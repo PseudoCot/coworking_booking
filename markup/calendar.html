@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Бронирование коворкингов</title>
+  <title>Календарь</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -23,7 +23,7 @@
         </svg>
       </a>
     </div>
-    <h1 class="header__title title-reset">Коворкинги</h1>
+    <h1 class="header__title title-reset">Календарь</h1>
     <button class="main-controls__language-button language-button btn-reset">
       <svg class="language-button__icon" width="21px" height="21px" viewBox="0 0 24 24" fill="none"
         xmlns="http://www.w3.org/2000/svg">
@@ -52,46 +52,32 @@
   </header>
 
   <main class="main">
-    <article class="booking">
-      <form class="booking__searching searching">
-        <span class="searching__institute">
-          <input class="searching__institute-input" type="text" name="institute" id="institute" placeholder="Институт">
-        </span>
-        <span class="searching__separator-line"></span>
-        <span class="searching__audience">
-          <input class="searching__audience-input" type="text" name="coworking" id="coworking" placeholder="Коворкинг">
-        </span>
-        <span class="searching__separator-line"></span>
-        <button class="searching__submit btn-reset" type="submit">Поиск</button>
-        <span class="searching__separator-line"></span>
-        <button class="searching__show-all btn-reset">Показать все</button>
-      </form>
-      <ul class="booking__list list-reset">
-        <li class="booking__list-item">
-          <img class="booking__item-img" src="img/cow-irit.jpg" alt="Коворкинг ИРИТ-РТФ">
-          <h3 class="booking__item-title title-reset">ИРИТ - РТФ</h3>
-          <div class="booking__item-content">
-            <span class="booking__item-content-title">Режим работы</span>
-            <span class="booking__item-content-info">с&nbsp;10:00 до&nbsp;16:00</span>
-          </div>
-        </li>
-        <li class="booking__list-item">
-          <img class="booking__item-img" src="img/idea-terr.jpg" alt="Коворкинг 'Территория Идей'">
-          <h3 class="booking__item-title title-reset">Территория идей</h3>
-          <div class="booking__item-content">
-            <span class="booking__item-content-title">Режим работы</span>
-            <span class="booking__item-content-info">с&nbsp;8:00 до&nbsp;18:00</span>
-          </div>
-        </li>
-        <li class="booking__list-item">
-          <img class="booking__item-img" src="img/mezzanines.jpg" alt="Коворкинг 'Антресоли'">
-          <h3 class="booking__item-title title-reset">Антресоли</h3>
-          <div class="booking__item-content">
-            <span class="booking__item-content-title">Режим работы</span>
-            <span class="booking__item-content-info">с&nbsp;10:00 до&nbsp;16:00,<br>по&nbsp;заявкам</span>
-          </div>
-        </li>
-      </ul>
+    <article class="calendar">
+      <div class="calendar__iframe">
+        <!-- гугл календарь -->
+        <span class="calendar__iframe-title">ГУГЛ КАЛЕНДАРЬ</span>
+      </div>
+      <div class="calendar__booking-list">
+        <h2 class="booking__list-title title-reset">Доступные коворкинги</h2>
+        <ul class="booking__list list-reset">
+          <li class="booking__list-item">
+            <img class="booking__item-img" src="img/cow-irit.jpg" alt="Коворкинг ИРИТ-РТФ">
+            <h3 class="booking__item-title title-reset">ИРИТ - РТФ</h3>
+            <div class="booking__item-content">
+              <span class="booking__item-content-title">Режим работы</span>
+              <span class="booking__item-content-info">с&nbsp;10:00 до&nbsp;16:00</span>
+            </div>
+          </li>
+          <li class="booking__list-item">
+            <img class="booking__item-img" src="img/mezzanines.jpg" alt="Коворкинг 'Антресоли'">
+            <h3 class="booking__item-title title-reset">Антресоли</h3>
+            <div class="booking__item-content">
+              <span class="booking__item-content-title">Режим работы</span>
+              <span class="booking__item-content-info">с&nbsp;10:00 до&nbsp;16:00,<br>по&nbsp;заявкам</span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </article>
   </main>
 </body>

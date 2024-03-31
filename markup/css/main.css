@@ -98,7 +98,8 @@
   --bg-color: #e3f2fdc9;
   --darker-theme-color: #7e8bff42;
 
-  --card-color: #ffffffa8;
+  --transparent-card-color: #ffffffa8;
+  --light-card-color: #fff;
   --shadow-color: #e6e6e6;
   --card-shadow-color: #304ffe3a;
 
@@ -405,12 +406,12 @@ img {
 }
 
 .booking__list-item {
-  padding: 35px 30px;
+  padding: 35px 30px 15px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   border-radius: 15px;
-  background-color: var(--card-color);
+  background-color: var(--transparent-card-color);
   box-shadow: 0 0 4px 0 var(--theme-button-text-color);
   /* сделать градиент */
 }
@@ -434,10 +435,11 @@ img {
 }
 
 .booking__item-content {
+  min-height: 38px;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
+  align-items: flex-start;
   gap: 40px;
 }
 
@@ -452,3 +454,44 @@ img {
 }
 
 /* /// calendar /// */
+.calendar {
+  padding-top: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar__iframe {
+  margin-bottom: 30px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--theme-button-color);
+  border: 1px solid #525da9;
+}
+
+.calendar__iframe-title {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 32px;
+  color: var(--dark-text-color);
+}
+
+.calendar__booking-list {
+  padding-bottom: 50px;
+  background: no-repeat 80% 50% url("../img/stars.svg");
+}
+
+.booking__list-title {
+  margin-bottom: 25px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--theme-text-color);
+}
+
+/* за основы для карточек берётся элемент из booking */
+.calendar .booking__list-item {
+  background-color: var(--light-card-color);
+}
