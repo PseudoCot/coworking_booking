@@ -1,42 +1,152 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('fonts/Roboto-Bold.eot');
+  src: local('Roboto Bold'), local('Roboto-Bold'),
+    url('../fonts/Roboto-Bold.woff2') format('woff2'),
+    url('../fonts/Roboto-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('fonts/Roboto-Medium.eot');
+  src: local('Roboto Medium'), local('Roboto-Medium'),
+    url('../fonts/Roboto-Medium.woff2') format('woff2'),
+    url('../fonts/Roboto-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('fonts/Roboto-Regular.eot');
+  src: local('Roboto'), local('Roboto-Regular'),
+    url('../fonts/Roboto-Regular.woff2') format('woff2'),
+    url('../fonts/Roboto-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('fonts/Roboto-Light.eot');
+  src: local('Roboto Light'), local('Roboto-Light'),
+    url('../fonts/Roboto-Light.woff2') format('woff2'),
+    url('../fonts/Roboto-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Grtsk Tera';
+  src: url('fonts/BoldTera.eot');
+  src: local('Bold Tera'), local('Bold-Tera'),
+    url('../fonts/BoldTera.woff2') format('woff2'),
+    url('../fonts/BoldTera.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Grtsk Tera';
+  src: url('fonts/SemiBoldTera.eot');
+  src: local('SemiBold Tera'), local('SemiBold-Tera'),
+    url('../fonts/SemiBoldTera.woff2') format('woff2'),
+    url('../fonts/SemiBoldTera.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Grtsk Exa';
+  src: url('fonts/MediumExa.eot');
+  src: local('Medium Exa'), local('Medium-Exa'),
+    url('../fonts/MediumExa.woff2') format('woff2'),
+    url('../fonts/MediumExa.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Grtsk Exa';
+  src: url('fonts/RegularExa.eot');
+  src: local('Regular Exa'), local('Regular-Exa'),
+    url('../fonts/RegularExa.woff2') format('woff2'),
+    url('../fonts/RegularExa.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Grtsk Exa';
+  src: url('fonts/LightExa.eot');
+  src: local('Light Exa'), local('Light-Exa'),
+    url('../fonts/LightExa.woff2') format('woff2'),
+    url('../fonts/LightExa.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
 :root {
-  --bg-color: #fff;
-  --main-color: #fff;
-  --main-text-color: #fff;
+  --font-family: "Roboto Regular", sans-serif;
+  --second-family: "Grtsk Exa", sans-serif;
+  --third-family: "Grtsk Tera", sans-serif;
+
+  --bg-color: #e3f2fdc9;
+  --darker-theme-color: #7e8bff42;
+
+  --card-color: #ffffffa8;
+  --shadow-color: #e6e6e6;
+  --card-shadow-color: #304ffe3a;
+
+  --theme-button-color: #8C9EFF;
+  --light-button-color: #fff;
+
+  --dark-text-color: #000;
+  --theme-text-color: #283493;
+  --light-text-color: #fff;
+  --theme-title-text-color: #283493d0;
+  --theme-button-text-color: #304FFE;
+  --light-button-text-color: #fff;
+  --link-text-color: #9575CD;
 }
 
 html {
   box-sizing: border-box;
 }
-  
+
 *,
 *::before,
 *::after {
   box-sizing: inherit;
   font-family: 'Roboto', sans-serif;
 }
-  
+
 body {
-  min-width: 1200px;
+  /* min-width: 1200px; */
   font-weight: 400;
-  background-color: #E5E5E5;
 }
-  
+
 a {
   color: inherit;
   text-decoration: none;
 }
-  
+
 img {
   max-width: 100%;
 }
-  
+
+
 /* glob */
 .list-reset {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-  
+
 .btn-reset {
   padding: 0;
   border: none;
@@ -45,12 +155,300 @@ img {
   user-select: none;
 }
 
-.title-reset, .paragraph-reset {
+.title-reset,
+.paragraph-reset {
   margin: 0;
 }
-  
+
 .container {
-  max-width: 1200px;
-  padding: 0 15px;
+  max-width: 1480px;
+  /* padding: 0 15px; */
   margin: 0 auto 70px;
+  background-color: var(--bg-color);
 }
+
+.main {
+  padding: 0 100px;
+}
+
+
+/* /// header /// */
+.header {
+  padding: 30px 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid var(--darker-theme-color);
+}
+
+.header__logo {
+  margin-right: 110px;
+}
+
+.nav {
+  width: 100%;
+}
+
+.nav__links {
+  display: flex;
+  flex-direction: row;
+  gap: 76px;
+}
+
+.nav__link-text {
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--link-text-color);
+}
+
+.main-controls {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.language-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-right: 19px;
+}
+
+.language-button__icon {
+  opacity: 70%;
+}
+
+.language-button__text {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--dark-text-color);
+}
+
+.main-controls__reg-button {
+  padding: 14px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--dark-text-color);
+  border: 1px solid var(--theme-button-color);
+  border-radius: 15px;
+  opacity: 0.6;
+}
+
+.main-controls__login-button {
+  padding: 14px 30px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--theme-button-text-color);
+  background-color: var(--light-button-color);
+  border: 1px solid var(--theme-button-color);
+  border-radius: 15px;
+}
+
+
+/* /// header (additional) /// */
+.header__title {
+  width: 100%;
+  margin-left: -110px;
+  font-family: var(--third-family);
+  font-weight: 600;
+  font-size: 32px;
+  text-align: center;
+  color: var(--theme-title-text-color);
+}
+
+
+/* /// coworking /// */
+.coworking {
+  padding: 105px 0 320px;
+  height: 100%;
+  background: no-repeat right url("../img/persona.svg");
+}
+
+.coworking__title {
+  width: 485px;
+  margin-bottom: 55px;
+  font-family: var(--third-family);
+  font-weight: 600;
+  font-size: 36px;
+  color: var(--theme-title-text-color);
+}
+
+.searching {
+  position: relative;
+  display: inline-block;
+  background-color: var(--light-button-color);
+  border-radius: 10px;
+  box-shadow: 0 8px 6px 0 rgba(0, 0, 0, 0.15);
+}
+
+.searching__audience,
+.searching__institute {
+  position: relative;
+  margin: 5px 0;
+}
+
+.searching__audience:before,
+.searching__institute:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(50% - 14px);
+  height: 28px;
+  width: 28px;
+  margin-left: 30px;
+  display: inline-block;
+  overflow: visible;
+  z-index: 1;
+}
+
+.searching__audience:before {
+  background: no-repeat url("../img/icons/magnifier.svg");
+}
+
+.searching__institute:before {
+  background: no-repeat url("../img/icons/map-point.svg");
+}
+
+.searching__audience-input,
+.searching__institute-input {
+  padding: 0 20px;
+  height: 75px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 15px;
+  text-align: center;
+  color: var(--dark-text-color);
+  border-radius: 10px;
+  border: none;
+}
+
+.searching__audience-input {
+  width: 330px;
+}
+
+.searching__institute-input {
+  width: 290px;
+}
+
+.searching__separator-line {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  height: 100%;
+  background-color: var(--shadow-color);
+}
+
+.searching__submit {
+  margin: 5px 10px;
+  padding: 20px 47px;
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--light-button-text-color);
+  background-color: var(--theme-button-color);
+  border-radius: 15px;
+  box-shadow: 0 2px 0 0 var(--theme-text-color);
+}
+
+
+/* /// booking /// */
+.booking {
+  padding-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* За основу для формы поиска берется схожий элемент из coworking */
+.booking__searching {
+  margin-bottom: 50px;
+}
+
+.booking__searching .searching__institute-input,
+.booking__searching .searching__audience-input {
+  width: 258px;
+}
+
+.booking__searching .searching__submit {
+  margin: 5px 30px;
+  padding: 20px 75px;
+}
+
+.searching__show-all {
+  margin: 5px 30px;
+  padding: 20px 45px;
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--theme-button-text-color);
+  background-color: var(--light-button-color);
+  border: 1px solid var(--theme-button-color);
+  border-radius: 15px;
+  /* box-shadow: 0 8px 6px 0 var(--theme-text-color); */
+}
+
+.booking__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.booking__list-item {
+  padding: 35px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 15px;
+  background-color: var(--card-color);
+  box-shadow: 0 0 4px 0 var(--theme-button-text-color);
+  /* сделать градиент */
+}
+
+.booking__item-img {
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+
+.booking__item-title,
+.booking__item-content-title,
+.booking__item-content-info {
+  font-family: var(--second-family);
+  font-weight: 400;
+}
+
+.booking__item-title {
+  margin-bottom: 7px;
+  font-size: 24px;
+  color: var(--theme-text-color);
+}
+
+.booking__item-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.booking__item-content-title {
+  font-size: 16px;
+  color: var(--theme-text-color);
+}
+
+.booking__item-content-info {
+  font-size: 16px;
+  color: var(--theme-button-text-color);
+}
+
+/* /// calendar /// */
