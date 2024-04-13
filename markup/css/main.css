@@ -270,14 +270,14 @@ img {
 
 
 
-/* /// coworking /// */
-.coworking {
+/* /// hero /// */
+.hero {
   padding: 105px 0 320px;
   height: 100%;
   background: no-repeat right url("../img/persona.svg");
 }
 
-.coworking__title {
+.hero__title {
   width: 485px;
   margin-bottom: 55px;
   font-family: var(--third-family);

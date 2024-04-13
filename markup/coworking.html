@@ -46,47 +46,60 @@
   <main class="main">
     <article class="coworking">
       <h1 class="title title-reset">Коворкинги</h1>
-      <div class="coworking__card">
-        <img class="coworking__item-img" src="img/mezzanines.jpg" alt="Коворкинг 'Антресоли'">
-        <h3 class="coworking__item-title title-reset">Антресоли</h3>
-        <div class="coworking__item-content">
-          <span class="coworking__item-content-title">Режим работы</span>
-          <span class="coworking__item-content-info">с&nbsp;10:00 до&nbsp;16:00,<br>по&nbsp;заявкам</span>
-        </div>
+      <div class="coworking__wrapper">
         <div class="coworking__info">
-          <h3 class="coworking__info-title">Описание:</h3>
-          <p class="coworking__info-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi maxime,
-            repellendus officiis saepe temporibus eligendi magnam suscipit aliquid possimus adipisci repellat
-            consequuntur ut dicta excepturi eum. Accusamus modi numquam perferendis.</p>
-          <h3 class="coworking__info-title">Адрес:</h3>
-          <address class="coworking__info-text">ул. Мира 19, 4 этаж</address>
-          <h3 class="coworking__info-title">Вместимость:</h3>
-          <address class="coworking__info-text">до 40 человек</address>
-          <h3 class="coworking__info-title">Технические возможности:</h3>
-          <ul class="coworking__info-list">
-            <li class="coworking__info-list-item">стационарная и мобильная мебель как для индивидуальной, так и для
-              груповой работы</li>
-            <li class="coworking__info-list-item">6 маркерных досок</li>
-            <li class="coworking__info-list-item">Wi-Fi</li>
-          </ul>
+          <div class="coworking__left-info">
+            <img class="coworking__info-img" src="img/mezzanines.jpg" alt="Коворкинг 'Антресоли'">
+            <h2 class="coworking__info-header title-reset">Антресоли</h2>
+            <div class="coworking__info-opening">
+              <span class="coworking__opening-title">Режим работы</span>
+              <span class="coworking__opening-text">с&nbsp;10:00 до&nbsp;16:00,<br>по&nbsp;заявкам</span>
+            </div>
+          </div>
+          <div class="coworking__right-info">
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title">Описание:</h3>
+              <p class="coworking__info-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi maxime,
+                repellendus officiis saepe temporibus eligendi magnam suscipit aliquid possimus adipisci repellat
+                consequuntur ut dicta excepturi eum. Accusamus modi numquam perferendis.</p>
+            </div>
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title">Адрес:</h3>
+              <address class="coworking__info-text">ул. Мира 19, 4 этаж</address>
+            </div>
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title">Количество мест:</h3>
+              <span class="coworking__info-text">Переговорные: 2</span>
+              <span class="coworking__info-text">Столы: 40</span>
+            </div>
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title">Технические возможности:</h3>
+              <ul class="coworking__info-list">
+                <li class="coworking__info-point">стационарная и мобильная мебель как для индивидуальной, так и для
+                  груповой работы</li>
+                <li class="coworking__info-point">6 маркерных досок</li>
+                <li class="coworking__info-point">Wi-Fi</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="coworking__mini-form mini-form">
-        <div class="mini-form__input-group">
-          <label class="mini-form__input-label" for="date">Дата</label>
-          <input class="mini-form__input" type="date" name="date" id="coworking-date">
-        </div>
-        <div class="mini-form__input-group">
-          <label class="mini-form__input-label" for="date">Тип места</label>
-          <select class="mini-form__select" name="date" id="coworking-date">
-            <option class="mini-form__select-option">ИРИТ-РТФ</option>
-            <option class="mini-form__select-option">Территория идей</option>
-            <option class="mini-form__select-option">Антресоли</option>
-          </select>
-        </div>
-        <div class="mini-form__input-group">
-          <label class="mini-form__input-label" for="date">Время</label>
-          <input class="mini-form__input" type="time" name="date" id="coworking-date">
+        <div class="coworking__mini-form mini-form">
+          <h2 class="mini-form__title">Форма бронирования</h2>
+          <div class="mini-form__input-group">
+            <label class="mini-form__input-label" for="type">Тип места:</label>
+            <select class="mini-form__select" name="type" id="coworking-type">
+              <option class="mini-form__select-option">Столы</option>
+              <option class="mini-form__select-option">Переговорные</option>
+            </select>
+          </div>
+          <div class="mini-form__input-group">
+            <label class="mini-form__input-label" for="date">Дата:</label>
+            <input class="mini-form__input" type="date" name="date" id="coworking-date">
+          </div>
+          <div class="mini-form__input-group">
+            <label class="mini-form__input-label" for="time">Время:</label>
+            <input class="mini-form__input" type="time" name="time" id="coworking-time">
+          </div>
         </div>
       </div>
     </article>
