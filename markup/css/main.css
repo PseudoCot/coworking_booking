@@ -141,6 +141,7 @@ img {
 }
 
 
+
 /* glob */
 .list-reset {
   margin: 0;
@@ -171,6 +172,7 @@ img {
 .main {
   padding: 0 100px;
 }
+
 
 
 /* /// header /// */
@@ -232,7 +234,7 @@ img {
 }
 
 .main-controls__reg-button {
-  padding: 14px;
+  padding: 12px 14px;
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 14px;
@@ -243,7 +245,7 @@ img {
 }
 
 .main-controls__login-button {
-  padding: 14px 30px;
+  padding: 12px 30px;
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 15px;
@@ -252,6 +254,7 @@ img {
   border: 1px solid var(--theme-button-color);
   border-radius: 15px;
 }
+
 
 
 /* /// header (additional) /// */
@@ -264,6 +267,7 @@ img {
   text-align: center;
   color: var(--theme-title-text-color);
 }
+
 
 
 /* /// coworking /// */
@@ -301,9 +305,6 @@ img {
   content: "";
   position: absolute;
   left: 0;
-  top: calc(50% - 14px);
-  height: 28px;
-  width: 28px;
   margin-left: 30px;
   display: inline-block;
   overflow: visible;
@@ -311,11 +312,19 @@ img {
 }
 
 .searching__audience:before {
-  background: no-repeat url("../img/icons/magnifier.svg");
+  background: no-repeat url("../img/icons/search.svg");
+  /* размеры должны совпадать с svg */
+  top: calc(50% - 10px);
+  height: 20px;
+  width: 20px;
 }
 
 .searching__institute:before {
   background: no-repeat url("../img/icons/map-point.svg");
+  /* размеры должны совпадать с svg */
+  top: calc(50% - 10px);
+  width: 14px;
+  height: 19px;
 }
 
 .searching__audience-input,
@@ -360,6 +369,7 @@ img {
   border-radius: 15px;
   box-shadow: 0 2px 0 0 var(--theme-text-color);
 }
+
 
 
 /* /// booking /// */
@@ -452,6 +462,8 @@ img {
   font-size: 16px;
   color: var(--theme-button-text-color);
 }
+
+
 
 /* /// calendar /// */
 .calendar {
