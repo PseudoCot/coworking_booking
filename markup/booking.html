@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
@@ -37,7 +37,7 @@
       </ul>
     </nav>
     <div class="main-controls">
-      <button class="main-controls__reg-button btn-reset">Регистрация</button>
+      <button class="main-controls__register-button btn-reset">Регистрация</button>
       <button class="main-controls__login-button btn-reset">Вход</button>
     </div>
   </header>
@@ -45,7 +45,8 @@
 
   <main class="main">
     <article class="booking">
-      <h1 class="title title-reset">Коворкинги</h1>
+      <h1 class="booking__title cb-title title-reset">Коворкинги</h1>
+
       <form class="booking__searching searching">
         <span class="searching__institute">
           <input class="searching__institute-input" type="text" name="institute" id="institute" placeholder="Институт">
@@ -59,6 +60,7 @@
         <span class="searching__separator-line"></span>
         <button class="searching__show-all btn-reset">Показать все</button>
       </form>
+
       <ul class="booking__list list-reset">
         <li class="booking__list-item">
           <img class="booking__item-img" src="img/cow-irit.jpg" alt="Коворкинг ИРИТ-РТФ">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
@@ -37,7 +37,7 @@
       </ul>
     </nav>
     <div class="main-controls">
-      <button class="main-controls__reg-button btn-reset">Регистрация</button>
+      <button class="main-controls__register-button btn-reset">Регистрация</button>
       <button class="main-controls__login-button btn-reset">Вход</button>
     </div>
   </header>
@@ -45,7 +45,8 @@
 
   <main class="main">
     <article class="coworking">
-      <h1 class="title title-reset">Коворкинги</h1>
+      <h1 class="coworking__title cb-title title-reset">Коворкинги</h1>
+
       <div class="coworking__wrapper">
         <div class="coworking__info">
           <div class="coworking__left-info">
@@ -83,22 +84,23 @@
             </div>
           </div>
         </div>
+
         <div class="coworking__mini-form mini-form">
-          <h2 class="mini-form__title">Форма бронирования</h2>
-          <div class="mini-form__input-group">
-            <label class="mini-form__input-label" for="type">Тип места:</label>
-            <select class="mini-form__select" name="type" id="coworking-type">
+          <h2 class="mini-form__title cb-form-title">Форма бронирования</h2>
+          <div class="mini-form__input-group cb-form-group">
+            <label class="mini-form__label cb-form-label" for="type">Тип места:</label>
+            <select class="mini-form__select cb-form-input" name="type" id="coworking-type">
               <option class="mini-form__select-option">Столы</option>
               <option class="mini-form__select-option">Переговорные</option>
             </select>
           </div>
-          <div class="mini-form__input-group">
-            <label class="mini-form__input-label" for="date">Дата:</label>
-            <input class="mini-form__input" type="date" name="date" id="coworking-date">
+          <div class="mini-form__input-group cb-form-group">
+            <label class="mini-form__label cb-form-label" for="date">Дата:</label>
+            <input class="mini-form__input cb-form-input" type="date" name="date" id="coworking-date">
           </div>
-          <div class="mini-form__input-group">
-            <label class="mini-form__input-label" for="time">Время:</label>
-            <input class="mini-form__input" type="time" name="time" id="coworking-time">
+          <div class="mini-form__input-group cb-form-group">
+            <label class="mini-form__label cb-form-label" for="time">Время:</label>
+            <input class="mini-form__input cb-form-input" type="time" name="time" id="coworking-time">
           </div>
         </div>
       </div>

@@ -102,6 +102,7 @@
   --light-card-color: #fff;
   --shadow-color: #e6e6e6;
   --card-shadow-color: #304ffe3a;
+  --card-bg-color: #D9D9D9;
 
   --theme-button-color: #8C9EFF;
   --light-button-color: #fff;
@@ -176,7 +177,8 @@ img {
 
 
 /* /// shared /// */
-.title {
+/* cb - coworking booking */
+.cb-title {
   padding: 28px 0 50px;
   width: 100%;
   font-family: var(--third-family);
@@ -185,6 +187,16 @@ img {
   text-align: center;
   color: var(--theme-title-text-color);
 }
+
+.cb-form-title {}
+
+.cb-form-group {}
+
+.cb-form-label {}
+
+.cb-form-input {}
+
+.cb-form-btn {}
 
 
 
@@ -199,6 +211,8 @@ img {
 
 .header__logo {
   margin-right: 110px;
+  width: 51px;
+  height: 51px;
 }
 
 .nav {
@@ -246,7 +260,7 @@ img {
   color: var(--dark-text-color);
 }
 
-.main-controls__reg-button {
+.main-controls__register-button {
   padding: 12px 14px;
   font-family: var(--second-family);
   font-weight: 400;
@@ -427,7 +441,10 @@ img {
 
 .booking__item-img {
   margin-bottom: 10px;
+  width: 353px;
+  height: 277px;
   border-radius: 15px;
+  background-color: var(--card-bg-color);
 }
 
 .booking__item-title,
@@ -504,4 +521,12 @@ img {
 /* за основы для карточек берётся элемент из booking */
 .calendar .booking__list-item {
   background-color: var(--light-card-color);
+}
+
+
+
+/* /// calendar /// */
+.coworking {
+  display: flex;
+  flex-direction: column;
 }

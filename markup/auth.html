@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="container">
+  <header class="header">
+    <div class="header__logo">
+      <a href="/" class="header__logo-link">
+        <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M51 25.5C51 39.5833 39.5833 51 25.5 51C11.4167 51 0 39.5833 0 25.5C0 11.4167 11.4167 0 25.5 0C39.5833 0 51 11.4167 51 25.5ZM9.17786 25.5C9.17786 34.5145 16.4855 41.8221 25.5 41.8221C34.5145 41.8221 41.8221 34.5145 41.8221 25.5C41.8221 16.4855 34.5145 9.17786 25.5 9.17786C16.4855 9.17786 9.17786 16.4855 9.17786 25.5Z"
+            fill="#8C9EFF" fill-opacity="0.82" />
+          <path
+            d="M35.3077 19.2885C35.3077 22.7912 32.4681 25.6308 28.9654 25.6308C25.4626 25.6308 22.6231 22.7912 22.6231 19.2885C22.6231 15.7857 25.4626 12.9462 28.9654 12.9462C32.4681 12.9462 35.3077 15.7857 35.3077 19.2885Z"
+            fill="#8C9EFF" fill-opacity="0.82" />
+        </svg>
+      </a>
+    </div>
+    <nav class="header__nav nav">
+      <ul class="nav__links list-reset">
+        <li class="nav__link">
+          <a href="booking.html" class="nav__link-text">Бронирование</a>
+        </li>
+        <li class="nav__link">
+          <a href="calendar.html" class="nav__link-text">Календарь</a>
+        </li>
+        <li class="nav__link">
+          <a href="#" class="nav__link-text">О нас</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="main-controls">
+      <button class="main-controls__register-button btn-reset">Регистрация</button>
+      <button class="main-controls__login-button btn-reset">Вход</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <article class="auth">
+      <h1 class="auth__title cb-title title-reset">Регистрация</h1>
+
+      <div class="auth__wrapper">
+        <div class="auth__login-form login-form">
+          <h2 class="login-form__title cb-form-title">Вход</h2>
+          <div class="login-form__input-group cb-form-group">
+            <label class="login-form__label cb-form-label" for="login-email">Почта:</label>
+            <input class="login-form__input cb-form-input" type="email" name="login-email" id="login-email">
+          </div>
+          <div class="login-form__input-group cb-form-group">
+            <label class="login-form__label cb-form-label" for="login-password">Пароль:</label>
+            <input class="login-form__input cb-form-input" type="password" name="login-password" id="login-password">
+          </div>
+          <div class="login-form__btns">
+            <button class="login-form__submit-btn cb-form-btn">Войти</button>
+            <button class="login-form__reset-password-btn cb-form-btn">Восстановить пароль</button>
+          </div>
+        </div>
+
+        <div class="auth__register-form">
+          <h2 class="register-form__title cb-form-title">Регистрация</h2>
+          <div class="register-form__input-group cb-form-group">
+            <label class="register-form__label cb-form-label" for="register-fio">ФИО:</label>
+            <input class="register-form__input cb-form-input" type="text" name="register-fio" id="register-fio">
+          </div>
+          <div class="register-form__input-group cb-form-group">
+            <label class="register-form__label cb-form-label" for="register-email">Почта:</label>
+            <input class="register-form__input cb-form-input" type="email" name="register-email" id="register-email">
+          </div>
+          <div class="register-form__input-group cb-form-group">
+            <label class="register-form__label cb-form-label" for="register-password">Пароль:</label>
+            <!-- добавить поясняющую информацию -->
+            <input class="register-form__input cb-form-input" type="password" name="register-password"
+              id="register-password">
+          </div>
+          <div class="register-form__input-group cb-form-group">
+            <label class="register-form__label cb-form-label" for="register-password-repeat">Пароль:</label>
+            <input class="register-form__input cb-form-input" type="password" name="register-password-repeat"
+              id="register-password-repeat">
+          </div>
+          <button class="register-form__submit-btn cb-form-btn">Зарегистрироваться</button>
+        </div>
+      </div>
+    </article>
+  </main>
+</body>
+
+</html>
