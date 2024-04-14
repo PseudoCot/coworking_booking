@@ -51,11 +51,13 @@
           <h2 class="login-form__title cb-form-title">Вход</h2>
           <div class="login-form__input-group cb-form-group">
             <label class="login-form__label cb-form-label" for="login-email">Почта:</label>
-            <input class="login-form__input cb-form-input" type="email" name="login-email" id="login-email">
+            <input class="login-form__input cb-form-input" type="email" name="login-email" id="login-email"
+              inputmode="email" autocomplete="email">
           </div>
           <div class="login-form__input-group cb-form-group">
             <label class="login-form__label cb-form-label" for="login-password">Пароль:</label>
-            <input class="login-form__input cb-form-input" type="password" name="login-password" id="login-password">
+            <input class="login-form__input cb-form-input" type="password" name="login-password" id="login-password"
+              autocomplete="current-password">
           </div>
           <div class="login-form__btns">
             <button class="login-form__submit-btn cb-form-btn">Войти</button>
@@ -67,22 +69,24 @@
           <h2 class="register-form__title cb-form-title">Регистрация</h2>
           <div class="register-form__input-group cb-form-group">
             <label class="register-form__label cb-form-label" for="register-fio">ФИО:</label>
-            <input class="register-form__input cb-form-input" type="text" name="register-fio" id="register-fio">
+            <input class="register-form__input cb-form-input" type="text" name="register-fio" id="register-fio"
+              autocapitalize="words" autocomplete="full-name fio">
           </div>
           <div class="register-form__input-group cb-form-group">
             <label class="register-form__label cb-form-label" for="register-email">Почта:</label>
-            <input class="register-form__input cb-form-input" type="email" name="register-email" id="register-email">
+            <input class="register-form__input cb-form-input" type="email" name="register-email" id="register-email"
+              inputmode="email" autocomplete="email">
           </div>
           <div class="register-form__input-group cb-form-group">
             <label class="register-form__label cb-form-label" for="register-password">Пароль:</label>
             <!-- добавить поясняющую информацию -->
             <input class="register-form__input cb-form-input" type="password" name="register-password"
-              id="register-password">
+              id="register-password" autocomplete="new-password">
           </div>
           <div class="register-form__input-group cb-form-group">
             <label class="register-form__label cb-form-label" for="register-password-repeat">Пароль:</label>
             <input class="register-form__input cb-form-input" type="password" name="register-password-repeat"
-              id="register-password-repeat">
+              id="register-password-repeat" autocomplete="new-password">
           </div>
           <button class="register-form__submit-btn cb-form-btn">Зарегистрироваться</button>
         </div>
