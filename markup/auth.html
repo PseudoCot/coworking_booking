@@ -47,8 +47,8 @@
       <h1 class="auth__title cb-title title-reset">Регистрация</h1>
 
       <div class="auth__wrapper">
-        <div class="auth__login-form login-form">
-          <h2 class="login-form__title cb-form-title">Вход</h2>
+        <form class="auth__login-form login-form cb-form" action="">
+          <h2 class="login-form__title cb-form-title title-reset">Вход</h2>
           <div class="login-form__input-group cb-form-group">
             <label class="login-form__label cb-form-label" for="login-email">Почта:</label>
             <input class="login-form__input cb-form-input" type="email" name="login-email" id="login-email"
@@ -63,10 +63,10 @@
             <button class="login-form__submit-btn cb-form-btn">Войти</button>
             <button class="login-form__reset-password-btn cb-form-btn">Восстановить пароль</button>
           </div>
-        </div>
+        </form>
 
-        <div class="auth__register-form">
-          <h2 class="register-form__title cb-form-title">Регистрация</h2>
+        <form class="auth__register-form register-form cb-form" action="">
+          <h2 class="register-form__title cb-form-title title-reset">Регистрация</h2>
           <div class="register-form__input-group cb-form-group">
             <label class="register-form__label cb-form-label" for="register-fio">ФИО:</label>
             <input class="register-form__input cb-form-input" type="text" name="register-fio" id="register-fio"
@@ -89,7 +89,7 @@
               id="register-password-repeat" autocomplete="new-password">
           </div>
           <button class="register-form__submit-btn cb-form-btn">Зарегистрироваться</button>
-        </div>
+        </form>
       </div>
     </article>
   </main>

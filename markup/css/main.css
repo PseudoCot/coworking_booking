@@ -91,29 +91,39 @@
 
 
 :root {
+  --card-img-width: 353px;
+  --card-img-height: 277px;
+
   --font-family: "Roboto Regular", sans-serif;
   --second-family: "Grtsk Exa", sans-serif;
   --third-family: "Grtsk Tera", sans-serif;
-
-  --bg-color: #e3f2fdc9;
-  --darker-theme-color: #7e8bff42;
-
-  --transparent-card-color: #ffffffa8;
-  --light-card-color: #fff;
-  --shadow-color: #e6e6e6;
-  --card-shadow-color: #304ffe3a;
-  --card-bg-color: #D9D9D9;
-
-  --theme-button-color: #8C9EFF;
-  --light-button-color: #fff;
 
   --dark-text-color: #000;
   --theme-text-color: #283493;
   --light-text-color: #fff;
   --theme-title-text-color: #283493d0;
-  --theme-button-text-color: #304FFE;
+  --link-text-color: #9575cd;
+
+  --bg-color: #e3f2fdc9;
+  --darker-theme-color: #7e8bff42;
+
+  --transparent-card-color: #ffffffa8;
+  --light-card-bg-color: #fff;
+  --shadow-color: #e6e6e6;
+  --card-shadow-color: #304ffe3a;
+  --card-img-bg-color: #d9d9d9;
+
+  --theme-button-text-color: #304ffe;
   --light-button-text-color: #fff;
-  --link-text-color: #9575CD;
+  --theme-button-color: #8c9eff;
+  --light-button-color: #fff;
+  --form-button-border-color: #304ffee6;
+  --form-button-bg-color: #8c9eff1a;
+  --darker-form-button-bg-color: #8c9eff42;
+
+  --form-input-border-color: #28359396;
+  --form-input-shadow-color: #28359340;
+  --form-input-bg-color: #8c9eff33;
 }
 
 html {
@@ -188,15 +198,64 @@ img {
   color: var(--theme-title-text-color);
 }
 
-.cb-form-title {}
+.cb-form {
+  padding: 15px 56px 32px;
+  border-radius: 15px;
+  background-color: var(--light-card-bg-color);
+  box-shadow: 0 0 4px 0 var(--theme-button-text-color);
+}
 
-.cb-form-group {}
+.cb-form-title {
+  margin-bottom: 15px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--theme-text-color);
+}
 
-.cb-form-label {}
+.cb-form-group {
+  margin-bottom: 20px;
+}
 
-.cb-form-input {}
+.cb-form-group:last-child {
+  margin-bottom: 35px;
+}
 
-.cb-form-btn {}
+.cb-form-label {
+  margin-bottom: 10px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--theme-text-color);
+}
+
+.cb-form-input {
+  width: 100%;
+  height: 29px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 0.5px solid var(--form-input-border-color);
+  box-shadow: 2px 3px 4px 0 var(--form-input-shadow-color);
+  background: var(--form-input-bg-color);
+}
+
+.cb-form-btn,
+.cb-form-darker-btn {
+  padding: 18px 24px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--theme-button-text-color);
+  border-radius: 15px;
+  border: 1px solid var(--form-button-border-color);
+  background: var(--form-button-bg-color);
+}
+
+.cb-form-darker-btn {
+  background: var(--darker-form-button-bg-color);
+}
 
 
 
@@ -328,6 +387,7 @@ img {
 .searching__audience:before {
   background: no-repeat url("../img/icons/search.svg");
   /* размеры должны совпадать с svg */
+  /* попробовать поменять на транслейт */
   top: calc(50% - 10px);
   height: 20px;
   width: 20px;
@@ -336,6 +396,7 @@ img {
 .searching__institute:before {
   background: no-repeat url("../img/icons/map-point.svg");
   /* размеры должны совпадать с svg */
+  /* попробовать поменять на транслейт */
   top: calc(50% - 10px);
   width: 14px;
   height: 19px;
@@ -436,15 +497,15 @@ img {
   border-radius: 15px;
   background-color: var(--transparent-card-color);
   box-shadow: 0 0 4px 0 var(--theme-button-text-color);
-  /* сделать градиент */
+  /* поменять на градиент */
 }
 
 .booking__item-img {
   margin-bottom: 10px;
-  width: 353px;
-  height: 277px;
+  width: var(--card-img-width);
+  height: var(--card-img-height);
   border-radius: 15px;
-  background-color: var(--card-bg-color);
+  background-color: var(--card-img-bg-color);
 }
 
 .booking__item-title,
@@ -520,7 +581,7 @@ img {
 
 /* за основы для карточек берётся элемент из booking */
 .calendar .booking__list-item {
-  background-color: var(--light-card-color);
+  background-color: var(--light-card-bg-color);
 }
 
 
@@ -530,3 +591,107 @@ img {
   display: flex;
   flex-direction: column;
 }
+
+
+
+/* /// coworking /// */
+.coworking__wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.coworking__info {
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  border-radius: 15px;
+  background-color: var(--light-card-bg-color);
+  box-shadow: 0 0 4px 0 var(--theme-button-text-color);
+  /* поменять на градиент */
+}
+
+.coworking__left-info,
+.coworking__right-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coworking__info-img {
+  margin-top: 20px;
+  margin-bottom: 16px;
+  width: var(--card-img-width);
+  height: var(--card-img-height);
+  border-radius: 15px;
+  background-color: var(--card-img-bg-color);
+}
+
+.coworking__info-header,
+.coworking__info-opening-title,
+.coworking__info-opening-text {
+  font-family: var(--second-family);
+  font-weight: 400;
+}
+
+.coworking__info-header {
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: var(--theme-text-color);
+}
+
+.coworking__info-opening {
+  min-height: 38px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.coworking__info-opening-title {
+  font-size: 16px;
+  color: var(--theme-text-color);
+}
+
+.coworking__info-opening-info {
+  font-size: 16px;
+  color: var(--theme-button-text-color);
+}
+
+.coworking__info-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.coworking__info-title,
+.coworking__info-text,
+.coworking__info-point {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.coworking__info-title {
+  color: var(--theme-text-color);
+}
+
+.coworking__info-info,
+.coworking__info-point {
+  color: var(--theme-button-text-color);
+}
+
+.coworking__info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.coworking__form {}
+
+
+
+/* /// auth /// */
