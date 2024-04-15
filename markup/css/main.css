@@ -189,7 +189,7 @@ img {
 /* /// shared /// */
 /* cb - coworking booking */
 .cb-title {
-  padding: 28px 0 50px;
+  padding: 30px 0 50px;
   width: 100%;
   font-family: var(--third-family);
   font-weight: 600;
@@ -199,17 +199,28 @@ img {
 }
 
 .cb-form {
-  padding: 15px 56px 32px;
   border-radius: 15px;
   background-color: var(--light-card-bg-color);
   box-shadow: 0 0 4px 0 var(--theme-button-text-color);
 }
 
-.cb-form-title {
+.cb-form-top {
+  padding: 15px 56px 0;
   margin-bottom: 15px;
+  border-bottom: 1px #4256F6 solid;
+}
+
+.cb-form-bottom {
+  padding: 0 56px 35px;
+}
+
+.cb-form-title {
+  margin-bottom: 8px;
+  position: relative;
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 24px;
+  text-align: center;
   color: var(--theme-text-color);
 }
 
@@ -217,11 +228,12 @@ img {
   margin-bottom: 20px;
 }
 
-.cb-form-group:last-child {
+.cb-form-group:last-of-type {
   margin-bottom: 35px;
 }
 
 .cb-form-label {
+  display: block;
   margin-bottom: 10px;
   font-family: var(--second-family);
   font-weight: 400;
@@ -598,6 +610,7 @@ img {
 .coworking__wrapper {
   display: flex;
   flex-direction: row;
+  align-items: start;
   gap: 25px;
 }
 
@@ -605,6 +618,7 @@ img {
   padding: 30px;
   display: flex;
   flex-direction: row;
+  flex-basis: 100%;
   gap: 25px;
   border-radius: 15px;
   background-color: var(--light-card-bg-color);
@@ -612,8 +626,7 @@ img {
   /* поменять на градиент */
 }
 
-.coworking__left-info,
-.coworking__right-info {
+.coworking__left-info {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -622,6 +635,7 @@ img {
 .coworking__info-img {
   margin-top: 20px;
   margin-bottom: 16px;
+  min-width: var(--card-img-width);
   width: var(--card-img-width);
   height: var(--card-img-height);
   border-radius: 15px;
@@ -629,14 +643,14 @@ img {
 }
 
 .coworking__info-header,
-.coworking__info-opening-title,
-.coworking__info-opening-text {
+.coworking__opening-title,
+.coworking__opening-text {
   font-family: var(--second-family);
   font-weight: 400;
 }
 
 .coworking__info-header {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   font-size: 24px;
   color: var(--theme-text-color);
 }
@@ -650,14 +664,21 @@ img {
   gap: 40px;
 }
 
-.coworking__info-opening-title {
+.coworking__opening-title {
   font-size: 16px;
   color: var(--theme-text-color);
 }
 
-.coworking__info-opening-info {
+.coworking__opening-text {
   font-size: 16px;
   color: var(--theme-button-text-color);
+}
+
+.coworking__right-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .coworking__info-group {
@@ -673,24 +694,81 @@ img {
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 16px;
+  font-style: normal;
 }
 
 .coworking__info-title {
   color: var(--theme-text-color);
 }
 
-.coworking__info-info,
+.coworking__info-text,
 .coworking__info-point {
   color: var(--theme-button-text-color);
 }
 
 .coworking__info-list {
+  /* отступ для маркера */
+  padding-left: 18px;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  list-style-type: disc;
 }
 
-.coworking__form {}
+.coworking__info-point::marker {
+  font-size: 13px;
+  color: var(--theme-button-text-color);
+}
+
+.coworking__form {
+  flex-basis: 35%;
+}
+
+.coworking__form-top {
+  padding: 8px 20px 0;
+}
+
+.coworking__form-bottom {
+  padding: 0 20px 25px;
+}
+
+.coworking__form-group {
+  margin-bottom: 10px;
+}
+
+.coworking__form-group:last-of-type {
+  margin-bottom: 20px;
+}
+
+.coworking__form-select,
+.coworking__form-input {
+  height: 22px;
+}
+
+.coworking__form-select {
+  width: 200px;
+}
+
+.coworking__form-input[type=date] {
+  width: 130px;
+}
+
+/* .coworking__form-input::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+.coworking__form-input::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+.coworking__form-input::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+  color: transparent;
+} */
+
+.coworking__form-input[type=time] {
+  width: 120px;
+}
+
+.coworking__form-submit-btn {
+  padding: 18px 45px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 
 
