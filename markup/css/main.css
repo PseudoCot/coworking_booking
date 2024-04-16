@@ -290,13 +290,13 @@ img {
   width: 100%;
 }
 
-.nav__links {
+.nav__items {
   display: flex;
   flex-direction: row;
   gap: 76px;
 }
 
-.nav__link-text {
+.nav__item-link {
   font-family: var(--second-family);
   font-weight: 500;
   font-size: 15px;
@@ -311,7 +311,7 @@ img {
   gap: 15px;
 }
 
-.language-button {
+.language-btn {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -320,18 +320,18 @@ img {
   margin-right: 19px;
 }
 
-.language-button__icon {
+.language-btn__icon {
   opacity: 70%;
 }
 
-.language-button__text {
+.language-btn__text {
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 12px;
   color: var(--dark-text-color);
 }
 
-.main-controls__register-button {
+.main-controls__register-btn {
   padding: 12px 14px;
   font-family: var(--second-family);
   font-weight: 400;
@@ -342,7 +342,7 @@ img {
   opacity: 0.6;
 }
 
-.main-controls__login-button {
+.main-controls__login-btn {
   padding: 12px 30px;
   font-family: var(--second-family);
   font-weight: 400;
