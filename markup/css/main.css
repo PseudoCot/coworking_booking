@@ -142,6 +142,13 @@ body {
   font-weight: 400;
 }
 
+body,
+html,
+main {
+  /* чтобы могли помещаться задники на страницу */
+  height: 100%;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -372,9 +379,9 @@ img {
 
 /* /// hero /// */
 .hero {
-  padding: 105px 0 320px;
+  padding-top: 105px;
   height: 100%;
-  background: no-repeat right url("../img/persona.svg");
+  background: no-repeat right 25% url("../img/persona.svg");
 }
 
 .hero__title {
@@ -766,12 +773,6 @@ img {
 .coworking__form-input[type=date] {
   width: 130px;
 }
-
-/* .coworking__form-input::-webkit-datetime-edit-year-field:not([aria-valuenow]),
-.coworking__form-input::-webkit-datetime-edit-month-field:not([aria-valuenow]),
-.coworking__form-input::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
-  color: transparent;
-} */
 
 .coworking__form-input[type=time] {
   width: 120px;
