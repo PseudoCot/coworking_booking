@@ -83,29 +83,31 @@
         </div>
 
         <form class="coworking__form cb-form" action="">
-          <div class="coworking__form-top cb-form-top">
-            <h2 class="coworking__form-title cb-form-title title-reset">Форма бронирования</h2>
-          </div>
-          <div class="coworking__form-bottom cb-form-bottom">
-            <div class="coworking__form-group cb-form-group">
-              <label class="coworking__form-label cb-form-label" for="type">Тип места:</label>
-              <select class="coworking__form-select cb-form-input" name="type" id="coworking-type">
-                <option class="coworking__form-select-option" value="" selected disabled hidden></option>
-                <option class="coworking__form-select-option" value="Столы">Столы</option>
-                <option class="coworking__form-select-option" value="Переговорные">Переговорные</option>
-              </select>
+          <div class="coworking__form-wrapper cb-form-wrapper">
+            <div class="coworking__form-top cb-form-top">
+              <h2 class="coworking__form-title cb-form-title title-reset">Форма бронирования</h2>
             </div>
-            <div class="coworking__form-group cb-form-group">
-              <label class="coworking__form-label cb-form-label" for="date">Дата:</label>
-              <input class="coworking__form-input cb-form-input" type="date" name="date" placeholder=""
-                id="coworking-date">
+            <div class="coworking__form-bottom cb-form-bottom">
+              <div class="coworking__form-group cb-form-group">
+                <label class="coworking__form-label cb-form-label" for="type">Тип места:</label>
+                <select class="coworking__form-select cb-form-input" name="type" id="coworking-type">
+                  <option class="coworking__form-select-option" value="" selected disabled hidden></option>
+                  <option class="coworking__form-select-option" value="Столы">Столы</option>
+                  <option class="coworking__form-select-option" value="Переговорные">Переговорные</option>
+                </select>
+              </div>
+              <div class="coworking__form-group cb-form-group">
+                <label class="coworking__form-label cb-form-label" for="date">Дата:</label>
+                <input class="coworking__form-input cb-form-input" type="date" name="date" placeholder=""
+                  id="coworking-date">
+              </div>
+              <div class="coworking__form-group cb-form-group">
+                <label class="coworking__form-label cb-form-label" for="time">Время:</label>
+                <input class="coworking__form-input cb-form-input" type="time" name="time" placeholder=""
+                  id="coworking-time">
+              </div>
+              <button class="coworking__form-submit-btn cb-form-btn btn-reset">Забронировать</button>
             </div>
-            <div class="coworking__form-group cb-form-group">
-              <label class="coworking__form-label cb-form-label" for="time">Время:</label>
-              <input class="coworking__form-input cb-form-input" type="time" name="time" placeholder=""
-                id="coworking-time">
-            </div>
-            <button class="coworking__form-submit-btn cb-form-btn btn-reset">Забронировать</button>
           </div>
         </form>
       </div>

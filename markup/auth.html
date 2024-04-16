@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Регистрация</title>
+  <title>Авторизация</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -41,51 +41,63 @@
 
   <main class="main">
     <article class="auth">
-      <h1 class="auth__title cb-title title-reset">Регистрация</h1>
+      <h1 class="auth__title cb-title title-reset">Авторизация</h1>
 
       <div class="auth__wrapper">
         <form class="auth__login-form login-form cb-form" action="">
-          <h2 class="login-form__title cb-form-title title-reset">Вход</h2>
-          <div class="login-form__input-group cb-form-group">
-            <label class="login-form__label cb-form-label" for="login-email">Почта:</label>
-            <input class="login-form__input cb-form-input" type="email" name="login-email" id="login-email"
-              inputmode="email" autocomplete="email">
-          </div>
-          <div class="login-form__input-group cb-form-group">
-            <label class="login-form__label cb-form-label" for="login-password">Пароль:</label>
-            <input class="login-form__input cb-form-input" type="password" name="login-password" id="login-password"
-              autocomplete="current-password">
-          </div>
-          <div class="login-form__btns">
-            <button class="login-form__submit-btn cb-form-btn btn-reset">Войти</button>
-            <button class="login-form__reset-password-btn cb-form-btn btn-reset">Восстановить пароль</button>
+          <div class="login-form__wrapper cb-form-wrapper">
+            <div class="login-form__top cb-form-top">
+              <h2 class="login-form__title cb-form-title title-reset">Вход</h2>
+            </div>
+            <div class="login-form__bottom cb-form-bottom">
+              <div class="login-form__input-group cb-form-group">
+                <label class="login-form__label cb-form-label" for="login-email">Почта:</label>
+                <input class="login-form__input cb-form-input" type="email" name="login-email" id="login-email"
+                  inputmode="email" autocomplete="email">
+              </div>
+              <div class="login-form__input-group cb-form-group">
+                <label class="login-form__label cb-form-label" for="login-password">Пароль:</label>
+                <input class="login-form__input cb-form-input" type="password" name="login-password" id="login-password"
+                  autocomplete="current-password">
+              </div>
+              <div class="login-form__btns">
+                <button class="login-form__submit-btn cb-form-btn btn-reset">Войти</button>
+                <button class="login-form__reset-password-btn cb-form-darker-btn btn-reset">Восстановить пароль</button>
+              </div>
+            </div>
           </div>
         </form>
 
         <form class="auth__register-form register-form cb-form" action="">
-          <h2 class="register-form__title cb-form-title title-reset">Регистрация</h2>
-          <div class="register-form__input-group cb-form-group">
-            <label class="register-form__label cb-form-label" for="register-fio">ФИО:</label>
-            <input class="register-form__input cb-form-input" type="text" name="register-fio" id="register-fio"
-              autocapitalize="words" autocomplete="full-name fio">
+          <div class="register-form__wrapper cb-form-wrapper">
+            <div class="register-form__top cb-form-top">
+              <h2 class="register-form__title cb-form-title title-reset">Регистрация</h2>
+            </div>
+            <div class="register-form__bottom cb-form-bottom">
+              <div class="register-form__input-group cb-form-group">
+                <label class="register-form__label cb-form-label" for="register-fio">ФИО:</label>
+                <input class="register-form__input cb-form-input" type="text" name="register-fio" id="register-fio"
+                  autocapitalize="words" autocomplete="full-name fio">
+              </div>
+              <div class="register-form__input-group cb-form-group">
+                <label class="register-form__label cb-form-label" for="register-email">Почта:</label>
+                <input class="register-form__input cb-form-input" type="email" name="register-email" id="register-email"
+                  inputmode="email" autocomplete="email">
+              </div>
+              <div class="register-form__input-group cb-form-group">
+                <label class="register-form__label cb-form-label" for="register-password">Пароль:</label>
+                <!-- добавить поясняющую информацию -->
+                <input class="register-form__input cb-form-input" type="password" name="register-password"
+                  id="register-password" autocomplete="new-password">
+              </div>
+              <div class="register-form__input-group cb-form-group">
+                <label class="register-form__label cb-form-label" for="register-password-repeat">Пароль:</label>
+                <input class="register-form__input cb-form-input" type="password" name="register-password-repeat"
+                  id="register-password-repeat" autocomplete="new-password">
+              </div>
+              <button class="register-form__submit-btn cb-form-btn btn-reset">Зарегистрироваться</button>
+            </div>
           </div>
-          <div class="register-form__input-group cb-form-group">
-            <label class="register-form__label cb-form-label" for="register-email">Почта:</label>
-            <input class="register-form__input cb-form-input" type="email" name="register-email" id="register-email"
-              inputmode="email" autocomplete="email">
-          </div>
-          <div class="register-form__input-group cb-form-group">
-            <label class="register-form__label cb-form-label" for="register-password">Пароль:</label>
-            <!-- добавить поясняющую информацию -->
-            <input class="register-form__input cb-form-input" type="password" name="register-password"
-              id="register-password" autocomplete="new-password">
-          </div>
-          <div class="register-form__input-group cb-form-group">
-            <label class="register-form__label cb-form-label" for="register-password-repeat">Пароль:</label>
-            <input class="register-form__input cb-form-input" type="password" name="register-password-repeat"
-              id="register-password-repeat" autocomplete="new-password">
-          </div>
-          <button class="register-form__submit-btn cb-form-btn btn-reset">Зарегистрироваться</button>
         </form>
       </div>
     </article>
