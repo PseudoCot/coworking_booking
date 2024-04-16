@@ -414,20 +414,18 @@ img {
 
 .searching__audience:before {
   background: no-repeat url("../img/icons/search.svg");
-  /* размеры должны совпадать с svg */
-  /* попробовать поменять на транслейт */
-  top: calc(50% - 10px);
+  top: 50%;
   height: 20px;
   width: 20px;
+  transform: translateY(-50%);
 }
 
 .searching__institute:before {
   background: no-repeat url("../img/icons/map-point.svg");
-  /* размеры должны совпадать с svg */
-  /* попробовать поменять на транслейт */
-  top: calc(50% - 10px);
+  top: 50%;
   width: 14px;
   height: 19px;
+  transform: translateY(-50%);
 }
 
 .searching__audience-input,
