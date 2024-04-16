@@ -353,6 +353,21 @@ img {
   border-radius: 15px;
 }
 
+.main-controls__user-acc-btn {
+  padding: 12px 11px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--theme-button-text-color);
+  background-color: var(--light-button-color);
+  border: 1px solid var(--theme-button-color);
+  border-radius: 15px;
+}
+
+.main-controls__logout-btn {
+  margin-left: 5px;
+}
+
 
 
 /* /// hero /// */
@@ -382,6 +397,7 @@ img {
 .searching__audience,
 .searching__institute {
   position: relative;
+  display: inline-block;
   margin: 5px 0;
 }
 
@@ -445,7 +461,7 @@ img {
   background-color: var(--shadow-color);
 }
 
-.searching__submit {
+.searching__submit-btn {
   margin: 5px 10px;
   padding: 20px 47px;
   font-family: var(--second-family);
