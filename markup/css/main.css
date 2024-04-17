@@ -134,7 +134,7 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--second-family);
 }
 
 body {
@@ -848,4 +848,108 @@ img {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+}
+
+
+
+/* /// user-acc /// */
+.user-acc__info-wrapper {
+  margin: 0 auto 50px;
+  max-width: 930px;
+  width: 100%;
+  border-radius: 15px;
+  background: var(--light-card-bg-color);
+  box-shadow: 0 0 8px 2px rgba(82, 93, 169, 0.19);
+}
+
+.user-acc__info {
+  padding: 20px 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-acc__info-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-acc__info-title {
+  margin-right: 10px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--theme-text-color);
+}
+
+.user-acc__info-text {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--form-button-border-color);
+}
+
+.user-acc__info-btns {
+  padding: 0 15px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 15px;
+}
+
+.user-acc__info-edit-btn,
+.user-acc__info-change-password-btn {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--form-button-border-color);
+  border-radius: 15px;
+  border: 1px solid var(--form-button-border-color);
+  background-color: var(--form-button-bg-color);
+}
+
+.user-acc__info-edit-btn {
+  padding: 18px 50px;
+}
+
+.user-acc__info-change-password-btn {
+  padding: 18px 21px;
+}
+
+.user-acc__booked-list-title {
+  margin-bottom: 25px;
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 26px;
+  text-align: center;
+  color: rgba(40, 53, 147, 0.78);
+  /* 28... 80% */
+}
+
+.user-acc__booked-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.user-acc__booked-item {
+  max-width: 930px;
+}
+
+.user-acc__booked-item:last-child {
+  margin-bottom: 50px;
+}
+
+.user-acc__booked-item .coworking__info-img {
+  margin-top: 0;
+}
+
+.user-acc__booked-item .coworking__info-header {
+  margin-bottom: 0;
+}
+
+.user-acc__booked-item .coworking__info-title {
+  display: inline-block;
 }
