@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Личный кабинет</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="container">
+  <header class="header">
+    <div class="header__logo">
+      <a href="/" class="header__logo-link">
+        <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M51 25.5C51 39.5833 39.5833 51 25.5 51C11.4167 51 0 39.5833 0 25.5C0 11.4167 11.4167 0 25.5 0C39.5833 0 51 11.4167 51 25.5ZM9.17786 25.5C9.17786 34.5145 16.4855 41.8221 25.5 41.8221C34.5145 41.8221 41.8221 34.5145 41.8221 25.5C41.8221 16.4855 34.5145 9.17786 25.5 9.17786C16.4855 9.17786 9.17786 16.4855 9.17786 25.5Z"
+            fill="#8C9EFF" fill-opacity="0.82" />
+          <path
+            d="M35.3077 19.2885C35.3077 22.7912 32.4681 25.6308 28.9654 25.6308C25.4626 25.6308 22.6231 22.7912 22.6231 19.2885C22.6231 15.7857 25.4626 12.9462 28.9654 12.9462C32.4681 12.9462 35.3077 15.7857 35.3077 19.2885Z"
+            fill="#8C9EFF" fill-opacity="0.82" />
+        </svg>
+      </a>
+    </div>
+    <nav class="header__nav nav">
+      <ul class="nav__items list-reset">
+        <li class="nav__item">
+          <a href="booking.html" class="nav__item-link">Бронирование</a>
+        </li>
+        <li class="nav__item">
+          <a href="calendar.html" class="nav__item-link">Календарь</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="main-controls">
+      <button class="main-controls__register-btn btn-reset">Регистрация</button>
+      <button class="main-controls__login-btn btn-reset">Вход</button>
+    </div>
+  </header>
+
+
+  <main class="main">
+    <article class="user-acc">
+      <h1 class="user-acc__title cb-title title-reset">Личный кабинет</h1>
+
+      <div class="user-acc__info">
+        <div class="user-acc__info-group">
+          <h2 class="user-acc__info-title">Фамилия:</h2>
+          <span class="user-acc__info-text">Иванов</span>
+        </div>
+        <div class="user-acc__info-group">
+          <h2 class="user-acc__info-title">Имя:</h2>
+          <span class="user-acc__info-text">Иван</span>
+        </div>
+        <div class="user-acc__info-group">
+          <h2 class="user-acc__info-title">Отчество:</h2>
+          <span class="user-acc__info-text">Иванович</span>
+        </div>
+        <div class="user-acc__info-group">
+          <h2 class="user-acc__info-title">Почта:</h2>
+          <span class="user-acc__info-text">i.i.ivanov@urfu.me</span>
+        </div>
+        <div class="user-acc__info-group">
+          <h2 class="user-acc__info-title">Студент:</h2>
+          <span class="user-acc__info-checkbox"></span>
+        </div>
+        <div class="user-acc__info-group">
+          <h2 class="user-acc__info-title">Имя пользователя telegram:</h2>
+          <span class="user-acc__info-text">@IvanIvanov</span>
+        </div>
+
+      </div>
+
+      <ul class="user-acc__booked-list list-reset">
+        <li class="user-acc__booked-item coworking__info">
+          <div class="coworking__left-info">
+            <img class="coworking__info-img" src="img/mezzanines.jpg" alt="Коворкинг 'Антресоли'">
+            <h2 class="coworking__info-header title-reset">Антресоли</h2>
+          </div>
+          <div class="coworking__right-info">
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title title-reset">Описание:</h3>
+              <p class="coworking__info-text paragraph-reset">"Антресоли" - это комфортное, уютное пространство для
+                студентов, где любой желающий может провести время за работой или учебой. Студенты, приходящие в
+                коворкинг, могут подготовиться к занятиям и обсудить свои проекты..</p>
+            </div>
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title title-reset">Дата бронирования:</h3>
+              <span class="coworking__info-inline-text">21.04.2024</span>
+            </div>
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title title-reset">Время бронирования:</h3>
+              <span class="coworking__info-inline-text">10:00 - 11:00</span>
+            </div>
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title title-reset">Тип места:</h3>
+              <span class="coworking__info-inline-text">Переговорная</span>
+            </div>
+          </div>
+        </li>
+        <li class="user-acc__booked-item coworking__info">
+          <div class="coworking__left-info">
+            <img class="coworking__info-img" src="img/mezzanines.jpg" alt="Коворкинг 'Антресоли'">
+            <h2 class="coworking__info-header title-reset">Антресоли</h2>
+          </div>
+          <div class="coworking__right-info">
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title title-reset">Описание:</h3>
+              <p class="coworking__info-text paragraph-reset">"Антресоли" - это комфортное, уютное пространство для
+                студентов, где любой желающий может провести время за работой или учебой. Студенты, приходящие в
+                коворкинг, могут подготовиться к занятиям и обсудить свои проекты..</p>
+            </div>
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title title-reset">Дата бронирования:</h3>
+              <span class="coworking__info-inline-text">21.04.2024</span>
+            </div>
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title title-reset">Время бронирования:</h3>
+              <span class="coworking__info-inline-text">10:00 - 11:00</span>
+            </div>
+            <div class="coworking__info-group">
+              <h3 class="coworking__info-title title-reset">Тип места:</h3>
+              <span class="coworking__info-inline-text">Переговорная</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </article>
+  </main>
+</body>
+
+</html>

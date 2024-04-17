@@ -704,23 +704,29 @@ img {
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: start;
 }
 
 .coworking__info-group {
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
 }
 
 .coworking__info-title,
 .coworking__info-text,
+.coworking__info-inline-text,
 .coworking__info-point {
+  display: block;
+  margin-bottom: 5px;
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 16px;
   font-style: normal;
+}
+
+.coworking__info-text:nth-last-child(-n+1),
+.coworking__info-point:nth-last-child(-n+1) {
+  margin-bottom: 0;
 }
 
 .coworking__info-title {
@@ -728,8 +734,12 @@ img {
 }
 
 .coworking__info-text,
-.coworking__info-point {
+.coworking__info-inline-text {
   color: var(--theme-button-text-color);
+}
+
+.coworking__info-inline-text {
+  display: inline-block;
 }
 
 .coworking__info-list {
@@ -737,8 +747,12 @@ img {
   padding-left: 18px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
   list-style-type: disc;
+}
+
+.coworking__info-point {
+  display: list-item;
+  color: var(--theme-button-text-color);
 }
 
 .coworking__info-point::marker {
