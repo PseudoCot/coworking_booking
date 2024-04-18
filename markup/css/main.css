@@ -262,7 +262,7 @@ img {
   border-radius: 5px;
   border: 0.5px solid var(--form-input-border-color);
   box-shadow: 2px 3px 4px 0 var(--form-input-shadow-color);
-  background: var(--form-input-bg-color);
+  background-color: var(--form-input-bg-color);
 }
 
 .cb-form-btn,
@@ -274,11 +274,35 @@ img {
   color: var(--theme-button-text-color);
   border-radius: 15px;
   border: 1px solid var(--form-button-border-color);
-  background: var(--form-button-bg-color);
+  background-color: var(--form-button-bg-color);
 }
 
 .cb-form-darker-btn {
-  background: var(--darker-form-button-bg-color);
+  background-color: var(--darker-form-button-bg-color);
+}
+
+.cb-toast {
+  padding: 30px 30px 40px;
+  max-width: 776px;
+  border-radius: 15px;
+  border: 1px solid #000;
+  background-color: var(--light-card-bg-color);
+}
+
+.cb-toast-title {
+  margin-bottom: 15px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 24px;
+  text-align: center;
+  color: var(--theme-text-color);
+}
+
+.cb-toast-text {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--theme-text-color);
 }
 
 
@@ -787,6 +811,7 @@ img {
 
 .coworking__form-select,
 .coworking__form-input {
+  position: relative;
   height: 22px;
 }
 
@@ -820,6 +845,10 @@ img {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.coworking__toast-text {
+  text-align: center;
 }
 
 
@@ -858,7 +887,7 @@ img {
   max-width: 930px;
   width: 100%;
   border-radius: 15px;
-  background: var(--light-card-bg-color);
+  background-color: var(--light-card-bg-color);
   box-shadow: 0 0 8px 2px rgba(82, 93, 169, 0.19);
 }
 
@@ -918,7 +947,7 @@ img {
 }
 
 .user-acc__booked-list-title {
-  margin-bottom: 25px;
+  margin-bottom: 35px;
   font-family: var(--second-family);
   font-weight: 500;
   font-size: 26px;
@@ -952,4 +981,29 @@ img {
 
 .user-acc__booked-item .coworking__info-title {
   display: inline-block;
+}
+
+.user-acc__toast {
+  padding: 15px 30px 30px;
+  margin: 0 auto 50px;
+  max-width: 776px;
+  border-radius: 15px;
+  border: 1px solid #000;
+  background-color: var(--light-card-bg-color);
+}
+
+.user-acc__toast-title {
+  margin-bottom: 10px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 24px;
+  text-align: center;
+  color: var(--theme-text-color);
+}
+
+.user-acc__toast-text {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--form-button-border-color);
 }
