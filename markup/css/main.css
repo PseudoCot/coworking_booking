@@ -202,6 +202,7 @@ img {
   border-radius: 15px;
   background-color: var(--light-card-bg-color);
   box-shadow: 0 8px 6px 2px rgba(82, 93, 169, 0.19);
+  z-index: 5;
 }
 
 .cb-form-wrapper {
@@ -230,6 +231,7 @@ img {
 }
 
 .cb-form-group {
+  position: relative;
   margin-bottom: 20px;
 }
 
@@ -256,6 +258,64 @@ img {
   border: 0.5px solid var(--form-input-border-color);
   box-shadow: 2px 3px 4px 0 var(--form-input-shadow-color);
   background-color: var(--form-input-bg-color);
+}
+
+.cb-form-tooltip {
+  position: absolute;
+  padding: 3px;
+  right: 0;
+  bottom: 0;
+  transform: translateX(120%);
+}
+
+.cb-form-tooltip::before {
+  bottom: 35px;
+  position: absolute;
+  padding: 2px 4px;
+  width: 290px;
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 10px;
+  text-align: justify;
+  color: #FFFFFFE6;
+  content: attr(data-tip);
+
+  background-color: #283593B3;
+  /* 70% */
+  border-radius: 5px;
+
+  transform: translateX(-87%);
+}
+
+.cb-form-tooltip::after {
+  bottom: 15px;
+  position: absolute;
+  width: 16px;
+  height: 12px;
+
+  content: "";
+
+  border: 10px solid transparent;
+  border-top: 10px solid #283593B3;
+  /* 70% */
+
+  transform: translateX(-80%);
+}
+
+.cb-form-tooltip::before,
+.cb-form-tooltip::after {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: -100;
+}
+
+.cb-form-tooltip:hover::before,
+.cb-form-tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
 }
 
 .cb-form-btn,
