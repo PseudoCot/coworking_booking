@@ -1065,3 +1065,13 @@ img {
   font-size: 20px;
   color: var(--form-button-border-color);
 }
+
+
+
+/* /// temp /// */
+.temp-links {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  font-size: 10px;
+}
