@@ -247,6 +247,15 @@ img {
   color: var(--theme-text-color);
 }
 
+.cb-form-sub-label {
+  margin-bottom: 5px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: #28359399;
+  /* 60% */
+}
+
 .cb-form-input {
   width: 326px;
   height: 29px;
@@ -955,8 +964,39 @@ img {
   width: 130px;
 }
 
-.coworking__form-input[type=time] {
-  width: 120px;
+.coworking__form-time-group {
+  padding: 2px 5px;
+  margin-bottom: 5px;
+  width: 100px;
+  height: 22px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.coworking__form-time-group:nth-last-child(-n+2) {
+  margin-bottom: 0;
+}
+
+.coworking__form-time-select {
+  padding: 1px 2px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 10px;
+  color: #000000CC;
+  border-radius: 10px;
+  border: 1px solid #2835934D;
+  /* 30% */
+  background: #ffffff;
+}
+
+.coworking__form-time-separator {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 10px;
+  color: #000000;
+  /* 80% */
 }
 
 .coworking__form-submit-btn {
