@@ -797,6 +797,7 @@ img {
 }
 
 .coworking__info {
+  position: relative;
   padding: 30px;
   display: flex;
   flex-direction: row;
@@ -914,6 +915,20 @@ img {
 .coworking__info-point::marker {
   font-size: 13px;
   color: var(--theme-button-text-color);
+}
+
+.coworking__info-cancel-btn {
+  position: absolute;
+  right: 15px;
+  bottom: 21px;
+  padding: 17px 25px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--form-button-border-color);
+  border-radius: 15px;
+  border: 1px solid var(--form-button-border-color);
+  background-color: var(--form-button-bg-color);
 }
 
 .coworking__form {
@@ -1179,6 +1194,10 @@ img {
   display: inline-block;
 }
 
+.user-acc__booked-item .coworking__info-group:nth-last-child(-n+2) {
+  max-width: 70%;
+}
+
 .user-acc__toast {
   padding: 15px 30px 30px;
   margin: 0 auto 50px;
@@ -1202,6 +1221,56 @@ img {
   font-weight: 400;
   font-size: 20px;
   color: var(--form-button-border-color);
+}
+
+.user-acc__submit-form {
+  display: inline-block;
+}
+
+.submit-form__top {
+  padding: 8px 81px 5px;
+  margin-bottom: 15px;
+}
+
+.submit-form__sub-title {
+  margin-bottom: 15px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--theme-text-color);
+}
+
+.submit-form__bottom {
+  padding: 0 25px 15px;
+}
+
+.submit-form__btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.submit-form__cancel-btn,
+.submit-form__submit-btn {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  color: #304FFEE6;
+  /* 90% */
+  border-radius: 15px;
+  border: 1px solid #304FFEE6;
+  /* 90% */
+  background-color: transparent;
+}
+
+.submit-form__cancel-btn {
+  padding: 6px 13px;
+}
+
+.submit-form__submit-btn {
+  padding: 6px 18px;
 }
 
 
