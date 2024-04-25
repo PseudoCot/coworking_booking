@@ -674,7 +674,7 @@ img {
 .booking__list {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   gap: 20px;
 }
 
