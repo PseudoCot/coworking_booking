@@ -730,22 +730,33 @@ img {
   flex-direction: column;
 }
 
-.calendar__iframe {
-  margin-bottom: 30px;
-  width: 100%;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.calendar__iframe-wrapper {
+  position: relative;
+  margin: 0 auto 30px;
+  width: 928px;
+  height: 599px;
+  /* размеры должны соответствовать размерам iframe */
   background-color: var(--theme-button-color);
   border: 1px solid #525da9;
 }
 
+.calendar__iframe {
+  position: relative;
+  margin: -2px -2px;
+  border-width: 0;
+  z-index: 5;
+}
+
 .calendar__iframe-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 32px;
   color: var(--dark-text-color);
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 .calendar__booking-list {
@@ -1143,3 +1154,16 @@ img {
   gap: 10px;
   font-size: 10px;
 }
+
+/*
+alpha % = alpha HEX
+90% = e6
+80% = cc
+70% = b3
+60% = 99
+50% = 80
+40% = 66
+30% = 4d
+20% = 33
+10% = 1a
+*/
