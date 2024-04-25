@@ -74,7 +74,14 @@
           </div>
           <div class="user-acc__info-group">
             <h2 class="user-acc__info-title title-reset">Студент:</h2>
-            <span class="user-acc__info-checkbox"></span>
+            <span class="user-acc__info-checkbox">
+              <svg class="user-acc__info-checkbox-mark" width="13" height="11" viewBox="0 0 13 11" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M5.03751 7.9864L1.34951 4.49239L0 6.04204L5.23322 11L13 1.34567L11.4625 0L5.03751 7.9864Z"
+                  fill="#283593" />
+              </svg>
+            </span>
           </div>
           <div class="user-acc__info-group">
             <h2 class="user-acc__info-title title-reset">Имя пользователя telegram:</h2>
@@ -87,44 +94,46 @@
         </div>
       </div>
 
-      <div class="user-acc__edit-form edit-form">
-        <div class="edit-form__groups">
-          <div class="edit-form__group">
-            <label class="edit-form__label" for="last-name">Фамилия:</label>
-            <input class="edit-form__input" type="text" name="last-name" id="last-name" autocapitalize="words"
+      <form class="user-acc__info-wrapper">
+        <div class="user-acc__info">
+          <button class="user-acc__close-edit-btn btn-reset">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M7.27848 8.82397L0 16.199L1.6653 17.8864L8.94379 10.5114L16.3347 18.0003L18 16.3129L10.6091 8.82397L17.6522 1.6874L15.9869 0L8.94379 7.13657L2.01306 0.113892L0.347758 1.80129L7.27848 8.82397Z"
+                fill="#283593" fill-opacity="0.8" />
+            </svg>
+          </button>
+          <div class="user-acc__info-group">
+            <label class="user-acc__info-title" for="last-name">Фамилия:</label>
+            <input class="user-acc__info-input" type="text" name="last-name" id="last-name" autocapitalize="words"
               value="Иванов">
           </div>
-          <div class="edit-form__group">
-            <label class="edit-form__label" for="first-name">Имя:</label>
-            <input class="edit-form__input" type="text" name="first-name" id="first-name" autocapitalize="words"
+          <div class="user-acc__info-group">
+            <label class="user-acc__info-title" for="first-name">Имя:</label>
+            <input class="user-acc__info-input" type="text" name="first-name" id="first-name" autocapitalize="words"
               value="Иван">
           </div>
-          <div class="edit-form__group">
-            <label class="edit-form__label" for="patronymic">Отчество:</label>
-            <input class="edit-form__input" type="text" name="patronymic" id="patronymic" autocapitalize="words"
+          <div class="user-acc__info-group">
+            <label class="user-acc__info-title" for="patronymic">Отчество:</label>
+            <input class="user-acc__info-input" type="text" name="patronymic" id="patronymic" autocapitalize="words"
               value="Иванович">
           </div>
-          <div class="edit-form__group">
-            <label class="edit-form__label" for="email">Почта:</label>
-            <input class="edit-form__input" type="text" name="email" id="email" autocapitalize="words"
+          <div class="user-acc__info-group">
+            <label class="user-acc__info-title" for="email">Почта:</label>
+            <input class="user-acc__info-input" type="text" name="email" id="email" autocapitalize="words"
               value="i.i.ivanov@urfu.me">
           </div>
-          <div class="edit-form__group">
-            <label class="edit-form__label" for="student">Студент:</label>
-            <input class="edit-form__checkbox" type="checkbox" name="student" id="student" autocapitalize="words"
-              value=false>
-          </div>
-          <div class="edit-form__group">
-            <label class="edit-form__label" for="telegram">Имя пользователя telegram:</label>
-            <input class="edit-form__input" type="text" name="telegram" id="telegram" autocapitalize="words"
+          <div class="user-acc__info-group">
+            <label class="user-acc__info-title" for="telegram">Имя пользователя telegram:</label>
+            <input class="user-acc__info-input" type="text" name="telegram" id="telegram" autocapitalize="words"
               value="@IvanIvanov">
           </div>
         </div>
-        <div class="edit-form__btns">
-          <button class="edit-form__submit-btn btn-reset">Редактировать</button>
-          <button class="edit-form__change-password-btn btn-reset">Сменить пароль</button>
+        <div class="user-acc__info-btns">
+          <button class="user-acc__info-edit-btn btn-reset">Редактировать</button>
+          <button class="user-acc__info-change-password-btn btn-reset">Сменить пароль</button>
         </div>
-      </div>
+      </form>
 
       <h2 class="user-acc__booked-list-title title-reset">Мои бронирования</h2>
       <ul class="user-acc__booked-list list-reset">

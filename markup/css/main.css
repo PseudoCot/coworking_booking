@@ -1051,7 +1051,7 @@ img {
 }
 
 .user-acc__info-wrapper {
-  margin: 0 auto;
+  margin: 0 auto 35px;
   max-width: 930px;
   width: 100%;
   border-radius: 15px;
@@ -1060,7 +1060,9 @@ img {
 }
 
 .user-acc__info {
+  position: relative;
   padding: 20px 30px 0;
+  margin-bottom: 25px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -1097,6 +1099,7 @@ img {
 
 .user-acc__info-edit-btn,
 .user-acc__info-change-password-btn {
+  padding: 18px 21px;
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 20px;
@@ -1106,12 +1109,37 @@ img {
   background-color: var(--form-button-bg-color);
 }
 
-.user-acc__info-edit-btn {
-  padding: 18px 50px;
+.user-acc__close-edit-btn {
+  position: absolute;
+  top: 14px;
+  right: 24px;
 }
 
-.user-acc__info-change-password-btn {
-  padding: 18px 21px;
+.user-acc__info-input {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: #304FFEE6;
+  border-radius: 5px;
+  border: 0.50px solid rgba(40, 53, 147, 0.6);
+  background-color: transparent;
+}
+
+.user-acc__info-checkbox {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border: 0.50px solid rgba(40, 53, 147, 0.6);
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.user-acc__info-checkbox-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .user-acc__booked-list-title {
