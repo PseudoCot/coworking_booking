@@ -211,7 +211,7 @@ img {
 }
 
 .cb-form-top {
-  padding: 15px 56px 0;
+  padding: 15px 56px;
   margin-bottom: 20px;
   border-bottom: 1px #4256F6 solid;
 }
@@ -221,7 +221,6 @@ img {
 }
 
 .cb-form-title {
-  margin-bottom: 15px;
   position: relative;
   font-family: var(--second-family);
   font-weight: 400;
@@ -913,16 +912,12 @@ img {
 }
 
 .coworking__form-top {
-  padding: 8px 20px 0;
+  padding: 8px 20px;
   margin-bottom: 15px;
 }
 
 .coworking__form-bottom {
   padding: 0 20px 25px;
-}
-
-.coworking__form-title {
-  margin-bottom: 8px;
 }
 
 .coworking__form-group {
@@ -995,10 +990,6 @@ img {
 .auth {
   margin: 0 auto 320px;
   max-width: 440px;
-}
-
-.auth__title {
-  margin-bottom: 140px;
 }
 
 .auth-form__btns {
@@ -1143,6 +1134,52 @@ img {
   font-weight: 400;
   font-size: 20px;
   color: var(--form-button-border-color);
+}
+
+
+
+/* /// temp /// */
+.new-password {
+  padding: 160px 0 250px;
+  background: no-repeat right center url("../img/persona.svg")
+}
+
+.new-password-form {
+  position: relative;
+  display: inline-block;
+  left: 9%;
+}
+
+.new-password-form__top {
+  padding: 8px 77px;
+  margin-bottom: 20px;
+}
+
+.new-password-form__bottom {
+  padding: 0 65px 25px;
+}
+
+.new-password-form__input-group {
+  margin-bottom: 10px;
+}
+
+.new-password-form__input-group:nth-last-child(-n+2) {
+  margin-bottom: 20px;
+}
+
+.new-password-form__label {
+  margin-bottom: 8px;
+}
+
+.new-password-form__input {
+  width: 200px;
+  height: 22px;
+}
+
+.new-password-form__set-password-btn {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 
