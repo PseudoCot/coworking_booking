@@ -798,11 +798,13 @@ img {
 
 .coworking__info {
   position: relative;
-  padding: 30px;
-  display: flex;
-  flex-direction: row;
   flex-basis: 100%;
-  gap: 25px;
+  padding: 30px 30px 0;
+  margin-bottom: 21px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  gap: 21px 25px;
   border-radius: 15px;
   background-color: var(--light-card-bg-color);
   box-shadow: 0 0 4px 0 var(--theme-button-text-color);
@@ -810,14 +812,54 @@ img {
 }
 
 .coworking__left-info {
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.coworking__info-img {
-  margin-top: 20px;
-  margin-bottom: 16px;
+.coworking__info-carousel {
+  position: relative;
+  margin: 20px 0 16px;
+}
+
+.info-carousel__left-btn,
+.info-carousel__right-btn {
+  position: absolute;
+  padding: 15px;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.info-carousel__left-btn {
+  left: 5px;
+}
+
+.info-carousel__right-btn {
+  right: 5px;
+}
+
+.info-carousel__left-btn::after,
+.info-carousel__right-btn::after {
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  content: "";
+  border-right: 4px solid #D9D9D9B3;
+  border-bottom: 4px solid #D9D9D9B3;
+  /* 70% */
+}
+
+.info-carousel__left-btn::after {
+  transform: translateY(-50%) translateX(-50%) rotateZ(135deg);
+}
+
+.info-carousel__right-btn::after {
+  transform: rotateZ(-45deg) translateY(-85%) translateY(-10%);
+}
+
+.info-carousel__image {
   min-width: var(--card-img-width);
   width: var(--card-img-width);
   height: var(--card-img-height);
@@ -858,6 +900,8 @@ img {
 }
 
 .coworking__right-info {
+  grid-column: 2;
+  grid-row: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -917,6 +961,24 @@ img {
   color: var(--theme-button-text-color);
 }
 
+.coworking__image-list {
+  grid-column: 1 / 3;
+  grid-row: 2;
+  padding: 0 30px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+}
+
+.coworking__image-item,
+.coworking__image {
+  border-radius: 15px;
+  width: 108px;
+  height: 72px;
+}
+
 .coworking__info-cancel-btn {
   position: absolute;
   right: 15px;
@@ -952,14 +1014,54 @@ img {
   margin-bottom: 20px;
 }
 
+.coworking__form-select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .coworking__form-select,
 .coworking__form-input {
   position: relative;
+  padding: 2px 20px 2px 4px;
   height: 22px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: #283593CC;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
 }
 
-.coworking__form-select {
-  width: 200px;
+.coworking__form-select-wrapper::before,
+.coworking__form-input::before {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  content: "";
+  border-radius: 5px;
+  background-color: #8C9EFF99;
+  box-shadow: 1px 1px 0 0 var(--form-input-border-color);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.coworking__form-select-wrapper::after,
+.coworking__form-input::after {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  width: 6px;
+  height: 6px;
+  content: "";
+  border-radius: 5px;
+  border: 6px solid transparent;
+  border-top: 6px solid #ffffff;
+  transform: translateY(-20%);
+  pointer-events: none;
 }
 
 .coworking__form-input::-webkit-calendar-picker-indicator {
@@ -977,6 +1079,29 @@ img {
 
 .coworking__form-input[type=date] {
   width: 130px;
+}
+
+.coworking__form-select {
+  width: 200px;
+}
+
+.coworking__form-select-option {
+  padding: 6px 5px;
+  width: 100%;
+  height: 26px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 13px;
+  color: #283593CC;
+  /* 80% */
+  border: 0.5px solid #28359399;
+  /* 60% */
+  border-top: none;
+}
+
+.coworking__form-select-option:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .coworking__form-time-group {
@@ -1004,6 +1129,7 @@ img {
   border: 1px solid #2835934D;
   /* 30% */
   background: #ffffff;
+  cursor: pointer;
 }
 
 .coworking__form-time-separator {

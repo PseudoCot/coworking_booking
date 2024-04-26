@@ -48,7 +48,11 @@
       <div class="coworking__wrapper">
         <div class="coworking__info">
           <div class="coworking__left-info">
-            <img class="coworking__info-img" src="img/antresoli_1.jpg" alt="Коворкинг 'Антресоли'">
+            <div class="coworking__info-carousel info-carousel">
+              <button class="info-carousel__left-btn btn-reset"></button>
+              <img class="info-carousel__image" src="img/antresoli_1.jpg" alt="Коворкинг 'Антресоли'">
+              <button class="info-carousel__right-btn btn-reset"></button>
+            </div>
             <h2 class="coworking__info-header title-reset">Антресоли</h2>
             <div class="coworking__info-opening">
               <span class="coworking__opening-title">Режим работы</span>
@@ -81,6 +85,29 @@
               </ul>
             </div>
           </div>
+          <ul class="coworking__image-list list-reset">
+            <li class="coworking__image-item">
+              <img class="coworking__image" src="img/antresoli_1.jpg" alt="Антресоли">
+            </li>
+            <li class="coworking__image-item">
+              <img class="coworking__image" src="img/antresoli_2.png" alt="Антресоли">
+            </li>
+            <li class="coworking__image-item">
+              <img class="coworking__image" src="img/antresoli_1.jpg" alt="Антресоли">
+            </li>
+            <li class="coworking__image-item">
+              <img class="coworking__image" src="img/antresoli_2.png" alt="Антресоли">
+            </li>
+            <li class="coworking__image-item">
+              <img class="coworking__image" src="img/antresoli_1.jpg" alt="Антресоли">
+            </li>
+            <li class="coworking__image-item">
+              <img class="coworking__image" src="img/antresoli_2.png" alt="Антресоли">
+            </li>
+            <li class="coworking__image-item">
+              <img class="coworking__image" src="img/antresoli_1.jpg" alt="Антресоли">
+            </li>
+          </ul>
         </div>
 
         <form class="coworking__form cb-form" action="">
@@ -91,11 +118,13 @@
             <div class="coworking__form-bottom cb-form-bottom">
               <div class="coworking__form-group cb-form-group">
                 <label class="coworking__form-label cb-form-label" for="type">Тип места:</label>
-                <select class="coworking__form-select cb-form-input" name="type" id="coworking-type">
-                  <option class="coworking__form-select-option" value="" selected disabled hidden></option>
-                  <option class="coworking__form-select-option" value="Столы">Столы</option>
-                  <option class="coworking__form-select-option" value="Переговорные">Переговорные</option>
-                </select>
+                <div class="coworking__form-select-wrapper">
+                  <select class="coworking__form-select cb-form-input" name="type" id="coworking-type">
+                    <option class="coworking__form-select-option" value="" selected disabled hidden></option>
+                    <option class="coworking__form-select-option" value="Столы">Столы</option>
+                    <option class="coworking__form-select-option" value="Переговорные">Переговорные</option>
+                  </select>
+                </div>
               </div>
               <div class="coworking__form-group cb-form-group">
                 <label class="coworking__form-label cb-form-label" for="date">Дата:</label>
