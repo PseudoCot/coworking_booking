@@ -343,11 +343,19 @@ img {
 }
 
 .cb-toast {
+  position: relative;
   padding: 30px 30px 40px;
   max-width: 776px;
   border-radius: 15px;
   border: 1px solid #000;
   background-color: var(--light-card-bg-color);
+}
+
+.cb-close-toast-btn {
+  position: absolute;
+  padding: 3px;
+  top: 18px;
+  right: 18px;
 }
 
 .cb-toast-title {
@@ -687,6 +695,7 @@ img {
   background-color: var(--transparent-card-color);
   box-shadow: 0 0 4px 0 var(--theme-button-text-color);
   /* поменять на градиент */
+  cursor: pointer;
 }
 
 .booking__item-img {
@@ -827,7 +836,7 @@ img {
 .info-carousel__left-btn,
 .info-carousel__right-btn {
   position: absolute;
-  padding: 15px;
+  padding: 18px 15px;
   top: 50%;
   transform: translateY(-50%)
 }
@@ -852,11 +861,11 @@ img {
 }
 
 .info-carousel__left-btn::after {
-  transform: translateY(-50%) translateX(-50%) rotateZ(135deg);
+  transform: translateY(-50%) translateX(-35%) rotateZ(135deg);
 }
 
 .info-carousel__right-btn::after {
-  transform: rotateZ(-45deg) translateY(-85%) translateY(-10%);
+  transform: rotateZ(-45deg) translateY(-85%) translateX(-10%);
 }
 
 .info-carousel__image {
@@ -1252,6 +1261,7 @@ img {
 
 .user-acc__close-edit-btn {
   position: absolute;
+  padding: 3px;
   top: 14px;
   right: 24px;
 }
