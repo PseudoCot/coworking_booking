@@ -1311,7 +1311,9 @@ img {
 }
 
 .user-acc__booked-item {
+  padding: 30px;
   max-width: 930px;
+  gap: 0 25px;
 }
 
 .user-acc__booked-item:last-child {
