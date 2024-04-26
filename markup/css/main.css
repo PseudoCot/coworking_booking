@@ -643,25 +643,25 @@ img {
 
 
 
-/* /// booking /// */
-.booking {
+/* /// coworkings /// */
+.coworkings {
   margin-bottom: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* За основу для формы поиска берется схожий элемент из coworking */
-.booking__searching {
+/* За основу для формы поиска берется схожий элемент из index */
+.coworkings__searching {
   margin-bottom: 50px;
 }
 
-.booking__searching .searching__institute-input,
-.booking__searching .searching__audience-input {
+.coworkings__searching .searching__institute-input,
+.coworkings__searching .searching__audience-input {
   width: 258px;
 }
 
-.booking__searching .searching__submit-btn {
+.coworkings__searching .searching__submit-btn {
   margin: 5px 30px;
   padding: 20px 75px;
 }
@@ -679,14 +679,22 @@ img {
   /* box-shadow: 0 8px 6px 0 var(--theme-text-color); */
 }
 
-.booking__list {
+.coworkings__list {
   display: flex;
   flex-direction: row;
   /* flex-wrap: wrap; */
   gap: 20px;
 }
 
-.booking__list-item {
+.coworkings__list-title {
+  margin-bottom: 25px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--theme-text-color);
+}
+
+.coworkings__list-item {
   padding: 35px 30px 15px;
   display: flex;
   flex-direction: column;
@@ -698,7 +706,7 @@ img {
   cursor: pointer;
 }
 
-.booking__item-img {
+.coworkings__item-img {
   margin-bottom: 10px;
   width: var(--card-img-width);
   height: var(--card-img-height);
@@ -706,20 +714,20 @@ img {
   background-color: var(--card-img-bg-color);
 }
 
-.booking__item-title,
-.booking__item-content-title,
-.booking__item-content-info {
+.coworkings__item-title,
+.coworkings__item-content-title,
+.coworkings__item-content-info {
   font-family: var(--second-family);
   font-weight: 400;
 }
 
-.booking__item-title {
+.coworkings__item-title {
   margin-bottom: 7px;
   font-size: 24px;
   color: var(--theme-text-color);
 }
 
-.booking__item-content {
+.coworkings__item-content {
   min-height: 38px;
   display: flex;
   flex-direction: row;
@@ -728,12 +736,12 @@ img {
   gap: 40px;
 }
 
-.booking__item-content-title {
+.coworkings__item-content-title {
   font-size: 16px;
   color: var(--theme-text-color);
 }
 
-.booking__item-content-info {
+.coworkings__item-content-info {
   font-size: 16px;
   color: var(--theme-button-text-color);
 }
@@ -776,28 +784,20 @@ img {
   z-index: 1;
 }
 
-.calendar__booking-list {
+.calendar__coworking-list {
   padding-bottom: 50px;
   background: no-repeat 80% 50% url("../img/stars.svg");
 }
 
-.booking__list-title {
-  margin-bottom: 25px;
-  font-family: var(--second-family);
-  font-weight: 400;
-  font-size: 24px;
-  color: var(--theme-text-color);
-}
-
-/* за основы для карточек берётся элемент из booking */
-.calendar .booking__list-item {
+/* за основы для карточек берётся элемент из coworkings */
+.calendar .coworking__list-item {
   background-color: var(--light-card-bg-color);
 }
 
 
 
-/* /// coworking /// */
-.coworking__wrapper {
+/* /// booking /// */
+.booking__wrapper {
   margin-bottom: 100px;
   display: flex;
   flex-direction: row;
@@ -805,7 +805,7 @@ img {
   gap: 25px;
 }
 
-.coworking__info {
+.booking__info {
   position: relative;
   flex-basis: 100%;
   padding: 30px 30px 0;
@@ -820,7 +820,7 @@ img {
   /* поменять на градиент */
 }
 
-.coworking__left-info {
+.booking__left-info {
   grid-column: 1;
   grid-row: 1;
   display: flex;
@@ -828,7 +828,7 @@ img {
   align-items: center;
 }
 
-.coworking__info-carousel {
+.booking__info-carousel {
   position: relative;
   margin: 20px 0 16px;
 }
@@ -876,20 +876,20 @@ img {
   background-color: var(--card-img-bg-color);
 }
 
-.coworking__info-header,
-.coworking__opening-title,
-.coworking__opening-text {
+.booking__info-header,
+.booking__opening-title,
+.booking__opening-text {
   font-family: var(--second-family);
   font-weight: 400;
 }
 
-.coworking__info-header {
+.booking__info-header {
   margin-bottom: 18px;
   font-size: 24px;
   color: var(--theme-text-color);
 }
 
-.coworking__info-opening {
+.booking__info-opening {
   min-height: 38px;
   display: flex;
   flex-direction: row;
@@ -898,17 +898,17 @@ img {
   gap: 40px;
 }
 
-.coworking__opening-title {
+.booking__opening-title {
   font-size: 16px;
   color: var(--theme-text-color);
 }
 
-.coworking__opening-text {
+.booking__opening-text {
   font-size: 16px;
   color: var(--theme-button-text-color);
 }
 
-.coworking__right-info {
+.booking__right-info {
   grid-column: 2;
   grid-row: 1;
   width: 100%;
@@ -918,14 +918,14 @@ img {
   align-items: start;
 }
 
-.coworking__info-group {
+.booking__info-group {
   margin-bottom: 20px;
 }
 
-.coworking__info-title,
-.coworking__info-text,
-.coworking__info-inline-text,
-.coworking__info-point {
+.booking__info-title,
+.booking__info-text,
+.booking__info-inline-text,
+.booking__info-point {
   display: block;
   margin-bottom: 5px;
   font-family: var(--second-family);
@@ -934,25 +934,25 @@ img {
   font-style: normal;
 }
 
-.coworking__info-text:nth-last-child(-n+1),
-.coworking__info-point:nth-last-child(-n+1) {
+.booking__info-text:nth-last-child(-n+1),
+.booking__info-point:nth-last-child(-n+1) {
   margin-bottom: 0;
 }
 
-.coworking__info-title {
+.booking__info-title {
   color: var(--theme-text-color);
 }
 
-.coworking__info-text,
-.coworking__info-inline-text {
+.booking__info-text,
+.booking__info-inline-text {
   color: var(--theme-button-text-color);
 }
 
-.coworking__info-inline-text {
+.booking__info-inline-text {
   display: inline-block;
 }
 
-.coworking__info-list {
+.booking__info-list {
   /* отступ для маркера */
   padding-left: 18px;
   display: flex;
@@ -960,17 +960,17 @@ img {
   list-style-type: disc;
 }
 
-.coworking__info-point {
+.booking__info-point {
   display: list-item;
   color: var(--theme-button-text-color);
 }
 
-.coworking__info-point::marker {
+.booking__info-point::marker {
   font-size: 13px;
   color: var(--theme-button-text-color);
 }
 
-.coworking__image-list {
+.booking__image-list {
   grid-column: 1 / 3;
   grid-row: 2;
   padding: 0 30px 20px;
@@ -981,14 +981,14 @@ img {
   gap: 9px;
 }
 
-.coworking__image-item,
-.coworking__image {
+.booking__image-item,
+.booking__image {
   border-radius: 15px;
   width: 108px;
   height: 72px;
 }
 
-.coworking__info-cancel-btn {
+.booking__info-cancel-btn {
   position: absolute;
   right: 15px;
   bottom: 21px;
@@ -1002,34 +1002,34 @@ img {
   background-color: var(--form-button-bg-color);
 }
 
-.coworking__form {
+.booking__form {
   flex-basis: 35%;
 }
 
-.coworking__form-top {
+.booking__form-top {
   padding: 8px 20px;
   margin-bottom: 15px;
 }
 
-.coworking__form-bottom {
+.booking__form-bottom {
   padding: 0 20px 25px;
 }
 
-.coworking__form-group {
+.booking__form-group {
   margin-bottom: 10px;
 }
 
-.coworking__form-group:nth-last-child(-n+2) {
+.booking__form-group:nth-last-child(-n+2) {
   margin-bottom: 20px;
 }
 
-.coworking__form-select-wrapper {
+.booking__form-select-wrapper {
   position: relative;
   display: inline-block;
 }
 
-.coworking__form-select,
-.coworking__form-input {
+.booking__form-select,
+.booking__form-input {
   position: relative;
   padding: 2px 20px 2px 4px;
   height: 22px;
@@ -1043,8 +1043,8 @@ img {
   cursor: pointer;
 }
 
-.coworking__form-select-wrapper::before,
-.coworking__form-input::before {
+.booking__form-select-wrapper::before,
+.booking__form-input::before {
   position: absolute;
   top: 50%;
   right: 5px;
@@ -1058,8 +1058,8 @@ img {
   pointer-events: none;
 }
 
-.coworking__form-select-wrapper::after,
-.coworking__form-input::after {
+.booking__form-select-wrapper::after,
+.booking__form-input::after {
   position: absolute;
   top: 50%;
   right: 6px;
@@ -1073,7 +1073,7 @@ img {
   pointer-events: none;
 }
 
-.coworking__form-input::-webkit-calendar-picker-indicator {
+.booking__form-input::-webkit-calendar-picker-indicator {
   position: absolute;
   top: 0;
   left: 0;
@@ -1086,15 +1086,15 @@ img {
   cursor: pointer;
 }
 
-.coworking__form-input[type=date] {
+.booking__form-input[type=date] {
   width: 130px;
 }
 
-.coworking__form-select {
+.booking__form-select {
   width: 200px;
 }
 
-.coworking__form-select-option {
+.booking__form-select-option {
   padding: 6px 5px;
   width: 100%;
   height: 26px;
@@ -1108,12 +1108,12 @@ img {
   border-top: none;
 }
 
-.coworking__form-select-option:last-child {
+.booking__form-select-option:last-child {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
-.coworking__form-time-group {
+.booking__form-time-group {
   padding: 2px 5px;
   margin-bottom: 5px;
   width: 100px;
@@ -1124,11 +1124,11 @@ img {
   gap: 5px;
 }
 
-.coworking__form-time-group:nth-last-child(-n+2) {
+.booking__form-time-group:nth-last-child(-n+2) {
   margin-bottom: 0;
 }
 
-.coworking__form-time-select {
+.booking__form-time-select {
   padding: 1px 2px;
   font-family: var(--font-family);
   font-weight: 400;
@@ -1141,7 +1141,7 @@ img {
   cursor: pointer;
 }
 
-.coworking__form-time-separator {
+.booking__form-time-separator {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 10px;
@@ -1149,14 +1149,14 @@ img {
   /* 80% */
 }
 
-.coworking__form-submit-btn {
+.booking__form-submit-btn {
   padding: 18px 45px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.coworking__toast-text {
+.booking__toast-text {
   text-align: center;
 }
 
@@ -1318,19 +1318,19 @@ img {
   margin-bottom: 50px;
 }
 
-.user-acc__booked-item .coworking__info-img {
+.user-acc__booked-item .booking__info-img {
   margin-top: 0;
 }
 
-.user-acc__booked-item .coworking__info-header {
+.user-acc__booked-item .booking__info-header {
   margin-bottom: 0;
 }
 
-.user-acc__booked-item .coworking__info-title {
+.user-acc__booked-item .booking__info-title {
   display: inline-block;
 }
 
-.user-acc__booked-item .coworking__info-group:nth-last-child(-n+2) {
+.user-acc__booked-item .booking__info-group:nth-last-child(-n+2) {
   max-width: 70%;
 }
 
