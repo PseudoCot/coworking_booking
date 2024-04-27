@@ -61,9 +61,9 @@ export default function Footer(): JSX.Element {
       </div>
       <div className="temp-links">
         <a href="index.html">Index</a>
-        <a href="booking.html">Booking</a>
-        <a href="calendar.html">Calendar</a>
         <a href="coworking.html">Coworking</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="booking.html">Booking</a>
         <a href="register.html">Register</a>
         <a href="auth.html">Auth</a>
         <a href="user-acc.html">UserAcc</a>
