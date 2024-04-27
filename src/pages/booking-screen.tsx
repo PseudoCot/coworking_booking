@@ -10,8 +10,8 @@ export default function BookingScreen({ }: BookingScreenProps): JSX.Element {
           <div className="booking__left-info">
             <div className="booking__info-carousel info-carousel">
               <button className="info-carousel__left-btn btn-reset"></button>
-              <img className="info-carousel__image" src="img/antresoli_1.jpg" alt="Коворкинг 'Антресоли'">
-                <button className="info-carousel__right-btn btn-reset"></button>
+              <img className="info-carousel__image" src="img/antresoli_1.jpg" alt="Коворкинг 'Антресоли'" />
+              <button className="info-carousel__right-btn btn-reset"></button>
             </div>
             <h2 className="booking__info-header title-reset">Антресоли</h2>
             <div className="booking__info-opening">
@@ -40,8 +40,7 @@ export default function BookingScreen({ }: BookingScreenProps): JSX.Element {
             <div className="booking__info-group">
               <h3 className="booking__info-title title-reset">Технические возможности:</h3>
               <ul className="booking__info-list list-reset">
-                <li className="booking__info-point">стационарная и мобильная мебель как для индивидуальной, так и для
-                  груповой работы</li>
+                <li className="booking__info-point">стационарная и мобильная мебель как для индивидуальной, так и для груповой работы</li>
                 <li className="booking__info-point">6 маркерных досок</li>
                 <li className="booking__info-point">Wi-Fi</li>
               </ul>
@@ -170,9 +169,10 @@ export default function BookingScreen({ }: BookingScreenProps): JSX.Element {
       <div className="booking__toast cb-toast">
         <button className="booking__close-toast-btn cb-close-toast-btn btn-reset">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd"
+            <path fillRule="evenodd" clipRule="evenodd"
               d="M7.27848 8.82397L0 16.199L1.6653 17.8864L8.94379 10.5114L16.3347 18.0003L18 16.3129L10.6091 8.82397L17.6522 1.6874L15.9869 0L8.94379 7.13657L2.01306 0.113892L0.347758 1.80129L7.27848 8.82397Z"
-              fill="#283593" fill-opacity="0.8" />
+              fill="#283593" fillOpacity="0.8"
+            />
           </svg>
         </button>
         <h2 className="booking__toast-title cb-toast-title title-reset">Ошибка оформления бронирования!</h2>
@@ -185,9 +185,10 @@ export default function BookingScreen({ }: BookingScreenProps): JSX.Element {
       <div className="booking__toast cb-toast">
         <button className="booking__close-toast-btn cb-close-toast-btn btn-reset">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd"
+            <path fillRule="evenodd" clipRule="evenodd"
               d="M7.27848 8.82397L0 16.199L1.6653 17.8864L8.94379 10.5114L16.3347 18.0003L18 16.3129L10.6091 8.82397L17.6522 1.6874L15.9869 0L8.94379 7.13657L2.01306 0.113892L0.347758 1.80129L7.27848 8.82397Z"
-              fill="#283593" fill-opacity="0.8" />
+              fill="#283593" fillOpacity="0.8"
+            />
           </svg>
         </button>
         <h2 className="booking__toast-title cb-toast-title title-reset">Спасибо, место в коворкинге забронировано!</h2>
