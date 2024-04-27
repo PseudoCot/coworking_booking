@@ -1,19 +1,30 @@
-export const AuthStatus = {
+export const ApiMethods = {
+  Register: 'register',
+  Login: 'login',
+  RefreshSession: 'refresh_session',
+  Logout: 'logout',
+} as const;
+
+export const JsonRpcErrorCodes = {
+  [-32700]: 'Parse Error',
+  [-32600]: 'Invalid Request',
+  [-32601]: 'Method not found',
+  [-32602]: 'Invalid params',
+  [-32603]: 'Internal error',
+} as const;
+
+export const AuthStatuses = {
   Auth: 'Auth',
   NoAuth: 'NoAuth',
   Unknown: 'Unknown',
 } as const;
 
-export const APIRoute = {
-  Login: 'login',
-} as const;
-
-export const NameSpace = {
+export const NameSpaces = {
   Error: 'Error',
   User: 'User',
 } as const;
 
-export const ErrorCodesDesc: {[key: number]: string} = {
+export const ErrorCodesDesc: { [key: number]: string } = {
   400: 'Bad Request',
   401: 'Unauthorized',
   404: 'Not Found',
