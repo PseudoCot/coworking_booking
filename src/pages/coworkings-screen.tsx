@@ -1,3 +1,4 @@
+import CoworkingMiniCard from '../components/coworking-mini-card';
 import Layout from '../components/layout';
 
 type CoworkingsScreenProps = {};
@@ -27,30 +28,9 @@ export default function CoworkingsScreen({ }: CoworkingsScreenProps): JSX.Elemen
         </form>
 
         <ul className="coworkings__list list-reset">
-          <li className="coworkings__list-item">
-            <img className="coworkings__item-img" src="img/cow-irit.jpg" alt="Коворкинг ИРИТ-РТФ" />
-            <h3 className="coworkings__item-title title-reset">ИРИТ - РТФ</h3>
-            <div className="coworkings__item-content">
-              <span className="coworkings__item-content-title">Режим работы</span>
-              <span className="coworkings__item-content-info">с&nbsp;10:00 до&nbsp;16:00</span>
-            </div>
-          </li>
-          <li className="coworkings__list-item">
-            <img className="coworkings__item-img" src="img/idea-terr.jpg" alt="Коворкинг 'Территория Идей'" />
-            <h3 className="coworkings__item-title title-reset">Территория идей</h3>
-            <div className="coworkings__item-content">
-              <span className="coworkings__item-content-title">Режим работы</span>
-              <span className="coworkings__item-content-info">с&nbsp;8:00 до&nbsp;18:00</span>
-            </div>
-          </li>
-          <li className="coworkings__list-item">
-            <img className="coworkings__item-img" src="img/antresoli_1.jpg" alt="Коворкинг 'Антресоли'" />
-            <h3 className="coworkings__item-title title-reset">Антресоли</h3>
-            <div className="coworkings__item-content">
-              <span className="coworkings__item-content-title">Режим работы</span>
-              <span className="coworkings__item-content-info">с&nbsp;10:00 до&nbsp;16:00,<br />по&nbsp;заявкам</span>
-            </div>
-          </li>
+          <CoworkingMiniCard imgUrl='img/cow-irit.jpg' title='ИРИТ - РТФ' openingTime='10:00' closingTime='16:00' />
+          <CoworkingMiniCard imgUrl='img/idea-terr.jpg' title='Территория идей' openingTime='8:00' closingTime='18:00' />
+          <CoworkingMiniCard imgUrl='img/antresoli_1.jpg' title='Антресоли' openingTime='10:00' closingTime='16:00' optionalText='по&nbsp;заявкам' />
         </ul>
       </article>
     </Layout>
