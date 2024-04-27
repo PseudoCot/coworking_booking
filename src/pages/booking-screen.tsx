@@ -1,204 +1,208 @@
+import Layout from '../components/layout';
+
 type BookingScreenProps = {};
 
 export default function BookingScreen({ }: BookingScreenProps): JSX.Element {
   return (
-    <article className="booking">
-      <h1 className="booking__title cb-title title-reset">Коворкинги</h1>
+    <Layout>
+      <article className="booking">
+        <h1 className="booking__title cb-title title-reset">Коворкинги</h1>
 
-      <div className="booking__wrapper">
-        <div className="booking__info">
-          <div className="booking__left-info">
-            <div className="booking__info-carousel info-carousel">
-              <button className="info-carousel__left-btn btn-reset"></button>
-              <img className="info-carousel__image" src="img/antresoli_1.jpg" alt="Коворкинг 'Антресоли'" />
-              <button className="info-carousel__right-btn btn-reset"></button>
+        <div className="booking__wrapper">
+          <div className="booking__info">
+            <div className="booking__left-info">
+              <div className="booking__info-carousel info-carousel">
+                <button className="info-carousel__left-btn btn-reset"></button>
+                <img className="info-carousel__image" src="img/antresoli_1.jpg" alt="Коворкинг 'Антресоли'" />
+                <button className="info-carousel__right-btn btn-reset"></button>
+              </div>
+              <h2 className="booking__info-header title-reset">Антресоли</h2>
+              <div className="booking__info-opening">
+                <span className="booking__opening-title">Режим работы</span>
+                <span className="booking__opening-text">с&nbsp;10:00 до&nbsp;16:00,<br />по&nbsp;заявкам</span>
+              </div>
             </div>
-            <h2 className="booking__info-header title-reset">Антресоли</h2>
-            <div className="booking__info-opening">
-              <span className="booking__opening-title">Режим работы</span>
-              <span className="booking__opening-text">с&nbsp;10:00 до&nbsp;16:00,<br />по&nbsp;заявкам</span>
+            <div className="booking__right-info">
+              <div className="booking__info-group">
+                <h3 className="booking__info-title title-reset">Описание:</h3>
+                <p className="booking__info-text paragraph-reset">
+                  &quot;Антресоли&quot; - это комфортное, уютное пространство для
+                  студентов, где любой желающий может провести время за работой или учебой. Студенты, приходящие в
+                  коворкинг, могут подготовиться к занятиям и обсудить свои проекты.
+                </p>
+              </div>
+              <div className="booking__info-group">
+                <h3 className="booking__info-title title-reset">Адрес:</h3>
+                <address className="booking__info-text">ул. Мира 19, 4 этаж</address>
+              </div>
+              <div className="booking__info-group">
+                <h3 className="booking__info-title title-reset">Количество мест:</h3>
+                <span className="booking__info-text">Переговорные: 2</span>
+                <span className="booking__info-text">Столы: 40</span>
+              </div>
+              <div className="booking__info-group">
+                <h3 className="booking__info-title title-reset">Технические возможности:</h3>
+                <ul className="booking__info-list list-reset">
+                  <li className="booking__info-point">стационарная и мобильная мебель как для индивидуальной, так и для груповой работы</li>
+                  <li className="booking__info-point">6 маркерных досок</li>
+                  <li className="booking__info-point">Wi-Fi</li>
+                </ul>
+              </div>
             </div>
+            <ul className="booking__image-list list-reset">
+              <li className="booking__image-item">
+                <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
+              </li>
+              <li className="booking__image-item">
+                <img className="booking__image" src="img/antresoli_2.png" alt="Антресоли" />
+              </li>
+              <li className="booking__image-item">
+                <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
+              </li>
+              <li className="booking__image-item">
+                <img className="booking__image" src="img/antresoli_2.png" alt="Антресоли" />
+              </li>
+              <li className="booking__image-item">
+                <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
+              </li>
+              <li className="booking__image-item">
+                <img className="booking__image" src="img/antresoli_2.png" alt="Антресоли" />
+              </li>
+              <li className="booking__image-item">
+                <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
+              </li>
+            </ul>
           </div>
-          <div className="booking__right-info">
-            <div className="booking__info-group">
-              <h3 className="booking__info-title title-reset">Описание:</h3>
-              <p className="booking__info-text paragraph-reset">
-                &quot;Антресоли&quot; - это комфортное, уютное пространство для
-                студентов, где любой желающий может провести время за работой или учебой. Студенты, приходящие в
-                коворкинг, могут подготовиться к занятиям и обсудить свои проекты.
-              </p>
+
+          <form className="booking__form cb-form" action="">
+            <div className="booking__form-wrapper cb-form-wrapper">
+              <div className="booking__form-top cb-form-top">
+                <h2 className="booking__form-title cb-form-title title-reset">Форма бронирования</h2>
+              </div>
+              <div className="booking__form-bottom cb-form-bottom">
+                <div className="booking__form-group cb-form-group">
+                  <label className="booking__form-label cb-form-label" htmlFor="type">Тип места:</label>
+                  <div className="booking__form-select-wrapper">
+                    <select className="booking__form-select cb-form-input" name="type" id="booking-type">
+                      <option className="booking__form-select-option" value="" selected disabled hidden></option>
+                      <option className="booking__form-select-option" value="Столы">Столы</option>
+                      <option className="booking__form-select-option" value="Переговорные">Переговорные</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="booking__form-group cb-form-group">
+                  <label className="booking__form-label cb-form-label" htmlFor="date">Дата:</label>
+                  <input className="booking__form-input cb-form-input" type="date" name="date" id="booking-date" />
+                </div>
+                <div className="booking__form-group cb-form-group">
+                  <label className="booking__form-label cb-form-label" htmlFor="time">Время:</label>
+                  <span className="booking__form-sub-label cb-form-sub-label">Начало:</span>
+                  <div className="booking__form-time-group  cb-form-input">
+                    <select className="booking__form-time-select" name="start-time-hours" id="start-time-hours">
+                      <option value="08" className="booking__form-select-option">08</option>
+                      <option value="09" className="booking__form-select-option">09</option>
+                      <option value="10" className="booking__form-select-option">10</option>
+                      <option value="11" className="booking__form-select-option">11</option>
+                      <option value="12" className="booking__form-select-option">12</option>
+                      <option value="13" className="booking__form-select-option">13</option>
+                      <option value="14" className="booking__form-select-option">14</option>
+                      <option value="15" className="booking__form-select-option">15</option>
+                      <option value="16" className="booking__form-select-option">16</option>
+                      <option value="17" className="booking__form-select-option">17</option>
+                      <option value="18" className="booking__form-select-option">18</option>
+                      <option value="19" className="booking__form-select-option">19</option>
+                      <option value="20" className="booking__form-select-option">20</option>
+                    </select>
+                    <span className="booking__form-time-separator">:</span>
+                    <select className="booking__form-time-select" name="start-time-min" id="start-time-min">
+                      <option value="00" className="booking__form-select-option">00</option>
+                      <option value="05" className="booking__form-select-option">05</option>
+                      <option value="10" className="booking__form-select-option">10</option>
+                      <option value="15" className="booking__form-select-option">15</option>
+                      <option value="20" className="booking__form-select-option">20</option>
+                      <option value="25" className="booking__form-select-option">25</option>
+                      <option value="30" className="booking__form-select-option">30</option>
+                      <option value="35" className="booking__form-select-option">35</option>
+                      <option value="40" className="booking__form-select-option">40</option>
+                      <option value="45" className="booking__form-select-option">45</option>
+                      <option value="50" className="booking__form-select-option">50</option>
+                      <option value="55" className="booking__form-select-option">55</option>
+                    </select>
+                  </div>
+                  <span className="booking__form-sub-label cb-form-sub-label">Конец:</span>
+                  <div className="booking__form-time-group  cb-form-input">
+                    <select className="booking__form-time-select" name="start-time-hours" id="start-time-hours">
+                      <option value="08" className="booking__form-select-option">08</option>
+                      <option value="09" className="booking__form-select-option">09</option>
+                      <option value="10" className="booking__form-select-option">10</option>
+                      <option value="11" className="booking__form-select-option">11</option>
+                      <option value="12" className="booking__form-select-option">12</option>
+                      <option value="13" className="booking__form-select-option">13</option>
+                      <option value="14" className="booking__form-select-option">14</option>
+                      <option value="15" className="booking__form-select-option">15</option>
+                      <option value="16" className="booking__form-select-option">16</option>
+                      <option value="17" className="booking__form-select-option">17</option>
+                      <option value="18" className="booking__form-select-option">18</option>
+                      <option value="19" className="booking__form-select-option">19</option>
+                      <option value="20" className="booking__form-select-option">20</option>
+                    </select>
+                    <span className="booking__form-time-separator">:</span>
+                    <select className="booking__form-time-select" name="start-time-min" id="start-time-min">
+                      <option value="00" className="booking__form-select-option">00</option>
+                      <option value="05" className="booking__form-select-option">05</option>
+                      <option value="10" className="booking__form-select-option">10</option>
+                      <option value="15" className="booking__form-select-option">15</option>
+                      <option value="20" className="booking__form-select-option">20</option>
+                      <option value="25" className="booking__form-select-option">25</option>
+                      <option value="30" className="booking__form-select-option">30</option>
+                      <option value="35" className="booking__form-select-option">35</option>
+                      <option value="40" className="booking__form-select-option">40</option>
+                      <option value="45" className="booking__form-select-option">45</option>
+                      <option value="50" className="booking__form-select-option">50</option>
+                      <option value="55" className="booking__form-select-option">55</option>
+                    </select>
+                  </div>
+                </div>
+                <button className="booking__form-submit-btn cb-form-btn btn-reset">Забронировать</button>
+              </div>
             </div>
-            <div className="booking__info-group">
-              <h3 className="booking__info-title title-reset">Адрес:</h3>
-              <address className="booking__info-text">ул. Мира 19, 4 этаж</address>
-            </div>
-            <div className="booking__info-group">
-              <h3 className="booking__info-title title-reset">Количество мест:</h3>
-              <span className="booking__info-text">Переговорные: 2</span>
-              <span className="booking__info-text">Столы: 40</span>
-            </div>
-            <div className="booking__info-group">
-              <h3 className="booking__info-title title-reset">Технические возможности:</h3>
-              <ul className="booking__info-list list-reset">
-                <li className="booking__info-point">стационарная и мобильная мебель как для индивидуальной, так и для груповой работы</li>
-                <li className="booking__info-point">6 маркерных досок</li>
-                <li className="booking__info-point">Wi-Fi</li>
-              </ul>
-            </div>
-          </div>
-          <ul className="booking__image-list list-reset">
-            <li className="booking__image-item">
-              <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
-            </li>
-            <li className="booking__image-item">
-              <img className="booking__image" src="img/antresoli_2.png" alt="Антресоли" />
-            </li>
-            <li className="booking__image-item">
-              <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
-            </li>
-            <li className="booking__image-item">
-              <img className="booking__image" src="img/antresoli_2.png" alt="Антресоли" />
-            </li>
-            <li className="booking__image-item">
-              <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
-            </li>
-            <li className="booking__image-item">
-              <img className="booking__image" src="img/antresoli_2.png" alt="Антресоли" />
-            </li>
-            <li className="booking__image-item">
-              <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
-            </li>
-          </ul>
+          </form>
         </div>
 
-        <form className="booking__form cb-form" action="">
-          <div className="booking__form-wrapper cb-form-wrapper">
-            <div className="booking__form-top cb-form-top">
-              <h2 className="booking__form-title cb-form-title title-reset">Форма бронирования</h2>
-            </div>
-            <div className="booking__form-bottom cb-form-bottom">
-              <div className="booking__form-group cb-form-group">
-                <label className="booking__form-label cb-form-label" htmlFor="type">Тип места:</label>
-                <div className="booking__form-select-wrapper">
-                  <select className="booking__form-select cb-form-input" name="type" id="booking-type">
-                    <option className="booking__form-select-option" value="" selected disabled hidden></option>
-                    <option className="booking__form-select-option" value="Столы">Столы</option>
-                    <option className="booking__form-select-option" value="Переговорные">Переговорные</option>
-                  </select>
-                </div>
-              </div>
-              <div className="booking__form-group cb-form-group">
-                <label className="booking__form-label cb-form-label" htmlFor="date">Дата:</label>
-                <input className="booking__form-input cb-form-input" type="date" name="date" id="booking-date" />
-              </div>
-              <div className="booking__form-group cb-form-group">
-                <label className="booking__form-label cb-form-label" htmlFor="time">Время:</label>
-                <span className="booking__form-sub-label cb-form-sub-label">Начало:</span>
-                <div className="booking__form-time-group  cb-form-input">
-                  <select className="booking__form-time-select" name="start-time-hours" id="start-time-hours">
-                    <option value="08" className="booking__form-select-option">08</option>
-                    <option value="09" className="booking__form-select-option">09</option>
-                    <option value="10" className="booking__form-select-option">10</option>
-                    <option value="11" className="booking__form-select-option">11</option>
-                    <option value="12" className="booking__form-select-option">12</option>
-                    <option value="13" className="booking__form-select-option">13</option>
-                    <option value="14" className="booking__form-select-option">14</option>
-                    <option value="15" className="booking__form-select-option">15</option>
-                    <option value="16" className="booking__form-select-option">16</option>
-                    <option value="17" className="booking__form-select-option">17</option>
-                    <option value="18" className="booking__form-select-option">18</option>
-                    <option value="19" className="booking__form-select-option">19</option>
-                    <option value="20" className="booking__form-select-option">20</option>
-                  </select>
-                  <span className="booking__form-time-separator">:</span>
-                  <select className="booking__form-time-select" name="start-time-min" id="start-time-min">
-                    <option value="00" className="booking__form-select-option">00</option>
-                    <option value="05" className="booking__form-select-option">05</option>
-                    <option value="10" className="booking__form-select-option">10</option>
-                    <option value="15" className="booking__form-select-option">15</option>
-                    <option value="20" className="booking__form-select-option">20</option>
-                    <option value="25" className="booking__form-select-option">25</option>
-                    <option value="30" className="booking__form-select-option">30</option>
-                    <option value="35" className="booking__form-select-option">35</option>
-                    <option value="40" className="booking__form-select-option">40</option>
-                    <option value="45" className="booking__form-select-option">45</option>
-                    <option value="50" className="booking__form-select-option">50</option>
-                    <option value="55" className="booking__form-select-option">55</option>
-                  </select>
-                </div>
-                <span className="booking__form-sub-label cb-form-sub-label">Конец:</span>
-                <div className="booking__form-time-group  cb-form-input">
-                  <select className="booking__form-time-select" name="start-time-hours" id="start-time-hours">
-                    <option value="08" className="booking__form-select-option">08</option>
-                    <option value="09" className="booking__form-select-option">09</option>
-                    <option value="10" className="booking__form-select-option">10</option>
-                    <option value="11" className="booking__form-select-option">11</option>
-                    <option value="12" className="booking__form-select-option">12</option>
-                    <option value="13" className="booking__form-select-option">13</option>
-                    <option value="14" className="booking__form-select-option">14</option>
-                    <option value="15" className="booking__form-select-option">15</option>
-                    <option value="16" className="booking__form-select-option">16</option>
-                    <option value="17" className="booking__form-select-option">17</option>
-                    <option value="18" className="booking__form-select-option">18</option>
-                    <option value="19" className="booking__form-select-option">19</option>
-                    <option value="20" className="booking__form-select-option">20</option>
-                  </select>
-                  <span className="booking__form-time-separator">:</span>
-                  <select className="booking__form-time-select" name="start-time-min" id="start-time-min">
-                    <option value="00" className="booking__form-select-option">00</option>
-                    <option value="05" className="booking__form-select-option">05</option>
-                    <option value="10" className="booking__form-select-option">10</option>
-                    <option value="15" className="booking__form-select-option">15</option>
-                    <option value="20" className="booking__form-select-option">20</option>
-                    <option value="25" className="booking__form-select-option">25</option>
-                    <option value="30" className="booking__form-select-option">30</option>
-                    <option value="35" className="booking__form-select-option">35</option>
-                    <option value="40" className="booking__form-select-option">40</option>
-                    <option value="45" className="booking__form-select-option">45</option>
-                    <option value="50" className="booking__form-select-option">50</option>
-                    <option value="55" className="booking__form-select-option">55</option>
-                  </select>
-                </div>
-              </div>
-              <button className="booking__form-submit-btn cb-form-btn btn-reset">Забронировать</button>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <div className="booking__toast cb-toast">
-        <button className="booking__close-toast-btn cb-close-toast-btn btn-reset">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" clipRule="evenodd"
-              d="M7.27848 8.82397L0 16.199L1.6653 17.8864L8.94379 10.5114L16.3347 18.0003L18 16.3129L10.6091 8.82397L17.6522 1.6874L15.9869 0L8.94379 7.13657L2.01306 0.113892L0.347758 1.80129L7.27848 8.82397Z"
-              fill="#283593" fillOpacity="0.8"
-            />
-          </svg>
-        </button>
-        <h2 className="booking__toast-title cb-toast-title title-reset">Ошибка оформления бронирования!</h2>
-        <p className="booking__toast-text cb-toast-text paragraph-reset">
-          Заполните имя пользователя в telegram, это необходимо, чтобы мы могли оповещать вас в случае непредвиденного
-          закрытия коворкинга (из-за подготовки к мероприятию/аварийных ситуаций). И также это требуется для возможности
-          подтвердить бронирование.
-        </p>
-      </div>
-      <div className="booking__toast cb-toast">
-        <button className="booking__close-toast-btn cb-close-toast-btn btn-reset">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" clipRule="evenodd"
-              d="M7.27848 8.82397L0 16.199L1.6653 17.8864L8.94379 10.5114L16.3347 18.0003L18 16.3129L10.6091 8.82397L17.6522 1.6874L15.9869 0L8.94379 7.13657L2.01306 0.113892L0.347758 1.80129L7.27848 8.82397Z"
-              fill="#283593" fillOpacity="0.8"
-            />
-          </svg>
-        </button>
-        <h2 className="booking__toast-title cb-toast-title title-reset">Спасибо, место в коворкинге забронировано!</h2>
-        <p className="booking__toast-text cb-toast-text paragraph-reset">
-          Сейчас вам необходимо написать нашему telegram-боту - @имя_бота.<br />
-          За 2 часа до начала брони вам придет оповещение для подтверждения бронирования. Нажмите кнопку “Отклонить”,
-          если у вас поменяются планы. Или используйте кнопку “Подтвердить”, если бронирование коворкинга будет актуально.<br />
-          Если подтверждение не будет получено за 30 минут до начала брони, то она будет отменена.
-        </p>
-      </div>
-    </article>
+        <div className="booking__toast cb-toast">
+          <button className="booking__close-toast-btn cb-close-toast-btn btn-reset">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" clipRule="evenodd"
+                d="M7.27848 8.82397L0 16.199L1.6653 17.8864L8.94379 10.5114L16.3347 18.0003L18 16.3129L10.6091 8.82397L17.6522 1.6874L15.9869 0L8.94379 7.13657L2.01306 0.113892L0.347758 1.80129L7.27848 8.82397Z"
+                fill="#283593" fillOpacity="0.8"
+              />
+            </svg>
+          </button>
+          <h2 className="booking__toast-title cb-toast-title title-reset">Ошибка оформления бронирования!</h2>
+          <p className="booking__toast-text cb-toast-text paragraph-reset">
+            Заполните имя пользователя в telegram, это необходимо, чтобы мы могли оповещать вас в случае непредвиденного
+            закрытия коворкинга (из-за подготовки к мероприятию/аварийных ситуаций). И также это требуется для возможности
+            подтвердить бронирование.
+          </p>
+        </div>
+        <div className="booking__toast cb-toast">
+          <button className="booking__close-toast-btn cb-close-toast-btn btn-reset">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" clipRule="evenodd"
+                d="M7.27848 8.82397L0 16.199L1.6653 17.8864L8.94379 10.5114L16.3347 18.0003L18 16.3129L10.6091 8.82397L17.6522 1.6874L15.9869 0L8.94379 7.13657L2.01306 0.113892L0.347758 1.80129L7.27848 8.82397Z"
+                fill="#283593" fillOpacity="0.8"
+              />
+            </svg>
+          </button>
+          <h2 className="booking__toast-title cb-toast-title title-reset">Спасибо, место в коворкинге забронировано!</h2>
+          <p className="booking__toast-text cb-toast-text paragraph-reset">
+            Сейчас вам необходимо написать нашему telegram-боту - @имя_бота.<br />
+            За 2 часа до начала брони вам придет оповещение для подтверждения бронирования. Нажмите кнопку “Отклонить”,
+            если у вас поменяются планы. Или используйте кнопку “Подтвердить”, если бронирование коворкинга будет актуально.<br />
+            Если подтверждение не будет получено за 30 минут до начала брони, то она будет отменена.
+          </p>
+        </div>
+      </article>
+    </Layout>
   );
 }

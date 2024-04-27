@@ -37,8 +37,11 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 
     const { data } = await api.post<JsonRpcResponse<AuthResponseData>>(ApiMethods.Login, authData);
 
-    saveToken(data.result?.access_token);
+    if (!data.result) {
+      throw new Error(data.error?.message);
+    }
 
+    saveToken(data.result.access_token);
     dispatch(redirectToRoute(AppRoutes.Main.FullPath)); // определить, куда перенаправлять
   },
 );
@@ -54,7 +57,11 @@ export const refreshSessionAction = createAsyncThunk<void, undefined, {
 
     const { data } = await api.post<JsonRpcResponse<AuthResponseData>>(ApiMethods.RefreshSession);
 
-    saveToken(data.result?.access_token);
+    if (!data.result) {
+      throw new Error(data.error?.message);
+    }
+
+    saveToken(data.result.access_token);
   },
 );
 

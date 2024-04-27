@@ -13,6 +13,6 @@ export default function PrivateRoute({ children }: PrivateRouteProps): JSX.Eleme
   return (
     authStatus === AuthStatuses.Auth
       ? children as JSX.Element
-      : <Navigate to={AppRoutes.Login.FullPath} />
+      : <Navigate to={AppRoutes.Auth.FullPath} />
   );
 }
