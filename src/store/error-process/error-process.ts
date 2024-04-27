@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace } from '../../consts';
+import { NameSpaces } from '../../consts';
 
 type ErrorProcessState = {
-  errorCode: number | undefined;
+  errorCode?: number;
 }
 
 const initialState: ErrorProcessState = {
@@ -10,7 +10,7 @@ const initialState: ErrorProcessState = {
 };
 
 export const errorProcess = createSlice({
-  name: NameSpace.Error,
+  name: NameSpaces.Error,
   initialState,
   reducers: {
     setErrorCode: (state, action: PayloadAction<number | undefined>) => {
@@ -19,4 +19,4 @@ export const errorProcess = createSlice({
   },
 });
 
-export const {setErrorCode} = errorProcess.actions;
+export const { setErrorCode } = errorProcess.actions;

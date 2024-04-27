@@ -1,10 +1,8 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios'; //AxiosRequestConfig
 import { getToken } from './token';
 import { DetailMessageType } from '../types/detail-message';
 import { store } from '../store';
-import { redirectToRoute } from '../store/action';
-import { AppRoutes } from '../routes';
-import { AuthStatus, NameSpace } from '../consts';
+import { AuthStatuses, NameSpaces } from '../consts';
 import { logoutAction } from '../store/api-actions';
 import { StatusCodes } from 'http-status-codes';
 import { setErrorCode } from '../store/error-process/error-process';
@@ -13,7 +11,7 @@ const BACKEND_URL = '127.0.0.1:9999';
 const REQUEST_TIMEOUT = 5000;
 
 
-const useToken = (config: AxiosRequestConfig) => {
+const useToken = (config: InternalAxiosRequestConfig) => {
   const token = getToken();
 
   if (token && config.headers) {
@@ -23,10 +21,9 @@ const useToken = (config: AxiosRequestConfig) => {
   return config;
 };
 
-const redirectOnError = (error: AxiosError<DetailMessageType>) => {
+const setError = (error: AxiosError<DetailMessageType>) => {
   if (error.response && error.response.status !== StatusCodes.UNAUTHORIZED) {
     store.dispatch(setErrorCode(error.response.status));
-    store.dispatch(redirectToRoute(AppRoutes.Error.FullPath));
   }
 
   throw error;
@@ -34,7 +31,7 @@ const redirectOnError = (error: AxiosError<DetailMessageType>) => {
 
 const redirectToLoginOnExpiredToken = (error: AxiosError<DetailMessageType>) => {
   if (error.response?.status === StatusCodes.UNAUTHORIZED && getToken() !== ''
-    && store.getState()[NameSpace.User].authStatus === AuthStatus.Auth) {
+    && store.getState()[NameSpaces.User].authStatus === AuthStatuses.Auth) {
     store.dispatch(logoutAction);
   }
 
@@ -50,9 +47,9 @@ export const createAPI = (): AxiosInstance => {
 
   api.interceptors.request.use(useToken);
 
-  api.interceptors.response.use(
+  api.interceptors.response.use( // проверить, что ошибки перехватываются (все ответы от сервера с кодом 200)
     (response) => response,
-    redirectOnError
+    setError
   );
 
   api.interceptors.response.use(

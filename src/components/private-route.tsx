@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { PropsWithChildren } from 'react';
-import { AuthStatus } from '../consts';
+import { AuthStatuses } from '../consts';
 import { useAppSelector } from '../hooks';
 import { getAuthStatus } from '../store/user-process/selectors';
 import { AppRoutes } from '../routes';
@@ -11,7 +11,7 @@ export default function PrivateRoute({ children }: PrivateRouteProps): JSX.Eleme
   const authStatus = useAppSelector(getAuthStatus);
 
   return (
-    authStatus === AuthStatus.Auth
+    authStatus === AuthStatuses.Auth
       ? children as JSX.Element
       : <Navigate to={AppRoutes.Login.FullPath} />
   );

@@ -1,4 +1,4 @@
-const AUTH_TOKEN_KEY_NAME = 'WTW';
+const AUTH_TOKEN_KEY_NAME = 'coworking_booking';
 
 export type Token = string;
 
