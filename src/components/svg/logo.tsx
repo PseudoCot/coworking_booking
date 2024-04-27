@@ -1,10 +1,10 @@
 type LogoSVGProps = {
-
+  classNames?: string;
 };
 
-export default function LogoSVG({ }: LogoSVGProps): JSX.Element {
+export default function LogoSVG({ classNames }: LogoSVGProps): JSX.Element {
   return (
-    <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={classNames} width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M51 25.5C51 39.5833 39.5833 51 25.5 51C11.4167 51 0 39.5833 0 25.5C0 11.4167 11.4167 0 25.5 0C39.5833 0 51 11.4167 51 25.5ZM9.17786 25.5C9.17786 34.5145 16.4855 41.8221 25.5 41.8221C34.5145 41.8221 41.8221 34.5145 41.8221 25.5C41.8221 16.4855 34.5145 9.17786 25.5 9.17786C16.4855 9.17786 9.17786 16.4855 9.17786 25.5Z" fill="#8C9EFF" fillOpacity="0.82" />
       <path d="M35.3077 19.2885C35.3077 22.7912 32.4681 25.6308 28.9654 25.6308C25.4626 25.6308 22.6231 22.7912 22.6231 19.2885C22.6231 15.7857 25.4626 12.9462 28.9654 12.9462C32.4681 12.9462 35.3077 15.7857 35.3077 19.2885Z" fill="#8C9EFF" fillOpacity="0.82" />
     </svg>

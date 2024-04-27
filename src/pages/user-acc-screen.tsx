@@ -1,4 +1,6 @@
 import Layout from '../components/layout';
+import CheckmarkSVG from '../components/svg/checkmark';
+import CloseCrossSVG from '../components/svg/close-cross';
 
 type UserAccScreenProps = {};
 
@@ -38,14 +40,7 @@ export default function UserAccScreen({ }: UserAccScreenProps): JSX.Element {
             <div className="user-acc__info-group">
               <h2 className="user-acc__info-title title-reset">Студент:</h2>
               <span className="user-acc__info-checkbox">
-                <svg className="user-acc__info-checkbox-mark" width="13" height="11" viewBox="0 0 13 11" fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path fillRule="evenodd" clipRule="evenodd"
-                    d="M5.03751 7.9864L1.34951 4.49239L0 6.04204L5.23322 11L13 1.34567L11.4625 0L5.03751 7.9864Z"
-                    fill="#283593"
-                  />
-                </svg>
+                <CheckmarkSVG classNames="user-acc__info-checkbox-mark" />
               </span>
             </div>
             <div className="user-acc__info-group">
@@ -62,12 +57,7 @@ export default function UserAccScreen({ }: UserAccScreenProps): JSX.Element {
         <form className="user-acc__info-wrapper">
           <div className="user-acc__info">
             <button className="user-acc__close-edit-btn btn-reset">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd"
-                  d="M7.27848 8.82397L0 16.199L1.6653 17.8864L8.94379 10.5114L16.3347 18.0003L18 16.3129L10.6091 8.82397L17.6522 1.6874L15.9869 0L8.94379 7.13657L2.01306 0.113892L0.347758 1.80129L7.27848 8.82397Z"
-                  fill="#283593" fillOpacity="0.8"
-                />
-              </svg>
+              <CloseCrossSVG />
             </button>
             <div className="user-acc__info-group">
               <label className="user-acc__info-title" htmlFor="last-name">Фамилия:</label>
