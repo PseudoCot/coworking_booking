@@ -1,11 +1,30 @@
-export const ROUTES = {
-  main: {
-    fullPath: '/',
+export const AppRoutes = {
+  Main: {
+    FullPath: '/',
   },
-  login: {
-    fullPath: '/login',
+  Coworkings: {
+    FullPath: '/coworkings',
   },
-  error: {
-    fullPath: '*'
+  Calendar: {
+    FullPath: '/calendar',
+  },
+  Booking: {
+    FullPath: '/coworkings/:id',
+    RelativePath: ':id',
+  },
+  Register: {
+    FullPath: '/register',
+  },
+  Auth: {
+    FullPath: '/auth',
+  },
+  UserAcc: {
+    FullPath: '/user',
+  },
+  NewPassword: {
+    FullPath: '/new-password',
+  },
+  Error: {
+    FullPath: '*'
   },
 } as const;

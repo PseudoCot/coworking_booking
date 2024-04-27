@@ -3,7 +3,7 @@ import { getToken } from './token';
 import { DetailMessageType } from '../types/detail-message';
 import { store } from '../store';
 import { redirectToRoute } from '../store/action';
-import { ROUTES } from '../routes';
+import { AppRoutes } from '../routes';
 import { AuthStatus, NameSpace } from '../consts';
 import { logoutAction } from '../store/api-actions';
 import { StatusCodes } from 'http-status-codes';
@@ -26,7 +26,7 @@ const useToken = (config: AxiosRequestConfig) => {
 const redirectOnError = (error: AxiosError<DetailMessageType>) => {
   if (error.response && error.response.status !== StatusCodes.UNAUTHORIZED) {
     store.dispatch(setErrorCode(error.response.status));
-    store.dispatch(redirectToRoute(ROUTES.error.fullPath));
+    store.dispatch(redirectToRoute(AppRoutes.Error.FullPath));
   }
 
   throw error;

@@ -1,6 +1,6 @@
 import './error-screen.css';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../routes';
+import { AppRoutes } from '../routes';
 import { ErrorCodesDesc } from '../consts';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getErrorCode } from '../store/error-process/selectors';
