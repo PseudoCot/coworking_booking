@@ -11,7 +11,7 @@ export default function PrivateRoute({ children }: PrivateRouteProps): JSX.Eleme
   const authStatus = useAppSelector(getAuthStatus);
 
   return (
-    authStatus === AuthStatuses.Auth
+    authStatus === AuthStatuses.Auth && true
       ? children as JSX.Element
       : <Navigate to={AppRoutes.Auth.FullPath} />
   );

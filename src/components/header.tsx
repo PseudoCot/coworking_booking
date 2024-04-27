@@ -1,4 +1,9 @@
+import { useAppSelector } from '../hooks';
+import { getAuthStatus } from '../store/user-process/selectors';
+
 export default function Header(): JSX.Element {
+  const authStatus = useAppSelector(getAuthStatus);
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -18,10 +23,10 @@ export default function Header(): JSX.Element {
       <nav className="header__nav nav">
         <ul className="nav__items list-reset">
           <li className="nav__item">
-            <a href="booking.html" className="nav__item-link">Бронирование</a>
+            <a href="booking" className="nav__item-link">Бронирование</a>
           </li>
           <li className="nav__item">
-            <a href="calendar.html" className="nav__item-link">Календарь</a>
+            <a href="calendar" className="nav__item-link">Календарь</a>
           </li>
         </ul>
       </nav>
@@ -57,16 +62,22 @@ export default function Header(): JSX.Element {
           </svg>
         </button> */}
 
-        <a href="register.html" className="main-controls__register-btn">Регистрация</a>
-        <a href="auth.html" className="main-controls__login-btn">Вход</a>
-
-        {/* <a href="#" className="main-controls__user-acc-btn">Имя пользователя</a>
-        <button className="main-controls__logout-btn btn-reset">
-          <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13.5 16L0.5 16L0.5 0L13.5 0V5L11.5 5V2H2.5V14L11.5 14V11H13.5V16Z" fill="#14191A" />
-            <path d="M15.5 12L19.5 8L15.5 4L15.5 7L6.5 7L6.5 9L15.5 9V12Z" fill="#14191A" />
-          </svg>
-        </button> */}
+        authStatus ? {
+          <>
+            <a href="user-acc" className="main-controls__user-acc-btn">Имя пользователя</a>
+            <button className="main-controls__logout-btn btn-reset">
+              <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.5 16L0.5 16L0.5 0L13.5 0V5L11.5 5V2H2.5V14L11.5 14V11H13.5V16Z" fill="#14191A" />
+                <path d="M15.5 12L19.5 8L15.5 4L15.5 7L6.5 7L6.5 9L15.5 9V12Z" fill="#14191A" />
+              </svg>
+            </button>
+          </>
+        } : {
+          <>
+            <a href="register" className="main-controls__register-btn">Регистрация</a>
+            <a href="auth" className="main-controls__login-btn">Вход</a>
+          </>
+        }
       </div>
     </header>
   );

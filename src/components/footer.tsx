@@ -60,14 +60,14 @@ export default function Footer(): JSX.Element {
         <span className="footer__credits-right">Lorem Ipsum</span>
       </div>
       <div className="temp-links">
-        <a href="index.html">Index</a>
-        <a href="coworking.html">Coworking</a>
-        <a href="calendar.html">Calendar</a>
-        <a href="booking.html">Booking</a>
-        <a href="register.html">Register</a>
-        <a href="auth.html">Auth</a>
-        <a href="user-acc.html">UserAcc</a>
-        <a href="new-password.html">NewPass</a>
+        <a href="">Index</a>
+        <a href="coworkings">Coworkings</a>
+        <a href="calendar">Calendar</a>
+        <a href="coworkings/0">Booking</a>
+        <a href="register">Register</a>
+        <a href="auth">Auth</a>
+        <a href="user-acc">UserAcc</a>
+        <a href="new-password">NewPass</a>
       </div>
     </footer>
   );
