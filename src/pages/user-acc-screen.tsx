@@ -1,6 +1,7 @@
 import Layout from '../components/layout';
 import CheckmarkSVG from '../components/svg/checkmark';
 import CloseCrossSVG from '../components/svg/close-cross';
+import WarningMessage from '../components/warning-message';
 
 type UserAccScreenProps = {};
 
@@ -10,14 +11,11 @@ export default function UserAccScreen({ }: UserAccScreenProps): JSX.Element {
       <article className="user-acc">
         <h1 className="user-acc__title cb-title title-reset">Личный кабинет</h1>
 
-        <div className="user-acc__toast">
-          <h2 className="user-acc__toast-title title-reset">Предупреждение!</h2>
-          <p className="user-acc__toast-text paragraph-reset">
-            Заполните имя пользователя в telegram, это необходимо, чтобы мы могли оповещать вас в случае непредвиденного
-            закрытия коворкинга (из-за подготовки к мероприятию/аварийных ситуаций). И также это требуется для возможности
-            подтвердить бронирование.
-          </p>
-        </div>
+        <WarningMessage title='Предупреждение!' >
+          Заполните имя пользователя в telegram, это необходимо, чтобы мы могли оповещать вас в случае непредвиденного
+          закрытия коворкинга (из-за подготовки к мероприятию/аварийных ситуаций). И также это требуется для возможности
+          подтвердить бронирование.
+        </WarningMessage>
 
         <div className="user-acc__info-wrapper">
           <div className="user-acc__info">

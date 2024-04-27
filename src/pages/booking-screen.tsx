@@ -1,5 +1,6 @@
 import Layout from '../components/layout';
 import CloseCrossSVG from '../components/svg/close-cross';
+import Toast from '../components/toast';
 
 type BookingScreenProps = {};
 
@@ -170,29 +171,17 @@ export default function BookingScreen({ }: BookingScreenProps): JSX.Element {
           </form>
         </div>
 
-        <div className="booking__toast cb-toast">
-          <button className="booking__close-toast-btn cb-close-toast-btn btn-reset">
-            <CloseCrossSVG />
-          </button>
-          <h2 className="booking__toast-title cb-toast-title title-reset">Ошибка оформления бронирования!</h2>
-          <p className="booking__toast-text cb-toast-text paragraph-reset">
-            Заполните имя пользователя в telegram, это необходимо, чтобы мы могли оповещать вас в случае непредвиденного
-            закрытия коворкинга (из-за подготовки к мероприятию/аварийных ситуаций). И также это требуется для возможности
-            подтвердить бронирование.
-          </p>
-        </div>
-        <div className="booking__toast cb-toast">
-          <button className="booking__close-toast-btn cb-close-toast-btn btn-reset">
-            <CloseCrossSVG />
-          </button>
-          <h2 className="booking__toast-title cb-toast-title title-reset">Спасибо, место в коворкинге забронировано!</h2>
-          <p className="booking__toast-text cb-toast-text paragraph-reset">
-            Сейчас вам необходимо написать нашему telegram-боту - @имя_бота.<br />
-            За 2 часа до начала брони вам придет оповещение для подтверждения бронирования. Нажмите кнопку “Отклонить”,
-            если у вас поменяются планы. Или используйте кнопку “Подтвердить”, если бронирование коворкинга будет актуально.<br />
-            Если подтверждение не будет получено за 30 минут до начала брони, то она будет отменена.
-          </p>
-        </div>
+        <Toast title='Ошибка оформления бронирования!'>
+          Заполните имя пользователя в telegram, это необходимо, чтобы мы могли оповещать вас в случае непредвиденного
+          закрытия коворкинга (из-за подготовки к мероприятию/аварийных ситуаций). И также это требуется для возможности
+          подтвердить бронирование.
+        </Toast>
+        <Toast title='Спасибо, место в коворкинге забронировано!'>
+          Сейчас вам необходимо написать нашему telegram-боту - @имя_бота.<br />
+          За 2 часа до начала брони вам придет оповещение для подтверждения бронирования. Нажмите кнопку “Отклонить”,
+          если у вас поменяются планы. Или используйте кнопку “Подтвердить”, если бронирование коворкинга будет актуально.<br />
+          Если подтверждение не будет получено за 30 минут до начала брони, то она будет отменена.
+        </Toast>
       </article>
     </Layout>
   );
