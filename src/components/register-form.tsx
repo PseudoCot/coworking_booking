@@ -24,7 +24,7 @@ export default function RegisterForm(): JSX.Element {
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    if (processEmailValidation() || processPasswordValidation() || processRepeatedPasswordValidation()) {
+    if (processEmailValidation() && processPasswordValidation() && processRepeatedPasswordValidation()) {
       dispatch(registerAction({
         lastName,
         firstName,
@@ -139,7 +139,11 @@ export default function RegisterForm(): JSX.Element {
                 data-tip="Пароли не совпадают"
               />}
           </div>
-          <button className="register-form__submit-btn cb-form-btn btn-reset" type='submit' disabled={submitDisabled}>Зарегистрироваться</button>
+          <button className="register-form__submit-btn cb-form-btn btn-reset"
+            type='submit' disabled={submitDisabled}
+          >
+            Зарегистрироваться
+          </button>
         </div>
       </div>
     </form>
