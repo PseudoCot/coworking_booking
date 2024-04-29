@@ -90,7 +90,44 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-// добавить запрос на данные пользователя
+// export const fetchUserAction = createAsyncThunk<void, undefined, {
+//   dispatch: AppDispatch;
+//   state: State;
+//   extra: AxiosInstance;
+// }>(
+//   'user/logout',
+//   async (newPassword, { dispatch, extra: api }) => {
+//     const { data } = await api.post<JsonRpcResponse<null>>(ApiMethods.ChangePassword, { newPassword });
+//     return data.result.;
+//   },
+// );
+
+// export const changeUserDataAction = createAsyncThunk<void, string, {
+//   dispatch: AppDispatch;
+//   state: State;
+//   extra: AxiosInstance;
+// }>(
+//   'user/logout',
+//   async (newPassword, { dispatch, extra: api }) => {
+//     await api.post<JsonRpcResponse<null>>(ApiMethods.ChangePassword, { newPassword });
+//   },
+// );
+
+export const changePasswordAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/logout',
+  async (newPassword, { dispatch, extra: api }) => {
+    await api.post<JsonRpcResponse<null>>(ApiMethods.ChangePassword, { newPassword });
+
+    // определить, нужно ли авторизовывать пользователя
+    dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
+  },
+);
+
+// добавить запрос загрузки аватарки пользователя
 
 
 export const fetchCoworkingsAction = createAsyncThunk<CoworkingShortData[], undefined, {

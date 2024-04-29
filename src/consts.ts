@@ -3,6 +3,13 @@ export const ApiMethods = {
   Login: 'login',
   RefreshSession: 'refresh_session',
   Logout: 'logout',
+
+  // временные данные до выяснения структуры api
+  FetchUser: 'temp',
+  ChangeUserData: 'temp',
+  ChangePassword: 'temp',
+  FetchCoworkings: 'temp',
+  FetchCoworking: 'temp',
 } as const;
 
 export const JsonRpcErrorCodes = {
