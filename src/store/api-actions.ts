@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
 import { ApiMethods } from '../consts';
 import { redirectToRoute } from './action';
@@ -14,22 +13,32 @@ import { AuthData } from '../types/auth-data';
 import { AuthResponseData } from '../types/api/auth-response-data';
 import { coworkingShortDataMock } from '../mocks/coworking-short-data-mock';
 import { coworkingDataMock } from '../mocks/coworking-data-mock';
+import { ThunkExtraArgument } from '../types/thunk-extra-argument';
+import { createJsonRpcRequest } from '../shared/create-json-rpc-request';
+import { RegisterRequestParams } from '../types/api/register-request-params';
+import { AuthRequestParams } from '../types/api/auth-request-params';
+import { RefreshRequestParams } from '../types/api/refresh-request-params';
 
 
 export const registerAction = createAsyncThunk<void, RegisterData, {
   dispatch: AppDispatch;
   state: State;
-  extra: AxiosInstance;
+  extra: ThunkExtraArgument;
 }>(
   'user/register',
-  async (registerData, { dispatch, extra: api }) => {
-    await api.post<JsonRpcResponse<RegisterResponseData>>(ApiMethods.Register, {
-      last_name: registerData.lastName,
-      first_name: registerData.firstName,
-      patronymic: registerData.patronymic,
-      email: registerData.email,
-      password: registerData.password,
-    });
+  async (registerData, { dispatch, extra: { api } }) => {
+    await api.post<JsonRpcResponse<RegisterResponseData>>('', createJsonRpcRequest<RegisterRequestParams>(
+      ApiMethods.Register,
+      {
+        data: {
+          last_name: registerData.lastName,
+          first_name: registerData.firstName,
+          patronymic: registerData.patronymic,
+          email: registerData.email,
+          password: registerData.password,
+        }
+      }
+    ));
 
     dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
   },
@@ -38,13 +47,20 @@ export const registerAction = createAsyncThunk<void, RegisterData, {
 export const loginAction = createAsyncThunk<void, AuthData, {
   dispatch: AppDispatch;
   state: State;
-  extra: AxiosInstance;
+  extra: ThunkExtraArgument;
 }>(
   'user/login',
-  async (authData, { dispatch, extra: api }) => {
-    // добавить в authData вычисленный fingerprint
-
-    const { data } = await api.post<JsonRpcResponse<AuthResponseData>>(ApiMethods.Login, authData);
+  async (authData, { dispatch, extra: { fpService, api } }) => {
+    const fingerprintId = await fpService.createFingerprintId();
+    const { data } = await api.post<JsonRpcResponse<AuthResponseData>>('', createJsonRpcRequest<AuthRequestParams>(
+      ApiMethods.Login,
+      {
+        data: {
+          ...authData,
+          fingerprint: fingerprintId,
+        }
+      }
+    ));
 
     if (!data.result) {
       throw new Error(data.error?.message);
@@ -58,13 +74,17 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 export const refreshSessionAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
-  extra: AxiosInstance;
+  extra: ThunkExtraArgument;
 }>(
   'user/refreshSession',
-  async (_, { extra: api }) => {
-    // добавить вычисление fingerprint и отправить в запросе
-
-    const { data } = await api.post<JsonRpcResponse<AuthResponseData>>(ApiMethods.RefreshSession);
+  async (_, { extra: { fpService, api } }) => {
+    const fingerprintId = await fpService.createFingerprintId();
+    const { data } = await api.post<JsonRpcResponse<AuthResponseData>>('', createJsonRpcRequest<RefreshRequestParams>(
+      ApiMethods.RefreshSession,
+      {
+        fingerprint: fingerprintId,
+      }
+    ));
 
     if (!data.result) {
       throw new Error(data.error?.message);
@@ -77,11 +97,17 @@ export const refreshSessionAction = createAsyncThunk<void, undefined, {
 export const logoutAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
-  extra: AxiosInstance;
+  extra: ThunkExtraArgument;
 }>(
   'user/logout',
-  async (_, { dispatch, extra: api }) => {
-    await api.post<JsonRpcResponse<null>>(ApiMethods.Logout);
+  async (_, { dispatch, extra: { fpService, api } }) => {
+    const fingerprintId = await fpService.createFingerprintId();
+    await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest<RefreshRequestParams>(
+      ApiMethods.Logout,
+      {
+        fingerprint: fingerprintId
+      }
+    ));
 
     dropToken();
     dispatch(clearUserData);
@@ -93,39 +119,55 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 // export const fetchUserAction = createAsyncThunk<void, undefined, {
 //   dispatch: AppDispatch;
 //   state: State;
-//   extra: AxiosInstance;
+//   extra: ThunkExtraArgument;
 // }>(
 //   'user/logout',
-//   async (newPassword, { dispatch, extra: api }) => {
-//     const { data } = await api.post<JsonRpcResponse<null>>(ApiMethods.ChangePassword, { newPassword });
+//   async (_, { dispatch, extra: { api } }) => {
+//     const { data } = await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest<>(
+//       ApiMethods.ChangePassword
+//     ));
 //     return data.result.;
 //   },
 // );
 
-// export const changeUserDataAction = createAsyncThunk<void, string, {
+// export const changeUserDataAction = createAsyncThunk<void, UserData, {
 //   dispatch: AppDispatch;
 //   state: State;
-//   extra: AxiosInstance;
+//   extra: ThunkExtraArgument;
 // }>(
 //   'user/logout',
-//   async (newPassword, { dispatch, extra: api }) => {
-//     await api.post<JsonRpcResponse<null>>(ApiMethods.ChangePassword, { newPassword });
+//   async (newUserData, { dispatch, extra: { api } }) => {
+//     await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest<>(
+//       ApiMethods.ChangePassword,
+//       {
+//         data: {
+//           ...newUserData
+//         }
+//       }
+//     ));
 //   },
 // );
 
-export const changePasswordAction = createAsyncThunk<void, string, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'user/logout',
-  async (newPassword, { dispatch, extra: api }) => {
-    await api.post<JsonRpcResponse<null>>(ApiMethods.ChangePassword, { newPassword });
+// export const changePasswordAction = createAsyncThunk<void, string, {
+//   dispatch: AppDispatch;
+//   state: State;
+//   extra: ThunkExtraArgument;
+// }>(
+//   'user/logout',
+//   async (newPassword, { dispatch, extra: { api } }) => {
+//     await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest<>(
+//       ApiMethods.ChangePassword,
+//       {
+//         data: {
+//           newPassword
+//         }
+//       }
+//     ));
 
-    // определить, нужно ли авторизовывать пользователя
-    dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
-  },
-);
+//     // определить, нужно ли авторизовывать пользователя
+//     dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
+//   },
+// );
 
 // добавить запрос загрузки аватарки пользователя
 
@@ -133,12 +175,14 @@ export const changePasswordAction = createAsyncThunk<void, string, {
 export const fetchCoworkingsAction = createAsyncThunk<CoworkingShortData[], undefined, {
   dispatch: AppDispatch;
   state: State;
-  extra: AxiosInstance;
+  extra: ThunkExtraArgument;
 }>(
   'user/fetchCoworkings',
-  async (_, { extra: api }) => {
+  async (_, { extra: { api } }) => {
     // закомментированно до момета получения api
-    // const { data } = await api.post<JsonRpcResponse<CoworkingShortData[]>>(ApiMethods.FetchCoworkings);
+    // const { data } = await api.post<JsonRpcResponse<CoworkingShortData[]>>('', createJsonRpcRequest(
+    //   ApiMethods.FetchCoworkings
+    // ));
     // return data.result.;
     return coworkingShortDataMock;
   },
@@ -147,12 +191,19 @@ export const fetchCoworkingsAction = createAsyncThunk<CoworkingShortData[], unde
 export const fetchCoworkingAction = createAsyncThunk<CoworkingData, string, {
   dispatch: AppDispatch;
   state: State;
-  extra: AxiosInstance;
+  extra: ThunkExtraArgument;
 }>(
   'user/fetchCoworking',
-  async (coworkingId, { extra: api }) => {
+  async (coworkingId, { extra: { api } }) => {
     // закомментированно до момета получения api
-    // const { data } = await api.post<JsonRpcResponse<CoworkingData>>(ApiMethods.FetchCoworking);
+    // const { data } = await api.post<JsonRpcResponse<CoworkingData>>('', createJsonRpcRequest<>(
+    //   ApiMethods.FetchCoworking,
+    //   {
+    //     data: {
+    //       id: coworkingId
+    //     }
+    //   }
+    // ));
     // return data.result.;
     return await coworkingDataMock[coworkingId];
   },
