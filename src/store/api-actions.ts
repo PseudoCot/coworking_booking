@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
@@ -22,7 +23,13 @@ export const registerAction = createAsyncThunk<void, RegisterData, {
 }>(
   'user/register',
   async (registerData, { dispatch, extra: api }) => {
-    await api.post<JsonRpcResponse<RegisterResponseData>>(ApiMethods.Register, registerData);
+    await api.post<JsonRpcResponse<RegisterResponseData>>(ApiMethods.Register, {
+      last_name: registerData.lastName,
+      first_name: registerData.firstName,
+      patronymic: registerData.patronymic,
+      email: registerData.email,
+      password: registerData.password,
+    });
 
     dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
   },

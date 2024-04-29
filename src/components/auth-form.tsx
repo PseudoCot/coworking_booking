@@ -15,8 +15,8 @@ export default function AuthForm(): JSX.Element {
     e.preventDefault();
 
     dispatch(loginAction({
-      email: email,
-      password: password,
+      email,
+      password,
     }));
   };
 
@@ -33,8 +33,7 @@ export default function AuthForm(): JSX.Element {
         <div className="auth-form__bottom cb-form-bottom">
           <div className="auth-form__input-group cb-form-group">
             <label className="auth-form__label cb-form-label" htmlFor="email">Почта:</label>
-            <input
-              className="auth-form__input cb-form-input"
+            <input className="auth-form__input cb-form-input"
               type="email"
               name="email"
               id="email"
