@@ -1,9 +1,7 @@
-import CoworkingMiniCard from '../components/coworking-mini-card';
+import CoworkingList from '../components/coworking-list';
 import Layout from '../components/layout';
 
-type CoworkingsScreenProps = {};
-
-export default function CoworkingsScreen({ }: CoworkingsScreenProps): JSX.Element {
+export default function CoworkingsScreen(): JSX.Element {
   return (
     <Layout>
       <article className="coworkings">
@@ -27,11 +25,7 @@ export default function CoworkingsScreen({ }: CoworkingsScreenProps): JSX.Elemen
           <button className="searching__show-all-btn btn-reset">Показать все</button>
         </form>
 
-        <ul className="coworkings__list list-reset">
-          <CoworkingMiniCard imgUrl='img/cow-irit.jpg' title='ИРИТ - РТФ' openingTime='10:00' closingTime='16:00' />
-          <CoworkingMiniCard imgUrl='img/idea-terr.jpg' title='Территория идей' openingTime='8:00' closingTime='18:00' />
-          <CoworkingMiniCard imgUrl='img/antresoli_1.jpg' title='Антресоли' openingTime='10:00' closingTime='16:00' optionalText='по&nbsp;заявкам' />
-        </ul>
+        <CoworkingList />
       </article>
     </Layout>
   );

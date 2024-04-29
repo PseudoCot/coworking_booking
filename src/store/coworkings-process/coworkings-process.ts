@@ -9,6 +9,7 @@ type CoworkingsProcessState = {
   coworkingsData?: CoworkingShortData[];
   coworkingNameSearch?: string;
   instituteSearch?: string;
+  dateTimeSearch?: string;
 }
 
 const initialState: CoworkingsProcessState = {
@@ -17,6 +18,7 @@ const initialState: CoworkingsProcessState = {
   coworkingsData: [],
   coworkingNameSearch: '',
   instituteSearch: '',
+  dateTimeSearch: '',
 };
 
 export const coworkingsProcess = createSlice({
@@ -29,11 +31,17 @@ export const coworkingsProcess = createSlice({
     setInstituteSearh: (state, action: PayloadAction<string>) => {
       state.instituteSearch = action.payload;
     },
+    setDateTimeSearh: (state, action: PayloadAction<string>) => {
+      state.dateTimeSearch = action.payload;
+    },
     resetCoworkingNameSearh: (state) => {
       state.coworkingNameSearch = '';
     },
     resetInstituteSearh: (state) => {
       state.instituteSearch = '';
+    },
+    resetDateTimeSearh: (state) => {
+      state.dateTimeSearch = '';
     },
   },
   extraReducers(builder) {

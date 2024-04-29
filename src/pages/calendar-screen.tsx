@@ -1,9 +1,7 @@
-import CoworkingMiniCard from '../components/coworking-mini-card';
+import CoworkingList from '../components/coworking-list';
 import Layout from '../components/layout';
 
-type CalendarScreenProps = {};
-
-export default function CalendarScreen({ }: CalendarScreenProps): JSX.Element {
+export default function CalendarScreen(): JSX.Element {
   return (
     <Layout>
       <article className="calendar">
@@ -20,10 +18,7 @@ export default function CalendarScreen({ }: CalendarScreenProps): JSX.Element {
 
         <div className="calendar__coworking-list">
           <h2 className="coworkings__list-title title-reset">Доступные коворкинги</h2>
-          <ul className="coworkings__list list-reset">
-            <CoworkingMiniCard imgUrl='img/cow-irit.jpg' title='ИРИТ - РТФ' openingTime='10:00' closingTime='16:00' />
-            <CoworkingMiniCard imgUrl='img/antresoli_1.jpg' title='Антресоли' openingTime='10:00' closingTime='16:00' optionalText='по&nbsp;заявкам' />
-          </ul>
+          <CoworkingList />
         </div>
       </article>
     </Layout>
