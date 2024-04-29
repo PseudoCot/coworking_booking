@@ -26,11 +26,11 @@ export default function Header(): JSX.Element {
         </ul>
       </nav>
       <div className="main-controls">
-        <button className="main-controls__language-btn language-btn btn-reset">
+        {/* <button className="main-controls__language-btn language-btn btn-reset">
           <LanguageSVG classNames="language-btn__icon" />
           <span className="language-btn__text">RU</span>
           <SelectArrowSVG classNames="language-btn__arrow" />
-        </button>
+        </button> */}
 
         {authStatus ?
           <>

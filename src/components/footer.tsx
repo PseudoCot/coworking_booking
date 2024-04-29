@@ -44,7 +44,7 @@ export default function Footer(): JSX.Element {
         <a href="coworkings/0">Booking</a>
         <a href="register">Register</a>
         <a href="auth">Auth</a>
-        <a href="user-acc">UserAcc</a>
+        <a href="user">UserAcc</a>
         <a href="new-password">NewPass</a>
       </div>
     </footer>

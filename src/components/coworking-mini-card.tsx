@@ -15,7 +15,7 @@ export default function CoworkingMiniCard({ imgUrl, title, openingTime, closingT
         <span className="coworkings__item-content-title">Режим работы</span>
         <span className="coworkings__item-content-info">
           с&nbsp;{openingTime} до&nbsp;{closingTime}
-          {optionalText ?? <>,<br /> {optionalText}</>}
+          {optionalText && <>,<br /> {optionalText}</>}
         </span>
       </div>
     </li>

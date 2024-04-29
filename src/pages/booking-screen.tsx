@@ -1,5 +1,4 @@
 import Layout from '../components/layout';
-import CloseCrossSVG from '../components/svg/close-cross';
 import Toast from '../components/toast';
 
 type BookingScreenProps = {};
