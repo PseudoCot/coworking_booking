@@ -11,6 +11,8 @@ import { RegisterResponseData } from '../types/api/register-response-data';
 import { RegisterData } from '../types/register-data';
 import { AuthData } from '../types/auth-data';
 import { AuthResponseData } from '../types/api/auth-response-data';
+import { coworkingShortDataMock } from '../mocks/coworking-short-data-mock';
+import { coworkingDataMock } from '../mocks/coworking-data-mock';
 
 
 export const registerAction = createAsyncThunk<void, RegisterData, {
@@ -82,3 +84,32 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 );
 
 // добавить запрос на данные пользователя
+
+
+export const fetchCoworkingsAction = createAsyncThunk<CoworkingShortData[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/fetchCoworkings',
+  async (_, { extra: api }) => {
+    // закомментированно до момета получения api
+    // const { data } = await api.post<JsonRpcResponse<CoworkingShortData[]>>(ApiMethods.FetchCoworkings);
+    // return data.result.;
+    return coworkingShortDataMock;
+  },
+);
+
+export const fetchCoworkingAction = createAsyncThunk<CoworkingData, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/fetchCoworking',
+  async (coworkingId, { extra: api }) => {
+    // закомментированно до момета получения api
+    // const { data } = await api.post<JsonRpcResponse<CoworkingData>>(ApiMethods.FetchCoworking);
+    // return data.result.;
+    return await coworkingDataMock[coworkingId];
+  },
+);

@@ -20,8 +20,10 @@ export const AuthStatuses = {
 } as const;
 
 export const NameSpaces = {
-  Error: 'Error',
+  Coworkings: 'Coworkings',
+  Coworking: 'Coworking',
   User: 'User',
+  Error: 'Error',
 } as const;
 
 export const ErrorCodesDesc: { [key: number]: string } = {
