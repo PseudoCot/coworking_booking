@@ -7,6 +7,7 @@ export const ApiMethods = {
   // временные данные до выяснения структуры api
   FetchUser: 'temp',
   ChangeUserData: 'temp',
+  RequestChangePassword: 'temp',
   ChangePassword: 'temp',
   FetchCoworkings: 'temp',
   FetchCoworking: 'temp',

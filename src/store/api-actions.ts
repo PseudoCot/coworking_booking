@@ -131,23 +131,34 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 //   },
 // );
 
-// export const changeUserDataAction = createAsyncThunk<void, UserData, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: ThunkExtraArgument;
-// }>(
-//   'user/logout',
-//   async (newUserData, { dispatch, extra: { api } }) => {
-//     await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest<>(
-//       ApiMethods.ChangePassword,
-//       {
-//         data: {
-//           ...newUserData
-//         }
-//       }
-//     ));
-//   },
-// );
+export const changeUserDataAction = createAsyncThunk<void, UserData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'user/logout',
+  async (newUserData, { dispatch, extra: { api } }) => {
+    // await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest<>(
+    //   ApiMethods.ChangePassword,
+    //   {
+    //     data: {
+    //       ...newUserData
+    //     }
+    //   }
+    // ));
+  },
+);
+
+export const requestChangePasswordAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'user/logout',
+  async (_, { extra: { api } }) => {
+    await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest(ApiMethods.RequestChangePassword));
+  },
+);
 
 export const changePasswordAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch;

@@ -10,7 +10,8 @@ type UserProcessState = {
   firstName?: string;
   patronymic?: string;
   email?: string;
-  is_student?: boolean;
+  telegram?: string;
+  isStudent?: boolean;
   avatarUrl?: string;
 };
 
@@ -20,6 +21,8 @@ const initialState: UserProcessState = {
   firstName: undefined,
   patronymic: undefined,
   email: undefined,
+  telegram: undefined,
+  isStudent: undefined,
   avatarUrl: undefined,
 };
 
@@ -27,11 +30,13 @@ export const userProcess = createSlice({
   name: NameSpaces.User,
   initialState,
   reducers: {
-    setUserData: (state, action: PayloadAction<Omit<UserData, 'token'>>) => {
+    setUserData: (state, action: PayloadAction<UserData>) => {
       state.lastName = action.payload.last_name;
       state.firstName = action.payload.first_name;
       state.patronymic = action.payload.patronymic;
       state.email = action.payload.email;
+      state.telegram = action.payload.telegram;
+      state.isStudent = action.payload.is_student;
       // state.avatarUrl = action.payload.avatarUrl;
     },
     clearUserData: (state) => {
@@ -39,6 +44,8 @@ export const userProcess = createSlice({
       state.firstName = undefined;
       state.patronymic = undefined;
       state.email = undefined;
+      state.telegram = undefined;
+      state.isStudent = undefined;
       // state.avatarUrl = undefined;
     },
   },

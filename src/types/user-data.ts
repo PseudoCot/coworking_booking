@@ -3,7 +3,8 @@ export type UserData = {
   email: string;
   last_name: string;
   first_name: string;
-  patronymic: string;
+  patronymic?: string;
+  telegram: boolean;
   is_student: boolean;
   avatar_url: string;
 
