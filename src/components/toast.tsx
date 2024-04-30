@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useRef } from 'react';
 import CloseCrossSVG from './svg/close-cross';
 
 type ToastProps = PropsWithChildren<{
@@ -6,9 +6,15 @@ type ToastProps = PropsWithChildren<{
 }>;
 
 export default function Toast({ title, children }: ToastProps): JSX.Element {
+  const toastRef = useRef<HTMLDivElement>(null);
+
+  const handleCloseButtonClick = () => {
+    toastRef.current?.remove();
+  };
+
   return (
-    <div className="booking__toast cb-toast">
-      <button className="booking__close-toast-btn cb-close-toast-btn btn-reset">
+    <div className="booking__toast cb-toast" ref={toastRef}>
+      <button className="booking__close-toast-btn cb-close-toast-btn btn-reset" onClick={handleCloseButtonClick}>
         <CloseCrossSVG />
       </button>
       <h2 className="booking__toast-title cb-toast-title title-reset">{title}</h2>

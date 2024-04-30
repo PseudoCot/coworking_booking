@@ -1,6 +1,7 @@
-import { useState, FormEventHandler, useEffect } from 'react';
+import { useState, FormEventHandler, useEffect, MouseEventHandler } from 'react';
 import { useAppDispatch } from '../hooks';
 import classNames from 'classnames';
+import { fetchCoworkingsAction } from '../store/api-actions';
 
 type CoworkingSearshingFormProps = {
   inMainScreen?: boolean;
@@ -22,7 +23,19 @@ export default function CoworkingSearshingForm({ inMainScreen = false }: Coworki
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    dispatch(someAction({
+    dispatch(fetchCoworkingsAction({
+      coworkingName,
+      institute,
+    }));
+  };
+
+  const handleShowAllButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+
+    setCoworkingName('');
+    setInstitute('');
+
+    dispatch(fetchCoworkingsAction({
       coworkingName,
       institute,
     }));
@@ -63,7 +76,7 @@ export default function CoworkingSearshingForm({ inMainScreen = false }: Coworki
         {!inMainScreen &&
           <>
             <span className="searching__separator-line"></span>
-            <button className="searching__show-all-btn btn-reset">Показать все</button>
+            <button className="searching__show-all-btn btn-reset" onClick={handleShowAllButtonClick}>Показать все</button>
           </>}
       </form>
 

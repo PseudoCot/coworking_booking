@@ -18,6 +18,7 @@ import { createJsonRpcRequest } from '../shared/create-json-rpc-request';
 import { RegisterRequestParams } from '../types/api/register-request-params';
 import { AuthRequestParams } from '../types/api/auth-request-params';
 import { RefreshRequestParams } from '../types/api/refresh-request-params';
+import { CoworkingsSearchingData } from '../types/coworkings-searching-data';
 
 
 export const registerAction = createAsyncThunk<void, RegisterData, {
@@ -172,13 +173,13 @@ export const changePasswordAction = createAsyncThunk<void, string, {
 // добавить запрос загрузки аватарки пользователя
 
 
-export const fetchCoworkingsAction = createAsyncThunk<CoworkingShortData[], undefined, {
+export const fetchCoworkingsAction = createAsyncThunk<CoworkingShortData[], CoworkingsSearchingData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
   'user/fetchCoworkings',
-  async (_, { extra: { api } }) => {
+  async (coworkingsSearchingData, { extra: { api } }) => {
     // закомментированно до момета получения api
     // const { data } = await api.post<JsonRpcResponse<CoworkingShortData[]>>('', createJsonRpcRequest(
     //   ApiMethods.FetchCoworkings
