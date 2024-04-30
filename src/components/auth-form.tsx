@@ -7,7 +7,7 @@ import useInput from '../hooks/use-input';
 export default function AuthForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [submitEnabled, setSubmitEnabled] = useState(false);
   const [email, setEmail, , processEmailValidation] = useInput(checkEmailValidity);
   const [password, setPassword] = useState('');
 
@@ -21,7 +21,7 @@ export default function AuthForm(): JSX.Element {
   };
 
   useEffect(() => {
-    setSubmitDisabled(processEmailValidation() && password.length > 0);
+    setSubmitEnabled(processEmailValidation() && password.length > 0);
   }, [email, password, processEmailValidation]);
 
   return (
@@ -55,7 +55,7 @@ export default function AuthForm(): JSX.Element {
             />
           </div>
           <div className="auth-form__btns">
-            <button className="auth-form__submit-btn cb-form-btn btn-reset" type='submit' disabled={submitDisabled}>Войти</button>
+            <button className="auth-form__submit-btn cb-form-btn btn-reset" type='submit' disabled={!submitEnabled}>Войти</button>
             <button className="auth-form__reset-password-btn cb-form-darker-btn btn-reset">Восстановить пароль</button>
           </div>
         </div>

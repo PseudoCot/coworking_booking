@@ -10,7 +10,7 @@ import { validateStringsLength } from '../shared/validate-strings-length';
 export default function RegisterForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [submitEnabled, setSubmitEnabled] = useState(false);
 
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -37,7 +37,7 @@ export default function RegisterForm(): JSX.Element {
 
   useEffect(() => {
     // проверить необходимость в установке таймера до проверки
-    setSubmitDisabled(validateStringsLength([lastName, firstName, email, password, repeatedPassword]));
+    setSubmitEnabled(validateStringsLength([lastName, firstName, email, password, repeatedPassword]));
   }, [lastName, firstName, email, password, repeatedPassword]);
 
   return (
@@ -140,7 +140,7 @@ export default function RegisterForm(): JSX.Element {
               />}
           </div>
           <button className="register-form__submit-btn cb-form-btn btn-reset"
-            type='submit' disabled={submitDisabled}
+            type='submit' disabled={!submitEnabled}
           >
             Зарегистрироваться
           </button>

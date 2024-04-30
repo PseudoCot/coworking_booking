@@ -6,6 +6,7 @@ export default function MainScreen(): JSX.Element {
     <Layout>
       <article className="hero">
         <h1 className="hero__title title-reset">Там, где творчество встречает комфорт</h1>
+
         <CoworkingSearshingForm />
       </article>
     </Layout>

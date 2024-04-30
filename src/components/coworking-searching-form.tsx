@@ -14,7 +14,8 @@ export default function CoworkingSearshingForm({ inMainScreen = false }: Coworki
 
   const dispatch = useAppDispatch();
 
-  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [submitEnabled, setSubmitEnabled] = useState(false);
+
   const [coworkingName, setCoworkingName] = useState('');
   const [institute, setInstitute] = useState('');
 
@@ -28,7 +29,7 @@ export default function CoworkingSearshingForm({ inMainScreen = false }: Coworki
   };
 
   useEffect(() => {
-    setSubmitDisabled(coworkingName.length > 0 || institute.length > 0);
+    setSubmitEnabled(coworkingName.length > 0 || institute.length > 0);
   }, [coworkingName, institute]);
 
   return (
@@ -58,7 +59,7 @@ export default function CoworkingSearshingForm({ inMainScreen = false }: Coworki
           />
         </div>
         <span className="searching__separator-line"></span>
-        <button className="searching__submit-btn btn-reset" type="submit" disabled={submitDisabled}>Поиск</button>
+        <button className="searching__submit-btn btn-reset" type="submit" disabled={!submitEnabled}>Поиск</button>
         {!inMainScreen &&
           <>
             <span className="searching__separator-line"></span>

@@ -9,7 +9,8 @@ import TipSVG from './svg/tip';
 export default function NewPasswordForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [submitEnabled, setSubmitEnabled] = useState(false);
+
   const [password, setPassword, passwordError, processPasswordValidation] = useInput(checkPasswordValidity);
   const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, processRepeatedPasswordValidation] = useInput(
     (value: string) => password === value // проверить
@@ -24,7 +25,7 @@ export default function NewPasswordForm(): JSX.Element {
   };
 
   useEffect(() => {
-    setSubmitDisabled(validateStringsLength([password, repeatedPassword]));
+    setSubmitEnabled(validateStringsLength([password, repeatedPassword]));
   }, [password, repeatedPassword]);
 
   return (
@@ -70,7 +71,7 @@ export default function NewPasswordForm(): JSX.Element {
               />}
           </div>
           <button className="new-password-form__set-password-btn cb-form-btn btn-reset"
-            type="submit" disabled={submitDisabled}
+            type="submit" disabled={!submitEnabled}
           >
             Сохранить
           </button>
