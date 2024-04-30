@@ -1,98 +1,43 @@
+import { useCallback, useState } from 'react';
 import Layout from '../components/layout';
-import CheckmarkSVG from '../components/svg/checkmark';
-import CloseCrossSVG from '../components/svg/close-cross';
+import UserInfoCard from '../components/user-info-card';
 import WarningMessage from '../components/warning-message';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import EditingUserInfoForm from '../components/editing-user-info-form';
+import { requestChangePasswordAction } from '../store/api-actions';
+import { getUserData } from '../store/user-process/selectors';
 
-type UserAccScreenProps = {};
+export default function UserAccScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-export default function UserAccScreen({ }: UserAccScreenProps): JSX.Element {
+  const [editingInfo, setEditingInfo] = useState(false);
+
+  const handleEditClick = useCallback(() => {
+    setEditingInfo((prev) => !prev);
+  }, [setEditingInfo]);
+  const handleChangePasswordClick = useCallback(() => {
+    dispatch(requestChangePasswordAction());
+  }, [dispatch]);
+
+  const userData = useAppSelector(getUserData);
+
   return (
     <Layout>
       <article className="user-acc">
         <h1 className="user-acc__title cb-title title-reset">Личный кабинет</h1>
 
-        <WarningMessage title='Предупреждение!' >
-          Заполните имя пользователя в telegram, это необходимо, чтобы мы могли оповещать вас в случае непредвиденного
-          закрытия коворкинга (из-за подготовки к мероприятию/аварийных ситуаций). И также это требуется для возможности
-          подтвердить бронирование.
-        </WarningMessage>
+        {userData.telegram ||
+          <WarningMessage title='Предупреждение!' >
+            Заполните имя пользователя в telegram, это необходимо, чтобы мы могли оповещать вас в случае непредвиденного
+            закрытия коворкинга (из-за подготовки к мероприятию/аварийных ситуаций). И также это требуется для возможности
+            подтвердить бронирование.
+          </WarningMessage>}
 
-        <div className="user-acc__info-wrapper">
-          <div className="user-acc__info">
-            <div className="user-acc__info-group">
-              <h2 className="user-acc__info-title title-reset">Фамилия:</h2>
-              <span className="user-acc__info-text">Иванов</span>
-            </div>
-            <div className="user-acc__info-group">
-              <h2 className="user-acc__info-title title-reset">Имя:</h2>
-              <span className="user-acc__info-text">Иван</span>
-            </div>
-            <div className="user-acc__info-group">
-              <h2 className="user-acc__info-title title-reset">Отчество:</h2>
-              <span className="user-acc__info-text">Иванович</span>
-            </div>
-            <div className="user-acc__info-group">
-              <h2 className="user-acc__info-title title-reset">Почта:</h2>
-              <span className="user-acc__info-text">i.i.ivanov@urfu.me</span>
-            </div>
-            <div className="user-acc__info-group">
-              <h2 className="user-acc__info-title title-reset">Студент:</h2>
-              <span className="user-acc__info-checkbox">
-                <CheckmarkSVG classNames="user-acc__info-checkbox-mark" />
-              </span>
-            </div>
-            <div className="user-acc__info-group">
-              <h2 className="user-acc__info-title title-reset">Имя пользователя telegram:</h2>
-              <span className="user-acc__info-text">@IvanIvanov</span>
-            </div>
-          </div>
-          <div className="user-acc__info-btns">
-            <button className="user-acc__info-edit-btn btn-reset">Редактировать</button>
-            <button className="user-acc__info-change-password-btn btn-reset">Сменить пароль</button>
-          </div>
-        </div>
-
-        <form className="user-acc__info-wrapper">
-          <div className="user-acc__info">
-            <button className="user-acc__close-edit-btn btn-reset">
-              <CloseCrossSVG />
-            </button>
-            <div className="user-acc__info-group">
-              <label className="user-acc__info-title" htmlFor="last-name">Фамилия:</label>
-              <input className="user-acc__info-input" type="text" name="last-name" id="last-name" autoCapitalize="words"
-                value="Иванов"
-              />
-            </div>
-            <div className="user-acc__info-group">
-              <label className="user-acc__info-title" htmlFor="first-name">Имя:</label>
-              <input className="user-acc__info-input" type="text" name="first-name" id="first-name" autoCapitalize="words"
-                value="Иван"
-              />
-            </div>
-            <div className="user-acc__info-group">
-              <label className="user-acc__info-title" htmlFor="patronymic">Отчество:</label>
-              <input className="user-acc__info-input" type="text" name="patronymic" id="patronymic" autoCapitalize="words"
-                value="Иванович"
-              />
-            </div>
-            <div className="user-acc__info-group">
-              <label className="user-acc__info-title" htmlFor="email">Почта:</label>
-              <input className="user-acc__info-input" type="text" name="email" id="email" autoCapitalize="words"
-                value="i.i.ivanov@urfu.me"
-              />
-            </div>
-            <div className="user-acc__info-group">
-              <label className="user-acc__info-title" htmlFor="telegram">Имя пользователя telegram:</label>
-              <input className="user-acc__info-input" type="text" name="telegram" id="telegram" autoCapitalize="words"
-                value="@IvanIvanov"
-              />
-            </div>
-          </div>
-          <div className="user-acc__info-btns">
-            <button className="user-acc__info-edit-btn btn-reset">Редактировать</button>
-            <button className="user-acc__info-change-password-btn btn-reset">Сменить пароль</button>
-          </div>
-        </form>
+        {editingInfo
+          ?
+          <UserInfoCard {...userData} onEditClick={handleEditClick} onChangePasswordClick={handleChangePasswordClick} />
+          :
+          <EditingUserInfoForm {...userData} onCloseEditingClick={handleEditClick} onChangePasswordClick={handleChangePasswordClick} />}
 
         <h2 className="user-acc__booked-list-title title-reset">Мои бронирования</h2>
         <ul className="user-acc__booked-list list-reset">
