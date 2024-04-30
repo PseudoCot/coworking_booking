@@ -26,10 +26,10 @@ export default function Header(): JSX.Element {
       <nav className="header__nav nav">
         <ul className="nav__items list-reset">
           <li className="nav__item">
-            <Link to="booking" className="nav__item-link">Бронирование</Link>
+            <Link to="/coworkings" className="nav__item-link">Бронирование</Link>
           </li>
           <li className="nav__item">
-            <Link to="calendar" className="nav__item-link">Календарь</Link>
+            <Link to="/calendar" className="nav__item-link">Календарь</Link>
           </li>
         </ul>
       </nav>
@@ -42,15 +42,15 @@ export default function Header(): JSX.Element {
 
         {authStatus === AuthStatuses.Auth ?
           <>
-            <Link to="user" className="main-controls__user-acc-btn">{'Имя пользователя'}</Link>
+            <Link to="/user" className="main-controls__user-acc-btn">{'Имя пользователя'}</Link>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutButtonClick}>
               <ExitSVG />
             </button>
           </>
           :
           <>
-            <Link to="register" className="main-controls__register-btn">Регистрация</Link>
-            <Link to="auth" className="main-controls__auth-btn">Вход</Link>
+            <Link to="/register" className="main-controls__register-btn">Регистрация</Link>
+            <Link to="/auth" className="main-controls__auth-btn">Вход</Link>
           </>}
       </div>
     </header>

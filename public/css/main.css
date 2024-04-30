@@ -141,6 +141,7 @@ html {
 
 body {
   font-weight: 400;
+  background-color: var(--bg-color);
 }
 
 a {
@@ -183,7 +184,7 @@ body,
 
 .container {
   /* padding: 0 15px; */
-  background-color: var(--bg-color);
+  /* background-color: var(--bg-color); */
 }
 
 .main {

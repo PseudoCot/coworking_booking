@@ -40,13 +40,13 @@ export default function Footer(): JSX.Element {
       </div>
       <div className="temp-links">
         <Link to="/">Index</Link>
-        <Link to="coworkings">Coworkings</Link>
-        <Link to="calendar">Calendar</Link>
-        <Link to="coworkings/irit">Booking</Link>
-        <Link to="register">Register</Link>
-        <Link to="auth">Auth</Link>
-        <Link to="user">UserAcc</Link>
-        <Link to="new-password">NewPass</Link>
+        <Link to="/coworkings">Coworkings</Link>
+        <Link to="/calendar">Calendar</Link>
+        <Link to="/coworkings/irit">Booking</Link>
+        <Link to="/register">Register</Link>
+        <Link to="/auth">Auth</Link>
+        <Link to="/user">UserAcc</Link>
+        <Link to="/new-password">NewPass</Link>
       </div>
     </footer>
   );

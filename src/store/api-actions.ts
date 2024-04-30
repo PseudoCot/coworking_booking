@@ -148,26 +148,26 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 //   },
 // );
 
-// export const changePasswordAction = createAsyncThunk<void, string, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: ThunkExtraArgument;
-// }>(
-//   'user/logout',
-//   async (newPassword, { dispatch, extra: { api } }) => {
-//     await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest<>(
-//       ApiMethods.ChangePassword,
-//       {
-//         data: {
-//           newPassword
-//         }
-//       }
-//     ));
+export const changePasswordAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'user/logout',
+  async (newPassword, { dispatch, extra: { api } }) => {
+    await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest(
+      ApiMethods.ChangePassword,
+      {
+        data: {
+          newPassword
+        }
+      }
+    ));
 
-//     // определить, нужно ли авторизовывать пользователя
-//     dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
-//   },
-// );
+    // определить, нужно ли авторизовывать пользователя
+    dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
+  },
+);
 
 // добавить запрос загрузки аватарки пользователя
 
