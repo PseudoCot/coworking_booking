@@ -1,4 +1,8 @@
+import { generatePath, useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../routes';
+
 type CoworkingMiniCardProps = {
+  id: string;
   imgUrl: string;
   title: string;
   openingTime: string;
@@ -6,9 +10,14 @@ type CoworkingMiniCardProps = {
   optionalText?: string;
 };
 
-export default function CoworkingMiniCard({ imgUrl, title, openingTime, closingTime, optionalText }: CoworkingMiniCardProps): JSX.Element {
+export default function CoworkingMiniCard({ id, imgUrl, title, openingTime,
+  closingTime, optionalText }: CoworkingMiniCardProps): JSX.Element {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => navigate(generatePath(AppRoutes.Booking.FullPath, { id: id }));
+
   return (
-    <li className="coworkings__list-item">
+    <li className="coworkings__list-item" onClick={handleCardClick}>
       <img className="coworkings__item-img" src={imgUrl} alt={`Коворкинг ${title}`} />
       <h3 className="coworkings__item-title title-reset">{title}</h3>
       <div className="coworkings__item-content">
