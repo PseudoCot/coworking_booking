@@ -181,6 +181,26 @@ export const changePasswordAction = createAsyncThunk<void, string, {
   },
 );
 
+export const cancelBookingAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'user/logout',
+  async (coworkingId, { _, extra: { api } }) => {
+    await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest(
+      ApiMethods.CancelBooking,
+      {
+        data: {
+          coworkingId
+        }
+      }
+    ));
+
+    // обновить список брони?
+  },
+);
+
 // добавить запрос загрузки аватарки пользователя
 
 

@@ -4,13 +4,15 @@ import UserInfoCard from '../components/user-info-card';
 import WarningMessage from '../components/warning-message';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import EditingUserInfoForm from '../components/editing-user-info-form';
-import { requestChangePasswordAction } from '../store/api-actions';
+import { cancelBookingAction, requestChangePasswordAction } from '../store/api-actions';
 import { getUserData } from '../store/user-process/selectors';
+import SubmitForm from '../components/submit-form';
 
 export default function UserAccScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [editingInfo, setEditingInfo] = useState(false);
+  const [showCancelForm, setShowCancelForm] = useState(false);
 
   const handleEditClick = useCallback(() => {
     setEditingInfo((prev) => !prev);
@@ -18,6 +20,14 @@ export default function UserAccScreen(): JSX.Element {
   const handleChangePasswordClick = useCallback(() => {
     dispatch(requestChangePasswordAction());
   }, [dispatch]);
+
+  const handleCancelDismiss = useCallback(() => {
+    setShowCancelForm((prev) => !prev);
+  }, [setShowCancelForm]);
+  const handleCancelSubmit = useCallback(() => {
+    setShowCancelForm((prev) => !prev);
+    dispatch(cancelBookingAction('irit')); // заменить статическуя строку
+  }, [dispatch, setShowCancelForm]);
 
   const userData = useAppSelector(getUserData);
 
@@ -73,18 +83,10 @@ export default function UserAccScreen(): JSX.Element {
             </div>
           </li>
         </ul>
-        <form action="#" className="user-acc__submit-form submit-form cb-form">
-          <div className="submit-form__top cb-form-top">
-            <h2 className="submit-form__title cb-form-title title-reset">Отмена бронирования</h2>
-          </div>
-          <div className="submit-form__bottom cb-form-bottom">
-            <h3 className="submit-form__sub-title">Вы уверены, что хотите отменить бронирование?</h3>
-            <div className="submit-form__btns">
-              <button className="submit-form__cancel-btn btn-reset">Нет</button>
-              <button className="submit-form__submit-btn btn-reset">Да</button>
-            </div>
-          </div>
-        </form>
+        {showCancelForm &&
+          <SubmitForm title={'Отмена бронирования'} question={'Вы уверены, что хотите отменить бронирование?'}
+            dismissText={'Нет'} submitText={'Да'} onDismiss={handleCancelDismiss} onSubmit={handleCancelSubmit}
+          />}
       </article>
     </Layout>
   );

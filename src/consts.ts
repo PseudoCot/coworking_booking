@@ -8,6 +8,7 @@ export const ApiMethods = {
   FetchUser: 'temp',
   ChangeUserData: 'temp',
   RequestChangePassword: 'temp',
+  CancelBooking: 'temp',
   ChangePassword: 'temp',
   FetchCoworkings: 'temp',
   FetchCoworking: 'temp',
