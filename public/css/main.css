@@ -458,7 +458,7 @@ body,
   opacity: 0.6;
 }
 
-.main-controls__login-btn {
+.main-controls__auth-btn {
   padding: 12px 30px;
   font-family: var(--second-family);
   font-weight: 400;
@@ -576,13 +576,13 @@ body,
   box-shadow: 0 8px 6px 0 rgba(0, 0, 0, 0.15);
 }
 
-.searching__audience,
+.searching__coworking,
 .searching__institute {
   position: relative;
   display: inline-block;
 }
 
-.searching__audience:before,
+.searching__coworking:before,
 .searching__institute:before {
   content: "";
   position: absolute;
@@ -593,7 +593,7 @@ body,
   z-index: 1;
 }
 
-.searching__audience:before {
+.searching__coworking:before {
   background: no-repeat url("../img/icons/search.svg");
   top: 50%;
   height: 20px;
@@ -609,7 +609,7 @@ body,
   transform: translateY(-50%);
 }
 
-.searching__audience-input,
+.searching__coworking-input,
 .searching__institute-input {
   padding: 0 20px;
   height: 75px;
@@ -622,7 +622,7 @@ body,
   border: none;
 }
 
-.searching__audience-input {
+.searching__coworking-input {
   width: 330px;
 }
 
@@ -670,7 +670,7 @@ body,
 }
 
 .coworkings__searching .searching__institute-input,
-.coworkings__searching .searching__audience-input {
+.coworkings__searching .searching__coworking-input {
   width: 258px;
 }
 
@@ -716,7 +716,6 @@ body,
   background-color: var(--transparent-card-color);
   box-shadow: 0 0 4px 0 var(--theme-button-text-color);
   /* поменять на градиент */
-  cursor: pointer;
 }
 
 .coworkings__item-img {

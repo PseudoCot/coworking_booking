@@ -35,8 +35,8 @@ export default function CoworkingSearshingForm({ inMainScreen = false }: Coworki
   return (
     <>
       <form className={formClasses} action='#' onSubmit={handleSubmit}>
-        <div className="searching__audience">
-          <input className="searching__audience-input"
+        <div className="searching__coworking">
+          <input className="searching__coworking-input"
             type="text"
             name="coworking"
             id="coworking"

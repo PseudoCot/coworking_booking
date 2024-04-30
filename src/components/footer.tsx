@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import CrossSVG from './svg/cross';
 import TelegramSVG from './svg/telegram';
 import VkSVG from './svg/vk';
@@ -38,14 +39,14 @@ export default function Footer(): JSX.Element {
         <span className="footer__credits-right">Lorem Ipsum</span>
       </div>
       <div className="temp-links">
-        <a href="">Index</a>
-        <a href="coworkings">Coworkings</a>
-        <a href="calendar">Calendar</a>
-        <a href="coworkings/0">Booking</a>
-        <a href="register">Register</a>
-        <a href="auth">Auth</a>
-        <a href="user">UserAcc</a>
-        <a href="new-password">NewPass</a>
+        <Link to="/">Index</Link>
+        <Link to="coworkings">Coworkings</Link>
+        <Link to="calendar">Calendar</Link>
+        <Link to="coworkings/irit">Booking</Link>
+        <Link to="register">Register</Link>
+        <Link to="auth">Auth</Link>
+        <Link to="user">UserAcc</Link>
+        <Link to="new-password">NewPass</Link>
       </div>
     </footer>
   );

@@ -1,27 +1,35 @@
-import { useAppSelector } from '../hooks';
+import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { getAuthStatus } from '../store/user-process/selectors';
 import ExitSVG from './svg/exit';
-import LanguageSVG from './svg/language';
 import LogoSVG from './svg/logo';
-import SelectArrowSVG from './svg/select-arrow';
+import { AuthStatuses } from '../consts';
+import { logoutAction } from '../store/api-actions';
 
 export default function Header(): JSX.Element {
+  const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
+
+  const handleLogoutButtonClick = () => {
+    if (authStatus === AuthStatuses.Auth) {
+      dispatch(logoutAction());
+    }
+  };
 
   return (
     <header className="header">
       <div className="header__logo">
-        <a href="/" className="header__logo-link">
+        <Link to="/" className="header__logo-link">
           <LogoSVG />
-        </a>
+        </Link>
       </div>
       <nav className="header__nav nav">
         <ul className="nav__items list-reset">
           <li className="nav__item">
-            <a href="booking" className="nav__item-link">Бронирование</a>
+            <Link to="booking" className="nav__item-link">Бронирование</Link>
           </li>
           <li className="nav__item">
-            <a href="calendar" className="nav__item-link">Календарь</a>
+            <Link to="calendar" className="nav__item-link">Календарь</Link>
           </li>
         </ul>
       </nav>
@@ -32,17 +40,17 @@ export default function Header(): JSX.Element {
           <SelectArrowSVG classNames="language-btn__arrow" />
         </button> */}
 
-        {authStatus ?
+        {authStatus === AuthStatuses.Auth ?
           <>
-            <a href="user-acc" className="main-controls__user-acc-btn">Имя пользователя</a>
-            <button className="main-controls__logout-btn btn-reset">
+            <Link to="user" className="main-controls__user-acc-btn">{'Имя пользователя'}</Link>
+            <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutButtonClick}>
               <ExitSVG />
             </button>
           </>
           :
           <>
-            <a href="register" className="main-controls__register-btn">Регистрация</a>
-            <a href="auth" className="main-controls__login-btn">Вход</a>
+            <Link to="register" className="main-controls__register-btn">Регистрация</Link>
+            <Link to="auth" className="main-controls__auth-btn">Вход</Link>
           </>}
       </div>
     </header>
