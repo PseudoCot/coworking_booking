@@ -1,4 +1,4 @@
-import { CoworkingData } from '../types/coworking-data';
+import { CoworkingData } from '../types/coworking/coworking-data';
 
 export const coworkingDataMock: CoworkingData[] = [
   {

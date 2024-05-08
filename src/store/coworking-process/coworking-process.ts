@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../consts';
 import { fetchCoworkingAction } from '../api-actions';
-import { CoworkingData } from '../../types/coworking-data';
+import { CoworkingData } from '../../types/coworking/coworking-data';
 
 type CoworkingProcessState = {
   coworkingFetching: boolean;

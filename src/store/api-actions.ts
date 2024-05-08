@@ -6,19 +6,19 @@ import { redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { AppRoutes } from '../routes';
 import { clearUserData } from './user-process/user-process';
-import { JsonRpcResponce as JsonRpcResponse } from '../types/api/json-rpc-response';
-import { RegisterResponseData } from '../types/api/register-response-data';
-import { RegisterData } from '../types/register-data';
-import { AuthData } from '../types/auth-data';
-import { AuthResponseData } from '../types/api/auth-response-data';
+import { JsonRpcResponce as JsonRpcResponse } from '../types/json-rpc/json-rpc-response';
+import { RegisterResponseData } from '../types/register/register-response-data';
+import { RegisterData } from '../types/register/register-data';
+import { AuthData } from '../types/auth/auth-data';
+import { AuthResponseData } from '../types/auth/auth-response-data';
 import { coworkingShortDataMock } from '../mocks/coworking-short-data-mock';
 import { coworkingDataMock } from '../mocks/coworking-data-mock';
 import { ThunkExtraArgument } from '../types/thunk-extra-argument';
 import { createJsonRpcRequest } from '../shared/create-json-rpc-request';
-import { RegisterRequestParams } from '../types/api/register-request-params';
-import { AuthRequestParams } from '../types/api/auth-request-params';
-import { RefreshRequestParams } from '../types/api/refresh-request-params';
-import { CoworkingsSearchingData } from '../types/coworkings-searching-data';
+import { RegisterRequestParams } from '../types/register/register-request-params';
+import { AuthRequestParams } from '../types/auth/auth-request-params';
+import { RefreshRequestParams } from '../types/refresh-session/refresh-request-params';
+import { CoworkingsSearchingData } from '../types/coworking/coworkings-searching-data';
 
 
 export const registerAction = createAsyncThunk<void, RegisterData, {

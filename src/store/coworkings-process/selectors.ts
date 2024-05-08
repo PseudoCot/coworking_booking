@@ -1,5 +1,5 @@
 import { NameSpaces } from '../../consts';
-import { CoworkingShortData } from '../../types/coworking-short-data';
+import { CoworkingShortData } from '../../types/coworking/coworking-short-data';
 import { State } from '../../types/state';
 
 export const isFetchingCoworkings = (state: State): boolean => state[NameSpaces.Coworkings].coworkingsFetching;

@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatuses as Status, NameSpaces } from '../../consts';
 import { AuthStatus } from '../../types/auth-status';
 import { refreshSessionAction, loginAction, logoutAction } from '../api-actions';
-import { UserData } from '../../types/user-data';
+import { UserData } from '../../types/user/user-data';
 
 type UserProcessState = {
   authStatus: AuthStatus;

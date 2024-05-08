@@ -1,7 +1,7 @@
-import { JsonRpcRequest } from '../types/api/json-rpc-request';
+import { JsonRpcRequest } from '../types/json-rpc/json-rpc-request';
 import { v4 as uuidv4 } from 'uuid';
-import { JsonRpcRequestMethod } from '../types/api/json-rpc-request-method';
-import { JsonRpcParams } from '../types/api/json-rpc-params';
+import { JsonRpcRequestMethod } from '../types/json-rpc/json-rpc-request-method';
+import { JsonRpcParams } from '../types/json-rpc/json-rpc-params';
 
 const JSON_RPC_VERSION = '2.0';
 

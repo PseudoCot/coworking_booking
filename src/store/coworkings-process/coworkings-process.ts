@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../consts';
-import { CoworkingShortData } from '../../types/coworking-short-data';
+import { CoworkingShortData } from '../../types/coworking/coworking-short-data';
 import { fetchCoworkingsAction } from '../api-actions';
 
 type CoworkingsProcessState = {

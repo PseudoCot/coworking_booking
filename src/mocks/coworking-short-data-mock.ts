@@ -1,4 +1,4 @@
-import { CoworkingShortData } from '../types/coworking-short-data';
+import { CoworkingShortData } from '../types/coworking/coworking-short-data';
 
 export const coworkingShortDataMock: CoworkingShortData[] = [
   {

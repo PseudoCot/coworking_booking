@@ -28,6 +28,19 @@ export const AuthStatuses = {
   Unknown: 'Unknown',
 } as const;
 
+export const BookingStatuses = { // значения соответствуют api
+  New: 'new',
+  AwaitConfirm: 'await_confirm',
+  Confirmed: 'confirmed',
+  Cancelled: 'cancelled',
+  Passed: 'passed',
+} as const;
+
+export const PlaceTypes = { // значения соответствуют api
+  MeetingRoom: 'meeting_room',
+  Table: 'table',
+} as const;
+
 export const NameSpaces = {
   Coworkings: 'Coworkings',
   Coworking: 'Coworking',
