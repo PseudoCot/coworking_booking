@@ -1,4 +1,4 @@
-export type AuthRequestParams = {
+export type LoginRequestParams = {
   data: {
     email: string;
     password: string;

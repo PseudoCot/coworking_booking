@@ -1,7 +1,7 @@
 import { BookingStatus } from '../booking-status';
 import { SeatDto } from '../api-shared/seat-dto';
 
-export type BookingResponseDto = {
+export type BookingResponseData = {
   id: number;
   seat: SeatDto;
   session_start: string | Date;

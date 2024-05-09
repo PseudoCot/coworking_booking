@@ -1,4 +1,4 @@
-export type UpdateUserDto2 = {
+export type UpdateUserResponseData = {
   email?: string;
   last_name?: string;
   first_name?: string;

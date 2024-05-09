@@ -2,7 +2,7 @@ import { useState, FormEventHandler, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useInput from '../hooks/use-input';
 import { validateStringsLength } from '../shared/validate-strings-length';
-import { changeUserDataAction } from '../store/api-actions';
+import { updateUserDataAction } from '../store/api-actions';
 import CloseCrossSVG from './svg/close-cross';
 import checkEmailValidity from '../shared/check-email-validity';
 
@@ -34,7 +34,7 @@ export default function EditingUserInfoForm({ lastName: initialLastName, firstNa
     e.preventDefault();
 
     if (processEmailValidation()) {
-      dispatch(changeUserDataAction({
+      dispatch(updateUserDataAction({
         lastName,
         firstName,
         patronymic,

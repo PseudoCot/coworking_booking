@@ -34,7 +34,7 @@ export const ApiRoutes = {
   FetchCoworking: 'api/v1/coworking/get_coworking',
 
   UploadAvatar: 'api/v1/image',
-  FetchImage: 'api/v1/image/{filename}',
+  FetchImage: 'api/v1/image/',
 
   // User: 'api/v1/user',
   FetchUser: 'api/v1/user/get-profile',
