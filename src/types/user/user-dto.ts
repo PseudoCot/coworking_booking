@@ -1,4 +1,4 @@
-import { TelegramDto } from './telegram-response-dto';
+import { TelegramDto } from '../api-shared/telegram-response-dto';
 
 export type UserDto = {
   id: string;

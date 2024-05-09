@@ -1,5 +1,5 @@
 import { BookingStatus } from '../booking-status';
-import { SeatDto } from '../coworking/seat-dto';
+import { SeatDto } from '../api-shared/seat-dto';
 
 export type BookingResponseDto = {
   id: number;

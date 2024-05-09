@@ -5,5 +5,5 @@ export type RegisterResponseData = {
   first_name: string;
   patronymic?: string;
   is_student: boolean;
-  avatar_url?: string;
+  avatar_filename?: string;
 }

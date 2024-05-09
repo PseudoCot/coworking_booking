@@ -1,17 +1,48 @@
 export const ApiMethods = {
+  // Auth: 'auth',
   Register: 'register',
   Login: 'login',
-  RefreshSession: 'refresh_session',
-  Logout: 'logout',
+  RefreshSession: 'refresh_session', // ... login-response-data
+  Logout: 'logout', // refrech-session-request-params login-response-data
 
-  // временные данные до выяснения структуры api
-  FetchUser: 'temp',
-  ChangeUserData: 'temp',
-  RequestChangePassword: 'temp',
-  CancelBooking: 'temp',
-  ChangePassword: 'temp',
-  FetchCoworkings: 'temp',
-  FetchCoworking: 'temp',
+  // Coworking: 'coworking',
+  FetchCoworkingsByTimestamp: 'available_coworking_by_timestamp', // coworking-by-timestamp-request-params coworking-dto[]
+  FetchCoworkingsBySearch: 'get_coworking_by_search_params', // coworking-by-search-request-params coworking-dto[]
+  FetchCoworking: 'get_coworking', // coworking-request-params coworking-response-dto
+
+  // Avatar, // upload-avatar-request-params, обычнй post запрос, multipart/form-data
+
+  // User: 'user',
+  FetchUser: 'get-profile', // null, user-dto
+  UpdateUser: 'update-user-data', // update-user-request-params update-user-response-data
+
+  // Booking: 'reservation', //
+  FetchBookings: 'get-user-reservations', // null booking-response-data[]
+  BookCoworking: 'create_reservation', // book-request-params booking-response-data
+} as const;
+
+export const ApiRoutes = {
+  // Auth: 'api/v1/auth',
+  Register: 'api/v1/auth/register',
+  Login: 'api/v1/auth/login',
+  RefreshSession: 'api/v1/auth/refresh_session',
+  Logout: 'api/v1/auth/logout',
+
+  // Coworking: 'api/v1/coworking',
+  FetchCoworkingsByTimestamp: 'api/v1/coworking/available_coworking_by_timestamp',
+  FetchCoworkingsBySearch: 'api/v1/coworking/get_coworking_by_search_params',
+  FetchCoworking: 'api/v1/coworking/get_coworking',
+
+  UploadAvatar: 'api/v1/image',
+  FetchImage: 'api/v1/image/{filename}',
+
+  // User: 'api/v1/user',
+  FetchUser: 'api/v1/user/get-profile',
+  UpdateUser: 'api/v1/user/update_user_data',
+
+  // Booking: 'api/v1/reservation',
+  FetchBookings: 'api/v1/reservation/get_user_reservations',
+  BookCoworking: 'api/v1/reservation/create_reservation',
 } as const;
 
 export const JsonRpcErrorCodes = {

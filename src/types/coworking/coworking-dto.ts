@@ -1,7 +1,7 @@
 import { CoworkingImageDto } from './coworking-image-dto';
-import { DayOfDto } from './day-of-dto';
-import { ScheduleDto } from './schedule-dto';
-import { SeatDto } from './seat-dto';
+import { DayOfDto } from '../api-shared/day-of-dto';
+import { ScheduleDto } from '../api-shared/schedule-dto';
+import { SeatDto } from '../api-shared/seat-dto';
 
 export type CoworkingDto = {
   id: string;

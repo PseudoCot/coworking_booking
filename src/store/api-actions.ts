@@ -9,14 +9,14 @@ import { clearUserData } from './user-process/user-process';
 import { JsonRpcResponce as JsonRpcResponse } from '../types/json-rpc/json-rpc-response';
 import { RegisterResponseData } from '../types/register/register-response-data';
 import { RegisterData } from '../types/register/register-data';
-import { AuthData } from '../types/auth/auth-data';
-import { AuthResponseData } from '../types/auth/auth-response-data';
+import { AuthData } from '../types/login/login-data';
+import { AuthResponseData } from '../types/login/login-response-data';
 import { coworkingShortDataMock } from '../mocks/coworking-short-data-mock';
 import { coworkingDataMock } from '../mocks/coworking-data-mock';
 import { ThunkExtraArgument } from '../types/thunk-extra-argument';
 import { createJsonRpcRequest } from '../shared/create-json-rpc-request';
 import { RegisterRequestParams } from '../types/register/register-request-params';
-import { AuthRequestParams } from '../types/auth/auth-request-params';
+import { AuthRequestParams } from '../types/login/login-request-params';
 import { RefreshRequestParams } from '../types/refresh-session/refresh-request-params';
 import { CoworkingsSearchingData } from '../types/coworking/coworkings-searching-data';
 
