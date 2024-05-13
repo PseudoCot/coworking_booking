@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import CrossSVG from './svg/cross';
 import TelegramSVG from './svg/telegram';
 import VkSVG from './svg/vk';
+import { AppRoutes } from '../routes';
 
 export default function Footer(): JSX.Element {
   return (
@@ -39,14 +40,15 @@ export default function Footer(): JSX.Element {
         <span className="footer__credits-right">Lorem Ipsum</span>
       </div>
       <div className="temp-links">
-        <Link to="/">Index</Link>
-        <Link to="/coworkings">Coworkings</Link>
-        <Link to="/calendar">Calendar</Link>
-        <Link to="/coworkings/irit">Booking</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/auth">Auth</Link>
-        <Link to="/user">UserAcc</Link>
-        <Link to="/new-password">NewPass</Link>
+        <Link to={AppRoutes.Main.FullPath}>Index</Link>
+        <Link to={AppRoutes.Coworkings.FullPath}>Coworkings</Link>
+        <Link to={AppRoutes.Calendar.FullPath}>Calendar</Link>
+        <Link to={AppRoutes.Booking.FullPath}>Booking</Link>
+        <Link to={AppRoutes.Register.FullPath}>Register</Link>
+        <Link to={AppRoutes.Auth.FullPath}>Auth</Link>
+        <Link to={AppRoutes.UserAcc.FullPath}>UserAcc</Link>
+        <Link to={AppRoutes.NewPassword.FullPath}>NewPass</Link>
+        <Link to={AppRoutes.InputEmail.FullPath}>InputEmail</Link>
       </div>
     </footer>
   );
