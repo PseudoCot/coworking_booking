@@ -12,7 +12,7 @@ import NewPasswordScreen from './pages/new-password-screen';
 import CoworkingsScreen from './pages/coworkings-screen';
 import CalendarScreen from './pages/calendar-screen';
 import BookingScreen from './pages/booking-screen';
-import InputEmailScreen from './pages/input-email-screen';
+import PasswordRecoveryScreen from './pages/password-recovery-screen';
 
 export default function App(): JSX.Element {
   return (
@@ -38,8 +38,8 @@ export default function App(): JSX.Element {
           <PrivateRoute> <NewPasswordScreen /> </PrivateRoute>
         }
         />
-        <Route path={AppRoutes.InputEmail.FullPath} element={
-          <PrivateRoute> <InputEmailScreen /> </PrivateRoute>
+        <Route path={AppRoutes.PasswordRecovery.FullPath} element={
+          <PrivateRoute> <PasswordRecoveryScreen /> </PrivateRoute>
         }
         />
 

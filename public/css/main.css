@@ -1426,7 +1426,7 @@ body,
 
 
 
-/* /// temp /// */
+/* /// new-password /// */
 .new-password {
   padding: 160px 0 250px;
   background: no-repeat right center url("../img/persona.svg")
@@ -1470,6 +1470,13 @@ body,
   transform: translateX(-50%);
 }
 
+
+
+/* /// password-recovery /// */
+.password-recovery {
+  padding: 160px 0 250px;
+  background: no-repeat right center url("../img/persona.svg")
+}
 
 
 /* /// temp /// */
