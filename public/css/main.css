@@ -247,6 +247,8 @@ body,
   margin-bottom: 35px;
 }
 
+/* .cb-form-group--required {} */
+
 .cb-form-label {
   display: block;
   margin-bottom: 10px;
@@ -254,6 +256,11 @@ body,
   font-weight: 400;
   font-size: 16px;
   color: var(--theme-text-color);
+}
+
+.cb-form-group--required .cb-form-label::after {
+  content: '*';
+  color: #B71C1CBF;
 }
 
 .cb-form-sub-label {
