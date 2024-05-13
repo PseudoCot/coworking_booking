@@ -24,6 +24,9 @@ export const AppRoutes = {
   NewPassword: {
     FullPath: '/new-password',
   },
+  InputEmail: {
+    FullPath: '/input-email',
+  },
   Error: {
     FullPath: '*'
   },

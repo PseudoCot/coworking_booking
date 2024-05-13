@@ -12,10 +12,9 @@ import NewPasswordScreen from './pages/new-password-screen';
 import CoworkingsScreen from './pages/coworkings-screen';
 import CalendarScreen from './pages/calendar-screen';
 import BookingScreen from './pages/booking-screen';
+import InputEmailScreen from './pages/input-email-screen';
 
-export type AppProps = {};
-
-export default function App({ }: AppProps): JSX.Element {
+export default function App(): JSX.Element {
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
@@ -23,9 +22,7 @@ export default function App({ }: AppProps): JSX.Element {
         <Route path={AppRoutes.Coworkings.FullPath}>
           <Route index element={<CoworkingsScreen />} />
           <Route path={AppRoutes.Booking.FullPath} element={
-            <PrivateRoute>
-              <BookingScreen />
-            </PrivateRoute>
+            <PrivateRoute> <BookingScreen /> </PrivateRoute>
           }
           />
         </Route>
@@ -34,15 +31,15 @@ export default function App({ }: AppProps): JSX.Element {
         <Route path={AppRoutes.Register.FullPath} element={<RegisterScreen />} />
         <Route path={AppRoutes.Auth.FullPath} element={<AuthScreen />} />
         <Route path={AppRoutes.UserAcc.FullPath} element={
-          <PrivateRoute>
-            <UserAccScreen />
-          </PrivateRoute>
+          <PrivateRoute> <UserAccScreen /> </PrivateRoute>
         }
         />
         <Route path={AppRoutes.NewPassword.FullPath} element={
-          <PrivateRoute>
-            <NewPasswordScreen />
-          </PrivateRoute>
+          <PrivateRoute> <NewPasswordScreen /> </PrivateRoute>
+        }
+        />
+        <Route path={AppRoutes.InputEmail.FullPath} element={
+          <PrivateRoute> <InputEmailScreen /> </PrivateRoute>
         }
         />
 
