@@ -1,7 +1,7 @@
 import { useState, FormEventHandler, useEffect, MouseEventHandler } from 'react';
 import { useAppDispatch } from '../hooks';
 import classNames from 'classnames';
-import { fetchCoworkingsAction } from '../store/api-actions';
+import { fetchCoworkingsBySearchAction } from '../store/api-actions';
 
 type CoworkingSearshingFormProps = {
   inMainScreen?: boolean;
@@ -17,86 +17,66 @@ export default function CoworkingSearshingForm({ inMainScreen = false }: Coworki
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
 
-  const [coworkingName, setCoworkingName] = useState('');
+  const [title, setTitle] = useState('');
   const [institute, setInstitute] = useState('');
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    dispatch(fetchCoworkingsAction({
-      coworkingName,
+    dispatch(fetchCoworkingsBySearchAction({
+      title,
       institute,
     }));
   };
 
-  const handleShowAllButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleShowAllClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
-    setCoworkingName('');
+    setTitle('');
     setInstitute('');
 
-    dispatch(fetchCoworkingsAction({
-      coworkingName,
+    dispatch(fetchCoworkingsBySearchAction({
+      title,
       institute,
     }));
   };
 
   useEffect(() => {
-    setSubmitEnabled(coworkingName.length > 0 || institute.length > 0);
-  }, [coworkingName, institute]);
+    setSubmitEnabled(title.length > 0 || institute.length > 0);
+  }, [title, institute]);
 
   return (
-    <>
-      <form className={formClasses} action='#' onSubmit={handleSubmit}>
-        <div className="searching__coworking">
-          <input className="searching__coworking-input"
-            type="text"
-            name="coworking"
-            id="coworking"
-            placeholder={inMainScreen ? 'Название коворкинга' : 'Коворкинг'}
-            autoComplete="coworking"
-            value={coworkingName}
-            onChange={(e) => setCoworkingName(e.target.value)}
-          />
-        </div>
-        <span className="searching__separator-line"></span>
-        <div className="searching__institute">
-          <input className="searching__institute-input"
-            type="text"
-            name="institute"
-            id="institute"
-            placeholder="Институт"
-            autoComplete="institute"
-            value={institute}
-            onChange={(e) => setInstitute(e.target.value)}
-          />
-        </div>
-        <span className="searching__separator-line"></span>
-        <button className="searching__submit-btn btn-reset" type="submit" disabled={!submitEnabled}>Поиск</button>
-        {!inMainScreen &&
-          <>
-            <span className="searching__separator-line"></span>
-            <button className="searching__show-all-btn btn-reset" onClick={handleShowAllButtonClick}>Показать все</button>
-          </>}
-      </form>
-
-      {/* <form className="coworkings__searching searching">
-        <span className="searching__institute">
-          <input className="searching__institute-input" type="text" name="institute" id="institute" placeholder="Институт"
-            autoComplete="institute"
-          />
-        </span>
-        <span className="searching__separator-line"></span>
-        <span className="searching__audience">
-          <input className="searching__audience-input" type="text" name="coworking" id="coworking" placeholder="Коворкинг"
-            autoComplete="coworking"
-          />
-        </span>
-        <span className="searching__separator-line"></span>
-        <button className="searching__submit-btn btn-reset" type="submit">Поиск</button>
-        <span className="searching__separator-line"></span>
-        <button className="searching__show-all-btn btn-reset">Показать все</button>
-      </form> */}
-    </>
+    <form className={formClasses} action='#' onSubmit={handleSubmit}>
+      <div className="searching__coworking">
+        <input className="searching__coworking-input"
+          type="text"
+          name="title"
+          id="title"
+          placeholder={inMainScreen ? 'Название коворкинга' : 'Коворкинг'}
+          autoComplete="coworking"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <span className="searching__separator-line"></span>
+      <div className="searching__institute">
+        <input className="searching__institute-input"
+          type="text"
+          name="institute"
+          id="institute"
+          placeholder="Институт"
+          autoComplete="institute"
+          value={institute}
+          onChange={(e) => setInstitute(e.target.value)}
+        />
+      </div>
+      <span className="searching__separator-line"></span>
+      <button className="searching__submit-btn btn-reset" type="submit" disabled={!submitEnabled}>Поиск</button>
+      {!inMainScreen &&
+        <>
+          <span className="searching__separator-line"></span>
+          <button className="searching__show-all-btn btn-reset" onClick={handleShowAllClick}>Показать все</button>
+        </>}
+    </form>
   );
 }

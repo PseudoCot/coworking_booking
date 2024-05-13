@@ -14,17 +14,17 @@ export default function BookingForm(): JSX.Element {
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    dispatch(bookAction({
-      seatType,
-      date,
-      startTime,
-      endTime,
-    }));
+    // dispatch(bookAction({
+    //   seatType,
+    //   date,
+    //   startTime,
+    //   endTime,
+    // }));
   };
 
   useEffect(() => {
     setSubmitEnabled(false);
-  }, [email, password, processEmailValidation]);
+  }, [seatType, date, startTime, endTime]);
 
   return (
     <form className="booking__form cb-form" action="#" onSubmit={handleSubmit}>

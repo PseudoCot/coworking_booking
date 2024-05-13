@@ -8,13 +8,13 @@ type ToastProps = PropsWithChildren<{
 export default function Toast({ title, children }: ToastProps): JSX.Element {
   const toastRef = useRef<HTMLDivElement>(null);
 
-  const handleCloseButtonClick = () => {
+  const handleCloseClick = () => {
     toastRef.current?.remove();
   };
 
   return (
     <div className="booking__toast cb-toast" ref={toastRef}>
-      <button className="booking__close-toast-btn cb-close-toast-btn btn-reset" onClick={handleCloseButtonClick}>
+      <button className="booking__close-toast-btn cb-close-toast-btn btn-reset" onClick={handleCloseClick}>
         <CloseCrossSVG />
       </button>
       <h2 className="booking__toast-title cb-toast-title title-reset">{title}</h2>

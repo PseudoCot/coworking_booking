@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import generateDates, { CalendarData, DateObject } from '../shared/generate-dates';
 import cs from 'classnames';
 
-const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-const days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+const WEEK_DAYS = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
 
 export type CalendarProps = {
   currentDate: Date;
@@ -77,7 +77,7 @@ export default function Calendar({ currentDate }: CalendarProps): JSX.Element {
           Предыдущий
         </button>
         <div className='calendar__month'>
-          {`${months[calendar.month as number]} ${calendar.year as number}`}
+          {`${MONTHS[calendar.month as number]} ${calendar.year as number}`}
         </div>
         <button onClick={handleNextButtonClick} className='calendar__next-btn btn-reset'>
           Следующий
@@ -89,7 +89,7 @@ export default function Calendar({ currentDate }: CalendarProps): JSX.Element {
           <table className='main__table'>
             <thead className='main__table-head'>
               <tr className='main__table-row'>
-                {days.map((day) => (
+                {WEEK_DAYS.map((day) => (
                   <td key={day} className='main__table-head-cell'>
                     {day}
                   </td>
