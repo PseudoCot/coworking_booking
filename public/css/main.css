@@ -459,7 +459,7 @@ body,
   opacity: 0.6;
 }
 
-.main-controls__auth-btn {
+.main-controls__login-btn {
   padding: 12px 30px;
   font-family: var(--second-family);
   font-weight: 400;
@@ -1189,20 +1189,20 @@ body,
 
 
 
-/* /// auth /// */
-.auth {
+/* /// login /// */
+.login {
   margin: 0 auto 320px;
   max-width: 440px;
 }
 
-.auth-form__btns {
+.login-form__btns {
   display: flex;
   flex-direction: row;
   gap: 15px;
   justify-content: center;
 }
 
-.auth-form__reset-password-btn {
+.login-form__reset-password-btn {
   padding: 18px 5px;
 }
 

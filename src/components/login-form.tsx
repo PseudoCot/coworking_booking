@@ -4,7 +4,7 @@ import { loginAction } from '../store/api-actions';
 import checkEmailValidity from '../shared/check-email-validity';
 import useInput from '../hooks/use-input';
 
-export default function AuthForm(): JSX.Element {
+export default function LoginForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
@@ -25,15 +25,15 @@ export default function AuthForm(): JSX.Element {
   }, [email, password, processEmailValidation]);
 
   return (
-    <form className="auth__form auth-form cb-form" action="#" onSubmit={handleSubmit}>
-      <div className="auth-form__wrapper cb-form-wrapper">
-        <div className="auth-form__top cb-form-top">
-          <h2 className="auth-form__title cb-form-title title-reset">Вход</h2>
+    <form className="login__form login-form cb-form" action="#" onSubmit={handleSubmit}>
+      <div className="login-form__wrapper cb-form-wrapper">
+        <div className="login-form__top cb-form-top">
+          <h2 className="login-form__title cb-form-title title-reset">Вход</h2>
         </div>
-        <div className="auth-form__bottom cb-form-bottom">
-          <div className="auth-form__input-group cb-form-group">
-            <label className="auth-form__label cb-form-label" htmlFor="email">Почта:</label>
-            <input className="auth-form__input cb-form-input"
+        <div className="login-form__bottom cb-form-bottom">
+          <div className="login-form__input-group cb-form-group">
+            <label className="login-form__label cb-form-label" htmlFor="email">Почта:</label>
+            <input className="login-form__input cb-form-input"
               type="email"
               name="email"
               id="email"
@@ -43,9 +43,9 @@ export default function AuthForm(): JSX.Element {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="auth-form__input-group cb-form-group">
-            <label className="auth-form__label cb-form-label" htmlFor="password">Пароль:</label>
-            <input className="auth-form__input cb-form-input"
+          <div className="login-form__input-group cb-form-group">
+            <label className="login-form__label cb-form-label" htmlFor="password">Пароль:</label>
+            <input className="login-form__input cb-form-input"
               type="password"
               name="password"
               id="password"
@@ -54,9 +54,9 @@ export default function AuthForm(): JSX.Element {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="auth-form__btns">
-            <button className="auth-form__submit-btn cb-form-btn btn-reset" type='submit' disabled={!submitEnabled}>Войти</button>
-            <button className="auth-form__reset-password-btn cb-form-darker-btn btn-reset">Восстановить пароль</button>
+          <div className="login-form__btns">
+            <button className="login-form__submit-btn cb-form-btn btn-reset" type='submit' disabled={!submitEnabled}>Войти</button>
+            <button className="login-form__reset-password-btn cb-form-darker-btn btn-reset">Восстановить пароль</button>
           </div>
         </div>
       </div>

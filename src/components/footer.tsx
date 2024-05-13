@@ -45,7 +45,7 @@ export default function Footer(): JSX.Element {
         <Link to={AppRoutes.Calendar.FullPath}>Calendar</Link>
         <Link to={AppRoutes.Booking.FullPath}>Booking</Link>
         <Link to={AppRoutes.Register.FullPath}>Register</Link>
-        <Link to={AppRoutes.Auth.FullPath}>Auth</Link>
+        <Link to={AppRoutes.Login.FullPath}>Auth</Link>
         <Link to={AppRoutes.UserAcc.FullPath}>UserAcc</Link>
         <Link to={AppRoutes.NewPassword.FullPath}>NewPass</Link>
         <Link to={AppRoutes.PasswordRecovery.FullPath}>InputEmail</Link>

@@ -15,7 +15,7 @@ export const AppRoutes = {
   Register: {
     FullPath: '/register',
   },
-  Auth: {
+  Login: {
     FullPath: '/auth',
   },
   UserAcc: {

@@ -6,7 +6,7 @@ import { AppRoutes } from './routes';
 import HistoryRouter from './components/history-route';
 import browserHistory from './browser-history';
 import RegisterScreen from './pages/register-screen';
-import AuthScreen from './pages/auth-screen';
+import LoginScreen from './pages/login-screen';
 import UserAccScreen from './pages/user-acc-screen';
 import NewPasswordScreen from './pages/new-password-screen';
 import CoworkingsScreen from './pages/coworkings-screen';
@@ -29,7 +29,7 @@ export default function App(): JSX.Element {
         <Route path={AppRoutes.Calendar.FullPath} element={<CalendarScreen />} />
 
         <Route path={AppRoutes.Register.FullPath} element={<RegisterScreen />} />
-        <Route path={AppRoutes.Auth.FullPath} element={<AuthScreen />} />
+        <Route path={AppRoutes.Login.FullPath} element={<LoginScreen />} />
         <Route path={AppRoutes.UserAcc.FullPath} element={
           <PrivateRoute> <UserAccScreen /> </PrivateRoute>
         }
