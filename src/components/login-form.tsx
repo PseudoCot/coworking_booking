@@ -56,7 +56,7 @@ export default function LoginForm(): JSX.Element {
           </div>
           <div className="login-form__btns">
             <button className="login-form__submit-btn cb-form-btn btn-reset" type='submit' disabled={!submitEnabled}>Войти</button>
-            <button className="login-form__reset-password-btn cb-form-darker-btn btn-reset">Восстановить пароль</button>
+            <button className="login-form__reset-password-btn cb-form-btn btn-reset">Восстановить пароль</button>
           </div>
         </div>
       </div>

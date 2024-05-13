@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { getAuthStatus } from '../store/user-process/selectors';
+import { getAuthStatus, getUserTelegram } from '../store/user-process/selectors';
 import ExitSVG from './svg/exit';
 import LogoSVG from './svg/logo';
 import { AuthStatuses } from '../consts';
 import { logoutAction } from '../store/api-actions';
 import { AppRoutes } from '../routes';
+import WarningSVG from './svg/warning';
 
 export default function Header(): JSX.Element {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
+  const userTelegram = useAppSelector(getUserTelegram);
 
   const handleLogoutClick = () => {
     if (authStatus === AuthStatuses.Auth) {
@@ -43,6 +45,8 @@ export default function Header(): JSX.Element {
 
         {authStatus === AuthStatuses.Auth ?
           <>
+            {userTelegram ||
+              <WarningSVG classNames="main-controls__warning-sign" />}
             {/* добавить имя пользователя вместе статической строки */}
             <Link to={AppRoutes.UserAcc.FullPath} className="main-controls__user-acc-btn">{'Имя пользователя'}</Link>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutClick}>

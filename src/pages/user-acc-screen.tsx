@@ -36,21 +36,21 @@ export default function UserAccScreen(): JSX.Element {
       <article className="user-acc">
         <h1 className="user-acc__title cb-title title-reset">Личный кабинет</h1>
 
-        {userData.telegram ||
+        {/* {userData.telegram ||
           <WarningMessage title='Предупреждение!' >
             Заполните имя пользователя в telegram, это необходимо, чтобы мы могли оповещать вас в случае непредвиденного
             закрытия коворкинга (из-за подготовки к мероприятию/аварийных ситуаций). И также это требуется для возможности
             подтвердить бронирование.
-          </WarningMessage>}
+          </WarningMessage>} */}
 
-        {editingInfo
+        {/* {editingInfo
           ?
           <UserInfoCard {...userData} onEditClick={handleEditClick} onChangePasswordClick={handleChangePasswordClick} />
           :
-          <EditingUserInfoForm {...userData} onCloseEditingClick={handleEditClick} onChangePasswordClick={handleChangePasswordClick} />}
+          <EditingUserInfoForm {...userData} onCloseEditingClick={handleEditClick} onChangePasswordClick={handleChangePasswordClick} />} */}
 
         <h2 className="user-acc__booked-list-title title-reset">Мои бронирования</h2>
-        <ul className="user-acc__booked-list list-reset">
+        {/* <ul className="user-acc__booked-list list-reset">
           <li className="user-acc__booked-item booking__info">
             <div className="booking__left-info">
               <div className="booking__info-carousel info-carousel">
@@ -82,7 +82,7 @@ export default function UserAccScreen(): JSX.Element {
               <button className="booking__info-cancel-btn btn-reset">Отменить</button>
             </div>
           </li>
-        </ul>
+        </ul> */}
         {showCancelForm &&
           <SubmitForm title={'Отмена бронирования'} question={'Вы уверены, что хотите отменить бронирование?'}
             dismissText={'Нет'} submitText={'Да'} onDismiss={handleCancelDismiss} onSubmit={handleCancelSubmit}

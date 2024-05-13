@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../consts';
 import { CoworkingShortData } from '../../types/coworking/coworking-short-data';
-import { fetchCoworkingsAction } from '../api-actions';
+import { fetchCoworkingsBySearchAction, fetchCoworkingsByTimestampAction } from '../api-actions';
 
 type CoworkingsProcessState = {
   coworkingsFetching: boolean;
@@ -46,14 +46,25 @@ export const coworkingsProcess = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchCoworkingsAction.pending, (state) => {
+      .addCase(fetchCoworkingsBySearchAction.pending, (state) => {
         state.coworkingsFetching = true;
       })
-      .addCase(fetchCoworkingsAction.fulfilled, (state, action: PayloadAction<CoworkingShortData[]>) => {
+      .addCase(fetchCoworkingsBySearchAction.fulfilled, (state, action: PayloadAction<CoworkingShortData[]>) => {
         state.coworkingsData = action.payload;
         state.coworkingsFetching = false;
       })
-      .addCase(fetchCoworkingsAction.rejected, (state) => {
+      .addCase(fetchCoworkingsBySearchAction.rejected, (state) => {
+        state.coworkingsData = []; // перепроверить
+        state.coworkingsFetching = false;
+      })
+      .addCase(fetchCoworkingsByTimestampAction.pending, (state) => {
+        state.coworkingsFetching = true;
+      })
+      .addCase(fetchCoworkingsByTimestampAction.fulfilled, (state, action: PayloadAction<CoworkingShortData[]>) => {
+        state.coworkingsData = action.payload;
+        state.coworkingsFetching = false;
+      })
+      .addCase(fetchCoworkingsByTimestampAction.rejected, (state) => {
         state.coworkingsData = []; // перепроверить
         state.coworkingsFetching = false;
       });

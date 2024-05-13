@@ -121,7 +121,6 @@
   --light-button-color: #fff;
   --form-button-border-color: #304ffee6;
   --form-button-bg-color: #8c9eff1a;
-  --darker-form-button-bg-color: #8c9eff42;
 
   --form-input-border-color: #28359396;
   --form-input-shadow-color: #28359340;
@@ -179,13 +178,13 @@ html,
 body,
 #root,
 .container {
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.container {
-  /* padding: 0 15px; */
-  /* background-color: var(--bg-color); */
-}
+/* .container {
+  padding: 0 15px;
+  background-color: var(--bg-color);
+} */
 
 .main {
   padding: 0 100px;
@@ -336,8 +335,7 @@ body,
   z-index: 10;
 }
 
-.cb-form-btn,
-.cb-form-darker-btn {
+.cb-form-btn {
   padding: 18px 24px;
   font-family: var(--second-family);
   font-weight: 400;
@@ -346,10 +344,6 @@ body,
   border-radius: 15px;
   border: 1px solid var(--form-button-border-color);
   background-color: var(--form-button-bg-color);
-}
-
-.cb-form-darker-btn {
-  background-color: var(--darker-form-button-bg-color);
 }
 
 .cb-toast {
@@ -425,7 +419,7 @@ body,
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  gap: 15px;
+  align-items: center;
 }
 
 .language-btn {
@@ -449,6 +443,7 @@ body,
 }
 
 .main-controls__register-btn {
+  margin-right: 15px;
   padding: 12px 14px;
   font-family: var(--second-family);
   font-weight: 400;
@@ -470,7 +465,12 @@ body,
   border-radius: 15px;
 }
 
+.main-controls__warning-sign {
+  margin-right: 10px;
+}
+
 .main-controls__user-acc-btn {
+  margin-right: 20px;
   padding: 12px 11px;
   font-family: var(--second-family);
   font-weight: 400;
@@ -479,10 +479,6 @@ body,
   background-color: var(--light-button-color);
   border: 1px solid var(--theme-button-color);
   border-radius: 15px;
-}
-
-.main-controls__logout-btn {
-  margin-left: 5px;
 }
 
 
@@ -1413,7 +1409,7 @@ body,
   border-radius: 15px;
   border: 1px solid #304FFEE6;
   /* 90% */
-  background-color: transparent;
+  background-color: var(--form-button-bg-color);
 }
 
 .submit-form__cancel-btn {

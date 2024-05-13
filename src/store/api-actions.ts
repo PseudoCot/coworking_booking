@@ -52,7 +52,7 @@ export const registerAction = createAsyncThunk<void, RegisterData, {
       }
     ));
 
-    dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
+    dispatch(redirectToRoute(AppRoutes.Login.FullPath));
   },
 );
 
@@ -221,37 +221,39 @@ export const updateUserDataAction = createAsyncThunk<UpdateUserResponseData | un
   },
 );
 
-// export const requestChangePasswordAction = createAsyncThunk<void, undefined, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: ThunkExtraArgument;
-// }>(
-//   'user/requestChangePassword',
-//   async (_, { extra: { api } }) => {
-//     await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest(ApiMethods.RequestChangePassword));
-//   },
-// );
+// временное решение
+export const requestChangePasswordAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'user/requestChangePassword',
+  async (_, { extra: { api } }) => {
+    await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest<null>('', null));
+  },
+);
 
-// export const changePasswordAction = createAsyncThunk<void, string, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: ThunkExtraArgument;
-// }>(
-//   'user/changePassword',
-//   async (newPassword, { dispatch, extra: { api } }) => {
-//     await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest(
-//       ApiMethods.ChangePassword,
-//       {
-//         data: {
-//           newPassword
-//         }
-//       }
-//     ));
+// временное решение
+export const changePasswordAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'user/changePassword',
+  async (newPassword, { dispatch, extra: { api } }) => {
+    await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest(
+      ApiMethods.ChangePassword,
+      {
+        data: {
+          newPassword
+        }
+      }
+    ));
 
-//     // определить, нужно ли авторизовывать пользователя
-//     dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
-//   },
-// );
+    // определить, нужно ли авторизовывать пользователя
+    dispatch(redirectToRoute(AppRoutes.Auth.FullPath));
+  },
+);
 
 
 export const fetchBookingsAction = createAsyncThunk<BookingResponseData[], undefined, {
@@ -286,23 +288,24 @@ export const bookCoworkingAction = createAsyncThunk<BookingResponseData | undefi
   },
 );
 
-// export const cancelBookingAction = createAsyncThunk<void, string, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: ThunkExtraArgument;
-// }>(
-//   'booking/cancelBooking',
-//   async (coworkingId, { _, extra: { api } }) => {
-//     await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest(
-//       ApiMethods.CancelBooking,
-//       {
-//         data: {
-//           coworkingId
-//         }
-//       }
-//     ));
+// временное решение
+export const cancelBookingAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'booking/cancelBooking',
+  async (coworkingId, { _, extra: { api } }) => {
+    await api.post<JsonRpcResponse<null>>('', createJsonRpcRequest(
+      '',
+      {
+        data: {
+          coworkingId
+        }
+      }
+    ));
 
-//     // обновить список брони?
-//   },
-// );
+    // обновить список брони?
+  },
+);
 
