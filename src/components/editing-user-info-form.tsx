@@ -4,7 +4,7 @@ import useInput from '../hooks/use-input';
 import { validateStringsLength } from '../shared/validate-strings-length';
 import { updateUserDataAction } from '../store/api-actions';
 import CloseCrossSVG from './svg/close-cross';
-import checkEmailValidity from '../shared/check-email-validity';
+import emailValidationChecker from '../shared/email-validation-checker';
 
 type EditingUserInfoFormProps = {
   lastName: string;
@@ -27,7 +27,7 @@ export default function EditingUserInfoForm({ lastName: initialLastName, firstNa
   const [lastName, setLastName] = useState(initialLastName);
   const [firstName, setFirstName] = useState(initialFirstName);
   const [patronymic, setPatronymic] = useState(initialPatronymic);
-  const [email, setEmail, , processEmailValidation] = useInput(checkEmailValidity, initialEmail);
+  const [email, setEmail, , processEmailValidation] = useInput(emailValidationChecker, initialEmail);
   const [telegram, setTelegram] = useState(initialTelegram);
 
   const handleSubmit: FormEventHandler = (e) => {

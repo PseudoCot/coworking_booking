@@ -1,9 +1,9 @@
 import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
-import checkEmailValidity from '../shared/check-email-validity';
+import emailValidationChecker from '../shared/email-validation-checker';
 import { registerAction } from '../store/api-actions';
-import checkPasswordValidity from '../shared/check-password-validity';
+import passwordValidationChecker from '../shared/password-validation-checker';
 import { validateStringsLength } from '../shared/validate-strings-length';
 import FormInputGroup from './form-input-group';
 
@@ -15,16 +15,16 @@ export default function RegisterForm(): JSX.Element {
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [patronymic, setPatronymic] = useState('');
-  const [email, setEmail, emailError, processEmailValidation] = useInput(checkEmailValidity);
-  const [password, setPassword, passwordError, processPasswordValidation] = useInput(checkPasswordValidity);
-  const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, processRepeatedPasswordValidation] = useInput(
-    (value: string) => password === value // проверить
+  const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
+  const [password, setPassword, passwordError, setPasswordError, checkPasswordValidity] = useInput(passwordValidationChecker);
+  const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, setRepeatedPasswordError, checkRepeatedPasswordValidity] = useInput(
+    (repPas: string) => password === repPas // проверить
   );
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    if (processEmailValidation() && processPasswordValidation() && processRepeatedPasswordValidation()) {
+    if (checkEmailValidity() && checkPasswordValidity() && checkRepeatedPasswordValidity()) {
       dispatch(registerAction({
         lastName,
         firstName,
@@ -63,24 +63,24 @@ export default function RegisterForm(): JSX.Element {
             value={firstName} onChange={handleFirstNameChange}
           />
           <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
-            labelText='Фамилия' name='patronymic' type='text' autoCapitalize='words' autoComplete='patronymic'
+            labelText='Отчество' name='patronymic' type='text' autoCapitalize='words' autoComplete='patronymic'
             value={patronymic} onChange={handlePatronymicChange}
           />
           <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
             labelText='Почта' name='email' type='text' inputMode='email' autoComplete='email' required
-            value={email} onChange={handleEmailChange} showError={emailError}
+            value={email} onChange={handleEmailChange} showError={emailError} setShowError={setEmailError}
             tooltipClasses='register-form__tooltip' tooltipText='Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me'
             errorClasses='register-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'
           />
           <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
             labelText='Пароль' name='password' type='password' autoComplete='new-password' required
-            value={password} onChange={handlePasswordChange} showError={passwordError}
-            tooltipClasses='register-form__tooltip' tooltipText='Пароль должен содержать не менее 8 символов, среди которых есть латинские буквы, хотя бы 1 цифра и хотя бы 1 спец. символ'
+            value={password} onChange={handlePasswordChange} showError={passwordError} setShowError={setPasswordError}
+            tooltipClasses='register-form__tooltip' tooltipText='Пароль должен содержать не менее 8 символов, среди которых есть латинские буквы, хотя бы 1 строчная и заглавная буква, не менее 1 цифры и хотя бы 1 спец. символ'
             errorClasses='register-form__group-error' errorText='Пароль не соответствует требованиям сложности'
           />
           <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
             labelText='Повторите пароль' name='password-repeat' type='password' autoComplete='new-password' required
-            value={repeatedPassword} onChange={handleRepeatedPasswordChange} showError={repeatedPasswordError}
+            value={repeatedPassword} onChange={handleRepeatedPasswordChange} showError={repeatedPasswordError} setShowError={setRepeatedPasswordError}
             errorClasses='register-form__group-error' errorText='Пароли не совпадают'
           />
           <button className="register-form__submit-btn cb-form-btn btn-reset"

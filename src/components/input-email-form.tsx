@@ -1,7 +1,7 @@
 import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
-import checkEmailValidity from '../shared/check-email-validity';
+import emailValidationChecker from '../shared/email-validation-checker';
 import FormInputGroup from './form-input-group';
 import { changePasswordAction } from '../store/api-actions';
 
@@ -10,12 +10,12 @@ export default function InputEmailForm(): JSX.Element {
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
 
-  const [email, setEmail, emailError, processEmailValidation] = useInput(checkEmailValidity);
+  const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    if (processEmailValidation()) {
+    if (checkEmailValidity()) {
       dispatch(changePasswordAction(email));
     }
   };
@@ -35,7 +35,7 @@ export default function InputEmailForm(): JSX.Element {
         <div className="new-password-form__bottom cb-form-bottom">
           <FormInputGroup groupClasses='new-password-form__input-group' labelClasses='new-password-form__label' inputClasses='new-password-form__input'
             labelText='Укажите почту' name='email' type='text' inputMode='email' autoComplete='email current-login current-email' required
-            value={email} onChange={handleEmailChange} showError={emailError}
+            value={email} onChange={handleEmailChange} showError={emailError} setShowError={setEmailError}
             tooltipClasses='new-password-form__tooltip' tooltipText='Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me'
             errorClasses='new-password-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'
           />
