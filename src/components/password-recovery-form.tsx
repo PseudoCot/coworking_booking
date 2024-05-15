@@ -5,7 +5,7 @@ import emailValidationChecker from '../shared/email-validation-checker';
 import FormInputGroup from './form-input-group';
 import { changePasswordAction } from '../store/api-actions';
 
-export default function InputEmailForm(): JSX.Element {
+export default function PasswordRecoveryForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
