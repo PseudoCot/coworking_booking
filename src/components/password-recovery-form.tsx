@@ -27,19 +27,19 @@ export default function PasswordRecoveryForm(): JSX.Element {
   }, [email]);
 
   return (
-    <form className="new-password__form new-password-form cb-form" action="#" onSubmit={handleSubmit}>
-      <div className="new-password-form__wrapper cb-form-wrapper">
-        <div className="new-password-form__top cb-form-top">
-          <h2 className="new-password-form__title cb-form-title title-reset">Восстановить пароль</h2>
+    <form className="password-recovery__form password-recovery-form cb-form" action="#" onSubmit={handleSubmit}>
+      <div className="password-recovery-form__wrapper cb-form-wrapper">
+        <div className="password-recovery-form__top cb-form-top">
+          <h2 className="password-recovery-form__title cb-form-title title-reset">Восстановить пароль</h2>
         </div>
-        <div className="new-password-form__bottom cb-form-bottom">
-          <FormInputGroup groupClasses='new-password-form__input-group' labelClasses='new-password-form__label' inputClasses='new-password-form__input'
+        <div className="password-recovery-form__bottom cb-form-bottom">
+          <FormInputGroup groupClasses='password-recovery-form__input-group' labelClasses='password-recovery-form__label' inputClasses='password-recovery-form__input'
             labelText='Укажите почту' name='email' type='text' inputMode='email' autoComplete='email current-login current-email' required
             value={email} onChange={handleEmailChange} showError={emailError} setShowError={setEmailError}
-            tooltipClasses='new-password-form__tooltip' tooltipText='Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me'
-            errorClasses='new-password-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'
+            tooltipClasses='password-recovery-form__tooltip' tooltipText='Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me'
+            errorClasses='password-recovery-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'
           />
-          <button className="new-password-form__set-password-btn cb-form-btn btn-reset"
+          <button className="password-recovery-form__submit-btn cb-form-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
             Восстановить пароль

@@ -125,6 +125,7 @@
   --form-input-border-color: #28359396;
   --form-input-shadow-color: #28359340;
   --form-input-bg-color: #8c9eff33;
+  --form-group-error-bg-color: #5963ad;
 }
 
 html {
@@ -305,7 +306,7 @@ body,
   color: #FFFFFFE6;
   content: attr(data-tip);
 
-  background-color: #283593B3;
+  background-color: var(--form-group-error-bg-color);
   /* 70% */
   border-radius: 5px;
 
@@ -321,7 +322,7 @@ body,
   content: "";
 
   border: 10px solid transparent;
-  border-top: 10px solid #283593B3;
+  border-top: 10px solid var(--form-group-error-bg-color);
   /* 70% */
 
   transform: translateX(-80%);
@@ -359,7 +360,7 @@ body,
   align-content: center;
   color: #FFFFFFE6;
 
-  background-color: #283593B3;
+  background-color: var(--form-group-error-bg-color);
   /* 70% */
   border-radius: 5px;
 
@@ -372,7 +373,7 @@ body,
   position: absolute;
   content: "";
   border: 7px solid transparent;
-  border-top: 6px solid #283593B3;
+  border-top: 6px solid var(--form-group-error-bg-color);
   /* 70% */
 
   transform: translateX(-80%);
@@ -1479,48 +1480,59 @@ body,
 
 
 
-/* /// new-password /// */
-.new-password {
-  padding: 160px 0 250px;
-  background: no-repeat right center url("../img/persona.svg")
-}
-
-.new-password-form {
+/* /// new-password && password-recovery /// */
+.new-password-form,
+.password-recovery-form {
   position: relative;
   display: inline-block;
   left: 9%;
 }
 
-.new-password-form__top {
+.new-password-form__top,
+.password-recovery-form__top {
   padding: 8px 77px;
   margin-bottom: 20px;
 }
 
-.new-password-form__bottom {
+.new-password-form__bottom,
+.password-recovery-form__bottom {
   padding: 0 65px 25px;
 }
 
-.new-password-form__input-group {
+.new-password-form__input-group,
+.password-recovery-form__input-group {
   margin-bottom: 10px;
 }
 
-.new-password-form__input-group:nth-last-child(-n+2) {
+.new-password-form__input-group:nth-last-child(-n+2),
+.password-recovery-form__input-group:nth-last-child(-n+2) {
   margin-bottom: 20px;
 }
 
-.new-password-form__label {
+.new-password-form__label,
+.password-recovery-form__label {
   margin-bottom: 8px;
 }
 
-.new-password-form__input {
+.new-password-form__input,
+.password-recovery-form__input {
   width: 200px;
   height: 22px;
 }
 
-.new-password-form__set-password-btn {
+.new-password-form__submit-btn,
+.password-recovery-form__submit-btn {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+}
+
+
+
+/* /// new-password /// */
+.new-password {
+  padding: 160px 0 250px;
+  background: no-repeat right center url("../img/persona.svg")
 }
 
 
@@ -1530,6 +1542,17 @@ body,
   padding: 160px 0 250px;
   background: no-repeat right center url("../img/persona.svg")
 }
+
+.password-recovery-form__top {
+  padding-left: 52px;
+  padding-right: 52px;
+}
+
+.password-recovery-form__submit-btn {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 
 
 /* /// temp /// */
