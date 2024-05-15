@@ -1,8 +1,9 @@
-import { useState, FormEventHandler, useEffect } from 'react';
+import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
-import TipSVG from './svg/tip';
 import checkEmailValidity from '../shared/check-email-validity';
+import FormInputGroup from './form-input-group';
+import { changePasswordAction } from '../store/api-actions';
 
 export default function InputEmailForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -19,6 +20,8 @@ export default function InputEmailForm(): JSX.Element {
     }
   };
 
+  const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
+
   useEffect(() => {
     setSubmitEnabled(!!email);
   }, [email]);
@@ -30,26 +33,12 @@ export default function InputEmailForm(): JSX.Element {
           <h2 className="new-password-form__title cb-form-title title-reset">Восстановить пароль</h2>
         </div>
         <div className="new-password-form__bottom cb-form-bottom">
-          <div className="new-password-form__input-group cb-form-group">
-            <label className="new-password-form__label cb-form-label" htmlFor="email">Укажите почту:</label>
-            <input className="new-password-form__input cb-form-input"
-              type="email"
-              name="email"
-              id="email"
-              autoComplete="email current-login current-email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <span className="register-form__tooltip cb-form-tooltip"
-              data-tip="Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me"
-            >
-              <TipSVG />
-            </span>
-            {emailError &&
-              <span className="register-form__tooltip cb-form-tooltip"
-                data-tip="Адрес электронной почты не соответствует домену urfu.ru или ufru.me"
-              />}
-          </div>
+          <FormInputGroup groupClasses='new-password-form__input-group' labelClasses='new-password-form__label' inputClasses='new-password-form__input'
+            labelText='Укажите почту' name='email' type='text' inputMode='email' autoComplete='email current-login current-email' required
+            value={email} onChange={handleEmailChange} showError={emailError}
+            tooltipClasses='new-password-form__tooltip' tooltipText='Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me'
+            errorClasses='new-password-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'
+          />
           <button className="new-password-form__set-password-btn cb-form-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >

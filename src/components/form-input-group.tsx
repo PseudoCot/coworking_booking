@@ -14,7 +14,8 @@ type FormInputGroupProps = {
   labelText: string;
   name: string;
   type: string;
-  inputMode: InputMode;
+  inputMode?: InputMode;
+  autoCapitalize?: string;
   autoComplete?: string;
 
   value: string;
@@ -26,7 +27,7 @@ type FormInputGroupProps = {
 };
 
 export default function FormInputGroup({ groupClasses = '', labelClasses = '', inputClasses = '',
-  tooltipClasses = '', errorClasses = '', required, labelText, name, type, inputMode, autoComplete,
+  tooltipClasses = '', errorClasses = '', required, labelText, name, type, inputMode, autoCapitalize, autoComplete,
   value, onChange: handleChange, tooltipText, showError, errorText }: FormInputGroupProps): JSX.Element {
   return (
     <div className={`${groupClasses} cb-form-group ${required ? 'cb-form-group--required' : ''}`}>
@@ -36,6 +37,7 @@ export default function FormInputGroup({ groupClasses = '', labelClasses = '', i
         name={name}
         id={name}
         inputMode={inputMode}
+        autoCapitalize={autoCapitalize}
         autoComplete={autoComplete}
         value={value}
         onChange={handleChange}

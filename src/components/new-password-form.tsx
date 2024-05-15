@@ -1,10 +1,10 @@
-import { useState, FormEventHandler, useEffect } from 'react';
+import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
 import { changePasswordAction } from '../store/api-actions';
 import { validateStringsLength } from '../shared/validate-strings-length';
 import checkPasswordValidity from '../shared/check-password-validity';
-import TipSVG from './svg/tip';
+import FormInputGroup from './form-input-group';
 
 export default function NewPasswordForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -24,6 +24,9 @@ export default function NewPasswordForm(): JSX.Element {
     }
   };
 
+  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
+  const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
+
   useEffect(() => {
     setSubmitEnabled(validateStringsLength([password, repeatedPassword]));
   }, [password, repeatedPassword]);
@@ -35,41 +38,17 @@ export default function NewPasswordForm(): JSX.Element {
           <h2 className="new-password-form__title cb-form-title title-reset">Сменить пароль</h2>
         </div>
         <div className="new-password-form__bottom cb-form-bottom">
-          <div className="new-password-form__input-group cb-form-group">
-            <label className="new-password-form__label cb-form-label" htmlFor="password">Новый пароль:</label>
-            <input className="new-password-form__input cb-form-input"
-              type="password"
-              name="password"
-              id="password"
-              autoComplete="new-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <span className="register-form__tooltip cb-form-tooltip"
-              data-tip="Пароль должен содержать не менее 8 символов, среди которых есть латинские буквы, хотя бы 1 цифра и хотя бы 1 спец. символ"
-            >
-              <TipSVG />
-            </span>
-            {passwordError &&
-              <span className="register-form__tooltip cb-form-tooltip"
-                data-tip="Пароль не соответствует требованиям сложности"
-              />}
-          </div>
-          <div className="new-password-form__input-group cb-form-group">
-            <label className="new-password-form__label cb-form-label" htmlFor="password-repeat">Повторите пароль:</label>
-            <input className="new-password-form__input cb-form-input"
-              type="password"
-              name="password-repeat"
-              id="password-repeat"
-              autoComplete="new-password"
-              value={repeatedPassword}
-              onChange={(e) => setRepeatedPassword(e.target.value)}
-            />
-            {repeatedPasswordError &&
-              <span className="register-form__tooltip cb-form-tooltip"
-                data-tip="Пароли не совпадают"
-              />}
-          </div>
+          <FormInputGroup groupClasses='new-password-form__input-group' labelClasses='new-password-form__label' inputClasses='new-password-form__input'
+            labelText='Новый пароль' name='password' type='password' autoComplete='new-password' required
+            value={password} onChange={handlePasswordChange} showError={passwordError}
+            tooltipClasses='new-password-form__tooltip' tooltipText='Пароль должен содержать не менее 8 символов, среди которых есть латинские буквы, хотя бы 1 цифра и хотя бы 1 спец. символ'
+            errorClasses='new-password-form__group-error' errorText='Пароль не соответствует требованиям сложности'
+          />
+          <FormInputGroup groupClasses='new-password-form__input-group' labelClasses='new-password-form__label' inputClasses='new-password-form__input'
+            labelText='Повторите пароль' name='password-repeat' type='password' autoComplete='new-password' required
+            value={repeatedPassword} onChange={handleRepeatedPasswordChange} showError={repeatedPasswordError}
+            errorClasses='new-password-form__group-error' errorText='Пароли не совпадают'
+          />
           <button className="new-password-form__set-password-btn cb-form-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
