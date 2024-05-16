@@ -1,3 +1,12 @@
+import generateTimeArray from './shared/generate-time-array';
+
+export const AVAILABLE_HOURS_START = 8;
+export const AVAILABLE_HOURS_END = 20;
+export const AVAILABLE_HOURS = generateTimeArray(AVAILABLE_HOURS_START, AVAILABLE_HOURS_END, 1);
+export const AVAILABLE_MINUTES = generateTimeArray(0, 60, 5);
+export const FIRST_AVAILABLE_HOUR = AVAILABLE_HOURS.at(0) as string;
+export const FIRST_AVAILABLE_MINUTE = AVAILABLE_MINUTES.at(0) as string;
+
 export const ApiMethods = {
   // Auth: 'auth',
   Register: 'register',
