@@ -126,6 +126,8 @@
   --form-input-shadow-color: #28359340;
   --form-input-bg-color: #8c9eff33;
   --form-group-error-bg-color: #5963ad;
+
+  --calendar-cell-border-radius: 10px;
 }
 
 html {
@@ -554,7 +556,7 @@ body,
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .footer__contacts {
@@ -592,7 +594,7 @@ body,
 .footer__credits {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   gap: 8px;
 }
@@ -822,93 +824,19 @@ body,
   flex-direction: column;
 }
 
-.calendar__iframe-wrapper {
+.calendar__title {
+  margin-bottom: 35px;
+}
+
+/* .calendar__iframe-wrapper {
   position: relative;
   margin: 0 auto 30px;
+  /* размеры должны соответствовать размерам iframe
   width: 928px;
   height: 599px;
-  /* размеры должны соответствовать размерам iframe */
   background-color: var(--theme-button-color);
   border: 1px solid #525da9;
 }
-
-
-.calendar-container {
-  display: flex;
-}
-
-.calendar-it {
-  margin: 0 auto;
-}
-
-.calendar-headline {
-  display: flex;
-  margin-bottom: 10px;
-  justify-content: space-between;
-  padding: 0 20px;
-}
-
-.calendar-headline-month {
-  font-weight: 600;
-}
-
-.calendar-headline-controls {
-  display: flex;
-}
-
-.calendar-headline-control {
-  cursor: pointer;
-}
-
-.calendar-headline-control:hover {
-  text-decoration: underline;
-}
-
-.calendar-headline-controls-today {
-  margin: 0 10px;
-}
-
-.calendar-weeks-grid {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  font-size: 12px;
-  margin-bottom: 10px;
-  color: rgb(81, 81, 81);
-}
-
-.calendar-weeks-grid-cell {
-  text-align: center;
-}
-
-.calendar-grid-cell-inactive {
-  color: #9e9e9e;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  border-top: 1px solid rgb(190, 190, 190);
-  border-left: 1px solid rgb(190, 190, 190);
-}
-
-.calendar-grid-cell {
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid rgb(190, 190, 190);
-  border-right: 1px solid rgb(190, 190, 190);
-  cursor: pointer;
-}
-
-.calendar-grid-cell:hover {
-  background: #9ba3bf;
-}
-
-.calendar-grid-cell-active {
-  background: #9ba3bf;
-}
-
 
 .calendar__iframe {
   position: relative;
@@ -927,7 +855,153 @@ body,
   color: var(--dark-text-color);
   transform: translateX(-50%);
   z-index: 1;
+} */
+
+
+/* не знаю, как назвать класс для самого компонента календаря, но не потерять связь с названием страницы,
+   поэтому дальше под self будет подразумеваться этот самый компонент */
+.calendar__self {
+  margin: 0 auto 35px;
 }
+
+.calendar__self-controls {
+  padding: 0 20px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar__self-controls-left-btn,
+.calendar__self-controls-right-btn {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  background-color: #8c9effbf;
+}
+
+.calendar__self-controls-left-btn {
+  box-shadow: 1px 1px 0 0 var(--form-input-border-color);
+}
+
+.calendar__self-controls-right-btn {
+  box-shadow: -1px 1px 0 0 var(--form-input-border-color);
+}
+
+.calendar__self-controls-left-btn::before,
+.calendar__self-controls-right-btn::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  content: "";
+  border-radius: 5px;
+  border: 6px solid transparent;
+}
+
+.calendar__self-controls-left-btn::before {
+  border-right: 6px solid #ffffff;
+  transform: translateX(-75%) translateY(-50%);
+}
+
+.calendar__self-controls-right-btn::before {
+  border-left: 6px solid #ffffff;
+  transform: translateX(-25%) translateY(-50%);
+}
+
+.calendar__self-controls-today-btn {
+  width: 175px;
+  font-family: var(--third-family);
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  color: var(--theme-title-text-color);
+}
+
+.calendar__self-grid {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-radius: 10px;
+  background-color: var(--theme-button-color);
+}
+
+.calendar__self-grid-weekday-cell {
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.calendar__self-grid-cell {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--calendar-cell-border-radius);
+  border: 1px solid #304FFE;
+  box-shadow: 0 0 8px 2px rgba(82, 93, 169, 0.19);
+  background-color: #ffffffb3;
+}
+
+.calendar__self-grid-cell:hover {
+  background: #ffffff;
+}
+
+.calendar__self-grid-cell--inactive {
+  background-color: #ffffff66;
+}
+
+.calendar__self-grid-cell--active {
+  background: #ffffff;
+}
+
+.calendar__self-grid-cell-top {
+  padding: 4px 9px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--theme-title-text-color);
+  border-top-left-radius: var(--calendar-cell-border-radius);
+  border-top-right-radius: var(--calendar-cell-border-radius);
+  background-color: #ffffff66;
+  border-bottom: 1px solid #304FFE;
+}
+
+.calendar__self-grid-cell-month {
+  margin-right: auto;
+}
+
+.calendar__self-grid-cell-holiday {
+  color: #b71c1ccc;
+}
+
+.calendar__self-grid-cell-bottom {
+  width: 100%;
+  height: 100%;
+  border-bottom-left-radius: var(--calendar-cell-border-radius);
+  border-bottom-right-radius: var(--calendar-cell-border-radius);
+}
+
+.calendar__self-grid-cell-message {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  width: 100%;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 11px;
+  color: #283593b3;
+  transform: translateX(-50%) translateY(-50%);
+}
+
 
 .calendar__coworking-list {
   padding-bottom: 50px;
@@ -946,7 +1020,7 @@ body,
   margin-bottom: 100px;
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: flex-start;
   gap: 25px;
 }
 
@@ -1039,7 +1113,7 @@ body,
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-flex-start;
   gap: 40px;
 }
 
@@ -1060,7 +1134,7 @@ body,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .booking__info-group {
@@ -1388,7 +1462,7 @@ body,
   padding: 0 15px 20px;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 15px;
 }
 
