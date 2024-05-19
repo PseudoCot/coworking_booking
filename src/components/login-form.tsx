@@ -10,6 +10,7 @@ export default function LoginForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
+  const showSubmitError = false; // useAppSelector(getLoginError);
 
   const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
   const [password, setPassword] = useState('');
@@ -39,6 +40,8 @@ export default function LoginForm(): JSX.Element {
           <h2 className="login-form__title cb-form-title title-reset">Вход</h2>
         </div>
         <div className="login-form__bottom cb-form-bottom">
+          {showSubmitError &&
+            <span className="login-form__submit-error">Введённые данные не корректны. Попробуйте ещё раз</span>}
           <FormInputGroup groupClasses='login-form__input-group' labelClasses='login-form__label' inputClasses='login-form__input'
             labelText='Почта' name='email' type='text' inputMode='email' autoComplete='email current-login current-email' required
             value={email} onChange={handleEmailChange} showError={emailError} setShowError={setEmailError}
