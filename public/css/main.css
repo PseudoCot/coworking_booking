@@ -909,8 +909,13 @@ body,
   transform: translateX(-25%) translateY(-50%);
 }
 
-.calendar__self-controls-today-btn {
-  width: 175px;
+.calendar__self-controls-reset-btn svg {
+  vertical-align: middle;
+}
+
+.calendar__self-controls-month-title {
+  /* width: 175px; */
+  /* чтобы кнопки управленя не прыгали при смене месяца */
   font-family: var(--third-family);
   font-weight: 600;
   font-size: 16px;
@@ -942,21 +947,22 @@ body,
   display: flex;
   flex-direction: column;
   border-radius: var(--calendar-cell-border-radius);
-  border: 1px solid #304FFE;
+  border: 1px solid #304ffe;
   box-shadow: 0 0 8px 2px rgba(82, 93, 169, 0.19);
   background-color: #ffffffb3;
-}
-
-.calendar__self-grid-cell:hover {
-  background: #ffffff;
 }
 
 .calendar__self-grid-cell--inactive {
   background-color: #ffffff66;
 }
 
-.calendar__self-grid-cell--active {
-  background: #ffffff;
+.calendar__self-grid-cell:hover,
+.calendar__self-grid-cell--selected {
+  background-color: #ffffffd2;
+}
+
+.calendar__self-grid-cell--current {
+  background-color: #ffe9a8;
 }
 
 .calendar__self-grid-cell-top {
@@ -975,6 +981,20 @@ body,
   border-bottom: 1px solid #304FFE;
 }
 
+.calendar__self-grid-cell--current .calendar__self-grid-cell-top {
+  background-color: #ffd968;
+}
+
+.calendar__self-grid-cell--current:hover .calendar__self-grid-cell-top,
+.calendar__self-grid-cell--current.calendar__self-grid-cell--selected .calendar__self-grid-cell-top {
+  background-color: #fde08a;
+}
+
+.calendar__self-grid-cell:hover .calendar__self-grid-cell-top,
+.calendar__self-grid-cell--selected .calendar__self-grid-cell-top {
+  background-color: #ffffffe1;
+}
+
 .calendar__self-grid-cell-month {
   margin-right: auto;
 }
@@ -984,6 +1004,7 @@ body,
 }
 
 .calendar__self-grid-cell-bottom {
+  padding: 5px 10px;
   width: 100%;
   height: 100%;
   border-bottom-left-radius: var(--calendar-cell-border-radius);
@@ -1000,6 +1021,66 @@ body,
   font-size: 11px;
   color: #283593b3;
   transform: translateX(-50%) translateY(-50%);
+}
+
+.calendar__self-grid-cell--selected .calendar__self-grid-cell-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.calendar__form-sub-label {
+  margin-bottom: 2px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 11px;
+  color: #5f69b3;
+  /* 70% */
+}
+
+.calendar__form-time-group {
+  padding: 1px 4px;
+  margin-bottom: 5px;
+  width: 78px;
+  height: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  border-radius: 5px;
+  box-shadow: 2px 3px 4px 0 rgba(40, 53, 147, 0.25);
+  background-color: #8C9eff33;
+}
+
+.calendar__form-time-group:nth-last-child(-n+2) {
+  margin-bottom: 0;
+}
+
+.calendar__form-time-select {
+  padding: 0;
+  width: 30px;
+  height: 14px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 8px;
+  color: #000000CC;
+  border-radius: 10px;
+  border: 1px solid #28359399;
+  /* 30% */
+  background-color: #ffffff;
+}
+
+/* .calendar__form-select-option {
+
+} */
+
+.calendar__form-time-separator {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 10px;
+  color: #000000cc;
+  /* 80% */
+
 }
 
 

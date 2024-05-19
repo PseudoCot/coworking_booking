@@ -1,5 +1,7 @@
 import { useState, FormEventHandler, useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
+import TimestampSelectGroup from './timestamp-select-group';
+import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE } from '../consts';
 
 export default function BookingForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -8,8 +10,10 @@ export default function BookingForm(): JSX.Element {
 
   const [seatType, setSeatType] = useState('');
   const [date, setDate] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const [startHour, setStartHour] = useState(FIRST_AVAILABLE_HOUR);
+  const [startMinute, setStartMinute] = useState(FIRST_AVAILABLE_MINUTE);
+  const [endHour, setEndHour] = useState(FIRST_AVAILABLE_HOUR);
+  const [endMinute, setEndMinute] = useState(FIRST_AVAILABLE_MINUTE);
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -24,7 +28,7 @@ export default function BookingForm(): JSX.Element {
 
   useEffect(() => {
     setSubmitEnabled(false);
-  }, [seatType, date, startTime, endTime]);
+  }, [seatType, date]);
 
   return (
     <form className="booking__form cb-form" action="#" onSubmit={handleSubmit}>
@@ -49,72 +53,12 @@ export default function BookingForm(): JSX.Element {
           </div>
           <div className="booking__form-group cb-form-group">
             <label className="booking__form-label cb-form-label" htmlFor="time">Время:</label>
-            <span className="booking__form-sub-label cb-form-sub-label">Начало:</span>
-            <div className="booking__form-time-group  cb-form-input">
-              <select className="booking__form-time-select" name="start-time-hours" id="start-time-hours">
-                <option value="08" className="booking__form-select-option">08</option>
-                <option value="09" className="booking__form-select-option">09</option>
-                <option value="10" className="booking__form-select-option">10</option>
-                <option value="11" className="booking__form-select-option">11</option>
-                <option value="12" className="booking__form-select-option">12</option>
-                <option value="13" className="booking__form-select-option">13</option>
-                <option value="14" className="booking__form-select-option">14</option>
-                <option value="15" className="booking__form-select-option">15</option>
-                <option value="16" className="booking__form-select-option">16</option>
-                <option value="17" className="booking__form-select-option">17</option>
-                <option value="18" className="booking__form-select-option">18</option>
-                <option value="19" className="booking__form-select-option">19</option>
-                <option value="20" className="booking__form-select-option">20</option>
-              </select>
-              <span className="booking__form-time-separator">:</span>
-              <select className="booking__form-time-select" name="start-time-min" id="start-time-min">
-                <option value="00" className="booking__form-select-option">00</option>
-                <option value="05" className="booking__form-select-option">05</option>
-                <option value="10" className="booking__form-select-option">10</option>
-                <option value="15" className="booking__form-select-option">15</option>
-                <option value="20" className="booking__form-select-option">20</option>
-                <option value="25" className="booking__form-select-option">25</option>
-                <option value="30" className="booking__form-select-option">30</option>
-                <option value="35" className="booking__form-select-option">35</option>
-                <option value="40" className="booking__form-select-option">40</option>
-                <option value="45" className="booking__form-select-option">45</option>
-                <option value="50" className="booking__form-select-option">50</option>
-                <option value="55" className="booking__form-select-option">55</option>
-              </select>
-            </div>
-            <span className="booking__form-sub-label cb-form-sub-label">Конец:</span>
-            <div className="booking__form-time-group  cb-form-input">
-              <select className="booking__form-time-select" name="start-time-hours" id="start-time-hours">
-                <option value="08" className="booking__form-select-option">08</option>
-                <option value="09" className="booking__form-select-option">09</option>
-                <option value="10" className="booking__form-select-option">10</option>
-                <option value="11" className="booking__form-select-option">11</option>
-                <option value="12" className="booking__form-select-option">12</option>
-                <option value="13" className="booking__form-select-option">13</option>
-                <option value="14" className="booking__form-select-option">14</option>
-                <option value="15" className="booking__form-select-option">15</option>
-                <option value="16" className="booking__form-select-option">16</option>
-                <option value="17" className="booking__form-select-option">17</option>
-                <option value="18" className="booking__form-select-option">18</option>
-                <option value="19" className="booking__form-select-option">19</option>
-                <option value="20" className="booking__form-select-option">20</option>
-              </select>
-              <span className="booking__form-time-separator">:</span>
-              <select className="booking__form-time-select" name="start-time-min" id="start-time-min">
-                <option value="00" className="booking__form-select-option">00</option>
-                <option value="05" className="booking__form-select-option">05</option>
-                <option value="10" className="booking__form-select-option">10</option>
-                <option value="15" className="booking__form-select-option">15</option>
-                <option value="20" className="booking__form-select-option">20</option>
-                <option value="25" className="booking__form-select-option">25</option>
-                <option value="30" className="booking__form-select-option">30</option>
-                <option value="35" className="booking__form-select-option">35</option>
-                <option value="40" className="booking__form-select-option">40</option>
-                <option value="45" className="booking__form-select-option">45</option>
-                <option value="50" className="booking__form-select-option">50</option>
-                <option value="55" className="booking__form-select-option">55</option>
-              </select>
-            </div>
+            <TimestampSelectGroup subLabelClassNames='booking__form-sub-label' timeGroupClassNames='booking__form-time-group'
+              timeSelectClassNames='booking__form-time-select' selectOptionClassNames='booking__form-select-option'
+              timesSeparatorClassNames='booking__form-time-separator' startHour={startHour} startMinute={startMinute}
+              endHour={endHour} endMinute={endMinute} onStartHourChange={setStartHour} onStartMinuteChange={setStartMinute}
+              onEndHourChange={setEndHour} onEndMinuteChange={setEndMinute}
+            />
           </div>
           <button className="booking__form-submit-btn cb-form-btn btn-reset"
             type="submit" disabled={!submitEnabled}
