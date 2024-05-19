@@ -53,9 +53,9 @@ export default function BookingForm(): JSX.Element {
           </div>
           <div className="booking__form-group cb-form-group">
             <label className="booking__form-label cb-form-label" htmlFor="time">Время:</label>
-            <TimestampSelectGroup subLabelClassNames='booking__form-sub-label' timeGroupClassNames='booking__form-time-group'
-              timeSelectClassNames='booking__form-time-select' selectOptionClassNames='booking__form-select-option'
-              timesSeparatorClassNames='booking__form-time-separator' startHour={startHour} startMinute={startMinute}
+            <TimestampSelectGroup subLabelClasses='booking__form-sub-label' timeGroupClasses='booking__form-time-group'
+              timeSelectClasses='booking__form-time-select' selectOptionClasses='booking__form-select-option'
+              timesSeparatorClasses='booking__form-time-separator' startHour={startHour} startMinute={startMinute}
               endHour={endHour} endMinute={endMinute} onStartHourChange={setStartHour} onStartMinuteChange={setStartMinute}
               onEndHourChange={setEndHour} onEndMinuteChange={setEndMinute}
             />

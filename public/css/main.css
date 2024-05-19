@@ -406,13 +406,30 @@ body,
   background-color: var(--form-button-bg-color);
 }
 
+.cb-toast-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(13px);
+  z-index: 100;
+}
+
 .cb-toast {
-  position: relative;
-  padding: 30px 30px 40px;
+  position: absolute;
+  padding: 30px 30px 20px;
+  top: 50%;
+  left: 50%;
   max-width: 776px;
   border-radius: 15px;
-  border: 1px solid #000;
+  border: 1px solid #9575cd;
   background-color: var(--light-card-bg-color);
+  box-shadow: 0 4px 6px 0 #00000066;
+  transform: translate(-50%, -50%);
+  z-index: 100;
 }
 
 .cb-close-toast-btn {
@@ -428,7 +445,7 @@ body,
   font-weight: 400;
   font-size: 24px;
   text-align: center;
-  color: var(--theme-text-color);
+  color: var(--theme-button-text-color);
 }
 
 .cb-toast-text {
@@ -436,6 +453,7 @@ body,
   font-weight: 400;
   font-size: 16px;
   color: var(--theme-text-color);
+  white-space: pre-line;
 }
 
 
@@ -901,12 +919,12 @@ body,
 
 .calendar__self-controls-left-btn::before {
   border-right: 6px solid #ffffff;
-  transform: translateX(-75%) translateY(-50%);
+  transform: translate(-75%, -50%);
 }
 
 .calendar__self-controls-right-btn::before {
   border-left: 6px solid #ffffff;
-  transform: translateX(-25%) translateY(-50%);
+  transform: translate(-25%, -50%);
 }
 
 .calendar__self-controls-reset-btn svg {
@@ -1020,7 +1038,7 @@ body,
   font-weight: 400;
   font-size: 11px;
   color: #283593b3;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translate(-50%, -50%);
 }
 
 .calendar__self-grid-cell--selected .calendar__self-grid-cell-bottom {
@@ -1161,11 +1179,11 @@ body,
 }
 
 .info-carousel__left-btn::after {
-  transform: translateY(-50%) translateX(-35%) rotateZ(135deg);
+  transform: translate(-35%, -50%) rotateZ(135deg);
 }
 
 .info-carousel__right-btn::after {
-  transform: rotateZ(-45deg) translateY(-85%) translateX(-10%);
+  transform: rotateZ(-45deg) translate(-10%, -85%);
 }
 
 .info-carousel__image {
@@ -1457,7 +1475,35 @@ body,
 }
 
 .booking__toast-text {
+  margin-bottom: 15px;
   text-align: center;
+}
+
+.booking__toast-btn-desc {
+  margin-bottom: 10px;
+  display: block;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: #304ffec0;
+}
+
+.booking__toast-btn {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  left: 50%;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: #304ffee6;
+  /* 90% */
+  border-radius: 15px;
+  background-color: #8C9eff1a;
+  border: 1px solid #304ffee6;
+  /* 90% */
+  transform: translateX(-50%);
 }
 
 

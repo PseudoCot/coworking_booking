@@ -93,9 +93,9 @@ export default function Calendar(): JSX.Element {
                 {isDayHoliday &&
                   <div className="calendar__self-grid-cell-message">Нет доступных слотов<br /> для бронирования</div>}
                 {dayISOFormat === selectedDayISOFormat &&
-                  <TimestampSelectGroup subLabelClassNames='calendar__form-sub-label' timeGroupClassNames='calendar__form-time-group'
-                    timeSelectClassNames='calendar__form-time-select' selectOptionClassNames='calendar__form-select-option'
-                    timesSeparatorClassNames='calendar__form-time-separator' startHour={startHour} startMinute={startMinute}
+                  <TimestampSelectGroup subLabelClasses='calendar__form-sub-label' timeGroupClasses='calendar__form-time-group'
+                    timeSelectClasses='calendar__form-time-select' selectOptionClasses='calendar__form-select-option'
+                    timesSeparatorClasses='calendar__form-time-separator' startHour={startHour} startMinute={startMinute}
                     endHour={endHour} endMinute={endMinute} onStartHourChange={setStartHour} onStartMinuteChange={setStartMinute}
                     onEndHourChange={setEndHour} onEndMinuteChange={setEndMinute}
                   />}
