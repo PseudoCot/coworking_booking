@@ -1,4 +1,4 @@
 export type TimestampDto = {
-  from: string | Date;
-  to: string | Date;
+  from: string; // format datetime
+  to: string; // format datetime
 };

@@ -1,4 +1,4 @@
-import { SearchDto } from './search-dto';
+import { SearchDto } from '../api-shared/search-dto';
 
 export type CoworkingBySearchRequestParams = {
   search: SearchDto;

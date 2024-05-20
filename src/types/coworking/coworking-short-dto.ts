@@ -1,4 +1,4 @@
-export type CoworkingResponseDto = {
+export type CoworkingShortDto = {
   id: string;
   avatar: string;
   title: string;

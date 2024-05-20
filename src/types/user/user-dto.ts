@@ -1,5 +1,3 @@
-import { TelegramDto } from '../api-shared/telegram-response-dto';
-
 export type UserDto = {
   id: string;
   email: string;
@@ -7,6 +5,6 @@ export type UserDto = {
   first_name: string;
   patronymic?: string;
   is_student: boolean;
-  avatar_filename?: string;
-  telegram_info?: TelegramDto;
+  avatar_filename: string;
+  is_telegram_logged_in: boolean;
 };

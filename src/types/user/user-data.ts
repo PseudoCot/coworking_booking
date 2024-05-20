@@ -6,4 +6,5 @@ export type UserData = {
   patronymic?: string;
   is_student: boolean;
   avatar_url: string;
+  telegramLoggedIn: boolean;
 }
