@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { getAuthStatus, getUserTelegram } from '../store/user-process/selectors';
+import { getAuthStatus, isUserTelegramConnected } from '../store/user-process/selectors';
 import ExitSVG from './svg/exit';
 import LogoSVG from './svg/logo';
 import { AuthStatuses } from '../consts';
 import { logoutAction } from '../store/api-actions';
 import { AppRoutes } from '../routes';
 import WarningSVG from './svg/warning';
+import useUserFullName from '../hooks/use-user-full-name';
 
 export default function Header(): JSX.Element {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
-  const userTelegram = useAppSelector(getUserTelegram);
+  const userTelegramConnected = useAppSelector(isUserTelegramConnected);
+  const userFullName = useUserFullName();
 
   const handleLogoutClick = () => {
     if (authStatus === AuthStatuses.Auth) {
@@ -43,12 +45,12 @@ export default function Header(): JSX.Element {
           <SelectArrowSVG classNames="language-btn__arrow" />
         </button> */}
 
-        {authStatus === AuthStatuses.Auth ?
+        {authStatus === AuthStatuses.Auth
+          ?
           <>
-            {userTelegram ||
+            {userTelegramConnected ||
               <WarningSVG classNames="main-controls__warning-sign" />}
-            {/* добавить имя пользователя вместе статической строки */}
-            <Link to={AppRoutes.UserAcc.FullPath} className="main-controls__user-acc-btn">{'Имя пользователя'}</Link>
+            <Link to={AppRoutes.UserAcc.FullPath} className="main-controls__user-acc-btn">{userFullName}</Link>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutClick}>
               <ExitSVG />
             </button>

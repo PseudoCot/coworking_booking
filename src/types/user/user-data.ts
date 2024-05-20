@@ -1,10 +1,10 @@
 export type UserData = {
   id: string;
   email: string;
-  last_name: string;
-  first_name: string;
+  lastName: string;
+  firstName: string;
   patronymic?: string;
-  is_student: boolean;
-  avatar_url: string;
-  telegramLoggedIn: boolean;
+  isStudent: boolean;
+  telegramConnected: boolean;
+  avatarFileName?: string;
 }

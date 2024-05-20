@@ -1,52 +1,56 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { AuthStatuses as Status, NameSpaces } from '../../consts';
+import { AuthStatuses as Status, NameSpaces, AuthStatuses } from '../../consts';
 import { AuthStatus } from '../../types/auth-status';
 import { refreshSessionAction, loginAction, logoutAction } from '../api-actions';
-import { UserData } from '../../types/user/user-data';
+import { UserDto } from '../../types/user/user-dto';
 
 type UserProcessState = {
   authStatus: AuthStatus;
+  id?: string;
   lastName?: string;
   firstName?: string;
   patronymic?: string;
   email?: string;
-  telegram?: string;
   isStudent?: boolean;
-  avatarUrl?: string;
+  telegramConnected?: boolean;
+  avatarFileName?: string;
 };
 
 const initialState: UserProcessState = {
-  authStatus: 'Unknown',
+  authStatus: AuthStatuses.Unknown,
+  id: undefined,
   lastName: undefined,
   firstName: undefined,
   patronymic: undefined,
   email: undefined,
-  telegram: undefined,
+  telegramConnected: undefined,
   isStudent: undefined,
-  avatarUrl: undefined,
+  avatarFileName: undefined,
 };
 
 export const userProcess = createSlice({
   name: NameSpaces.User,
   initialState,
   reducers: {
-    setUserData: (state, action: PayloadAction<UserData>) => {
+    setUserData: (state, action: PayloadAction<UserDto>) => {
+      state.id = action.payload.id;
       state.lastName = action.payload.last_name;
       state.firstName = action.payload.first_name;
       state.patronymic = action.payload.patronymic;
       state.email = action.payload.email;
-      state.telegram = action.payload.telegram;
       state.isStudent = action.payload.is_student;
-      // state.avatarUrl = action.payload.avatarUrl;
+      state.telegramConnected = action.payload.is_telegram_logged_in;
+      state.avatarFileName = action.payload.avatar_filename;
     },
     clearUserData: (state) => {
+      state.id = undefined;
       state.lastName = undefined;
       state.firstName = undefined;
       state.patronymic = undefined;
       state.email = undefined;
-      state.telegram = undefined;
       state.isStudent = undefined;
-      // state.avatarUrl = undefined;
+      state.telegramConnected = undefined;
+      state.avatarFileName = undefined;
     },
   },
   extraReducers(builder) {
