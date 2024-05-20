@@ -3,24 +3,26 @@ import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
 import emailValidationChecker from '../shared/email-validation-checker';
 import FormInputGroup from './form-input-group';
-import { changePasswordAction } from '../store/api-actions';
+import { requestPasswordRecoveryAction } from '../store/api-actions';
 
-export default function PasswordRecoveryForm(): JSX.Element {
+export default function RequestPasswordRecoveryForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
 
   const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
 
+  const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
+
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
     if (checkEmailValidity()) {
-      dispatch(changePasswordAction(email));
+      dispatch(requestPasswordRecoveryAction({
+        email
+      }));
     }
   };
-
-  const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
 
   useEffect(() => {
     setSubmitEnabled(!!email);

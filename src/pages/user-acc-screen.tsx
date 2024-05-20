@@ -4,7 +4,7 @@ import UserInfoCard from '../components/user-info-card';
 import WarningMessage from '../components/warning-message';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import EditingUserInfoForm from '../components/editing-user-info-form';
-import { cancelBookingAction, requestChangePasswordAction } from '../store/api-actions';
+import { cancelBookingAction, requestPasswordRecoveryAction } from '../store/api-actions';
 import { getUserData } from '../store/user-process/selectors';
 import SubmitForm from '../components/submit-form';
 
@@ -18,7 +18,7 @@ export default function UserAccScreen(): JSX.Element {
     setEditingInfo((prev) => !prev);
   }, [setEditingInfo]);
   const handleChangePasswordClick = useCallback(() => {
-    dispatch(requestChangePasswordAction());
+    dispatch(requestPasswordRecoveryAction());
   }, [dispatch]);
 
   const handleCancelDismiss = useCallback(() => {

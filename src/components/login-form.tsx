@@ -15,6 +15,9 @@ export default function LoginForm(): JSX.Element {
   const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
   const [password, setPassword] = useState('');
 
+  const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
+  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
+
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
@@ -25,9 +28,6 @@ export default function LoginForm(): JSX.Element {
       }));
     }
   };
-
-  const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
-  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
 
   useEffect(() => {
     setSubmitEnabled(validateStringsLength([email, password]));

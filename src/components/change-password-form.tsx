@@ -21,6 +21,9 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
     (value: string) => password === value // проверить
   );
 
+  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
+  const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
+
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
@@ -39,9 +42,6 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
       );
     }
   };
-
-  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
-  const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
 
   useEffect(() => {
     setSubmitEnabled(validateStringsLength([password, repeatedPassword]));

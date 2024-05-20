@@ -18,8 +18,15 @@ export default function RegisterForm(): JSX.Element {
   const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
   const [password, setPassword, passwordError, setPasswordError, checkPasswordValidity] = useInput(passwordValidationChecker);
   const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, setRepeatedPasswordError, checkRepeatedPasswordValidity] = useInput(
-    (repPas: string) => password === repPas // проверить
+    (repeatedPass: string) => password === repeatedPass // проверить
   );
+
+  const handleLastNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setLastName(e.target.value), [setLastName]);
+  const handleFirstNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value), [setFirstName]);
+  const handlePatronymicChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPatronymic(e.target.value), [setPatronymic]);
+  const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
+  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
+  const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -34,13 +41,6 @@ export default function RegisterForm(): JSX.Element {
       }));
     }
   };
-
-  const handleLastNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setLastName(e.target.value), [setLastName]);
-  const handleFirstNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value), [setFirstName]);
-  const handlePatronymicChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPatronymic(e.target.value), [setPatronymic]);
-  const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
-  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
-  const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
 
   useEffect(() => {
     // проверить необходимость в установке таймера до проверки

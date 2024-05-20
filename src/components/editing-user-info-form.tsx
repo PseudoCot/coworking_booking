@@ -1,42 +1,40 @@
 import { useState, FormEventHandler, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import useInput from '../hooks/use-input';
 import { validateStringsLength } from '../shared/validate-strings-length';
-import { updateUserDataAction } from '../store/api-actions';
 import CloseCrossSVG from './svg/close-cross';
 import emailValidationChecker from '../shared/email-validation-checker';
+import { updateUserDataAction } from '../store/api-actions';
+import { useAppDispatch } from '../hooks';
 
 type EditingUserInfoFormProps = {
   lastName: string;
   firstName: string;
   patronymic: string;
   email: string;
-  telegram: string;
   onCloseEditingClick: () => void;
   onChangePasswordClick: () => void;
 };
 
 export default function EditingUserInfoForm({ lastName: initialLastName, firstName: initialFirstName,
-  patronymic: initialPatronymic, email: initialEmail, telegram: initialTelegram,
+  patronymic: initialPatronymic, email: initialEmail,
   onCloseEditingClick: handleCloseEditingClick, onChangePasswordClick: handleChangePasswordClick }
   : EditingUserInfoFormProps): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [submitEnabled, setSubmitEnabled] = useState(true);
 
   const [lastName, setLastName] = useState(initialLastName);
   const [firstName, setFirstName] = useState(initialFirstName);
   const [patronymic, setPatronymic] = useState(initialPatronymic);
-  const [email, setEmail, , processEmailValidation] = useInput(emailValidationChecker, initialEmail);
-  const [telegram, setTelegram] = useState(initialTelegram);
+  const [email, setEmail, , , processEmailValidation] = useInput(emailValidationChecker, initialEmail);
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
     if (processEmailValidation()) {
       dispatch(updateUserDataAction({
-        lastName,
         firstName,
+        lastName,
         patronymic,
         email,
       }));
@@ -45,8 +43,8 @@ export default function EditingUserInfoForm({ lastName: initialLastName, firstNa
 
   useEffect(() => {
     // проверить необходимость в установке таймера до проверки
-    setSubmitEnabled(validateStringsLength([lastName, firstName, patronymic, email, telegram]));
-  }, [lastName, firstName, patronymic, email, telegram]);
+    setSubmitEnabled(validateStringsLength([lastName, firstName, patronymic, email]));
+  }, [lastName, firstName, patronymic, email]);
 
   return (
     <form className="user-acc__info-wrapper" action='#' onSubmit={handleSubmit}>
@@ -76,13 +74,6 @@ export default function EditingUserInfoForm({ lastName: initialLastName, firstNa
           <label className="user-acc__info-title" htmlFor="email">Почта:</label>
           <input className="user-acc__info-input" type="text" name="email" id="email" autoCapitalize="words"
             value={email} onChange={(e) => setEmail(e.target.value)}
-          />
-          {/* поставить оповещение о неправильно введённом пароле */}
-        </div>
-        <div className="user-acc__info-group">
-          <label className="user-acc__info-title" htmlFor="telegram">Имя пользователя telegram:</label>
-          <input className="user-acc__info-input" type="text" name="telegram" id="telegram" autoCapitalize="words"
-            value={telegram} onChange={(e) => setTelegram(e.target.value)}
           />
         </div>
       </div>
