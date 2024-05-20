@@ -7,7 +7,7 @@ import { logoutAction } from '../store/api-actions';
 import { StatusCodes } from 'http-status-codes';
 import { setErrorCode } from '../store/error-process/error-process';
 
-const BACKEND_URL = '127.0.0.1:9999';
+const BACKEND_URL = 'http://130.193.50.180';
 const REQUEST_TIMEOUT = 5000;
 
 

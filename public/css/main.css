@@ -1568,6 +1568,31 @@ body,
   margin-bottom: 70px;
 }
 
+.user-acc__toast {
+  padding: 15px 30px 30px;
+  margin: 0 auto 50px;
+  max-width: 776px;
+  border-radius: 15px;
+  border: 1px solid #000;
+  background-color: var(--light-card-bg-color);
+}
+
+.user-acc__toast-title {
+  margin-bottom: 10px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 24px;
+  text-align: center;
+  color: var(--theme-text-color);
+}
+
+.user-acc__toast-text {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--form-button-border-color);
+}
+
 .user-acc__info-wrapper {
   margin: 0 auto 35px;
   max-width: 930px;
@@ -1704,30 +1729,6 @@ body,
   max-width: 70%;
 }
 
-.user-acc__toast {
-  padding: 15px 30px 30px;
-  margin: 0 auto 50px;
-  max-width: 776px;
-  border-radius: 15px;
-  border: 1px solid #000;
-  background-color: var(--light-card-bg-color);
-}
-
-.user-acc__toast-title {
-  margin-bottom: 10px;
-  font-family: var(--second-family);
-  font-weight: 400;
-  font-size: 24px;
-  text-align: center;
-  color: var(--theme-text-color);
-}
-
-.user-acc__toast-text {
-  font-family: var(--second-family);
-  font-weight: 400;
-  font-size: 20px;
-  color: var(--form-button-border-color);
-}
 
 
 .submit-form__wrapper {

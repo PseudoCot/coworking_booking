@@ -1,12 +1,17 @@
 import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
-import { changePasswordAction } from '../store/api-actions';
+import { changePasswordAction, recoverPasswordAction } from '../store/api-actions';
 import { validateStringsLength } from '../shared/validate-strings-length';
 import passwordValidationChecker from '../shared/password-validation-checker';
 import FormInputGroup from './form-input-group';
 
-export default function NewPasswordForm(): JSX.Element {
+export type ChangePasswordFormProps = {
+  token?: string;
+  email?: string;
+};
+
+export default function ChangePasswordForm({ token, email }: ChangePasswordFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
@@ -20,7 +25,18 @@ export default function NewPasswordForm(): JSX.Element {
     e.preventDefault();
 
     if (checkPasswordValidity() && checkRepeatedPasswordValidity()) {
-      dispatch(changePasswordAction(password));
+      dispatch(token && email
+        ? recoverPasswordAction({
+          password: password,
+          repeatedPassword: repeatedPassword,
+          token: token,
+          email: email,
+        })
+        : changePasswordAction({
+          password: password,
+          repeatedPassword: repeatedPassword,
+        })
+      );
     }
   };
 

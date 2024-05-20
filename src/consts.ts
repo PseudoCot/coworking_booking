@@ -13,21 +13,27 @@ export const ApiMethods = {
   Login: 'login',
   RefreshSession: 'refresh_session', // ... login-response-data
   Logout: 'logout', // refrech-session-request-params login-response-data
+  ChangePassword: 'change_password',
 
   // Coworking: 'coworking',
-  FetchCoworkingsByTimestamp: 'available_coworking_by_timestamp', // coworking-by-timestamp-request-params coworking-dto[]
-  FetchCoworkingsBySearch: 'get_coworking_by_search_params', // coworking-by-search-request-params coworking-dto[]
-  FetchCoworking: 'get_coworking', // coworking-request-params coworking-response-dto
+  FetchCoworkingsByTimestamp: 'available_coworking_by_timestamp', // coworking-by-timestamp-request-params coworking-short-dto[]
+  FetchCoworkingsBySearch: 'get_coworking_by_search_params', // coworking-by-search-request-params coworking-short-dto[]
+  FetchCoworking: 'get_coworking', // coworking-request-params coworking-dto
 
   // Avatar, // upload-avatar-request-params, обычнй post запрос, multipart/form-data
 
   // User: 'user',
-  FetchUser: 'get-profile', // null, user-dto
-  UpdateUser: 'update-user-data', // update-user-request-params update-user-response-data
+  FetchUser: 'get_profile', // null, user-dto
+  UpdateUser: 'update_user_data', // update-user-request-params user-dto
 
   // Booking: 'reservation', //
-  FetchBookings: 'get-user-reservations', // null booking-response-data[]
-  BookCoworking: 'create_reservation', // book-request-params booking-response-data
+  FetchBookings: 'get_user_reservations', // null booking-dto[]
+  BookCoworking: 'create_reservation', // book-request-params booking-dto
+  CancelBooking: 'cancel_reservation', // cancel-booking-request-params null
+
+  // UserSettings: 'settings',
+  RequestPasswordRecovery: 'request_reset_password_link',
+  PasswordRecovery: 'reset_password',
 } as const;
 
 export const ApiRoutes = {
@@ -36,6 +42,7 @@ export const ApiRoutes = {
   Login: 'api/v1/auth/login',
   RefreshSession: 'api/v1/auth/refresh_session',
   Logout: 'api/v1/auth/logout',
+  ChangePassword: 'api/v1/auth/change_password',
 
   // Coworking: 'api/v1/coworking',
   FetchCoworkingsByTimestamp: 'api/v1/coworking/available_coworking_by_timestamp',
@@ -43,15 +50,20 @@ export const ApiRoutes = {
   FetchCoworking: 'api/v1/coworking/get_coworking',
 
   UploadAvatar: 'api/v1/image',
-  FetchImage: 'api/v1/image/',
+  FetchImage: 'api/v1/image/{filename}',
 
   // User: 'api/v1/user',
-  FetchUser: 'api/v1/user/get-profile',
+  FetchUser: 'api/v1/user/get_profile',
   UpdateUser: 'api/v1/user/update_user_data',
 
   // Booking: 'api/v1/reservation',
   FetchBookings: 'api/v1/reservation/get_user_reservations',
   BookCoworking: 'api/v1/reservation/create_reservation',
+  CancelBooking: 'api/v1/reservation/cancel_reservation',
+
+  // UserSettings: 'api/v1/user/settings',
+  RequestPasswordRecovery: 'api/v1/user/settings/request_reset_password_link',
+  PasswordRecovery: 'api/v1/user/settings/reset_password',
 } as const;
 
 export const JsonRpcErrorCodes = {
