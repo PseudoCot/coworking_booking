@@ -38,6 +38,53 @@ import { PasswordRecoveryData } from '../types/recovery-password/password-recove
 import { PasswordRecoveryRequestParams } from '../types/recovery-password/password-recovery-request-params';
 
 
+type EmptyObject = Record<string, never>;
+
+
+export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'user/fetchUser',
+  async (_, { extra: { api } }) => {
+    const { data } = await api.post<JsonRpcResponse<UserDto>>(ApiRoutes.FetchUser, createJsonRpcRequest<EmptyObject>(
+      ApiMethods.FetchUser,
+      {}
+    ));
+
+    if (!data.result) {
+      throw new Error(data.error?.message);
+    }
+
+    return data.result;
+  },
+);
+
+export const updateUserDataAction = createAsyncThunk<UserDto | void, UpdateUserData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'user/updateUser',
+  async (updateUserData, { extra: { api } }) => {
+    const { data } = await api.post<JsonRpcResponse<UserDto>>(ApiRoutes.UpdateUser, createJsonRpcRequest<UpdateUserRequestParams>(
+      ApiMethods.UpdateUser,
+      {
+        values_set: {
+          first_name: updateUserData.firstName,
+          last_name: updateUserData.lastName,
+          patronymic: updateUserData.patronymic,
+          email: updateUserData.email,
+        }
+      }
+    ));
+
+    return data.result;
+  },
+);
+
+
 export const registerAction = createAsyncThunk<void, RegisterData, {
   dispatch: AppDispatch;
   state: State;
@@ -69,7 +116,7 @@ export const loginAction = createAsyncThunk<void, LoginData, {
 }>(
   'auth/login',
   async (loginData, { dispatch, extra: { fpService, api } }) => {
-    const fingerprintId = await fpService.createFingerprintId(); // попробовать вынести в index.ts, чтобы не пересоздавать каждый раз
+    const fingerprintId = await fpService.getFingerprintId();
 
     const { data } = await api.post<JsonRpcResponse<LoginResponseData>>(ApiRoutes.Login, createJsonRpcRequest<LoginRequestParams>(
       ApiMethods.Login,
@@ -86,6 +133,7 @@ export const loginAction = createAsyncThunk<void, LoginData, {
     }
 
     saveToken(data.result.access_token);
+    dispatch(fetchUserAction());
     dispatch(redirectToRoute(AppRoutes.Main.FullPath)); // определить, куда перенаправлять
   },
 );
@@ -96,22 +144,22 @@ export const refreshSessionAction = createAsyncThunk<void, undefined, {
   extra: ThunkExtraArgument;
 }>(
   'auth/refreshSession',
-  async (_, { extra: { fpService, api } }) => {
-    const fingerprintId = await fpService.createFingerprintId();
+  async (_, { dispatch, extra: { fpService, api } }) => {
+    const fingerprintId = await fpService.getFingerprintId();
 
-    const { data } = await api.post<JsonRpcResponse<LoginResponseData>>(ApiRoutes.RefreshSession,
-      createJsonRpcRequest<RefreshRequestParams>(
-        ApiMethods.RefreshSession,
-        {
-          fingerprint: fingerprintId,
-        }
-      ));
+    const { data } = await api.post<JsonRpcResponse<LoginResponseData>>(ApiRoutes.RefreshSession, createJsonRpcRequest<RefreshRequestParams>(
+      ApiMethods.RefreshSession,
+      {
+        fingerprint: fingerprintId,
+      }
+    ), { withCredentials: false });
 
     if (!data.result) {
       throw new Error(data.error?.message);
     }
 
     saveToken(data.result.access_token);
+    dispatch(fetchUserAction());
   },
 );
 
@@ -122,15 +170,14 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 }>(
   'auth/logout',
   async (_, { dispatch, extra: { fpService, api } }) => {
-    const fingerprintId = await fpService.createFingerprintId();
+    const fingerprintId = await fpService.getFingerprintId();
 
-    await api.post<JsonRpcResponse<LoginResponseData>>(ApiRoutes.Logout,
-      createJsonRpcRequest<RefreshRequestParams>(
-        ApiMethods.Logout,
-        {
-          fingerprint: fingerprintId,
-        }
-      ));
+    await api.post<JsonRpcResponse<LoginResponseData>>(ApiRoutes.Logout, createJsonRpcRequest<RefreshRequestParams>(
+      ApiMethods.Logout,
+      {
+        fingerprint: fingerprintId,
+      }
+    ));
 
     dropToken();
     dispatch(clearUserData);
@@ -146,7 +193,7 @@ export const changePasswordAction = createAsyncThunk<void, ChangePasswordData, {
 }>(
   'user/changePassword',
   async (changePasswordData, { dispatch, extra: { fpService, api } }) => {
-    const fingerprintId = await fpService.createFingerprintId();
+    const fingerprintId = await fpService.getFingerprintId();
 
     const { data } = await api.post<JsonRpcResponse<ChangePasswordResponseData>>(ApiRoutes.ChangePassword,
       createJsonRpcRequest<ChangePasswordRequestParams>(
@@ -223,13 +270,12 @@ export const fetchCoworkingAction = createAsyncThunk<CoworkingDto | undefined, s
 }>(
   'coworking/fetchCoworking',
   async (coworkingId, { extra: { api } }) => {
-    const { data } = await api.post<JsonRpcResponse<CoworkingDto>>(ApiRoutes.FetchCoworking,
-      createJsonRpcRequest<CoworkingRequestParams>(
-        ApiMethods.FetchCoworking,
-        {
-          coworking_id: coworkingId
-        }
-      ));
+    const { data } = await api.post<JsonRpcResponse<CoworkingDto>>(ApiRoutes.FetchCoworking, createJsonRpcRequest<CoworkingRequestParams>(
+      ApiMethods.FetchCoworking,
+      {
+        coworking_id: coworkingId
+      }
+    ));
 
     return data.result;
     // return await coworkingDataMock[coworkingId];
@@ -249,46 +295,6 @@ export const uploadAvatarAction = createAsyncThunk<void, Blob, {
 );
 
 
-export const fetchUserAction = createAsyncThunk<UserDto | undefined, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: ThunkExtraArgument;
-}>(
-  'user/fetchUser',
-  async (_, { extra: { api } }) => {
-    const { data } = await api.post<JsonRpcResponse<UserDto>>(ApiRoutes.FetchUser, createJsonRpcRequest<null>(
-      ApiMethods.FetchUser,
-      null
-    ));
-
-    return data.result;
-  },
-);
-
-export const updateUserDataAction = createAsyncThunk<UserDto | void, UpdateUserData, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: ThunkExtraArgument;
-}>(
-  'user/updateUser',
-  async (updateUserData, { extra: { api } }) => {
-    const { data } = await api.post<JsonRpcResponse<UserDto>>(ApiRoutes.UpdateUser, createJsonRpcRequest<UpdateUserRequestParams>(
-      ApiMethods.UpdateUser,
-      {
-        values_set: {
-          first_name: updateUserData.firstName,
-          last_name: updateUserData.lastName,
-          patronymic: updateUserData.patronymic,
-          email: updateUserData.email,
-        }
-      }
-    ));
-
-    return data.result;
-  },
-);
-
-
 export const fetchBookingsAction = createAsyncThunk<BookedCoworkingDto[], undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -296,9 +302,9 @@ export const fetchBookingsAction = createAsyncThunk<BookedCoworkingDto[], undefi
 }>(
   'booking/fethBookings',
   async (_, { extra: { api } }) => {
-    const { data } = await api.post<JsonRpcResponse<BookedCoworkingDto[]>>(ApiRoutes.FetchBookings, createJsonRpcRequest<null>(
+    const { data } = await api.post<JsonRpcResponse<BookedCoworkingDto[]>>(ApiRoutes.FetchBookings, createJsonRpcRequest<EmptyObject>(
       ApiMethods.FetchBookings,
-      null
+      {}
     ));
 
     return data.result ?? [];
@@ -354,7 +360,7 @@ export const requestPasswordRecoveryAction = createAsyncThunk<void, RequestPassw
 }>(
   'userSettings/requestResetPasswordLink',
   async (requestPasswordRecoveryData, { extra: { fpService, api } }) => {
-    const fingerprintId = await fpService.createFingerprintId();
+    const fingerprintId = await fpService.getFingerprintId();
 
     await api.post<JsonRpcResponse<null>>(ApiRoutes.RequestPasswordRecovery,
       createJsonRpcRequest<RequestRecoveryPasswordRequestParams>(
@@ -374,7 +380,7 @@ export const recoverPasswordAction = createAsyncThunk<void, PasswordRecoveryData
 }>(
   'userSettings/requestResetPasswordLink',
   async (passwordResetData, { dispatch, extra: { fpService, api } }) => {
-    const fingerprintId = await fpService.createFingerprintId();
+    const fingerprintId = await fpService.getFingerprintId();
 
     await api.post<JsonRpcResponse<null>>(ApiRoutes.PasswordRecovery,
       createJsonRpcRequest<PasswordRecoveryRequestParams>(

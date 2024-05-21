@@ -8,6 +8,7 @@ import { StatusCodes } from 'http-status-codes';
 import { setErrorCode } from '../store/error-process/error-process';
 
 const BACKEND_URL = 'http://130.193.50.180';
+const TOKEN_HEADER = 'Authorization';
 const REQUEST_TIMEOUT = 5000;
 
 
@@ -15,7 +16,7 @@ const useToken = (config: InternalAxiosRequestConfig) => {
   const token = getToken();
 
   if (token && config.headers) {
-    config.headers['x-token'] = token;
+    config.headers[TOKEN_HEADER] = token;
   }
 
   return config;

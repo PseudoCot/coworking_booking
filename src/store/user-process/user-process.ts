@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatuses as Status, NameSpaces, AuthStatuses } from '../../consts';
 import { AuthStatus } from '../../types/auth-status';
-import { refreshSessionAction, loginAction, logoutAction } from '../api-actions';
+import { refreshSessionAction, loginAction, logoutAction, fetchUserAction } from '../api-actions';
 import { UserDto } from '../../types/user/user-dto';
 
 type UserProcessState = {
@@ -32,16 +32,6 @@ export const userProcess = createSlice({
   name: NameSpaces.User,
   initialState,
   reducers: {
-    setUserData: (state, action: PayloadAction<UserDto>) => {
-      state.id = action.payload.id;
-      state.lastName = action.payload.last_name;
-      state.firstName = action.payload.first_name;
-      state.patronymic = action.payload.patronymic;
-      state.email = action.payload.email;
-      state.isStudent = action.payload.is_student;
-      state.telegramConnected = action.payload.is_telegram_logged_in;
-      state.avatarFileName = action.payload.avatar_filename;
-    },
     clearUserData: (state) => {
       state.id = undefined;
       state.lastName = undefined;
@@ -69,8 +59,18 @@ export const userProcess = createSlice({
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authStatus = Status.NoAuth;
+      })
+      .addCase(fetchUserAction.fulfilled, (state, action: PayloadAction<UserDto>) => {
+        state.id = action.payload.id;
+        state.lastName = action.payload.last_name;
+        state.firstName = action.payload.first_name;
+        state.patronymic = action.payload.patronymic;
+        state.email = action.payload.email;
+        state.isStudent = action.payload.is_student;
+        state.telegramConnected = action.payload.is_telegram_logged_in;
+        state.avatarFileName = action.payload.avatar_filename;
       });
   }
 });
 
-export const { setUserData, clearUserData } = userProcess.actions;
+export const { clearUserData } = userProcess.actions;
