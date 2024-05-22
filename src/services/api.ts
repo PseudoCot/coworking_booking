@@ -1,11 +1,11 @@
-import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios'; //AxiosRequestConfig
+import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'; //AxiosRequestConfig
 import { getToken } from './token';
 import { DetailMessageType } from '../types/detail-message';
 import { store } from '../store';
 import { AuthStatuses, NameSpaces } from '../consts';
 import { logoutAction } from '../store/api-actions';
 import { StatusCodes } from 'http-status-codes';
-import { setErrorCode } from '../store/error-process/error-process';
+import { JsonRpcUnverifiedResponce } from '../types/json-rpc/json-rpc-unverified-response';
 
 const BACKEND_URL = 'http://130.193.50.180';
 const TOKEN_HEADER = 'Authorization';
@@ -22,12 +22,18 @@ const useToken = (config: InternalAxiosRequestConfig) => {
   return config;
 };
 
-const setError = (error: AxiosError<DetailMessageType>) => {
-  if (error.response && error.response.status !== StatusCodes.UNAUTHORIZED) {
-    store.dispatch(setErrorCode(error.response.status));
+// const withCredentials = (config: InternalAxiosRequestConfig) => {
+//   config.withCredentials = true;
+//   return config;
+// };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const interceptError = (value: AxiosResponse<JsonRpcUnverifiedResponce<any>, any>) => {
+  if (!value.data.result && value.data.error) {
+    throw new Error(value.data.error.message);
   }
 
-  throw error;
+  return value;
 };
 
 const redirectToLoginOnExpiredToken = (error: AxiosError<DetailMessageType>) => {
@@ -47,12 +53,11 @@ export const createAPI = (): AxiosInstance => {
   });
 
   api.interceptors.request.use(useToken);
+  // api.interceptors.request.use(withCredentials);
 
   api.interceptors.response.use( // проверить, что ошибки перехватываются (все ответы от сервера с кодом 200)
-    (response) => response,
-    setError
+    interceptError
   );
-
   api.interceptors.response.use(
     (response) => response,
     redirectToLoginOnExpiredToken

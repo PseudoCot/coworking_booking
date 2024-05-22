@@ -53,10 +53,6 @@ export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
       {}
     ));
 
-    if (!data.result) {
-      throw new Error(data.error?.message);
-    }
-
     return data.result;
   },
 );
@@ -128,10 +124,6 @@ export const loginAction = createAsyncThunk<void, LoginData, {
       }
     ));
 
-    if (!data.result) {
-      throw new Error(data.error?.message);
-    }
-
     saveToken(data.result.access_token);
     dispatch(fetchUserAction());
     dispatch(redirectToRoute(AppRoutes.Main.FullPath)); // определить, куда перенаправлять
@@ -153,10 +145,6 @@ export const refreshSessionAction = createAsyncThunk<void, undefined, {
         fingerprint: fingerprintId,
       }
     ), { withCredentials: false });
-
-    if (!data.result) {
-      throw new Error(data.error?.message);
-    }
 
     saveToken(data.result.access_token);
     dispatch(fetchUserAction());
@@ -201,15 +189,11 @@ export const changePasswordAction = createAsyncThunk<void, ChangePasswordData, {
         {
           data: {
             password: changePasswordData.password,
-            repeatedPassword: changePasswordData.repeatedPassword,
+            password_repeat: changePasswordData.repeatedPassword,
             fingerprint: fingerprintId,
           }
         }
       ));
-
-    if (!data.result) {
-      throw new Error(data.error?.message);
-    }
 
     if (data.result.login_required) {
       dropToken();

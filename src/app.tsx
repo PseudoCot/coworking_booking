@@ -30,18 +30,15 @@ export default function App(): JSX.Element {
 
         <Route path={AppRoutes.Register.FullPath} element={<RegisterScreen />} />
         <Route path={AppRoutes.Login.FullPath} element={<LoginScreen />} />
-        <Route path={AppRoutes.UserAcc.FullPath} element={
+        <Route path={AppRoutes.User.FullPath} element={
           <PrivateRoute> <UserAccScreen /> </PrivateRoute>
         }
         />
-        <Route path={AppRoutes.NewPassword.FullPath} element={
+        <Route path={AppRoutes.ChangePassword.FullPath} element={
           <PrivateRoute> <NewPasswordScreen /> </PrivateRoute>
         }
         />
-        <Route path={AppRoutes.PasswordRecovery.FullPath} element={
-          <PrivateRoute> <PasswordRecoveryScreen /> </PrivateRoute>
-        }
-        />
+        <Route path={AppRoutes.PasswordRecovery.FullPath} element={<PasswordRecoveryScreen />} />
 
         <Route path={AppRoutes.Error.FullPath} element={<ErrorScreen errorStatusCode={404} />} />
       </Routes>

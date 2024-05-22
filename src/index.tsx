@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './app';
 import { store } from './store';
-// import { refreshSessionAction } from './store/api-actions';
+import { refreshSessionAction } from './store/api-actions';
 
 // store.dispatch(refreshSessionAction());
 

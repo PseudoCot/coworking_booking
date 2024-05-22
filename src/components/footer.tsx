@@ -45,10 +45,10 @@ export default function Footer(): JSX.Element {
         <Link to={AppRoutes.Calendar.FullPath}>Calendar</Link>
         <Link to={AppRoutes.Booking.FullPath}>Booking</Link>
         <Link to={AppRoutes.Register.FullPath}>Register</Link>
-        <Link to={AppRoutes.Login.FullPath}>Auth</Link>
-        <Link to={AppRoutes.UserAcc.FullPath}>UserAcc</Link>
-        <Link to={AppRoutes.NewPassword.FullPath}>NewPass</Link>
-        <Link to={AppRoutes.PasswordRecovery.FullPath}>InputEmail</Link>
+        <Link to={AppRoutes.Login.FullPath}>Login</Link>
+        <Link to={AppRoutes.User.FullPath}>User</Link>
+        <Link to={AppRoutes.ChangePassword.FullPath}>ChangePass</Link>
+        <Link to={AppRoutes.PasswordRecovery.FullPath}>PasswordRecovery</Link>
       </div>
     </footer>
   );

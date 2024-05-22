@@ -1,7 +1,7 @@
 export type ChangePasswordRequestParams = {
   data: {
     password: string;
-    repeatedPassword: string;
+    password_repeat: string;
     fingerprint: string;
   };
 };

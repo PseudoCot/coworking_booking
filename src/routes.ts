@@ -18,11 +18,11 @@ export const AppRoutes = {
   Login: {
     FullPath: '/login',
   },
-  UserAcc: {
+  User: {
     FullPath: '/user',
   },
-  NewPassword: {
-    FullPath: '/new-password',
+  ChangePassword: {
+    FullPath: '/change-password',
   },
   PasswordRecovery: {
     FullPath: '/password-recovery',

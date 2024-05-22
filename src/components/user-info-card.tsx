@@ -1,17 +1,18 @@
+import { FormEventHandler } from 'react';
 import CheckmarkSVG from './svg/checkmark';
 
 type UserInfoCardProps = {
   lastName: string;
   firstName: string;
-  patronymic: string;
+  patronymic?: string;
   email: string;
-  telegram: string;
   isStudent: boolean;
-  onEditClick: () => void;
-  onChangePasswordClick: () => void;
+
+  onEditClick: FormEventHandler;
+  onChangePasswordClick: FormEventHandler;
 };
 
-export default function UserInfoCard({ lastName, firstName, patronymic, email, telegram, isStudent,
+export default function UserInfoCard({ lastName, firstName, patronymic, email, isStudent,
   onEditClick: handleEditClick, onChangePasswordClick: handleChangePasswordClick
 }: UserInfoCardProps): JSX.Element {
   return (
@@ -39,10 +40,6 @@ export default function UserInfoCard({ lastName, firstName, patronymic, email, t
             {isStudent &&
               <CheckmarkSVG classNames="user-acc__info-checkbox-mark" />}
           </span>
-        </div>
-        <div className="user-acc__info-group">
-          <h2 className="user-acc__info-title title-reset">Имя пользователя telegram:</h2>
-          <span className="user-acc__info-text">{telegram}</span>
         </div>
       </div>
       <div className="user-acc__info-btns">
