@@ -18,25 +18,33 @@ export default function UserAccScreen(): JSX.Element {
   const userData = useUserData();
 
   const [editingInfo, setEditingInfo] = useState(false);
-  const [showCancelForm, setShowCancelForm] = useState(false);
+  const [showChangePasswordSubmit, setShowChangePasswordSubmit] = useState(false);
+  const [showBookingCancelSubmit, setShowBookingCancelSubmit] = useState(false);
 
   const handleEditClick: FormEventHandler = useCallback((e) => {
     e.preventDefault();
     setEditingInfo((prev) => !prev);
   }, [setEditingInfo]);
   const handleChangePasswordClick: FormEventHandler = useCallback((e) => {
-    // добавить подтверждение
     e.preventDefault();
+
+    setShowChangePasswordSubmit(true);
+  }, []);
+
+  const handleChangePasswordDismiss = useCallback(() => {
+    setShowChangePasswordSubmit((prev) => !prev);
+  }, []);
+  const handleChangePasswordSubmit = useCallback(() => {
     navigate(AppRoutes.ChangePassword.FullPath);
   }, [navigate]);
 
-  const handleCancelDismiss = useCallback(() => {
-    setShowCancelForm((prev) => !prev);
-  }, [setShowCancelForm]);
-  const handleCancelSubmit = useCallback((bookingId: number) => {
-    setShowCancelForm((prev) => !prev);
+  const handleBookingCancelDismiss = useCallback(() => {
+    setShowBookingCancelSubmit((prev) => !prev);
+  }, [setShowBookingCancelSubmit]);
+  const createHandleBookingCancelSubmit = useCallback((bookingId: number) => () => {
+    setShowBookingCancelSubmit((prev) => !prev);
     dispatch(cancelBookingAction(bookingId));
-  }, [dispatch, setShowCancelForm]);
+  }, [dispatch, setShowBookingCancelSubmit]);
 
   return (
     <Layout>
@@ -57,6 +65,12 @@ export default function UserAccScreen(): JSX.Element {
 
             {editingInfo &&
               <UserInfoEditingForm {...userData} onCloseEditingClick={handleEditClick} onChangePasswordClick={handleChangePasswordClick} />}
+
+            {showChangePasswordSubmit &&
+              <SubmitForm title={'Смена пароля'} question={'Вы уверены, что хотите сменить пароль?'}
+                dismissText={'Нет'} submitText={'Да'} onDismiss={handleChangePasswordDismiss}
+                onSubmit={handleChangePasswordSubmit}
+              />}
 
             <h2 className="user-acc__booked-list-title title-reset">Мои бронирования</h2>
             {/* <ul className="user-acc__booked-list list-reset">
@@ -93,9 +107,10 @@ export default function UserAccScreen(): JSX.Element {
               </li>
             </ul> */}
 
-            {showCancelForm &&
+            {showBookingCancelSubmit &&
               <SubmitForm title={'Отмена бронирования'} question={'Вы уверены, что хотите отменить бронирование?'}
-                dismissText={'Нет'} submitText={'Да'} onDismiss={handleCancelDismiss} onSubmit={handleCancelSubmit}
+                dismissText={'Нет'} submitText={'Да'} onDismiss={handleBookingCancelDismiss}
+                onSubmit={createHandleBookingCancelSubmit()}
               />}
           </>
           : <Loader horizontalAlignCenter />}
