@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { EmptyObject, createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { ApiMethods, ApiRoutes } from '../consts';
 import { redirectToRoute } from './action';
@@ -36,9 +36,6 @@ import { RequestPasswordRecoveryData } from '../types/recovery-password/request-
 import { RequestRecoveryPasswordRequestParams } from '../types/recovery-password/request-password-recovery-request-params';
 import { PasswordRecoveryData } from '../types/recovery-password/password-recovery-data';
 import { PasswordRecoveryRequestParams } from '../types/recovery-password/password-recovery-request-params';
-
-
-type EmptyObject = Record<string, never>;
 
 
 export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
@@ -122,7 +119,7 @@ export const loginAction = createAsyncThunk<void, LoginData, {
           fingerprint: fingerprintId,
         }
       }
-    ));
+    ), { withCredentials: true });
 
     saveToken(data.result.access_token);
     dispatch(fetchUserAction());
@@ -144,7 +141,7 @@ export const refreshSessionAction = createAsyncThunk<void, undefined, {
       {
         fingerprint: fingerprintId,
       }
-    ), { withCredentials: false });
+    ), { withCredentials: true });
 
     saveToken(data.result.access_token);
     dispatch(fetchUserAction());
@@ -165,10 +162,10 @@ export const logoutAction = createAsyncThunk<void, undefined, {
       {
         fingerprint: fingerprintId,
       }
-    ));
+    ), { withCredentials: true });
 
     dropToken();
-    dispatch(clearUserData);
+    dispatch(clearUserData());
 
     // определить, нужно ли перенаправлять пользователя
   },
@@ -193,11 +190,11 @@ export const changePasswordAction = createAsyncThunk<void, ChangePasswordData, {
             fingerprint: fingerprintId,
           }
         }
-      ));
+      ), { withCredentials: true });
 
     if (data.result.login_required) {
       dropToken();
-      dispatch(clearUserData);
+      dispatch(clearUserData()());
       dispatch(redirectToRoute(AppRoutes.Login.FullPath));
     }
   },
@@ -381,7 +378,7 @@ export const recoverPasswordAction = createAsyncThunk<void, PasswordRecoveryData
       ));
 
     dropToken();
-    dispatch(clearUserData);
+    dispatch(clearUserData());
     dispatch(redirectToRoute(AppRoutes.Login.FullPath));
   },
 );

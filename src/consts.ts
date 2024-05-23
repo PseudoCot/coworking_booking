@@ -37,33 +37,33 @@ export const ApiMethods = {
 } as const;
 
 export const ApiRoutes = {
-  // Auth: 'api/v1/auth',
-  Register: 'api/v1/auth/register',
-  Login: 'api/v1/auth/login',
-  RefreshSession: 'api/v1/auth/refresh_session',
-  Logout: 'api/v1/auth/logout',
-  ChangePassword: 'api/v1/auth/change_password',
+  // Auth: 'v1/auth',
+  Register: 'v1/auth/register',
+  Login: 'v1/auth/login',
+  RefreshSession: 'v1/auth/refresh_session',
+  Logout: 'v1/auth/logout',
+  ChangePassword: 'v1/auth/change_password',
 
-  // Coworking: 'api/v1/coworking',
-  FetchCoworkingsByTimestamp: 'api/v1/coworking/available_coworking_by_timestamp',
-  FetchCoworkingsBySearch: 'api/v1/coworking/get_coworking_by_search_params',
-  FetchCoworking: 'api/v1/coworking/get_coworking',
+  // Coworking: 'v1/coworking',
+  FetchCoworkingsByTimestamp: 'v1/coworking/available_coworking_by_timestamp',
+  FetchCoworkingsBySearch: 'v1/coworking/get_coworking_by_search_params',
+  FetchCoworking: 'v1/coworking/get_coworking',
 
-  UploadAvatar: 'api/v1/image',
-  FetchImage: 'api/v1/image/{filename}',
+  UploadAvatar: 'v1/image',
+  FetchImage: 'v1/image/{filename}',
 
-  // User: 'api/v1/user',
-  FetchUser: 'api/v1/user/get_profile',
-  UpdateUser: 'api/v1/user/update_user_data',
+  // User: 'v1/user',
+  FetchUser: 'v1/user/get_profile',
+  UpdateUser: 'v1/user/update_user_data',
 
-  // Booking: 'api/v1/reservation',
-  FetchBookings: 'api/v1/reservation/get_user_reservations',
-  BookCoworking: 'api/v1/reservation/create_reservation',
-  CancelBooking: 'api/v1/reservation/cancel_reservation',
+  // Booking: 'v1/reservation',
+  FetchBookings: 'v1/reservation/get_user_reservations',
+  BookCoworking: 'v1/reservation/create_reservation',
+  CancelBooking: 'v1/reservation/cancel_reservation',
 
-  // UserSettings: 'api/v1/user/settings',
-  RequestPasswordRecovery: 'api/v1/user/settings/request_reset_password_link',
-  PasswordRecovery: 'api/v1/user/settings/reset_password',
+  // UserSettings: 'v1/user/settings',
+  RequestPasswordRecovery: 'v1/user/settings/request_reset_password_link',
+  PasswordRecovery: 'v1/user/settings/reset_password',
 } as const;
 
 export const JsonRpcErrorCodes = {

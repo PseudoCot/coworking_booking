@@ -38,6 +38,8 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
         patronymic,
         email,
       }));
+
+      handleCloseEditingClick(e);
     }
   };
 

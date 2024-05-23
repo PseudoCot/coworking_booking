@@ -5,7 +5,7 @@ import App from './app';
 import { store } from './store';
 import { refreshSessionAction } from './store/api-actions';
 
-// store.dispatch(refreshSessionAction());
+store.dispatch(refreshSessionAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

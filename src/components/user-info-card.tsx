@@ -38,7 +38,7 @@ export default function UserInfoCard({ lastName, firstName, patronymic, email, i
           <h2 className="user-acc__info-title title-reset">Студент:</h2>
           <span className="user-acc__info-checkbox">
             {isStudent &&
-              <CheckmarkSVG classNames="user-acc__info-checkbox-mark" />}
+              <CheckmarkSVG classes="user-acc__info-checkbox-mark" />}
           </span>
         </div>
       </div>

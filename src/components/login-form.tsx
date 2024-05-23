@@ -5,6 +5,7 @@ import emailValidationChecker from '../shared/email-validation-checker';
 import useInput from '../hooks/use-input';
 import FormInputGroup from './form-input-group';
 import { validateStringsLength } from '../shared/validate-strings-length';
+import { AppRoutes } from '../routes';
 
 export default function LoginForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -53,7 +54,9 @@ export default function LoginForm(): JSX.Element {
           />
           <div className="login-form__btns">
             <button className="login-form__submit-btn cb-form-btn btn-reset" type='submit' disabled={!submitEnabled}>Войти</button>
-            <button className="login-form__reset-password-btn cb-form-btn btn-reset">Восстановить пароль</button>
+            <a href={AppRoutes.PasswordRecovery.FullPath} className="login-form__reset-password-btn cb-form-btn btn-reset">
+              Восстановить пароль
+            </a>
           </div>
         </div>
       </div>

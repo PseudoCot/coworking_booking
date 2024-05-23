@@ -49,7 +49,7 @@ export default function Header(): JSX.Element {
           ?
           <>
             {userTelegramConnected ||
-              <WarningSVG classNames="main-controls__warning-sign" />}
+              <WarningSVG classes="main-controls__warning-sign" />}
             <Link to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn">{userFullName}</Link>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutClick}>
               <ExitSVG />
