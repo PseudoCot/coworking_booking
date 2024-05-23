@@ -10,6 +10,7 @@ export const getUserEmail = (state: State): string | undefined => state[NameSpac
 export const isUserStudent = (state: State): boolean | undefined => state[NameSpaces.User].isStudent;
 export const isUserTelegramConnected = (state: State): boolean | undefined => state[NameSpaces.User].telegramConnected;
 export const getUserAvatarFileName = (state: State): string | undefined => state[NameSpaces.User].avatarFileName;
+export const showCheckEmailMessage = (state: State): boolean => state[NameSpaces.User].showCheckEmailMessage;
 
 export const getUserData = (state: State): Partial<UserData> => state[NameSpaces.User];
 

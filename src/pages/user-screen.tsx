@@ -2,7 +2,7 @@ import { FormEventHandler, useCallback, useState } from 'react';
 import Layout from '../components/layout';
 import UserInfoCard from '../components/user-info-card';
 import WarningMessage from '../components/warning-message';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import UserInfoEditingForm from '../components/user-info-editing-form';
 import { cancelBookingAction } from '../store/api-actions';
 import SubmitForm from '../components/submit-form';
@@ -10,12 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../routes';
 import Loader from '../components/loader';
 import useUserData from '../hooks/use-user-data';
+import { showCheckEmailMessage } from '../store/user-process/selectors';
 
-export default function UserAccScreen(): JSX.Element {
+export default function UserScreen(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const userData = useUserData();
+  const showEmailMessage = useAppSelector(showCheckEmailMessage);
 
   const [editingInfo, setEditingInfo] = useState(false);
   const [showChangePasswordSubmit, setShowChangePasswordSubmit] = useState(false);
@@ -27,7 +29,6 @@ export default function UserAccScreen(): JSX.Element {
   }, [setEditingInfo]);
   const handleChangePasswordClick: FormEventHandler = useCallback((e) => {
     e.preventDefault();
-
     setShowChangePasswordSubmit(true);
   }, []);
 
@@ -66,11 +67,10 @@ export default function UserAccScreen(): JSX.Element {
             {editingInfo &&
               <UserInfoEditingForm {...userData} onCloseEditingClick={handleEditClick} onChangePasswordClick={handleChangePasswordClick} />}
 
-            {showChangePasswordSubmit &&
-              <SubmitForm title={'Смена пароля'} question={'Вы уверены, что хотите сменить пароль?'}
-                dismissText={'Нет'} submitText={'Да'} onDismiss={handleChangePasswordDismiss}
-                onSubmit={handleChangePasswordSubmit}
-              />}
+            {showEmailMessage &&
+              <WarningMessage title='Предупреждение!' >
+                Проверьте свою корпоративную почту, на неё должна прийти ссылка для обновления пароля.
+              </WarningMessage>}
 
             <h2 className="user-acc__booked-list-title title-reset">Мои бронирования</h2>
             {/* <ul className="user-acc__booked-list list-reset">
@@ -106,6 +106,12 @@ export default function UserAccScreen(): JSX.Element {
                 </div>
               </li>
             </ul> */}
+
+            {showChangePasswordSubmit &&
+              <SubmitForm title={'Смена пароля'} question={'Вы уверены, что хотите сменить пароль?'}
+                dismissText={'Нет'} submitText={'Да'} onDismiss={handleChangePasswordDismiss}
+                onSubmit={handleChangePasswordSubmit}
+              />}
 
             {showBookingCancelSubmit &&
               <SubmitForm title={'Отмена бронирования'} question={'Вы уверены, что хотите отменить бронирование?'}

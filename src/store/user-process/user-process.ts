@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatuses as Status, NameSpaces, AuthStatuses } from '../../consts';
 import { AuthStatus } from '../../types/auth-status';
-import { refreshSessionAction, loginAction, logoutAction, fetchUserAction } from '../api-actions';
+import { refreshSessionAction, loginAction, logoutAction, fetchUserAction, changePasswordAction } from '../api-actions';
 import { UserDto } from '../../types/user/user-dto';
 
 type UserProcessState = {
@@ -14,6 +14,7 @@ type UserProcessState = {
   isStudent?: boolean;
   telegramConnected?: boolean;
   avatarFileName?: string;
+  showCheckEmailMessage: boolean;
 };
 
 const initialState: UserProcessState = {
@@ -26,12 +27,16 @@ const initialState: UserProcessState = {
   telegramConnected: undefined,
   isStudent: undefined,
   avatarFileName: undefined,
+  showCheckEmailMessage: false,
 };
 
 export const userProcess = createSlice({
   name: NameSpaces.User,
   initialState,
   reducers: {
+    setShowCheckEmailMessage: (state, action: PayloadAction<boolean>) => {
+      state.showCheckEmailMessage = action.payload;
+    },
     clearUserData: (state) => {
       state.id = undefined;
       state.lastName = undefined;
@@ -58,6 +63,9 @@ export const userProcess = createSlice({
         state.authStatus = Status.NoAuth;
       })
       .addCase(logoutAction.fulfilled, (state) => {
+        state.authStatus = Status.NoAuth;
+      })
+      .addCase(changePasswordAction.fulfilled, (state) => {
         state.authStatus = Status.NoAuth;
       })
       .addCase(fetchUserAction.fulfilled, (state, action: PayloadAction<UserDto>) => {
