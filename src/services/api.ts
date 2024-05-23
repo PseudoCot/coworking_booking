@@ -7,7 +7,7 @@ import { logoutAction } from '../store/api-actions';
 import { StatusCodes } from 'http-status-codes';
 import { JsonRpcUnverifiedResponce } from '../types/json-rpc/json-rpc-unverified-response';
 
-const BACKEND_URL = 'http://130.193.50.180';
+const BACKEND_URL = 'http://localhost:5566'; // <- proxy, target -> http://130.193.50.180/api/
 const TOKEN_HEADER = 'Authorization';
 const REQUEST_TIMEOUT = 5000;
 
