@@ -65,7 +65,7 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
             value={repeatedPassword} onChange={handleRepeatedPasswordChange} showError={repeatedPasswordError} setShowError={setRepeatedPasswordError}
             errorClasses='new-password-form__group-error' errorText='Пароли не совпадают'
           />
-          <button className="new-password-form__submit-btn cb-form-btn btn-reset"
+          <button className="new-password-form__submit-btn cb-form-btn cb-light-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
             Сохранить

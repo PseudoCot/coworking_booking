@@ -41,7 +41,7 @@ export default function RequestPasswordRecoveryForm(): JSX.Element {
             tooltipClasses='password-recovery-form__tooltip' tooltipText='Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me'
             errorClasses='password-recovery-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'
           />
-          <button className="password-recovery-form__submit-btn cb-form-btn btn-reset"
+          <button className="password-recovery-form__submit-btn cb-form-btn cb-light-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
             Восстановить пароль

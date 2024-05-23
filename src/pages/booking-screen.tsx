@@ -38,7 +38,7 @@ export default function BookingScreen(): JSX.Element {
             Если подтверждение не будет получено за 30 минут до начала брони, то она будет отменена.`}
           >
             <span className="booking__toast-btn-desc">Чтобы добавить бронь в свой календарь, нажмите на кнопку</span>
-            <a href={calendarEventLink} className="booking__toast-btn">Google Calendar</a>
+            <a href={calendarEventLink} className="booking__toast-btn cb-light-btn">Google Calendar</a>
           </Toast>}
       </article>
     </Layout>

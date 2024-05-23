@@ -19,8 +19,8 @@ export default function SubmitForm({ title, question, dismissText, submitText, o
         <div className="submit-form__bottom cb-form-bottom">
           <h3 className="submit-form__sub-title">{question}</h3>
           <div className="submit-form__btns">
-            <button className="submit-form__cancel-btn btn-reset" onClick={handleDismiss}>{dismissText}</button>
-            <button className="submit-form__submit-btn btn-reset">{submitText}</button>
+            <button className="submit-form__cancel-btn cb-light-btn btn-reset" onClick={handleDismiss}>{dismissText}</button>
+            <button className="submit-form__submit-btn cb-light-btn btn-reset">{submitText}</button>
           </div>
         </div>
       </form>

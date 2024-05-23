@@ -71,11 +71,11 @@ export default function CoworkingSearshingForm({ inMainScreen = false }: Coworki
         />
       </div>
       <span className="searching__separator-line"></span>
-      <button className="searching__submit-btn btn-reset" type="submit" disabled={!submitEnabled}>Поиск</button>
+      <button className="searching__submit-btn cb-blue-btn btn-reset" type="submit" disabled={!submitEnabled}>Поиск</button>
       {!inMainScreen &&
         <>
           <span className="searching__separator-line"></span>
-          <button className="searching__show-all-btn btn-reset" onClick={handleShowAllClick}>Показать все</button>
+          <button className="searching__show-all-btn cb-white-btn btn-reset" onClick={handleShowAllClick}>Показать все</button>
         </>}
     </form>
   );

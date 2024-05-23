@@ -53,8 +53,10 @@ export default function LoginForm(): JSX.Element {
             value={password} onChange={handlePasswordChange}
           />
           <div className="login-form__btns">
-            <button className="login-form__submit-btn cb-form-btn btn-reset" type='submit' disabled={!submitEnabled}>Войти</button>
-            <a href={AppRoutes.PasswordRecovery.FullPath} className="login-form__reset-password-btn cb-form-btn btn-reset">
+            <button className="login-form__submit-btn cb-form-btn cb-light-btn btn-reset" type='submit' disabled={!submitEnabled}>
+              Войти
+            </button>
+            <a href={AppRoutes.PasswordRecovery.FullPath} className="login-form__reset-password-btn cb-form-btn cb-light-btn btn-reset">
               Восстановить пароль
             </a>
           </div>

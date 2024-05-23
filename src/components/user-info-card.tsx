@@ -43,8 +43,8 @@ export default function UserInfoCard({ lastName, firstName, patronymic, email, i
         </div>
       </div>
       <div className="user-acc__info-btns">
-        <button className="user-acc__info-edit-btn btn-reset" onClick={handleEditClick}>Редактировать</button>
-        <button className="user-acc__info-change-password-btn btn-reset"
+        <button className="user-acc__info-edit-btn cb-light-btn btn-reset" onClick={handleEditClick}>Редактировать</button>
+        <button className="user-acc__info-change-password-btn cb-light-btn btn-reset"
           onClick={handleChangePasswordClick}
         >
           Сменить пароль

@@ -83,7 +83,7 @@ export default function RegisterForm(): JSX.Element {
             value={repeatedPassword} onChange={handleRepeatedPasswordChange} showError={repeatedPasswordError} setShowError={setRepeatedPasswordError}
             errorClasses='register-form__group-error' errorText='Пароли не совпадают'
           />
-          <button className="register-form__submit-btn cb-form-btn btn-reset"
+          <button className="register-form__submit-btn cb-form-btn cb-light-btn btn-reset"
             type='submit' disabled={!submitEnabled}
           >
             Зарегистрироваться

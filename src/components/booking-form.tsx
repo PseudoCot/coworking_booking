@@ -60,7 +60,7 @@ export default function BookingForm(): JSX.Element {
               onEndHourChange={setEndHour} onEndMinuteChange={setEndMinute}
             />
           </div>
-          <button className="booking__form-submit-btn cb-form-btn btn-reset"
+          <button className="booking__form-submit-btn cb-form-btn cb-light-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
             Забронировать

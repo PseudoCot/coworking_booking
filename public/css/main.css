@@ -455,95 +455,116 @@ body,
   white-space: pre-line;
 }
 
-.cb-filled-btn {
+.cb-blue-btn {
   font-family: var(--second-family);
   color: #ffffff;
   background-color: #8c9eff;
   border-bottom: 2px solid #283593;
+  user-select: none;
 }
 
-.cb-filled-btn:focus {
+.cb-blue-btn:hover,
+.cb-blue-btn:focus {
   background-color: #5c6bc0;
 }
 
-.cb-filled-btn:active {
-  background-color: #5c6bc0;
-  transform: scale(0.9, 0.9);
+.cb-blue-btn:active {
+  transform: inherit scale(0.9, 0.9);
 }
 
-.cb-filled-btn:disabled {}
+.cb-blue-btn:disabled {
+  cursor: not-allowed;
+  filter: contrast(0.5);
+}
 
-.cb-hollow-btn {
+.cb-white-btn {
   font-family: var(--second-family);
   color: #304ffe;
   background-color: #ffffff;
   border: 1px solid #8c9eff;
+  user-select: none;
 }
 
-.cb-hollow-btn:focus {
+.cb-white-btn:hover,
+.cb-white-btn:focus {
   box-shadow: 0 1px 4px 2px rgba(40, 53, 147, 0.4);
 }
 
-.cb-hollow-btn:active {
-  transform: scale(0.9, 0.9);
+.cb-white-btn:active {
+  box-shadow: none;
+  transform: inherit scale(0.9, 0.9);
 }
 
-.cb-hollow-btn:disabled {}
+.cb-white-btn:disabled {
+  cursor: not-allowed;
+  filter: contrast(0.5);
+}
 
 .cb-light-btn {
   font-family: var(--second-family);
   color: #304ffee6;
   background-color: #8c9eff1a;
   border: 1px solid #304ffee6;
+  user-select: none;
 }
 
+.cb-light-btn:hover,
 .cb-light-btn:focus {
   background-color: #ffffff;
   box-shadow: 0 1px 4px 2px rgba(40, 53, 147, 0.4);
 }
 
 .cb-light-btn:active {
-  transform: scale(0.9, 0.9);
+  background-color: #8c9eff1a;
+  box-shadow: none;
+  transform: inherit scale(0.9, 0.9);
 }
 
-.cb-light-btn:disabled {}
+.cb-light-btn:disabled {
+  cursor: not-allowed;
+  filter: contrast(0.5);
+}
 
-.cb-link {
+.cb-hollow-btn {
   font-family: var(--second-family);
-  color: #9575cd;
-}
-
-.cb-link:focus {
-  color: #9575cd;
-  text-shadow: 0 4px 4px 0 rgba(40, 53, 147, 0.25);
-}
-
-.cb-link:active {
-  color: #673ab7;
-  transform: scale(0.9, 0.9);
-}
-
-.cb-link:disabled {}
-
-.cb-link-btn {
-  font-family: var(--second-family);
-  color: #ffffff90;
-  background-color: #ffffff;
+  color: #00000090;
   border: 1px solid #8c9eff80;
+  user-select: none;
 }
 
-.cb-link-btn:focus {
+.cb-hollow-btn:hover,
+.cb-hollow-btn:focus {
   color: #304ffecc;
   box-shadow: 0 1px 4px 2px rgba(40, 53, 147, 0.4);
 }
 
-.cb-link-btn:active {
+.cb-hollow-btn:active {
   color: #304ffecc;
-  transform: scale(0.9, 0.9);
+  box-shadow: none;
+  transform: inherit scale(0.9, 0.9);
 }
 
-.cb-link-btn:disabled {}
+.cb-hollow-btn:disabled {
+  cursor: not-allowed;
+  filter: contrast(0.5);
+}
 
+.cb-link {
+  font-family: var(--second-family);
+  color: #9575cd;
+  user-select: none;
+}
+
+.cb-link:hover,
+.cb-link:focus {
+  text-shadow: 0 4px 4px rgba(40, 53, 147, 0.25);
+}
+
+.cb-link:active {
+  color: #673ab7;
+  text-shadow: none;
+  transform: scale(0.9, 0.9);
+}
 
 
 /* /// header /// */
@@ -574,10 +595,8 @@ body,
 }
 
 .nav__item-link {
-  font-family: var(--second-family);
   font-weight: 500;
   font-size: 15px;
-  color: var(--link-text-color);
 }
 
 .main-controls {
@@ -611,23 +630,15 @@ body,
 .main-controls__register-btn {
   margin-right: 15px;
   padding: 12px 14px;
-  font-family: var(--second-family);
   font-weight: 400;
   font-size: 14px;
-  color: var(--dark-text-color);
-  border: 1px solid var(--theme-button-color);
   border-radius: 15px;
-  opacity: 0.6;
 }
 
 .main-controls__login-btn {
   padding: 12px 30px;
-  font-family: var(--second-family);
   font-weight: 400;
   font-size: 15px;
-  color: var(--theme-button-text-color);
-  background-color: var(--light-button-color);
-  border: 1px solid var(--theme-button-color);
   border-radius: 15px;
 }
 
@@ -638,12 +649,8 @@ body,
 .main-controls__user-acc-btn {
   margin-right: 20px;
   padding: 12px 11px;
-  font-family: var(--second-family);
   font-weight: 400;
   font-size: 15px;
-  color: var(--theme-button-text-color);
-  background-color: var(--light-button-color);
-  border: 1px solid var(--theme-button-color);
   border-radius: 15px;
 }
 
@@ -808,13 +815,9 @@ body,
 .searching__submit-btn {
   margin: 5px 10px 7px;
   padding: 23px 49px;
-  font-family: var(--second-family);
   font-weight: 500;
   font-size: 20px;
-  color: var(--light-button-text-color);
-  background-color: var(--theme-button-color);
   border-radius: 15px;
-  box-shadow: 0 2px 0 0 var(--theme-text-color);
 }
 
 
@@ -845,14 +848,9 @@ body,
 .searching__show-all-btn {
   margin: 5px 30px;
   padding: 20px 45px;
-  font-family: var(--second-family);
   font-weight: 500;
   font-size: 20px;
-  color: var(--theme-button-text-color);
-  background-color: var(--light-button-color);
-  border: 1px solid var(--theme-button-color);
   border-radius: 15px;
-  /* box-shadow: 0 8px 6px 0 var(--theme-text-color); */
 }
 
 .coworkings__list {
@@ -1399,13 +1397,9 @@ body,
   right: 15px;
   bottom: 21px;
   padding: 17px 25px;
-  font-family: var(--second-family);
   font-weight: 400;
   font-size: 20px;
-  color: var(--form-button-border-color);
   border-radius: 15px;
-  border: 1px solid var(--form-button-border-color);
-  background-color: var(--form-button-bg-color);
 }
 
 .booking__form {
@@ -1582,15 +1576,9 @@ body,
   display: inline-block;
   padding: 10px;
   left: 50%;
-  font-family: var(--second-family);
   font-weight: 400;
   font-size: 16px;
-  color: #304ffee6;
-  /* 90% */
   border-radius: 15px;
-  background-color: #8C9eff1a;
-  border: 1px solid #304ffee6;
-  /* 90% */
   transform: translateX(-50%);
 }
 
@@ -1730,13 +1718,9 @@ body,
 .user-acc__info-edit-btn,
 .user-acc__info-change-password-btn {
   padding: 18px 21px;
-  font-family: var(--second-family);
   font-weight: 400;
   font-size: 20px;
-  color: var(--form-button-border-color);
   border-radius: 15px;
-  border: 1px solid var(--form-button-border-color);
-  background-color: var(--form-button-bg-color);
 }
 
 .user-acc__info-form-wrapper {
@@ -1896,15 +1880,9 @@ body,
 
 .submit-form__cancel-btn,
 .submit-form__submit-btn {
-  font-family: var(--font-family);
   font-weight: 400;
   font-size: 20px;
-  color: #304FFEE6;
-  /* 90% */
   border-radius: 15px;
-  border: 1px solid #304FFEE6;
-  /* 90% */
-  background-color: var(--form-button-bg-color);
 }
 
 .submit-form__cancel-btn {

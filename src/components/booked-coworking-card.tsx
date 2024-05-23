@@ -39,7 +39,7 @@ export default function BookedCoworkingCard({ }: BookedCoworkingCardProps): JSX.
           <h3 className="booking__info-title title-reset">Тип места:</h3>
           <span className="booking__info-inline-text">Переговорная</span>
         </div>
-        <button className="booking__info-cancel-btn btn-reset">Отменить</button>
+        <button className="booking__info-cancel-btn cb-light-btn btn-reset">Отменить</button>
       </div>
     </li>
   );
