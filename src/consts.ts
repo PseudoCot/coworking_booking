@@ -1,4 +1,5 @@
 import generateTimeArray from './shared/generate-time-array';
+import { SelectOption } from './types/select-option';
 
 export const AVAILABLE_HOURS_START = 8;
 export const AVAILABLE_HOURS_END = 20;
@@ -88,10 +89,10 @@ export const BookingStatuses = { // значения соответствуют 
   Passed: 'passed',
 } as const;
 
-export const PlaceTypes = { // значения соответствуют api
-  MeetingRoom: 'meeting_room',
-  Table: 'table',
-} as const;
+export const PlaceTypeOptions: SelectOption[] = [ // value соответствуют api
+  { title: 'Переговорки', value: 'meeting_room' },
+  { title: 'Столы', value: 'table' },
+] as const;
 
 export const NameSpaces = {
   Coworkings: 'Coworkings',
