@@ -4,11 +4,9 @@ import SelectOption from './select-option';
 
 export type SelectProps = {
   selectClasses?: string;
-  arrowClasses?: string;
   placeholderClasses?: string;
   optionListClasses?: string;
   optionClasses?: string;
-  selectArrow?: JSX.Element;
 
   placeholder?: string;
 
@@ -18,7 +16,7 @@ export type SelectProps = {
   onClose?: () => void;
 };
 
-export default function Select({ selectArrow, selectClasses = '', arrowClasses = '', placeholderClasses = '',
+export default function Select({ selectClasses = '', placeholderClasses = '',
   optionListClasses = '', optionClasses = '', placeholder,
   options, selectedOption, onChange, onClose }: SelectProps): JSX.Element {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -71,16 +69,13 @@ export default function Select({ selectArrow, selectClasses = '', arrowClasses =
 
   return (
     <div className={`${selectClasses} select`} ref={rootRef} data-is-active={isOpen}>
-      <div className={`${arrowClasses} select__arrow`}>
-        {selectArrow}
-      </div>
       <div className={`${placeholderClasses} select__placeholder`} ref={placeholderRef}
         data-selected={!!selectedOption?.value} onClick={handlePlaceholderClick} role="button" tabIndex={0}
       >
         {selectedOption?.title || placeholder}
       </div>
       {isOpen && (
-        <ul className={`${optionListClasses} select__option-list`}>
+        <ul className={`${optionListClasses} select__option-list list-reset`}>
           {options.map((option) => (
             <SelectOption
               key={option.value}

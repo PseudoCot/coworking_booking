@@ -1,19 +1,22 @@
 import { useState, FormEventHandler, useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
 import TimestampSelectGroup from './timestamp-select-group';
-import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE } from '../consts';
+import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE, PlaceTypeOptions } from '../consts';
+import Select from './select';
 
 export default function BookingForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
 
-  const [seatType, setSeatType] = useState('');
+  const [placeType, setPlaceType] = useState('');
   const [date, setDate] = useState('');
   const [startHour, setStartHour] = useState(FIRST_AVAILABLE_HOUR);
   const [startMinute, setStartMinute] = useState(FIRST_AVAILABLE_MINUTE);
   const [endHour, setEndHour] = useState(FIRST_AVAILABLE_HOUR);
   const [endMinute, setEndMinute] = useState(FIRST_AVAILABLE_MINUTE);
+
+  const selectedPlaceType = PlaceTypeOptions.find((item) => item.value === placeType);
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -28,7 +31,7 @@ export default function BookingForm(): JSX.Element {
 
   useEffect(() => {
     setSubmitEnabled(false);
-  }, [seatType, date]);
+  }, [placeType, date]);
 
   return (
     <form className="booking__form cb-form" action="#" onSubmit={handleSubmit}>
@@ -39,13 +42,15 @@ export default function BookingForm(): JSX.Element {
         <div className="booking__form-bottom cb-form-bottom">
           <div className="booking__form-group cb-form-group">
             <label className="booking__form-label cb-form-label" htmlFor="type">Тип места:</label>
-            <div className="booking__form-select-wrapper">
-              <select className="booking__form-select cb-form-input" name="type" id="booking-type">
-                <option className="booking__form-select-option" value="" selected disabled hidden></option>
-                <option className="booking__form-select-option" value="Столы">Столы</option>
-                <option className="booking__form-select-option" value="Переговорные">Переговорные</option>
-              </select>
-            </div>
+            <Select
+              selectClasses=''
+              placeholderClasses=''
+              optionListClasses=''
+              optionClasses=''
+              options={PlaceTypeOptions}
+              selectedOption={selectedPlaceType}
+              onChange={setPlaceType}
+            />
           </div>
           <div className="booking__form-group cb-form-group">
             <label className="booking__form-label cb-form-label" htmlFor="date">Дата:</label>

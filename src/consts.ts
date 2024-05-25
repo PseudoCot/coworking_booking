@@ -90,8 +90,8 @@ export const BookingStatuses = { // значения соответствуют 
 } as const;
 
 export const PlaceTypeOptions: SelectOption[] = [ // value соответствуют api
-  { title: 'Переговорки', value: 'meeting_room' },
   { title: 'Столы', value: 'table' },
+  { title: 'Переговорные', value: 'meeting_room' },
 ] as const;
 
 export const NameSpaces = {
