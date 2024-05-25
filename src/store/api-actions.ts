@@ -27,7 +27,7 @@ import { ChangePasswordRequestParams } from '../types/change-password/change-pas
 import { ChangePasswordResponseData } from '../types/change-password/change-password-response-data';
 import { ChangePasswordData } from '../types/change-password/change-password-data';
 import { CoworkingShortDto } from '../types/coworking/coworking-short-dto';
-import { TimestampData } from '../types/coworking/timestamp-data';
+import { TimestampData } from '../types/api-shared/timestamp-data';
 import { CoworkingSearchData } from '../types/api-shared/search-data';
 import { UpdateUserData } from '../types/user/update-user-data';
 import { BookingData } from '../types/booking/booking-data';
@@ -68,7 +68,6 @@ export const updateUserDataAction = createAsyncThunk<UserDto | void, UpdateUserD
           first_name: updateUserData.firstName,
           last_name: updateUserData.lastName,
           patronymic: updateUserData.patronymic,
-          email: updateUserData.email,
         }
       }
     ));
@@ -194,7 +193,7 @@ export const changePasswordAction = createAsyncThunk<void, ChangePasswordData, {
 
     if (data.result.login_required) {
       dropToken();
-      dispatch(clearUserData()());
+      dispatch(clearUserData());
       dispatch(redirectToRoute(AppRoutes.Login.FullPath));
     }
   },

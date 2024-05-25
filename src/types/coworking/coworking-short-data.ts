@@ -1,15 +1,11 @@
+import { ScheduleDto } from '../api-shared/schedule-dto';
+
 export type CoworkingShortData = {
   id: string;
-  imgUrl: string;
+  avatar?: string;
   title: string;
-  openingTime: string;
-  closingTime: string;
-  optionalText?: string;
-
-  // id: string;
-  // avatar: string;
-  // title: string;
-  // institute: string;
-  // description: string;
-  // address: string;
+  institute: string;
+  description: string;
+  address: string;
+  workingSchedule?: ScheduleDto;
 };

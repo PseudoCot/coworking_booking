@@ -3,7 +3,7 @@ import { CoworkingData } from '../types/coworking/coworking-data';
 export const coworkingDataMock: CoworkingData[] = [
   {
     id: 'irit',
-    imgUrl: 'img/cow-irit.jpg',
+    avatar: 'img/cow-irit.jpg',
     title: 'ИРИТ - РТФ',
     openingTime: '10:00',
     closingTime: '16:00',
@@ -21,7 +21,7 @@ export const coworkingDataMock: CoworkingData[] = [
   },
   {
     id: 'terr',
-    imgUrl: 'img/idea-terr.jpg',
+    avatar: 'img/idea-terr.jpg',
     title: 'Территория идей',
     openingTime: '8:00',
     closingTime: '18:00',
@@ -38,7 +38,7 @@ export const coworkingDataMock: CoworkingData[] = [
   },
   {
     id: 'ant',
-    imgUrl: 'img/antresoli_1.jpg',
+    avatar: 'img/antresoli_1.jpg',
     title: 'Антресоли',
     openingTime: '10:00',
     closingTime: '16:00',

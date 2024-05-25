@@ -1,23 +1,20 @@
+import { EventDto } from '../api-shared/event-dto';
+import { ScheduleDto } from '../api-shared/schedule-dto';
+import { SeatDto } from '../api-shared/seat-dto';
+import { TechnicalCapabilityDto } from '../api-shared/technical-capability-dto';
+import { CoworkingImageDto } from './coworking-image-dto';
+
 export type CoworkingData = {
   id: string;
-  imgUrl: string;
+  avatar?: string;
   title: string;
-  openingTime: string;
-  closingTime: string;
-  optionalText?: string;
+  institute: string;
   description: string;
   address: string;
-  seatCapacity: { [key: string]: number };
-  techCapability: string[];
 
-  // id: string;
-  // avatar: string;
-  // title: string;
-  // institute: string;
-  // description: string;
-  // address: string;
-  // seats: SeatDto[];
-  // working_schedules: ScheduleDto[];
-  // images: CoworkingImageDto[];
-  // days_of: DayOfDto[];
+  seats: SeatDto[];
+  workingSchedules: ScheduleDto[];
+  images: CoworkingImageDto[];
+  events: EventDto[];
+  technicalCapabilities: TechnicalCapabilityDto[];
 };
