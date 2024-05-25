@@ -8,6 +8,10 @@ export const AVAILABLE_MINUTES = generateTimeArray(0, 60, 5);
 export const FIRST_AVAILABLE_HOUR = AVAILABLE_HOURS.at(0) as string;
 export const FIRST_AVAILABLE_MINUTE = AVAILABLE_MINUTES.at(0) as string;
 
+export const BACKEND_URL = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:5566' // proxy
+  : 'http://130.193.50.180/api/'; // target
+
 export const ApiMethods = {
   // Auth: 'auth',
   Register: 'register',
@@ -51,7 +55,7 @@ export const ApiRoutes = {
   FetchCoworking: 'v1/coworking/get_coworking',
 
   UploadAvatar: 'v1/image',
-  FetchImage: 'v1/image/{filename}',
+  FetchImage: 'v1/image/', // v1/image/{filename}
 
   // User: 'v1/user',
   FetchUser: 'v1/user/get_profile',

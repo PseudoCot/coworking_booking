@@ -2,12 +2,11 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestCo
 import { getToken } from './token';
 import { DetailMessageType } from '../types/detail-message';
 import { store } from '../store';
-import { AuthStatuses, NameSpaces } from '../consts';
+import { AuthStatuses, BACKEND_URL, NameSpaces } from '../consts';
 import { logoutAction } from '../store/api-actions';
 import { StatusCodes } from 'http-status-codes';
 import { JsonRpcUnverifiedResponce } from '../types/json-rpc/json-rpc-unverified-response';
 
-const BACKEND_URL = 'http://localhost:5566'; // <- proxy, target -> http://130.193.50.180/api/
 const TOKEN_HEADER = 'Authorization';
 const REQUEST_TIMEOUT = 5000;
 
