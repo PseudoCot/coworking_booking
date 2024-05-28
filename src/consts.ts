@@ -101,6 +101,7 @@ export const PlaceTypeOptions: SelectOption[] = [ // value соответств�
 export const NameSpaces = {
   Coworkings: 'Coworkings',
   Coworking: 'Coworking',
+  Booking: 'Booking',
   User: 'User',
   Error: 'Error',
 } as const;

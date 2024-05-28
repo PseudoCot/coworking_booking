@@ -1,7 +1,9 @@
 import { NameSpaces } from '../../consts';
-import { CoworkingData } from '../../types/coworking/coworking-data';
+import { CoworkingDto } from '../../types/coworking/coworking-dto';
 import { State } from '../../types/state';
 
-export const isFetchingCoworking = (state: State): boolean => state[NameSpaces.Coworking].coworkingFetching;
+export const isCoworkingFetching = (state: State): boolean => state[NameSpaces.Coworking].coworkingFetching;
 export const isCoworkingFetchingRejected = (state: State): boolean => state[NameSpaces.Coworking].coworkingFetchingError;
-export const getCoworkingData = (state: State): CoworkingData | undefined => state[NameSpaces.Coworking].coworkingData;
+
+export const getCoworkingDto = (state: State): CoworkingDto | undefined => state[NameSpaces.Coworking].coworkingDto;
+export const getCoworkingId = (state: State): string | undefined => state[NameSpaces.Coworking].coworkingDto?.id;
