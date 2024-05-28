@@ -1,74 +1,71 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../consts';
-import { CoworkingShortData } from '../../types/coworking/coworking-short-data';
 import { fetchCoworkingsBySearchAction, fetchCoworkingsByTimestampAction } from '../api-actions';
+import { CoworkingShortDto } from '../../types/coworking/coworking-short-dto';
+import { SearchDto } from '../../types/api-shared/search-dto';
+import { TimestampDto } from '../../types/api-shared/timestamp-dto';
 
 type CoworkingsProcessState = {
   coworkingsFetching: boolean;
   coworkingsFetchingError: boolean;
-  coworkingsData?: CoworkingShortData[];
-  coworkingNameSearch?: string;
-  instituteSearch?: string;
-  dateTimeSearch?: string;
+  coworkingsDto?: CoworkingShortDto[];
+  searchParams?: SearchDto;
+  timestampParams?: TimestampDto;
 }
 
 const initialState: CoworkingsProcessState = {
   coworkingsFetching: false,
   coworkingsFetchingError: false,
-  coworkingsData: [],
-  coworkingNameSearch: '',
-  instituteSearch: '',
-  dateTimeSearch: '',
+  coworkingsDto: [],
+  searchParams: undefined,
+  timestampParams: undefined,
 };
 
 export const coworkingsProcess = createSlice({
   name: NameSpaces.Coworkings,
   initialState,
   reducers: {
-    setCoworkingNameSearh: (state, action: PayloadAction<string>) => {
-      state.coworkingNameSearch = action.payload;
+    setCoworkingSearchParams: (state, action: PayloadAction<SearchDto>) => {
+      state.searchParams = action.payload;
     },
-    setInstituteSearh: (state, action: PayloadAction<string>) => {
-      state.instituteSearch = action.payload;
+    setCoworkingTimestampParams: (state, action: PayloadAction<TimestampDto>) => {
+      state.timestampParams = action.payload;
     },
-    setDateTimeSearh: (state, action: PayloadAction<string>) => {
-      state.dateTimeSearch = action.payload;
+    resetCoworkingSearchParams: (state) => {
+      state.searchParams = undefined;
     },
-    resetCoworkingNameSearh: (state) => {
-      state.coworkingNameSearch = '';
-    },
-    resetInstituteSearh: (state) => {
-      state.instituteSearch = '';
-    },
-    resetDateTimeSearh: (state) => {
-      state.dateTimeSearch = '';
+    resetCoworkingTimestampParams: (state) => {
+      state.timestampParams = undefined;
     },
   },
   extraReducers(builder) {
     builder
       .addCase(fetchCoworkingsBySearchAction.pending, (state) => {
+        state.coworkingsDto = [];
         state.coworkingsFetching = true;
       })
-      .addCase(fetchCoworkingsBySearchAction.fulfilled, (state, action: PayloadAction<CoworkingShortData[]>) => {
-        state.coworkingsData = action.payload;
+      .addCase(fetchCoworkingsBySearchAction.fulfilled, (state, action: PayloadAction<CoworkingShortDto[]>) => {
+        state.coworkingsDto = action.payload;
         state.coworkingsFetching = false;
       })
       .addCase(fetchCoworkingsBySearchAction.rejected, (state) => {
-        state.coworkingsData = []; // перепроверить
         state.coworkingsFetching = false;
+        state.coworkingsFetchingError = true;
       })
       .addCase(fetchCoworkingsByTimestampAction.pending, (state) => {
+        state.coworkingsDto = []; // перепроверить
         state.coworkingsFetching = true;
       })
-      .addCase(fetchCoworkingsByTimestampAction.fulfilled, (state, action: PayloadAction<CoworkingShortData[]>) => {
-        state.coworkingsData = action.payload;
+      .addCase(fetchCoworkingsByTimestampAction.fulfilled, (state, action: PayloadAction<CoworkingShortDto[]>) => {
+        state.coworkingsDto = action.payload;
         state.coworkingsFetching = false;
       })
       .addCase(fetchCoworkingsByTimestampAction.rejected, (state) => {
-        state.coworkingsData = []; // перепроверить
         state.coworkingsFetching = false;
+        state.coworkingsFetchingError = true;
       });
   },
 });
 
-export const { setCoworkingNameSearh, setInstituteSearh, resetCoworkingNameSearh, resetInstituteSearh } = coworkingsProcess.actions;
+export const { setCoworkingSearchParams, setCoworkingTimestampParams, resetCoworkingSearchParams,
+  resetCoworkingTimestampParams } = coworkingsProcess.actions;
