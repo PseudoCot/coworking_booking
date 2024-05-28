@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DateTime, Interval } from 'luxon';
 import classnames from 'classnames';
 import ResetSVG from './svg/reset';
 import TimestampSelectGroup from './timestamp-select-group';
 import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE } from '../consts';
+import { useAppDispatch } from '../hooks';
+import { fetchCoworkingsByTimestampAction } from '../store/api-actions';
+import createISODate from '../shared/create-iso-date';
 
 // const WEEKDAYS = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'] as const;
 const MONTHS = ['ЯНВАРЬ', 'ФЕВРАЛЬ', 'МАРТ', 'АПРЕЛЬ', 'МАЙ', 'ИЮНЬ',
@@ -15,6 +18,8 @@ const HOLIDAYS = [[1, 2, 3, 4, 5, 6, 7, 8], [23], [8], [], [1, 9], [12], [], [],
 // };
 
 export default function Calendar(): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const today = DateTime.local();
   const [selectedDayISOFormat, setSelectedDayISOFormat] = useState('');
   const [selectedDay, setSelectedDay] = useState<DateTime>();
@@ -49,6 +54,17 @@ export default function Calendar(): JSX.Element {
     setSelectedDayISOFormat(dayOfMonth.toISODate());
     setSelectedDay(dayOfMonth);
   };
+
+  useEffect(() => {
+    if (selectedDay) {
+      const selectedDate = selectedDay.toISODate() as string;
+      dispatch(fetchCoworkingsByTimestampAction({
+        from: createISODate(selectedDate, startHour, startMinute),
+        to: createISODate(selectedDate, endHour, endMinute),
+      }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, endHour, endMinute]);
 
   return (
     <div className="calendar__self">

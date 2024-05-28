@@ -1,4 +1,4 @@
-export type CoworkingSearchData = {
-  title: string;
-  institute: string;
+export type CoworkingsSearchData = {
+  title?: string;
+  institute?: string;
 };

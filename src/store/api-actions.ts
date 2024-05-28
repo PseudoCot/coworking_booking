@@ -28,7 +28,6 @@ import { ChangePasswordResponseData } from '../types/change-password/change-pass
 import { ChangePasswordData } from '../types/change-password/change-password-data';
 import { CoworkingShortDto } from '../types/coworking/coworking-short-dto';
 import { TimestampData } from '../types/api-shared/timestamp-data';
-import { CoworkingSearchData } from '../types/api-shared/search-data';
 import { UpdateUserData } from '../types/user/update-user-data';
 import { BookingData } from '../types/booking/booking-data';
 import { CancelBookingRequestParams } from '../types/booking/cancel-booking-request-params';
@@ -36,6 +35,7 @@ import { RequestPasswordRecoveryData } from '../types/recovery-password/request-
 import { RequestRecoveryPasswordRequestParams } from '../types/recovery-password/request-password-recovery-request-params';
 import { PasswordRecoveryData } from '../types/recovery-password/password-recovery-data';
 import { PasswordRecoveryRequestParams } from '../types/recovery-password/password-recovery-request-params';
+import { CoworkingsSearchData } from '../types/api-shared/search-data';
 
 
 export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
@@ -212,33 +212,37 @@ export const fetchCoworkingsByTimestampAction = createAsyncThunk<CoworkingShortD
         ApiMethods.FetchCoworkingsByTimestamp,
         {
           interval: {
-            from: timestampData.start,
-            to: timestampData.end,
+            from: timestampData.from,
+            to: timestampData.to,
           }
         }
       ));
 
-    return data.result ?? [];
+    return data.result;
     // return coworkingShortDataMock;
   },
 );
 
-export const fetchCoworkingsBySearchAction = createAsyncThunk<CoworkingShortDto[], CoworkingSearchData, {
+export const fetchCoworkingsBySearchAction = createAsyncThunk<CoworkingShortDto[], CoworkingsSearchData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
   'coworking/fetchCoworkingsBySearch',
-  async (searchData, { extra: { api } }) => {
+  async (searchData, { dispatch, extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<CoworkingShortDto[]>>(ApiRoutes.FetchCoworkingsBySearch,
       createJsonRpcRequest<CoworkingBySearchRequestParams>(
         ApiMethods.FetchCoworkingsBySearch,
         {
-          search: searchData,
+          search: {
+            title: searchData.title,
+            institute: searchData.institute
+          },
         }
       ));
 
-    return data.result ?? [];
+    dispatch(redirectToRoute(AppRoutes.Coworkings.FullPath));
+    return data.result;
     // return coworkingShortDataMock;
   },
 );
@@ -275,19 +279,19 @@ export const uploadAvatarAction = createAsyncThunk<void, Blob, {
 );
 
 
-export const fetchBookingsAction = createAsyncThunk<BookedCoworkingDto[], undefined, {
+export const fetchBookedCoworkingsAction = createAsyncThunk<BookedCoworkingDto[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'booking/fethBookings',
+  'booking/fethBookedCoworkings',
   async (_, { extra: { api } }) => {
-    const { data } = await api.post<JsonRpcResponse<BookedCoworkingDto[]>>(ApiRoutes.FetchBookings, createJsonRpcRequest<EmptyObject>(
-      ApiMethods.FetchBookings,
+    const { data } = await api.post<JsonRpcResponse<BookedCoworkingDto[]>>(ApiRoutes.FetchBookedCoworkings, createJsonRpcRequest<EmptyObject>(
+      ApiMethods.FetchBookedCoworkings,
       {}
     ));
 
-    return data.result ?? [];
+    return data.result;
   },
 );
 

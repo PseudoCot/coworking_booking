@@ -1,11 +1,10 @@
+import { COWORKING_DEFAULT_IMAGE } from '../consts';
 import getRoundedTime from '../shared/get-rounded-time';
 import { ScheduleDto } from '../types/api-shared/schedule-dto';
 import { SeatDto } from '../types/api-shared/seat-dto';
 import { TechnicalCapabilityDto } from '../types/api-shared/technical-capability-dto';
 import { CoworkingImageDto } from '../types/coworking/coworking-image-dto';
 import ImageCarousel from './image-carousel';
-
-const COWORKING_DEFAULT_IMAGE = 'coworking-default-image.png';
 
 type CoworkingCardProps = {
   avatar?: string;
@@ -16,18 +15,18 @@ type CoworkingCardProps = {
   images: CoworkingImageDto[];
   seats: SeatDto[];
   technicalCapabilities: TechnicalCapabilityDto[];
-  workingSchedules: ScheduleDto[];
+  workingSchedule: ScheduleDto[];
 };
 
 export default function CoworkingCard({ avatar, title, description, address, seats,
-  workingSchedules, images, technicalCapabilities }: CoworkingCardProps): JSX.Element {
+  workingSchedule, images, technicalCapabilities }: CoworkingCardProps): JSX.Element {
   // let avatarURL = avatar && getImageURL(avatar);
   // avatarURL = avatarURL || process.env.NODE_ENV === 'development'
   //   ? 'img/coworking-default-image.png'
   //   : getImageURL(''); // добавить название дефолтной картинки
 
-  const [openingTime, endingTime] = workingSchedules.length
-    ? [getRoundedTime(workingSchedules[0].start_time), getRoundedTime(workingSchedules[0].end_time)]
+  const [openingTime, endingTime] = workingSchedule.length
+    ? [getRoundedTime(workingSchedule[0].start_time), getRoundedTime(workingSchedule[0].end_time)]
     : ['00:00', '24:00'];
 
   return (

@@ -7,6 +7,7 @@ export const AVAILABLE_HOURS = generateTimeArray(AVAILABLE_HOURS_START, AVAILABL
 export const AVAILABLE_MINUTES = generateTimeArray(0, 60, 5);
 export const FIRST_AVAILABLE_HOUR = AVAILABLE_HOURS.at(0) as string;
 export const FIRST_AVAILABLE_MINUTE = AVAILABLE_MINUTES.at(0) as string;
+export const COWORKING_DEFAULT_IMAGE = 'coworking-default-image.png';
 
 export const BACKEND_URL = process.env.NODE_ENV === 'development'
   ? 'http://localhost:5566' // proxy
@@ -32,7 +33,7 @@ export const ApiMethods = {
   UpdateUser: 'update_user_data', // update-user-request-params user-dto
 
   // Booking: 'reservation', //
-  FetchBookings: 'get_user_reservations', // null booking-dto[]
+  FetchBookedCoworkings: 'get_user_reservations', // null booking-dto[]
   BookCoworking: 'create_reservation', // book-request-params booking-dto
   CancelBooking: 'cancel_reservation', // cancel-booking-request-params null
 
@@ -62,7 +63,7 @@ export const ApiRoutes = {
   UpdateUser: 'v1/user/update_user_data',
 
   // Booking: 'v1/reservation',
-  FetchBookings: 'v1/reservation/get_user_reservations',
+  FetchBookedCoworkings: 'v1/reservation/get_user_reservations',
   BookCoworking: 'v1/reservation/create_reservation',
   CancelBooking: 'v1/reservation/cancel_reservation',
 

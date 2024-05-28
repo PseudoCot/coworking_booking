@@ -1,7 +1,8 @@
 import { useState, FormEventHandler, useEffect, MouseEventHandler } from 'react';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import classNames from 'classnames';
 import { fetchCoworkingsBySearchAction } from '../store/api-actions';
+import { getCoworkingsSearchParams } from '../store/coworkings-process/selectors';
 
 export type CoworkingSearchFormProps = {
   inMainScreen?: boolean;
@@ -14,9 +15,10 @@ export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingS
   });
 
   const dispatch = useAppDispatch();
+  const searchParams = useAppSelector(getCoworkingsSearchParams);
 
-  const [title, setTitle] = useState('');
-  const [institute, setInstitute] = useState('');
+  const [title, setTitle] = useState(searchParams?.title);
+  const [institute, setInstitute] = useState(searchParams?.institute);
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {
@@ -31,42 +33,32 @@ export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingS
   const handleShowAllClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
-    setTitle('');
-    setInstitute('');
+    setTitle(undefined);
+    setInstitute(undefined);
 
     dispatch(fetchCoworkingsBySearchAction({
-      title,
-      institute,
+      title: undefined,
+      institute: undefined,
     }));
   };
 
   useEffect(() => {
-    setSubmitEnabled(title.length > 0 || institute.length > 0);
+    setSubmitEnabled(!!title?.length || !!institute?.length);
   }, [title, institute]);
 
   return (
     <form className={formClasses} action='#' onSubmit={handleSubmit}>
       <div className="searching__coworking">
-        <input className="searching__coworking-input"
-          type="text"
-          name="title"
-          id="title"
+        <input className="searching__coworking-input" type="text" name="title" id="title" autoComplete="coworking"
           placeholder={inMainScreen ? 'Название коворкинга' : 'Коворкинг'}
-          autoComplete="coworking"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={title} onChange={(e) => setTitle(e.target.value)}
         />
       </div>
       <span className="searching__separator-line"></span>
       <div className="searching__institute">
-        <input className="searching__institute-input"
-          type="text"
-          name="institute"
-          id="institute"
-          placeholder="Институт"
-          autoComplete="institute"
-          value={institute}
-          onChange={(e) => setInstitute(e.target.value)}
+        <input className="searching__institute-input" type="text" name="institute" id="institute"
+          autoComplete="institute" placeholder="Институт"
+          value={institute} onChange={(e) => setInstitute(e.target.value)}
         />
       </div>
       <span className="searching__separator-line"></span>
