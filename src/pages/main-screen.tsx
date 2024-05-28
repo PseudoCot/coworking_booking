@@ -1,4 +1,4 @@
-import CoworkingSearshingForm from '../components/coworking-searching-form';
+import CoworkingSearchForm from '../components/coworking-search-form';
 import Layout from '../components/layout';
 
 export default function MainScreen(): JSX.Element {
@@ -7,7 +7,7 @@ export default function MainScreen(): JSX.Element {
       <article className="hero">
         <h1 className="hero__title title-reset">Там, где творчество встречает комфорт</h1>
 
-        <CoworkingSearshingForm inMainScreen />
+        <CoworkingSearchForm inMainScreen />
       </article>
     </Layout>
   );

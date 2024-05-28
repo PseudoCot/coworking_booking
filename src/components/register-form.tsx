@@ -10,8 +10,6 @@ import FormInputGroup from './form-input-group';
 export default function RegisterForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [submitEnabled, setSubmitEnabled] = useState(false);
-
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [patronymic, setPatronymic] = useState('');
@@ -28,6 +26,7 @@ export default function RegisterForm(): JSX.Element {
   const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
   const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
 
+  const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 

@@ -1,5 +1,5 @@
 import CoworkingList from '../components/coworking-list';
-import CoworkingSearshingForm from '../components/coworking-searching-form';
+import CoworkingSearchForm from '../components/coworking-search-form';
 import Layout from '../components/layout';
 
 export default function CoworkingsScreen(): JSX.Element {
@@ -8,7 +8,7 @@ export default function CoworkingsScreen(): JSX.Element {
       <article className="coworkings">
         <h1 className="coworkings__title cb-title title-reset">Коворкинги</h1>
 
-        <CoworkingSearshingForm />
+        <CoworkingSearchForm />
 
         <CoworkingList />
       </article>

@@ -11,10 +11,10 @@ import { fetchCoworkingAction } from '../store/api-actions';
 import { useParams } from 'react-router-dom';
 
 export default function BookingScreen(): JSX.Element {
-  const dispatch = useAppDispatch();
   const urlParams = useParams();
-
+  const dispatch = useAppDispatch();
   const calendarEventLink = ''; // useAppSelector(getBookedEventLink);
+
   const coworkingDto = useAppSelector(getCoworkingDto);
   const coworkingFetching = useAppSelector(isCoworkingFetching);
 

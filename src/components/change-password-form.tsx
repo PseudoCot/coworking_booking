@@ -14,8 +14,6 @@ export type ChangePasswordFormProps = {
 export default function ChangePasswordForm({ token, email }: ChangePasswordFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [submitEnabled, setSubmitEnabled] = useState(false);
-
   const [password, setPassword, passwordError, setPasswordError, checkPasswordValidity] = useInput(passwordValidationChecker);
   const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, setRepeatedPasswordError, checkRepeatedPasswordValidity] = useInput(
     (value: string) => password === value // проверить
@@ -24,6 +22,7 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
   const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
   const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
 
+  const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 

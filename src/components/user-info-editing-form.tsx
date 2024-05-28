@@ -21,13 +21,12 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
   : UserInfoEditingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [submitEnabled, setSubmitEnabled] = useState(true);
-
   const [lastName, setLastName] = useState(initialLastName);
   const [firstName, setFirstName] = useState(initialFirstName);
   const [patronymic, setPatronymic] = useState(initialPatronymic);
   const [email, setEmail, , , processEmailValidation] = useInput(emailValidationChecker, initialEmail);
 
+  const [submitEnabled, setSubmitEnabled] = useState(true);
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 

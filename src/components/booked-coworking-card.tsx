@@ -1,12 +1,15 @@
 type BookedCoworkingCardProps = {
-  imgUrl: string;
-  imgUrl: string;
-  imgUrl: string;
-  imgUrl: string;
-  imgUrl: string;
-  imgUrl: string;
-  imgUrl: string;
-  imgUrl: string;
+  id: string;
+  avatar?: string;
+  title: string;
+  description: string;
+  address: string;
+
+  images: CoworkingImageDto[];
+  seats: SeatDto[];
+  technicalCapabilities: TechnicalCapabilityDto[];
+  workingSchedules: ScheduleDto[];
+  events: EventDto[];
 };
 
 export default function BookedCoworkingCard({ }: BookedCoworkingCardProps): JSX.Element {

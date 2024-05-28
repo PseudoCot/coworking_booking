@@ -3,11 +3,11 @@ import { useAppDispatch } from '../hooks';
 import classNames from 'classnames';
 import { fetchCoworkingsBySearchAction } from '../store/api-actions';
 
-type CoworkingSearshingFormProps = {
+export type CoworkingSearchFormProps = {
   inMainScreen?: boolean;
 };
 
-export default function CoworkingSearshingForm({ inMainScreen = false }: CoworkingSearshingFormProps): JSX.Element {
+export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingSearchFormProps): JSX.Element {
   const formClasses = classNames('searching', {
     'hero__searching': inMainScreen,
     'coworkings__searching': !inMainScreen
@@ -15,11 +15,10 @@ export default function CoworkingSearshingForm({ inMainScreen = false }: Coworki
 
   const dispatch = useAppDispatch();
 
-  const [submitEnabled, setSubmitEnabled] = useState(false);
-
   const [title, setTitle] = useState('');
   const [institute, setInstitute] = useState('');
 
+  const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 

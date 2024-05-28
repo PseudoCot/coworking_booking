@@ -8,12 +8,11 @@ import { requestPasswordRecoveryAction } from '../store/api-actions';
 export default function RequestPasswordRecoveryForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [submitEnabled, setSubmitEnabled] = useState(false);
-
   const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
 
   const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
 
+  const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 

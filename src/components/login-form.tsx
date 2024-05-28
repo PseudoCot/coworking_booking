@@ -9,8 +9,6 @@ import { AppRoutes } from '../routes';
 
 export default function LoginForm(): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const [submitEnabled, setSubmitEnabled] = useState(false);
   const showSubmitError = false; // useAppSelector(getLoginError);
 
   const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
@@ -19,6 +17,7 @@ export default function LoginForm(): JSX.Element {
   const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
   const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
 
+  const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
