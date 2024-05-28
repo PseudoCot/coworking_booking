@@ -1280,6 +1280,8 @@ body,
   background-color: var(--card-img-bg-color);
 }
 
+.info-carousel__bullets {}
+
 .booking__info-header,
 .booking__opening-title,
 .booking__opening-text {

@@ -243,7 +243,7 @@ export const fetchCoworkingsBySearchAction = createAsyncThunk<CoworkingShortDto[
   },
 );
 
-export const fetchCoworkingAction = createAsyncThunk<CoworkingDto | undefined, string, {
+export const fetchCoworkingAction = createAsyncThunk<CoworkingDto, string, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;

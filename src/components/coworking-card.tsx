@@ -1,78 +1,93 @@
+import getRoundedTime from '../shared/get-rounded-time';
+import { ScheduleDto } from '../types/api-shared/schedule-dto';
+import { SeatDto } from '../types/api-shared/seat-dto';
+import { TechnicalCapabilityDto } from '../types/api-shared/technical-capability-dto';
+import { CoworkingImageDto } from '../types/coworking/coworking-image-dto';
+import ImageCarousel from './image-carousel';
+
+const COWORKING_DEFAULT_IMAGE = 'coworking-default-image.png';
+
 type CoworkingCardProps = {
-  avatar: string;
+  avatar?: string;
   title: string;
-  working_schedules: ScheduleDto[];
   description: string;
   address: string;
-  seats: SeatDto[];
+
   images: CoworkingImageDto[];
+  seats: SeatDto[];
+  technicalCapabilities: TechnicalCapabilityDto[];
+  workingSchedules: ScheduleDto[];
 };
 
-export default function CoworkingCard({ }: CoworkingCardProps): JSX.Element {
+export default function CoworkingCard({ avatar, title, description, address, seats,
+  workingSchedules, images, technicalCapabilities }: CoworkingCardProps): JSX.Element {
+  // let avatarURL = avatar && getImageURL(avatar);
+  // avatarURL = avatarURL || process.env.NODE_ENV === 'development'
+  //   ? 'img/coworking-default-image.png'
+  //   : getImageURL(''); // добавить название дефолтной картинки
+
+  const [openingTime, endingTime] = workingSchedules.length
+    ? [getRoundedTime(workingSchedules[0].start_time), getRoundedTime(workingSchedules[0].end_time)]
+    : ['00:00', '24:00'];
+
   return (
     <div className="booking__info">
       <div className="booking__left-info">
-        <div className="booking__info-carousel info-carousel">
-          <button className="info-carousel__left-btn btn-reset"></button>
-          <img className="info-carousel__image" src="img/antresoli_1.jpg" alt="Коворкинг 'Антресоли'" />
-          <button className="info-carousel__right-btn btn-reset"></button>
-        </div>
-        <h2 className="booking__info-header title-reset">Антресоли</h2>
+        <ImageCarousel wrapperClasses='booking__info-carousel info-carousel' leftButtonClasses='info-carousel__left-btn'
+          rightButtonClasses='info-carousel__image' imageClasses='info-carousel__right-btn'
+          imageAlt={title} mainImage={avatar ?? COWORKING_DEFAULT_IMAGE}
+          images={images.map((imageData) => imageData.image_filename)}
+        />
+        <h2 className="booking__info-header title-reset">{title}</h2>
         <div className="booking__info-opening">
           <span className="booking__opening-title">Режим работы</span>
-          <span className="booking__opening-text">с&nbsp;10:00 до&nbsp;16:00,<br />по&nbsp;заявкам</span>
+          <span className="booking__opening-text">
+            с&nbsp;{openingTime} до&nbsp;{endingTime}
+            {/* {true &&
+              <>
+                , <br />по&nbsp;заявкам
+              </>} */}
+          </span>
+          {/* расширить инфу по каждому дню недели? */}
         </div>
       </div>
       <div className="booking__right-info">
         <div className="booking__info-group">
           <h3 className="booking__info-title title-reset">Описание:</h3>
           <p className="booking__info-text paragraph-reset">
-            &quot;Антресоли&quot; - это комфортное, уютное пространство для
-            студентов, где любой желающий может провести время за работой или учебой. Студенты, приходящие в
-            коворкинг, могут подготовиться к занятиям и обсудить свои проекты.
+            {description}
           </p>
         </div>
         <div className="booking__info-group">
           <h3 className="booking__info-title title-reset">Адрес:</h3>
-          <address className="booking__info-text">ул. Мира 19, 4 этаж</address>
+          <address className="booking__info-text">{address}</address>
         </div>
-        <div className="booking__info-group">
-          <h3 className="booking__info-title title-reset">Количество мест:</h3>
-          <span className="booking__info-text">Переговорные: 2</span>
-          <span className="booking__info-text">Столы: 40</span>
-        </div>
-        <div className="booking__info-group">
-          <h3 className="booking__info-title title-reset">Технические возможности:</h3>
-          <ul className="booking__info-list list-reset">
-            <li className="booking__info-point">стационарная и мобильная мебель как для индивидуальной, так и для груповой работы</li>
-            <li className="booking__info-point">6 маркерных досок</li>
-            <li className="booking__info-point">Wi-Fi</li>
-          </ul>
-        </div>
+        {seats.length &&
+          <div className="booking__info-group">
+            <h3 className="booking__info-title title-reset">Количество мест:</h3>
+            {seats.map((seatData) => (
+              <span className="booking__info-text" key={seatData.place_type}>
+                {seatData.label}: {seatData.seats_count}
+              </span>
+            ))}
+          </div>}
+        {technicalCapabilities.length &&
+          <div className="booking__info-group">
+            <h3 className="booking__info-title title-reset">Технические возможности:</h3>
+            <ul className="booking__info-list list-reset">
+              {technicalCapabilities.map((techCapabilityData) => (
+                <li className="booking__info-point" key={techCapabilityData.capability}>{techCapabilityData.capability}</li>
+              ))}
+            </ul>
+          </div>}
       </div>
-      <ul className="booking__image-list list-reset">
-        <li className="booking__image-item">
-          <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
-        </li>
-        <li className="booking__image-item">
-          <img className="booking__image" src="img/antresoli_2.png" alt="Антресоли" />
-        </li>
-        <li className="booking__image-item">
-          <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
-        </li>
-        <li className="booking__image-item">
-          <img className="booking__image" src="img/antresoli_2.png" alt="Антресоли" />
-        </li>
-        <li className="booking__image-item">
-          <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
-        </li>
-        <li className="booking__image-item">
-          <img className="booking__image" src="img/antresoli_2.png" alt="Антресоли" />
-        </li>
-        <li className="booking__image-item">
-          <img className="booking__image" src="img/antresoli_1.jpg" alt="Антресоли" />
-        </li>
-      </ul>
+      {/* <ul className="booking__image-list list-reset">
+        {images.map((imageData) => (
+          <li className="booking__image-item" key={imageData.image_filename}>
+            <img className="booking__image" src={getImageURL(imageData.image_filename)} alt={imageData.image_filename} />
+          </li>
+        ))}
+      </ul> */}
     </div>
   );
 }
