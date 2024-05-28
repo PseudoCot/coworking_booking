@@ -1,16 +1,23 @@
 import { useState, FormEventHandler, useEffect } from 'react';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import TimestampSelectGroup from './timestamp-select-group';
 import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE, PlaceTypeOptions } from '../consts';
 import Select from './select';
+import { DateTime } from 'luxon';
+import { bookCoworkingAction } from '../store/api-actions';
+import { getCoworkingId } from '../store/coworking-process/selectors';
+import createISODate from '../shared/create-iso-date';
 
 export default function BookingForm(): JSX.Element {
+  const today = DateTime.local();
+  const currentDate = today.toISODate();
+  const nextMonthDate = today.plus({ month: 1 }).toISODate();
+
   const dispatch = useAppDispatch();
+  const coworkingId = useAppSelector(getCoworkingId);
 
-  const [submitEnabled, setSubmitEnabled] = useState(false);
-
-  const [placeType, setPlaceType] = useState('');
-  const [date, setDate] = useState('');
+  const [placeType, setPlaceType] = useState<string>();
+  const [date, setDate] = useState<string>();
   const [startHour, setStartHour] = useState(FIRST_AVAILABLE_HOUR);
   const [startMinute, setStartMinute] = useState(FIRST_AVAILABLE_MINUTE);
   const [endHour, setEndHour] = useState(FIRST_AVAILABLE_HOUR);
@@ -18,15 +25,18 @@ export default function BookingForm(): JSX.Element {
 
   const selectedPlaceType = PlaceTypeOptions.find((item) => item.value === placeType);
 
+  const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    // dispatch(bookAction({
-    //   seatType,
-    //   date,
-    //   startTime,
-    //   endTime,
-    // }));
+    if (coworkingId && placeType && date) {
+      dispatch(bookCoworkingAction({
+        coworkingId: coworkingId,
+        placeType: placeType,
+        from: createISODate(date, startHour, startMinute),
+        to: createISODate(date, endHour, endMinute),
+      }));
+    }
   };
 
   useEffect(() => {
@@ -43,10 +53,6 @@ export default function BookingForm(): JSX.Element {
           <div className="booking__form-group cb-form-group">
             <label className="booking__form-label cb-form-label" htmlFor="type">Тип места:</label>
             <Select
-              selectClasses=''
-              placeholderClasses=''
-              optionListClasses=''
-              optionClasses=''
               options={PlaceTypeOptions}
               selectedOption={selectedPlaceType}
               onChange={setPlaceType}
@@ -54,7 +60,9 @@ export default function BookingForm(): JSX.Element {
           </div>
           <div className="booking__form-group cb-form-group">
             <label className="booking__form-label cb-form-label" htmlFor="date">Дата:</label>
-            <input className="booking__form-input cb-form-input" type="date" name="date" id="booking-date" />
+            <input className="booking__form-input cb-form-input" type="date" name="date" id="booking-date"
+              value={date} onChange={(e) => setDate(e.target.value)} min={currentDate} max={nextMonthDate}
+            />
           </div>
           <div className="booking__form-group cb-form-group">
             <label className="booking__form-label cb-form-label" htmlFor="time">Время:</label>
