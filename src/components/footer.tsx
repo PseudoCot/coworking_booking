@@ -39,17 +39,18 @@ export default function Footer(): JSX.Element {
         </span>
         <span className="footer__credits-right">Lorem Ipsum</span>
       </div>
-      <div className="temp-links">
-        <Link to={AppRoutes.Main.FullPath}>Index</Link>
-        <Link to={AppRoutes.Coworkings.FullPath}>Coworkings</Link>
-        <Link to={AppRoutes.Calendar.FullPath}>Calendar</Link>
-        <Link to={AppRoutes.Booking.FullPath}>Booking</Link>
-        <Link to={AppRoutes.Register.FullPath}>Register</Link>
-        <Link to={AppRoutes.Login.FullPath}>Login</Link>
-        <Link to={AppRoutes.User.FullPath}>User</Link>
-        <Link to={AppRoutes.ChangePassword.FullPath}>ChangePass</Link>
-        <Link to={AppRoutes.PasswordRecovery.FullPath}>PasswordRecovery</Link>
-      </div>
+      {process.env.NODE_ENV === 'development' &&
+        <div className="temp-links">
+          <Link to={AppRoutes.Main.FullPath}>Index</Link>
+          <Link to={AppRoutes.Coworkings.FullPath}>Coworkings</Link>
+          <Link to={AppRoutes.Calendar.FullPath}>Calendar</Link>
+          <Link to={AppRoutes.Booking.FullPath}>Booking</Link>
+          <Link to={AppRoutes.Register.FullPath}>Register</Link>
+          <Link to={AppRoutes.Login.FullPath}>Login</Link>
+          <Link to={AppRoutes.User.FullPath}>User</Link>
+          <Link to={AppRoutes.ChangePassword.FullPath}>ChangePass</Link>
+          <Link to={AppRoutes.PasswordRecovery.FullPath}>PasswordRecovery</Link>
+        </div>}
     </footer>
   );
 }

@@ -9,6 +9,8 @@ import { isBookingError, isBookingSucces } from '../store/booking-process/select
 import { useEffect } from 'react';
 import { fetchCoworkingAction } from '../store/api-actions';
 import { useParams } from 'react-router-dom';
+import { clearBookedCoworkingsFullDto } from '../store/booked-coworkings-process/booked-coworkings-process';
+import { TECHNICAL_SUPPORT_EMAIL, TELEGRAM_BOT_NAME } from '../consts';
 
 export default function BookingScreen(): JSX.Element {
   const urlParams = useParams();
@@ -25,6 +27,10 @@ export default function BookingScreen(): JSX.Element {
     if (urlParams.id) {
       dispatch(fetchCoworkingAction(urlParams.id));
     }
+
+    return () => {
+      dispatch(clearBookedCoworkingsFullDto()); // temp
+    };
   }, [dispatch, urlParams.id]);
 
   return (
@@ -38,7 +44,7 @@ export default function BookingScreen(): JSX.Element {
             <>
               <CoworkingCard title={coworkingDto.title} description={coworkingDto.description}
                 address={coworkingDto.address} images={coworkingDto.images} seats={coworkingDto.seats}
-                technicalCapabilities={coworkingDto.technical_capabilities} workingSchedules={coworkingDto.working_schedules}
+                technicalCapabilities={coworkingDto.technical_capabilities} workingSchedule={coworkingDto.working_schedules}
               />
               <BookingForm />
             </>
@@ -48,7 +54,7 @@ export default function BookingScreen(): JSX.Element {
         {showBookingSuccess &&
           <Toast toastClasses='booking__toast' toastTitleClasses='booking__toast-title' toastTextClasses='booking__toast-text'
             modalWindow title='Спасибо, место в коворкинге забронировано!'
-            text={`Сейчас вам необходимо написать нашему telegram-боту - ${'@имя_бота'}.
+            text={`Сейчас вам необходимо написать нашему telegram-боту - ${TELEGRAM_BOT_NAME}.
             За 2 часа до начала брони вам придет оповещение для подтверждения бронирования. Нажмите
             кнопку “Отклонить”, если у вас поменяются планы. Или используйте кнопку “Подтвердить”, если
             бронирование коворкинга будет актуально.
@@ -60,10 +66,10 @@ export default function BookingScreen(): JSX.Element {
         {showBookingError &&
           <Toast toastClasses='booking__toast' toastTitleClasses='booking__toast-title' toastTextClasses='booking__toast-text'
             modalWindow title='Ошибка оформления бронирования!'
-            text={`Для оформления бронирования вам необходимо написать нашему telegram-боту - ${'@имя_бота'}.
+            text={`Для оформления бронирования вам необходимо написать нашему telegram-боту - ${TELEGRAM_BOT_NAME}.
             Создайте бронирование в системе повторно после старта чата с ним.
             Если у вас уже есть активный чат с нашим ботом, то обратитесь в техническую поддержку
-            по адресу - ${'ПОЧТА'}.`}
+            по адресу - ${TECHNICAL_SUPPORT_EMAIL}.`}
           />}
       </article>
     </Layout>

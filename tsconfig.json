@@ -8,10 +8,7 @@
     ],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": [
-      "vitest/globals",
-      "@testing-library/jest-dom"
-    ],
+    "types": [],
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

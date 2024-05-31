@@ -1,8 +1,6 @@
 import { useState, FormEventHandler, useEffect } from 'react';
-import useInput from '../hooks/use-input';
 import { validateStringsLength } from '../shared/validate-strings-length';
 import CloseCrossSVG from './svg/close-cross';
-import emailValidationChecker from '../shared/email-validation-checker';
 import { updateUserDataAction } from '../store/api-actions';
 import { useAppDispatch } from '../hooks';
 
@@ -10,13 +8,12 @@ type UserInfoEditingFormProps = {
   lastName: string;
   firstName: string;
   patronymic?: string;
-  email: string;
   onCloseEditingClick: FormEventHandler;
   onChangePasswordClick: FormEventHandler;
 };
 
 export default function UserInfoEditingForm({ lastName: initialLastName, firstName: initialFirstName,
-  patronymic: initialPatronymic, email: initialEmail,
+  patronymic: initialPatronymic,
   onCloseEditingClick: handleCloseEditingClick, onChangePasswordClick: handleChangePasswordClick }
   : UserInfoEditingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
@@ -24,28 +21,24 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
   const [lastName, setLastName] = useState(initialLastName);
   const [firstName, setFirstName] = useState(initialFirstName);
   const [patronymic, setPatronymic] = useState(initialPatronymic);
-  const [email, setEmail, , , processEmailValidation] = useInput(emailValidationChecker, initialEmail);
 
   const [submitEnabled, setSubmitEnabled] = useState(true);
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    if (processEmailValidation()) {
-      dispatch(updateUserDataAction({
-        firstName,
-        lastName,
-        patronymic,
-        email,
-      }));
+    dispatch(updateUserDataAction({
+      firstName,
+      lastName,
+      patronymic,
+    }));
 
-      handleCloseEditingClick(e);
-    }
+    handleCloseEditingClick(e);
   };
 
   useEffect(() => {
     // проверить необходимость в установке таймера до проверки
-    setSubmitEnabled(validateStringsLength([lastName, firstName, email]));
-  }, [lastName, firstName, email]);
+    setSubmitEnabled(validateStringsLength([lastName, firstName]));
+  }, [lastName, firstName]);
 
   return (
     <div className="user-acc__info-form-wrapper">
@@ -70,12 +63,6 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
             <label className="user-acc__info-title" htmlFor="patronymic">Отчество:</label>
             <input className="user-acc__info-input" type="text" name="patronymic" id="patronymic" autoCapitalize="words"
               value={patronymic} onChange={(e) => setPatronymic(e.target.value)}
-            />
-          </div>
-          <div className="user-acc__info-group">
-            <label className="user-acc__info-title" htmlFor="email">Почта:</label>
-            <input className="user-acc__info-input" type="text" name="email" id="email" autoCapitalize="words"
-              value={email} onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>

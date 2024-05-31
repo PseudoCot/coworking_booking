@@ -1,4 +1,4 @@
-import { COWORKING_DEFAULT_IMAGE } from '../consts';
+import { COWORKING_DEFAULT_IMAGE, PlaceTypeOptions } from '../consts';
 import getRoundedTime from '../shared/get-rounded-time';
 import { ScheduleDto } from '../types/api-shared/schedule-dto';
 import { SeatDto } from '../types/api-shared/seat-dto';
@@ -66,7 +66,7 @@ export default function CoworkingCard({ avatar, title, description, address, sea
             <h3 className="booking__info-title title-reset">Количество мест:</h3>
             {seats.map((seatData) => (
               <span className="booking__info-text" key={seatData.place_type}>
-                {seatData.label}: {seatData.seats_count}
+                {PlaceTypeOptions.find((option) => option.value === seatData.place_type)?.value}: {seatData.seats_count}
               </span>
             ))}
           </div>}

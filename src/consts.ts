@@ -8,10 +8,12 @@ export const AVAILABLE_MINUTES = generateTimeArray(0, 60, 5);
 export const FIRST_AVAILABLE_HOUR = AVAILABLE_HOURS.at(0) as string;
 export const FIRST_AVAILABLE_MINUTE = AVAILABLE_MINUTES.at(0) as string;
 export const COWORKING_DEFAULT_IMAGE = 'coworking-default-image.png';
+export const TELEGRAM_BOT_NAME = '@test_coworking_booking_urfu_bot';
+export const TECHNICAL_SUPPORT_EMAIL = 'ap.makarov@urfu.me';
 
 export const BACKEND_URL = process.env.NODE_ENV === 'development'
   ? 'http://localhost:5566' // proxy
-  : 'http://130.193.50.180/api/'; // target
+  : 'http://158.160.122.132/api/'; // target
 
 export const ApiMethods = {
   // Auth: 'auth',
@@ -97,12 +99,13 @@ export const BookingStatuses = { // значения соответствуют 
 export const PlaceTypeOptions: SelectOption[] = [ // value соответствуют api
   { title: 'Столы', value: 'table' },
   { title: 'Переговорные', value: 'meeting_room' },
-] as const;
+];
 
 export const NameSpaces = {
   Coworkings: 'Coworkings',
   Coworking: 'Coworking',
   Booking: 'Booking',
+  BookedCoworkings: 'BookedCoworkings',
   User: 'User',
   Error: 'Error',
 } as const;

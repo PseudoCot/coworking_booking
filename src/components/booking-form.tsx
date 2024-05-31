@@ -40,7 +40,7 @@ export default function BookingForm(): JSX.Element {
   };
 
   useEffect(() => {
-    setSubmitEnabled(false);
+    setSubmitEnabled(!!placeType && !!date);
   }, [placeType, date]);
 
   return (

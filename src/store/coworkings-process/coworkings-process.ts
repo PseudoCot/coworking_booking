@@ -3,14 +3,12 @@ import { NameSpaces } from '../../consts';
 import { fetchCoworkingsBySearchAction, fetchCoworkingsByTimestampAction } from '../api-actions';
 import { CoworkingShortDto } from '../../types/coworking/coworking-short-dto';
 import { SearchDto } from '../../types/api-shared/search-dto';
-import { TimestampDto } from '../../types/api-shared/timestamp-dto';
 
 type CoworkingsProcessState = {
   coworkingsFetching: boolean;
   coworkingsFetchingError: boolean;
   coworkingsDto?: CoworkingShortDto[];
   searchParams?: SearchDto;
-  timestampParams?: TimestampDto;
 }
 
 const initialState: CoworkingsProcessState = {
@@ -18,7 +16,6 @@ const initialState: CoworkingsProcessState = {
   coworkingsFetchingError: false,
   coworkingsDto: [],
   searchParams: undefined,
-  timestampParams: undefined,
 };
 
 export const coworkingsProcess = createSlice({
@@ -28,14 +25,8 @@ export const coworkingsProcess = createSlice({
     setCoworkingSearchParams: (state, action: PayloadAction<SearchDto>) => {
       state.searchParams = action.payload;
     },
-    setCoworkingTimestampParams: (state, action: PayloadAction<TimestampDto>) => {
-      state.timestampParams = action.payload;
-    },
     resetCoworkingSearchParams: (state) => {
       state.searchParams = undefined;
-    },
-    resetCoworkingTimestampParams: (state) => {
-      state.timestampParams = undefined;
     },
   },
   extraReducers(builder) {
@@ -67,5 +58,4 @@ export const coworkingsProcess = createSlice({
   },
 });
 
-export const { setCoworkingSearchParams, setCoworkingTimestampParams, resetCoworkingSearchParams,
-  resetCoworkingTimestampParams } = coworkingsProcess.actions;
+export const { setCoworkingSearchParams, resetCoworkingSearchParams } = coworkingsProcess.actions;

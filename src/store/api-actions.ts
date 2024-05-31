@@ -285,11 +285,15 @@ export const fetchBookedCoworkingsAction = createAsyncThunk<BookedCoworkingDto[]
   extra: ThunkExtraArgument;
 }>(
   'booking/fethBookedCoworkings',
-  async (_, { extra: { api } }) => {
+  async (_, { dispatch, extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<BookedCoworkingDto[]>>(ApiRoutes.FetchBookedCoworkings, createJsonRpcRequest<EmptyObject>(
       ApiMethods.FetchBookedCoworkings,
       {}
     ));
+
+    for (const bookedCoworkingDto of data.result) {
+      await dispatch(fetchCoworkingAction(bookedCoworkingDto.seat.coworking_id)); // temp
+    }
 
     return data.result;
   },

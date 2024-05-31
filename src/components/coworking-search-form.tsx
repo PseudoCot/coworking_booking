@@ -1,8 +1,9 @@
-import { useState, FormEventHandler, useEffect, MouseEventHandler } from 'react';
+import { useState, FormEventHandler, MouseEventHandler } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import classNames from 'classnames';
 import { fetchCoworkingsBySearchAction } from '../store/api-actions';
 import { getCoworkingsSearchParams } from '../store/coworkings-process/selectors';
+import { resetCoworkingSearchParams, setCoworkingSearchParams } from '../store/coworkings-process/coworkings-process';
 
 export type CoworkingSearchFormProps = {
   inMainScreen?: boolean;
@@ -15,16 +16,19 @@ export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingS
   });
 
   const dispatch = useAppDispatch();
-  const searchParams = useAppSelector(getCoworkingsSearchParams);
+  const coworkingSearchParams = useAppSelector(getCoworkingsSearchParams);
 
-  const [title, setTitle] = useState(searchParams?.title);
-  const [institute, setInstitute] = useState(searchParams?.institute);
+  const [title, setTitle] = useState(coworkingSearchParams?.title);
+  const [institute, setInstitute] = useState(coworkingSearchParams?.institute);
 
-  const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
     dispatch(fetchCoworkingsBySearchAction({
+      title,
+      institute,
+    }));
+    dispatch(setCoworkingSearchParams({
       title,
       institute,
     }));
@@ -40,11 +44,8 @@ export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingS
       title: undefined,
       institute: undefined,
     }));
+    dispatch(resetCoworkingSearchParams());
   };
-
-  useEffect(() => {
-    setSubmitEnabled(!!title?.length || !!institute?.length);
-  }, [title, institute]);
 
   return (
     <form className={formClasses} action='#' onSubmit={handleSubmit}>
@@ -62,7 +63,7 @@ export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingS
         />
       </div>
       <span className="searching__separator-line"></span>
-      <button className="searching__submit-btn cb-blue-btn btn-reset" type="submit" disabled={!submitEnabled}>Поиск</button>
+      <button className="searching__submit-btn cb-blue-btn btn-reset" type="submit">Поиск</button>
       {!inMainScreen &&
         <>
           <span className="searching__separator-line"></span>
