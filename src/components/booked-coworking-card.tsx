@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { COWORKING_DEFAULT_IMAGE, PlaceTypeOptions } from '../consts';
+import { PlaceTypeOptions } from '../consts';
 import { useAppDispatch } from '../hooks';
 import getDateAndTimestamp from '../shared/get-date-and-timestamp';
 import getImageURL from '../shared/get-image-url';
@@ -17,7 +17,7 @@ export default function BookedCoworkingCard({ id, title, description, avatar, se
   : BookedCoworkingCardProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const imageURL = getImageURL(avatar ?? COWORKING_DEFAULT_IMAGE);
+  const imageURL = getImageURL(avatar);
   const [date, timestamp] = getDateAndTimestamp(from, to);
 
   const [showBookingCancelSubmit, setShowBookingCancelSubmit] = useState(false);

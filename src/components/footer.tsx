@@ -39,7 +39,7 @@ export default function Footer(): JSX.Element {
         </span>
         <span className="footer__credits-right">Lorem Ipsum</span>
       </div>
-      {process.env.NODE_ENV === 'development' &&
+      {import.meta.env.DEV &&
         <div className="temp-links">
           <Link to={AppRoutes.Main.FullPath}>Index</Link>
           <Link to={AppRoutes.Coworkings.FullPath}>Coworkings</Link>

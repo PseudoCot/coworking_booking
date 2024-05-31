@@ -5,8 +5,8 @@ import httpProxy from 'http-proxy';
 
 
 const options = {
-  target: 'http://130.193.50.180/api/',
-  port: 5566,
+  target: 'http://158.160.122.132:8000/api/',
+  proxyPort: 5566,
 };
 
 
@@ -68,6 +68,8 @@ proxy.on('proxyRes', (proxyRes, req, res) => {
       return cookie;
     })
   }
+
+  console.log(req.url);
 });
 
 // Failed to send a request to the target
@@ -97,5 +99,6 @@ const server = http.createServer(function (req, res) {
 //   });
 // });
 
-console.log('listening on port', options.port);
-server.listen(options.port);
+console.log('listening on port', options.proxyPort);
+console.log('target - ', options.target);
+server.listen(options.proxyPort);

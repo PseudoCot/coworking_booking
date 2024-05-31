@@ -10,7 +10,7 @@ type ImageCarouselProps = {
   bulletClasses?: string;
 
   imageAlt: string;
-  mainImage: string;
+  mainImage?: string;
   images: string[];
 };
 
@@ -24,7 +24,7 @@ export default function ImageCarousel({ wrapperClasses = '', leftButtonClasses =
   const [onRightBorder, setOnRightBorder] = useState(leftBorder < rightBorder);
 
   const [, setCurrentImageNumber] = useState(leftBorder);
-  const [currentImageURL, setCurrentImageURL] = useState(mainImage);
+  const [currentImageURL, setCurrentImageURL] = useState(getImageURL(mainImage));
 
   const updateCurrentImage = (currentNumber: number) => {
     if (currentNumber <= leftBorder) {

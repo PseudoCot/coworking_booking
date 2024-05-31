@@ -1,4 +1,4 @@
-import { COWORKING_DEFAULT_IMAGE, PlaceTypeOptions } from '../consts';
+import { PlaceTypeOptions } from '../consts';
 import getRoundedTime from '../shared/get-rounded-time';
 import { ScheduleDto } from '../types/api-shared/schedule-dto';
 import { SeatDto } from '../types/api-shared/seat-dto';
@@ -21,20 +21,25 @@ type CoworkingCardProps = {
 export default function CoworkingCard({ avatar, title, description, address, seats,
   workingSchedule, images, technicalCapabilities }: CoworkingCardProps): JSX.Element {
   // let avatarURL = avatar && getImageURL(avatar);
-  // avatarURL = avatarURL || process.env.NODE_ENV === 'development'
+  // avatarURL = avatarURL || import.meta.env.DEV
   //   ? 'img/coworking-default-image.png'
   //   : getImageURL(''); // добавить название дефолтной картинки
 
   const [openingTime, endingTime] = workingSchedule.length
     ? [getRoundedTime(workingSchedule[0].start_time), getRoundedTime(workingSchedule[0].end_time)]
-    : ['00:00', '24:00'];
+    : ['08:00', '20:00'];
+
+  const seatsTotalInfo = seats.reduce((result, seatDto) => {
+    result[seatDto.place_type] = (result[seatDto.place_type] ?? 0) + seatDto.seats_count;
+    return result;
+  }, {} as { [key: string]: number });
 
   return (
     <div className="booking__info">
       <div className="booking__left-info">
         <ImageCarousel wrapperClasses='booking__info-carousel info-carousel' leftButtonClasses='info-carousel__left-btn'
-          rightButtonClasses='info-carousel__image' imageClasses='info-carousel__right-btn'
-          imageAlt={title} mainImage={avatar ?? COWORKING_DEFAULT_IMAGE}
+          rightButtonClasses='info-carousel__right-btn' imageClasses='info-carousel__image'
+          imageAlt={title} mainImage={avatar}
           images={images.map((imageData) => imageData.image_filename)}
         />
         <h2 className="booking__info-header title-reset">{title}</h2>
@@ -64,9 +69,9 @@ export default function CoworkingCard({ avatar, title, description, address, sea
         {seats.length &&
           <div className="booking__info-group">
             <h3 className="booking__info-title title-reset">Количество мест:</h3>
-            {seats.map((seatData) => (
-              <span className="booking__info-text" key={seatData.place_type}>
-                {PlaceTypeOptions.find((option) => option.value === seatData.place_type)?.value}: {seatData.seats_count}
+            {Object.entries(seatsTotalInfo).map(([seatType, seatCount]) => (
+              <span className="booking__info-text" key={seatType}>
+                {PlaceTypeOptions.find((option) => option.value === seatType)?.title}: {seatCount}
               </span>
             ))}
           </div>}

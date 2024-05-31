@@ -24,7 +24,7 @@ export default function BookedCoworkingList(): JSX.Element {
   }, [dispatch]);
 
   if (coworkingsFetching) {
-    return <Loader />;
+    return <Loader horizontalAlignCenter />;
   }
 
   return bookings?.length && fullCoworkingsIds.length

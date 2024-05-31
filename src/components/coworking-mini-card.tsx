@@ -2,7 +2,6 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../routes';
 import { ScheduleDto } from '../types/api-shared/schedule-dto';
 import getImageURL from '../shared/get-image-url';
-import { COWORKING_DEFAULT_IMAGE } from '../consts';
 import getRoundedTime from '../shared/get-rounded-time';
 
 type CoworkingMiniCardProps = {
@@ -15,10 +14,10 @@ type CoworkingMiniCardProps = {
 export default function CoworkingMiniCard({ id, avatar, title, workingSchedule }: CoworkingMiniCardProps): JSX.Element {
   const navigate = useNavigate();
 
-  const imageURL = getImageURL(avatar ?? COWORKING_DEFAULT_IMAGE);
+  const imageURL = getImageURL(avatar);
   const [openingTime, endingTime] = workingSchedule
     ? [getRoundedTime(workingSchedule.start_time), getRoundedTime(workingSchedule.end_time)]
-    : ['00:00', '24:00'];
+    : ['08:00', '20:00'];
 
   const handleCardClick = () => navigate(generatePath(AppRoutes.Booking.FullPath, { id: id }));
 

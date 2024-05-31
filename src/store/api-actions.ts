@@ -54,7 +54,7 @@ export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
   },
 );
 
-export const updateUserDataAction = createAsyncThunk<UserDto | void, UpdateUserData, {
+export const updateUserDataAction = createAsyncThunk<UserDto, UpdateUserData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;

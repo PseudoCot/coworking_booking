@@ -11,10 +11,9 @@ export const COWORKING_DEFAULT_IMAGE = 'coworking-default-image.png';
 export const TELEGRAM_BOT_NAME = '@test_coworking_booking_urfu_bot';
 export const TECHNICAL_SUPPORT_EMAIL = 'ap.makarov@urfu.me';
 
-export const BACKEND_URL = process.env.NODE_ENV === 'development'
-  ? process.env.REACT_APP_PROXY_URL
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  : `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/${process.env.REACT_APP_API_PATH}`;
+export const BACKEND_URL = import.meta.env.DEV
+  ? import.meta.env.VITE_DEV_PROXY_URL
+  : `${import.meta.env.VITE_API_HOST}:${import.meta.env.VITE_API_PORT}/${import.meta.env.VITE_API_PATH}`;
 
 export const ApiMethods = {
   // Auth: 'auth',

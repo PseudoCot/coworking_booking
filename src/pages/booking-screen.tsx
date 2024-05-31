@@ -42,13 +42,13 @@ export default function BookingScreen(): JSX.Element {
           {coworkingDto
             ?
             <>
-              <CoworkingCard title={coworkingDto.title} description={coworkingDto.description}
-                address={coworkingDto.address} images={coworkingDto.images} seats={coworkingDto.seats}
+              <CoworkingCard title={coworkingDto.title} description={coworkingDto.description} address={coworkingDto.address}
+                avatar={coworkingDto.avatar} images={coworkingDto.images} seats={coworkingDto.seats}
                 technicalCapabilities={coworkingDto.technical_capabilities} workingSchedule={coworkingDto.working_schedules}
               />
               <BookingForm />
             </>
-            : coworkingFetching && <Loader />}
+            : coworkingFetching && <Loader horizontalAlignCenter />}
         </div>
 
         {showBookingSuccess &&

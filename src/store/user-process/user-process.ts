@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatuses as Status, NameSpaces, AuthStatuses } from '../../consts';
 import { AuthStatus } from '../../types/auth-status';
-import { refreshSessionAction, loginAction, logoutAction, fetchUserAction, changePasswordAction } from '../api-actions';
+import { refreshSessionAction, loginAction, logoutAction, fetchUserAction, changePasswordAction, updateUserDataAction } from '../api-actions';
 import { UserDto } from '../../types/user/user-dto';
 
 type UserProcessState = {
@@ -77,6 +77,11 @@ export const userProcess = createSlice({
         state.isStudent = action.payload.is_student;
         state.telegramConnected = action.payload.is_telegram_logged_in;
         state.avatarFileName = action.payload.avatar_filename;
+      })
+      .addCase(updateUserDataAction.fulfilled, (state, action: PayloadAction<UserDto>) => {
+        state.lastName = action.payload.last_name;
+        state.firstName = action.payload.first_name;
+        state.patronymic = action.payload.patronymic;
       });
   }
 });

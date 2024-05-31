@@ -824,6 +824,7 @@ body,
 
 /* /// coworkings /// */
 .coworkings {
+  min-height: 500px;
   margin-bottom: 80px;
   display: flex;
   flex-direction: column;
@@ -856,7 +857,8 @@ body,
 .coworkings__list {
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
+  justify-content: space-around;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -871,6 +873,7 @@ body,
 .coworkings__list-item {
   padding: 35px 30px 15px;
   display: flex;
+  width: 400px;
   flex-direction: column;
   align-items: center;
   border-radius: 15px;
@@ -898,6 +901,7 @@ body,
 .coworkings__item-title {
   margin-bottom: 7px;
   font-size: 24px;
+  text-align: center;
   color: var(--theme-text-color);
 }
 
@@ -1162,17 +1166,20 @@ body,
 }
 
 .calendar__form-time-select {
-  padding: 0;
+  padding: 1.5px 7px;
   width: 30px;
   height: 14px;
   font-family: var(--second-family);
-  font-weight: 400;
-  font-size: 8px;
+  font-weight: 500;
+  font-size: 10px;
   color: #000000CC;
   border-radius: 10px;
   border: 1px solid #28359399;
   /* 30% */
   background-color: #ffffff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 /* .calendar__form-select-option {
@@ -1216,7 +1223,7 @@ body,
   padding: 30px 30px 0;
   margin-bottom: 21px;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 350px auto;
   grid-template-rows: auto auto;
   gap: 21px 25px;
   border-radius: 15px;
@@ -1293,6 +1300,7 @@ body,
 .booking__info-header {
   margin-bottom: 18px;
   font-size: 24px;
+  text-align: center;
   color: var(--theme-text-color);
 }
 
