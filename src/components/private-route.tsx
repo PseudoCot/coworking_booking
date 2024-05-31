@@ -10,7 +10,7 @@ export type PrivateRouteProps = PropsWithChildren;
 export default function PrivateRoute({ children }: PrivateRouteProps): JSX.Element {
   const authStatus = useAppSelector(getAuthStatus);
 
-  return authStatus === AuthStatuses.Auth || import.meta.env.VITE_DEV_ALLOW_PRIVATE_PAGES
+  return authStatus === AuthStatuses.Auth || import.meta.env.VITE_DEV_ALLOW_PRIVATE_PAGES === 'false' //temp
     ? children as JSX.Element
     : <Navigate to={AppRoutes.Login.FullPath} />;
 }
