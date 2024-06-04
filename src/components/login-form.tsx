@@ -43,7 +43,7 @@ export default function LoginForm(): JSX.Element {
           {showSubmitError &&
             <span className="login-form__submit-error">Введённые данные не корректны. Попробуйте ещё раз</span>}
           <FormInputGroup groupClasses='login-form__input-group' labelClasses='login-form__label' inputClasses='login-form__input'
-            labelText='Почта' name='email' type='text' inputMode='email' autoComplete='email current-login current-email' required
+            labelText='Почта' name='email' type='email' inputMode='email' autoComplete='email current-login current-email' required
             value={email} onChange={handleEmailChange} showError={emailError} setShowError={setEmailError}
             errorClasses='register-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'
           />

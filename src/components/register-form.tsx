@@ -66,7 +66,7 @@ export default function RegisterForm(): JSX.Element {
             value={patronymic} onChange={handlePatronymicChange}
           />
           <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
-            labelText='Почта' name='email' type='text' inputMode='email' autoComplete='email' required
+            labelText='Почта' name='email' type='email' inputMode='email' autoComplete='email' required
             value={email} onChange={handleEmailChange} showError={emailError} setShowError={setEmailError}
             tooltipClasses='register-form__tooltip' tooltipText='Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me'
             errorClasses='register-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'

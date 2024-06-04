@@ -1,5 +1,5 @@
 type PenInCircleSVGProps = {
-  classes: string;
+  classes?: string;
 };
 
 export default function PenInCircleSVG({ classes }: PenInCircleSVGProps): JSX.Element {

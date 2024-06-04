@@ -50,15 +50,15 @@ export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingS
   return (
     <form className={formClasses} action='#' onSubmit={handleSubmit}>
       <div className="searching__coworking">
-        <input className="searching__coworking-input" type="text" name="title" id="title" autoComplete="coworking"
-          placeholder={inMainScreen ? 'Название коворкинга' : 'Коворкинг'}
+        <input className="searching__coworking-input" type="search" name="title" id="title"
+          inputMode="search" autoComplete="coworking" placeholder={inMainScreen ? 'Название коворкинга' : 'Коворкинг'}
           value={title} onChange={(e) => setTitle(e.target.value)}
         />
       </div>
       <span className="searching__separator-line"></span>
       <div className="searching__institute">
-        <input className="searching__institute-input" type="text" name="institute" id="institute"
-          autoComplete="institute" placeholder="Институт"
+        <input className="searching__institute-input" type="search" name="institute" id="institute"
+          inputMode="search" autoComplete="institute" placeholder="Институт"
           value={institute} onChange={(e) => setInstitute(e.target.value)}
         />
       </div>

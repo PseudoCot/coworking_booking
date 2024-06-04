@@ -1,5 +1,5 @@
 type PenSVGProps = {
-  classes: string;
+  classes?: string;
 };
 
 export default function PenSVG({ classes }: PenSVGProps): JSX.Element {

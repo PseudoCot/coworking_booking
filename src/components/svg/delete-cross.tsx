@@ -1,5 +1,5 @@
 type DeleteCrossSVGProps = {
-  classes: string;
+  classes?: string;
 };
 
 export default function DeleteCrossSVG({ classes }: DeleteCrossSVGProps): JSX.Element {

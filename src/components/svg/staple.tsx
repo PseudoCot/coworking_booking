@@ -1,5 +1,5 @@
 type StapleSVGProps = {
-  classes: string;
+  classes?: string;
 };
 
 export default function StapleSVG({ classes }: StapleSVGProps): JSX.Element {
