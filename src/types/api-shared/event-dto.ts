@@ -1,6 +1,7 @@
 export type EventDto = {
+  id: number;
   coworking_id: string;
-  day: string; // format: date
+  date: string; // format: date
   name: string;
   description?: string;
 };

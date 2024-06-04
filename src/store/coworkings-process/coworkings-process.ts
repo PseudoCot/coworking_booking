@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../consts';
 import { fetchCoworkingsBySearchAction, fetchCoworkingsByTimestampAction } from '../api-actions';
 import { CoworkingShortDto } from '../../types/coworking/coworking-short-dto';
-import { SearchDto } from '../../types/api-shared/search-dto';
+import { CoworkingsSearchDto } from '../../types/api-shared/search-dto';
 
 type CoworkingsProcessState = {
   coworkingsFetching: boolean;
   coworkingsFetchingError: boolean;
   coworkingsDto?: CoworkingShortDto[];
-  searchParams?: SearchDto;
+  searchParams?: CoworkingsSearchDto;
 }
 
 const initialState: CoworkingsProcessState = {
@@ -22,7 +22,7 @@ export const coworkingsProcess = createSlice({
   name: NameSpaces.Coworkings,
   initialState,
   reducers: {
-    setCoworkingSearchParams: (state, action: PayloadAction<SearchDto>) => {
+    setCoworkingSearchParams: (state, action: PayloadAction<CoworkingsSearchDto>) => {
       state.searchParams = action.payload;
     },
     resetCoworkingSearchParams: (state) => {

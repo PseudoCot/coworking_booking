@@ -1,4 +1,4 @@
-export type SearchDto = {
+export type CoworkingsSearchDto = {
   title?: string;
   institute?: string;
 };

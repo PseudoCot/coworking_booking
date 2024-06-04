@@ -2,7 +2,7 @@ import { PlaceTypeOptions } from '../consts';
 import getRoundedTime from '../shared/get-rounded-time';
 import { ScheduleDto } from '../types/api-shared/schedule-dto';
 import { SeatDto } from '../types/api-shared/seat-dto';
-import { TechnicalCapabilityDto } from '../types/api-shared/technical-capability-dto';
+import { CoworkingCapabilityDto } from '../types/api-shared/coworking-capability-dto';
 import { CoworkingImageDto } from '../types/coworking/coworking-image-dto';
 import ImageCarousel from './image-carousel';
 
@@ -14,7 +14,7 @@ type CoworkingCardProps = {
 
   images: CoworkingImageDto[];
   seats: SeatDto[];
-  technicalCapabilities: TechnicalCapabilityDto[];
+  technicalCapabilities: CoworkingCapabilityDto[];
   workingSchedule: ScheduleDto[];
 };
 

@@ -2,7 +2,7 @@ import { CoworkingImageDto } from './coworking-image-dto';
 import { ScheduleDto } from '../api-shared/schedule-dto';
 import { SeatDto } from '../api-shared/seat-dto';
 import { EventDto } from '../api-shared/event-dto';
-import { TechnicalCapabilityDto } from '../api-shared/technical-capability-dto';
+import { CoworkingCapabilityDto } from '../api-shared/coworking-capability-dto';
 
 export type CoworkingDto = {
   id: string;
@@ -15,5 +15,5 @@ export type CoworkingDto = {
   working_schedules: ScheduleDto[];
   images: CoworkingImageDto[];
   events: EventDto[];
-  technical_capabilities: TechnicalCapabilityDto[];
+  technical_capabilities: CoworkingCapabilityDto[];
 };
