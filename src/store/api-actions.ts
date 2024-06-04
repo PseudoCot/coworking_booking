@@ -411,7 +411,7 @@ export const recoverPasswordAction = createAsyncThunk<void, PasswordRecoveryData
 );
 
 
-export const createCoworking = createAsyncThunk<CoworkingShortDto, CreateCoworkingDto, {
+export const createCoworkingAction = createAsyncThunk<CoworkingShortDto, CreateCoworkingDto, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
@@ -431,7 +431,7 @@ export const createCoworking = createAsyncThunk<CoworkingShortDto, CreateCoworki
   },
 );
 
-export const createCoworkingCapability = createAsyncThunk<CoworkingCapabilityDto[], CreateCapabilityData, {
+export const createCoworkingCapabilityAction = createAsyncThunk<CoworkingCapabilityDto[], CreateCapabilityData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
@@ -451,7 +451,7 @@ export const createCoworkingCapability = createAsyncThunk<CoworkingCapabilityDto
   },
 );
 
-export const createCoworkingEvent = createAsyncThunk<EventDto, CreateEventData, {
+export const createCoworkingEventAction = createAsyncThunk<EventDto, CreateEventData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
@@ -471,7 +471,7 @@ export const createCoworkingEvent = createAsyncThunk<EventDto, CreateEventData, 
   },
 );
 
-export const createCoworkingSchedule = createAsyncThunk<ScheduleDto[], CreateScheduleData, {
+export const createCoworkingScheduleAction = createAsyncThunk<ScheduleDto[], CreateScheduleData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
@@ -491,7 +491,7 @@ export const createCoworkingSchedule = createAsyncThunk<ScheduleDto[], CreateSch
   },
 );
 
-export const createCoworkingSeats = createAsyncThunk<SeatDto[], CreateSeatsData, {
+export const createCoworkingSeatsAction = createAsyncThunk<SeatDto[], CreateSeatsData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;

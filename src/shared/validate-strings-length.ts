@@ -1,6 +1,6 @@
-export function validateStringsLength(strings: string[], requiredMinLength = 1): boolean {
+export function validateStringsLength(strings: Array<string | undefined>, requiredMinLength = 1): boolean {
   for (const str of strings) {
-    if (str.length < requiredMinLength) {
+    if (!str || str.length < requiredMinLength) {
       return false;
     }
   }
