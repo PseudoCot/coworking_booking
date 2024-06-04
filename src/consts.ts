@@ -28,8 +28,6 @@ export const ApiMethods = {
   FetchCoworkingsBySearch: 'get_coworking_by_search_params', // coworking-by-search-request-params coworking-short-dto[]
   FetchCoworking: 'get_coworking', // coworking-request-params coworking-dto
 
-  // Avatar, // upload-avatar-request-params, обычнй post запрос, multipart/form-data
-
   // User: 'user',
   FetchUser: 'get_profile', // null, user-dto
   UpdateUser: 'update_user_data', // update-user-request-params user-dto
@@ -42,6 +40,13 @@ export const ApiMethods = {
   // UserSettings: 'settings',
   RequestPasswordRecovery: 'request_reset_password_link',
   PasswordRecovery: 'reset_password',
+
+  // AdminCoworking: 'admin/coworking',
+  CreateCoworking: 'create_coworking',
+  CreateCoworkingCapability: 'create_coworking_tech_capabilities',
+  CreateCoworkingEvent: 'create_coworking_event',
+  CreateCoworkingSchedule: 'register_coworking_working_schedule',
+  CreateCoworkingSeats: 'register_coworking_seats',
 } as const;
 
 export const ApiRoutes = {
@@ -72,6 +77,16 @@ export const ApiRoutes = {
   // UserSettings: 'v1/user/settings',
   RequestPasswordRecovery: 'v1/user/settings/request_reset_password_link',
   PasswordRecovery: 'v1/user/settings/reset_password',
+
+  // AdminCoworking: 'v1/admin/coworking',
+  CreateCoworking: 'v1/admin/coworking/create_coworking',
+  CreateCoworkingCapability: 'v1/admin/coworking/create_coworking_tech_capabilities',
+  CreateCoworkingEvent: 'v1/admin/coworking/create_coworking_event',
+  CreateCoworkingSchedule: 'v1/admin/coworking/register_coworking_working_schedule',
+  CreateCoworkingSeats: 'v1/admin/coworking/register_coworking_seats',
+
+  UploadCoworkingAvatar: 'v1/admin/coworking/avatar',
+  UploadCoworkingImage: 'v1/admin/coworking/image',
 } as const;
 
 export const JsonRpcErrorCodes = {
@@ -100,6 +115,16 @@ export const PlaceTypeOptions: SelectOption[] = [ // value соответств�
   { title: 'Столы', value: 'table' },
   { title: 'Переговорные', value: 'meeting_room' },
 ];
+
+export const Weekdays = {
+  0: 'Понедельник',
+  1: 'Вторник',
+  2: 'Среда',
+  3: 'Четверг',
+  4: 'Пятница',
+  5: 'Суббота',
+  6: 'Воскресенье',
+} as const;
 
 export const NameSpaces = {
   Coworkings: 'Coworkings',

@@ -27,7 +27,6 @@ import { ChangePasswordRequestParams } from '../types/change-password/change-pas
 import { ChangePasswordResponseData } from '../types/change-password/change-password-response-data';
 import { ChangePasswordData } from '../types/change-password/change-password-data';
 import { CoworkingShortDto } from '../types/coworking/coworking-short-dto';
-import { TimestampData } from '../types/api-shared/timestamp-data';
 import { UpdateUserData } from '../types/user/update-user-data';
 import { BookingData } from '../types/booking/booking-data';
 import { CancelBookingRequestParams } from '../types/booking/cancel-booking-request-params';
@@ -35,7 +34,22 @@ import { RequestPasswordRecoveryData } from '../types/recovery-password/request-
 import { RequestRecoveryPasswordRequestParams } from '../types/recovery-password/request-password-recovery-request-params';
 import { PasswordRecoveryData } from '../types/recovery-password/password-recovery-data';
 import { PasswordRecoveryRequestParams } from '../types/recovery-password/password-recovery-request-params';
-import { CoworkingsSearchData } from '../types/api-shared/search-data';
+import { TimestampDto } from '../types/api-shared/timestamp-dto';
+import { CoworkingsSearchDto } from '../types/api-shared/search-dto';
+import { CreateCoworkingDto } from '../types/admin/create-coworking-dto';
+import { CreateCoworkingRequestParams } from '../types/admin/create-coworking-request-params';
+import { CreateCapabilityRequestParams } from '../types/admin/create-capability-request-params';
+import { CreateCapabilityData } from '../types/admin/create-capability-data';
+import { CoworkingCapabilityDto } from '../types/api-shared/coworking-capability-dto';
+import { CreateEventData } from '../types/admin/create-event-data';
+import { CreateEventRequestParams } from '../types/admin/create-event-request-params';
+import { EventDto } from '../types/api-shared/event-dto';
+import { CreateScheduleData } from '../types/admin/create-schedule-data';
+import { CreateScheduleRequestParams } from '../types/admin/create-schedule-request-params';
+import { ScheduleDto } from '../types/api-shared/schedule-dto';
+import { SeatDto } from '../types/api-shared/seat-dto';
+import { CreateSeatsData } from '../types/admin/create-seats-data';
+import { CreateSeatsRequestParams } from '../types/admin/create-seats-request-params';
 
 
 export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
@@ -200,7 +214,7 @@ export const changePasswordAction = createAsyncThunk<void, ChangePasswordData, {
 );
 
 
-export const fetchCoworkingsByTimestampAction = createAsyncThunk<CoworkingShortDto[], TimestampData, {
+export const fetchCoworkingsByTimestampAction = createAsyncThunk<CoworkingShortDto[], TimestampDto, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
@@ -223,7 +237,7 @@ export const fetchCoworkingsByTimestampAction = createAsyncThunk<CoworkingShortD
   },
 );
 
-export const fetchCoworkingsBySearchAction = createAsyncThunk<CoworkingShortDto[], CoworkingsSearchData, {
+export const fetchCoworkingsBySearchAction = createAsyncThunk<CoworkingShortDto[], CoworkingsSearchDto, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
@@ -267,14 +281,20 @@ export const fetchCoworkingAction = createAsyncThunk<CoworkingDto, string, {
 );
 
 
-export const uploadAvatarAction = createAsyncThunk<void, Blob, {
+export const uploadAvatarAction = createAsyncThunk<void, File, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
   'image/uploadAvatar',
   async (avatar, { extra: { api } }) => {
-    await api.post(ApiRoutes.UploadAvatar, avatar); // поставить доп заголовки??? multipart/form-data
+    const formData = new FormData();
+    formData.append('image', avatar);
+    await api.post(ApiRoutes.UploadAvatar, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   },
 );
 
@@ -387,5 +407,142 @@ export const recoverPasswordAction = createAsyncThunk<void, PasswordRecoveryData
     dropToken();
     dispatch(clearUserData());
     dispatch(redirectToRoute(AppRoutes.Login.FullPath));
+  },
+);
+
+
+export const createCoworking = createAsyncThunk<CoworkingShortDto, CreateCoworkingDto, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'admin/createCoworking',
+  async (createData, { extra: { api } }) => {
+    const { data } = await api.post<JsonRpcResponse<CoworkingShortDto>>(ApiRoutes.CreateCoworking,
+      createJsonRpcRequest<CreateCoworkingRequestParams>(
+        ApiMethods.CreateCoworking,
+        {
+          coworking: createData
+        }
+      ));
+
+    // dispatch(redirectToRoute(AppRoutes.Login.FullPath));
+    return data.result;
+  },
+);
+
+export const createCoworkingCapability = createAsyncThunk<CoworkingCapabilityDto[], CreateCapabilityData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'admin/createCoworkingCapability',
+  async (createData, { extra: { api } }) => {
+    const { data } = await api.post<JsonRpcResponse<CoworkingCapabilityDto[]>>(ApiRoutes.CreateCoworkingCapability,
+      createJsonRpcRequest<CreateCapabilityRequestParams>(
+        ApiMethods.CreateCoworkingCapability,
+        {
+          coworking_id: createData.coworkingId,
+          capabilities: createData.capabilities
+        }
+      ));
+
+    return data.result;
+  },
+);
+
+export const createCoworkingEvent = createAsyncThunk<EventDto, CreateEventData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'admin/createCoworkingEvent',
+  async (createData, { extra: { api } }) => {
+    const { data } = await api.post<JsonRpcResponse<EventDto>>(ApiRoutes.CreateCoworkingEvent,
+      createJsonRpcRequest<CreateEventRequestParams>(
+        ApiMethods.CreateCoworkingEvent,
+        {
+          coworking_id: createData.coworkingId,
+          event: createData.event
+        }
+      ));
+
+    return data.result;
+  },
+);
+
+export const createCoworkingSchedule = createAsyncThunk<ScheduleDto[], CreateScheduleData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'admin/createCoworkingSchedule',
+  async (createData, { extra: { api } }) => {
+    const { data } = await api.post<JsonRpcResponse<ScheduleDto[]>>(ApiRoutes.CreateCoworkingSchedule,
+      createJsonRpcRequest<CreateScheduleRequestParams>(
+        ApiMethods.CreateCoworkingSchedule,
+        {
+          coworking_id: createData.coworkingId,
+          schedules: createData.schedules
+        }
+      ));
+
+    return data.result;
+  },
+);
+
+export const createCoworkingSeats = createAsyncThunk<SeatDto[], CreateSeatsData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'admin/createCoworkingSeats',
+  async (createData, { extra: { api } }) => {
+    const { data } = await api.post<JsonRpcResponse<SeatDto[]>>(ApiRoutes.CreateCoworkingSeats,
+      createJsonRpcRequest<CreateSeatsRequestParams>(
+        ApiMethods.CreateCoworkingSeats,
+        {
+          coworking_id: createData.coworkingId,
+          meeting_rooms: createData.meetingRooms,
+          table_places: createData.tablePlaces
+        }
+      ));
+
+    return data.result;
+  },
+);
+
+
+export const uploadCoworkingAvatarAction = createAsyncThunk<void, File, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'image/uploadCoworkingAvatar',
+  async (avatar, { extra: { api } }) => {
+    const formData = new FormData();
+    formData.append('image', avatar);
+    await api.post(ApiRoutes.UploadCoworkingAvatar, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  },
+);
+
+export const uploadCoworkingImageAction = createAsyncThunk<void, File, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'image/uploadCoworkingImage',
+  async (image, { extra: { api } }) => {
+    const formData = new FormData();
+    formData.append('image', image);
+    await api.post(ApiRoutes.UploadCoworkingImage, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   },
 );
