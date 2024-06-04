@@ -1,8 +1,8 @@
-type EditSVGProps = {
+type PenInCircleSVGProps = {
   classes: string;
 };
 
-export default function EditSVG({ classes }: EditSVGProps): JSX.Element {
+export default function PenInCircleSVG({ classes }: PenInCircleSVGProps): JSX.Element {
   return (
     <svg className={classes} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M11.8964 5.70355L11.2786 6.32141L9.67859 4.72141L10.2964 4.10355C10.4917 3.90829 10.8083 3.90829 11.0036 4.10355L11.8964 4.99645C12.0917 5.19171 12.0917 5.50829 11.8964 5.70355Z" fill="#283593" fillOpacity="0.9" />

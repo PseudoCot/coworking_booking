@@ -1,8 +1,8 @@
-type ExitSVGProps = {
+type DoorSVGProps = {
   classes?: string;
 };
 
-export default function ExitSVG({ classes }: ExitSVGProps): JSX.Element {
+export default function DoorSVG({ classes }: DoorSVGProps): JSX.Element {
   return (
     <svg className={classes} width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M13.5 16L0.5 16L0.5 0L13.5 0V5L11.5 5V2H2.5V14L11.5 14V11H13.5V16Z" fill="#14191A" />

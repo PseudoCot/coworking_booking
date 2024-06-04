@@ -1,8 +1,8 @@
-type WarningSVGProps = {
+type ExclamationMarkInCircleSVGProps = {
   classes?: string;
 };
 
-export default function WarningSVG({ classes }: WarningSVGProps): JSX.Element {
+export default function ExclamationMarkInCircleSVG({ classes }: ExclamationMarkInCircleSVGProps): JSX.Element {
   return (
     <svg className={classes} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M7.875 10.5C7.875 10.9832 7.48325 11.375 7 11.375C6.51675 11.375 6.125 10.9832 6.125 10.5C6.125 10.0168 6.51675 9.625 7 9.625C7.48325 9.625 7.875 10.0168 7.875 10.5Z" fill="#283593" />

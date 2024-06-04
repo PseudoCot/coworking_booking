@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getAuthStatus, isUserTelegramConnected } from '../store/user-process/selectors';
-import ExitSVG from './svg/exit';
+import DoorSVG from './svg/door';
 import LogoSVG from './svg/logo';
 import { AuthStatuses } from '../consts';
 import { logoutAction } from '../store/api-actions';
 import { AppRoutes } from '../routes';
-import WarningSVG from './svg/warning';
+import ExclamationMarkInCircleSVG from './svg/exclamation-mark-in-circle';
 import useUserFullName from '../hooks/use-user-full-name';
 
 export default function Header(): JSX.Element {
@@ -40,7 +40,7 @@ export default function Header(): JSX.Element {
       </nav>
       <div className="main-controls">
         {/* <button className="main-controls__language-btn language-btn btn-reset">
-          <LanguageSVG classNames="language-btn__icon" />
+          <PlanetSVG classNames="language-btn__icon" />
           <span className="language-btn__text">RU</span>
           <SelectArrowSVG classNames="language-btn__arrow" />
         </button> */}
@@ -49,10 +49,10 @@ export default function Header(): JSX.Element {
           ?
           <>
             {userTelegramConnected ||
-              <WarningSVG classes="main-controls__warning-sign" />}
+              <ExclamationMarkInCircleSVG classes="main-controls__warning-sign" />}
             <Link to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn cb-white-btn">{userFullName}</Link>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutClick}>
-              <ExitSVG />
+              <DoorSVG />
             </button>
           </>
           :

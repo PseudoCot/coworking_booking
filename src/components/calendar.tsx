@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DateTime, Interval } from 'luxon';
 import classnames from 'classnames';
-import ResetSVG from './svg/reset';
+import HingeSVG from './svg/hinge';
 import TimestampSelectGroup from './timestamp-select-group';
 import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE } from '../consts';
 import { useAppDispatch } from '../hooks';
@@ -75,7 +75,7 @@ export default function Calendar(): JSX.Element {
         </h2>
         <button className="calendar__self-controls-right-btn btn-reset" onClick={() => handleNextMonthClick()} />
         <button className="calendar__self-controls-reset-btn btn-reset" onClick={() => handleResetMonthClick()}>
-          <ResetSVG />
+          <HingeSVG />
         </button>
       </div>
       <div className="calendar__self-grid">
