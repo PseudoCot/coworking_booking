@@ -68,12 +68,12 @@ export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
   },
 );
 
-export const updateUserDataAction = createAsyncThunk<UserDto, UpdateUserData, {
+export const postUserDataAction = createAsyncThunk<UserDto, UpdateUserData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'user/updateUser',
+  'user/postUserData',
   async (updateUserData, { extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<UserDto>>(ApiRoutes.UpdateUser, createJsonRpcRequest<UpdateUserRequestParams>(
       ApiMethods.UpdateUser,
@@ -184,12 +184,12 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const changePasswordAction = createAsyncThunk<void, ChangePasswordData, {
+export const postPasswordChangeAction = createAsyncThunk<void, ChangePasswordData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'user/changePassword',
+  'user/postPasswordChange',
   async (changePasswordData, { dispatch, extra: { fpService, api } }) => {
     const fingerprintId = await fpService.getFingerprintId();
 
@@ -281,12 +281,12 @@ export const fetchCoworkingAction = createAsyncThunk<CoworkingDto, string, {
 );
 
 
-export const uploadAvatarAction = createAsyncThunk<void, File, {
+export const postAvatarAction = createAsyncThunk<void, File, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'image/uploadAvatar',
+  'image/postAvatar',
   async (avatar, { extra: { api } }) => {
     const formData = new FormData();
     formData.append('image', avatar);
@@ -319,12 +319,12 @@ export const fetchBookedCoworkingsAction = createAsyncThunk<BookedCoworkingDto[]
   },
 );
 
-export const bookCoworkingAction = createAsyncThunk<BookedCoworkingDto | undefined, BookingData, {
+export const postBookedCoworkingAction = createAsyncThunk<BookedCoworkingDto | undefined, BookingData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'booking/bookCoworking',
+  'booking/postBookedCoworking',
   async (bookData, { extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<BookedCoworkingDto>>(ApiRoutes.BookCoworking, createJsonRpcRequest<BookingRequestParams>(
       ApiMethods.BookCoworking,
@@ -342,12 +342,12 @@ export const bookCoworkingAction = createAsyncThunk<BookedCoworkingDto | undefin
   },
 );
 
-export const cancelBookingAction = createAsyncThunk<void, number, {
+export const deleteBookingAction = createAsyncThunk<void, number, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'booking/cancelBooking',
+  'booking/deleteBooking',
   async (bookingId, { extra: { api } }) => {
     await api.post<JsonRpcResponse<null>>(ApiRoutes.CancelBooking, createJsonRpcRequest<CancelBookingRequestParams>(
       ApiMethods.CancelBooking,
@@ -366,7 +366,7 @@ export const requestPasswordRecoveryAction = createAsyncThunk<void, RequestPassw
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'userSettings/requestResetPasswordLink',
+  'userSettings/requestPasswordRecoveryLink',
   async (requestPasswordRecoveryData, { extra: { fpService, api } }) => {
     const fingerprintId = await fpService.getFingerprintId();
 
@@ -381,12 +381,12 @@ export const requestPasswordRecoveryAction = createAsyncThunk<void, RequestPassw
   },
 );
 
-export const recoverPasswordAction = createAsyncThunk<void, PasswordRecoveryData, {
+export const postPasswordRecoveryAction = createAsyncThunk<void, PasswordRecoveryData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'userSettings/requestResetPasswordLink',
+  'userSettings/postPasswordRecovery',
   async (passwordResetData, { dispatch, extra: { fpService, api } }) => {
     const fingerprintId = await fpService.getFingerprintId();
 
@@ -411,12 +411,12 @@ export const recoverPasswordAction = createAsyncThunk<void, PasswordRecoveryData
 );
 
 
-export const createCoworkingAction = createAsyncThunk<CoworkingShortDto, CreateCoworkingDto, {
+export const postCoworkingAction = createAsyncThunk<CoworkingShortDto, CreateCoworkingDto, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'admin/createCoworking',
+  'admin/postCoworking',
   async (createData, { extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<CoworkingShortDto>>(ApiRoutes.CreateCoworking,
       createJsonRpcRequest<CreateCoworkingRequestParams>(
@@ -431,12 +431,12 @@ export const createCoworkingAction = createAsyncThunk<CoworkingShortDto, CreateC
   },
 );
 
-export const createCoworkingCapabilityAction = createAsyncThunk<CoworkingCapabilityDto[], CreateCapabilityData, {
+export const postCoworkingCapabilityAction = createAsyncThunk<CoworkingCapabilityDto[], CreateCapabilityData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'admin/createCoworkingCapability',
+  'admin/postCoworkingCapability',
   async (createData, { extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<CoworkingCapabilityDto[]>>(ApiRoutes.CreateCoworkingCapability,
       createJsonRpcRequest<CreateCapabilityRequestParams>(
@@ -451,12 +451,12 @@ export const createCoworkingCapabilityAction = createAsyncThunk<CoworkingCapabil
   },
 );
 
-export const createCoworkingEventAction = createAsyncThunk<EventDto, CreateEventData, {
+export const postCoworkingEventAction = createAsyncThunk<EventDto, CreateEventData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'admin/createCoworkingEvent',
+  'admin/postCoworkingEvent',
   async (createData, { extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<EventDto>>(ApiRoutes.CreateCoworkingEvent,
       createJsonRpcRequest<CreateEventRequestParams>(
@@ -471,12 +471,12 @@ export const createCoworkingEventAction = createAsyncThunk<EventDto, CreateEvent
   },
 );
 
-export const createCoworkingScheduleAction = createAsyncThunk<ScheduleDto[], CreateScheduleData, {
+export const postCoworkingScheduleAction = createAsyncThunk<ScheduleDto[], CreateScheduleData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'admin/createCoworkingSchedule',
+  'admin/postCoworkingSchedule',
   async (createData, { extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<ScheduleDto[]>>(ApiRoutes.CreateCoworkingSchedule,
       createJsonRpcRequest<CreateScheduleRequestParams>(
@@ -491,12 +491,12 @@ export const createCoworkingScheduleAction = createAsyncThunk<ScheduleDto[], Cre
   },
 );
 
-export const createCoworkingSeatsAction = createAsyncThunk<SeatDto[], CreateSeatsData, {
+export const postCoworkingSeatsAction = createAsyncThunk<SeatDto[], CreateSeatsData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'admin/createCoworkingSeats',
+  'admin/postCoworkingSeats',
   async (createData, { extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<SeatDto[]>>(ApiRoutes.CreateCoworkingSeats,
       createJsonRpcRequest<CreateSeatsRequestParams>(
@@ -513,12 +513,12 @@ export const createCoworkingSeatsAction = createAsyncThunk<SeatDto[], CreateSeat
 );
 
 
-export const uploadCoworkingAvatarAction = createAsyncThunk<void, File, {
+export const postCoworkingAvatarAction = createAsyncThunk<void, File, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'image/uploadCoworkingAvatar',
+  'image/postCoworkingAvatar',
   async (avatar, { extra: { api } }) => {
     const formData = new FormData();
     formData.append('image', avatar);
@@ -530,12 +530,12 @@ export const uploadCoworkingAvatarAction = createAsyncThunk<void, File, {
   },
 );
 
-export const uploadCoworkingImageAction = createAsyncThunk<void, File, {
+export const postCoworkingImageAction = createAsyncThunk<void, File, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
-  'image/uploadCoworkingImage',
+  'image/postCoworkingImage',
   async (image, { extra: { api } }) => {
     const formData = new FormData();
     formData.append('image', image);

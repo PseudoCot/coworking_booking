@@ -1,7 +1,7 @@
 import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
-import { changePasswordAction, recoverPasswordAction } from '../store/api-actions';
+import { postPasswordChangeAction, postPasswordRecoveryAction } from '../store/api-actions';
 import { validateStringsLength } from '../shared/validate-strings-length';
 import passwordValidationChecker from '../shared/password-validation-checker';
 import FormInputGroup from './form-input-group';
@@ -28,13 +28,13 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
 
     if (checkPasswordValidity() && checkRepeatedPasswordValidity()) {
       dispatch(token && email
-        ? recoverPasswordAction({
+        ? postPasswordRecoveryAction({
           password: password,
           repeatedPassword: repeatedPassword,
           token: token,
           email: email,
         })
-        : changePasswordAction({
+        : postPasswordChangeAction({
           password: password,
           repeatedPassword: repeatedPassword,
         })

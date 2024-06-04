@@ -1,4 +1,4 @@
-import { WeekdayNumber } from '../weekday-number';
+import { WeekdayNumber } from '../weekday';
 
 export type ScheduleDto = {
   coworking_id: string;

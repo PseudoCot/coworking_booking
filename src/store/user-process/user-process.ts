@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatuses as Status, NameSpaces, AuthStatuses } from '../../consts';
 import { AuthStatus } from '../../types/auth-status';
-import { refreshSessionAction, loginAction, logoutAction, fetchUserAction, changePasswordAction, updateUserDataAction } from '../api-actions';
+import { refreshSessionAction, loginAction, logoutAction, fetchUserAction, postPasswordChangeAction, postUserDataAction } from '../api-actions';
 import { UserDto } from '../../types/user/user-dto';
 
 type UserProcessState = {
@@ -65,7 +65,7 @@ export const userProcess = createSlice({
       .addCase(logoutAction.fulfilled, (state) => {
         state.authStatus = Status.NoAuth;
       })
-      .addCase(changePasswordAction.fulfilled, (state) => {
+      .addCase(postPasswordChangeAction.fulfilled, (state) => {
         state.authStatus = Status.NoAuth;
       })
       .addCase(fetchUserAction.fulfilled, (state, action: PayloadAction<UserDto>) => {
@@ -78,7 +78,7 @@ export const userProcess = createSlice({
         state.telegramConnected = action.payload.is_telegram_logged_in;
         state.avatarFileName = action.payload.avatar_filename;
       })
-      .addCase(updateUserDataAction.fulfilled, (state, action: PayloadAction<UserDto>) => {
+      .addCase(postUserDataAction.fulfilled, (state, action: PayloadAction<UserDto>) => {
         state.lastName = action.payload.last_name;
         state.firstName = action.payload.first_name;
         state.patronymic = action.payload.patronymic;

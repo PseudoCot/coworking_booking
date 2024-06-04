@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../consts';
-import { bookCoworkingAction } from '../api-actions';
+import { postBookedCoworkingAction } from '../api-actions';
 
 type BookingProcessState = {
   bookRequesting: boolean;
@@ -22,17 +22,17 @@ export const bookingProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(bookCoworkingAction.pending, (state) => {
+      .addCase(postBookedCoworkingAction.pending, (state) => {
         state.bookRequesting = true;
         state.bookingSuccess = false;
         state.bookingError = false;
       })
-      .addCase(bookCoworkingAction.fulfilled, (state) => {
+      .addCase(postBookedCoworkingAction.fulfilled, (state) => {
         // state.bookedEventLink = action.payload.eventLink;
         state.bookRequesting = false;
         state.bookingSuccess = true;
       })
-      .addCase(bookCoworkingAction.rejected, (state) => {
+      .addCase(postBookedCoworkingAction.rejected, (state) => {
         state.bookRequesting = false;
         state.bookingError = true;
       });

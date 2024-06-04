@@ -3,7 +3,7 @@ import { PlaceTypeOptions } from '../consts';
 import { useAppDispatch } from '../hooks';
 import getDateAndTimestamp from '../shared/get-date-and-timestamp';
 import getImageURL from '../shared/get-image-url';
-import { cancelBookingAction } from '../store/api-actions';
+import { deleteBookingAction } from '../store/api-actions';
 import { BookedCoworkingDto } from '../types/booking/booked-coworking-dto';
 import SubmitForm from './submit-form';
 
@@ -27,7 +27,7 @@ export default function BookedCoworkingCard({ id, title, description, avatar, se
   };
   const createHandleBookingCancelSubmit = () => {
     setShowBookingCancelSubmit((prev) => !prev);
-    dispatch(cancelBookingAction(id));
+    dispatch(deleteBookingAction(id));
   };
 
   return (

@@ -1,7 +1,7 @@
 import { useState, FormEventHandler, useEffect } from 'react';
 import { validateStringsLength } from '../shared/validate-strings-length';
 import CloseCrossSVG from './svg/close-cross';
-import { updateUserDataAction } from '../store/api-actions';
+import { postUserDataAction } from '../store/api-actions';
 import { useAppDispatch } from '../hooks';
 
 type UserInfoEditingFormProps = {
@@ -26,7 +26,7 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    dispatch(updateUserDataAction({
+    dispatch(postUserDataAction({
       firstName,
       lastName,
       patronymic,

@@ -1,4 +1,4 @@
 export type SelectOption = {
   readonly title: string;
-  readonly value: string;
+  readonly value: string | number;
 };

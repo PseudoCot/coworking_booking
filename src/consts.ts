@@ -116,6 +116,16 @@ export const PlaceTypeOptions: SelectOption[] = [ // value соответств�
   { title: 'Переговорные', value: 'meeting_room' },
 ];
 
+export const WeekdayOptions: SelectOption[] = [
+  { title: 'Понедельник', value: 0 },
+  { title: 'Вторник', value: 1 },
+  { title: 'Среда', value: 2 },
+  { title: 'Четверг', value: 3 },
+  { title: 'Пятница', value: 4 },
+  { title: 'Суббота', value: 5 },
+  { title: 'Воскресенье', value: 6 },
+];
+
 export const Weekdays = {
   0: 'Понедельник',
   1: 'Вторник',

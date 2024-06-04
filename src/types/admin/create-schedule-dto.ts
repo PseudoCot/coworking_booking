@@ -1,4 +1,4 @@
-import { WeekdayNumber } from '../weekday-number';
+import { WeekdayNumber } from '../weekday';
 
 export type CreateScheduleDto = {
   week_day: WeekdayNumber;

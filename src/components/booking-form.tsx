@@ -4,7 +4,7 @@ import TimestampSelectGroup from './timestamp-select-group';
 import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE, PlaceTypeOptions } from '../consts';
 import Select from './select';
 import { DateTime } from 'luxon';
-import { bookCoworkingAction } from '../store/api-actions';
+import { postBookedCoworkingAction } from '../store/api-actions';
 import { getCoworkingId } from '../store/coworking-process/selectors';
 import createISODate from '../shared/create-iso-date';
 
@@ -16,7 +16,7 @@ export default function BookingForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const coworkingId = useAppSelector(getCoworkingId);
 
-  const [placeType, setPlaceType] = useState<string>();
+  const [placeType, setPlaceType] = useState<string | number>();
   const [date, setDate] = useState<string>();
   const [startHour, setStartHour] = useState(FIRST_AVAILABLE_HOUR);
   const [startMinute, setStartMinute] = useState(FIRST_AVAILABLE_MINUTE);
@@ -30,9 +30,9 @@ export default function BookingForm(): JSX.Element {
     e.preventDefault();
 
     if (coworkingId && placeType && date) {
-      dispatch(bookCoworkingAction({
+      dispatch(postBookedCoworkingAction({
         coworkingId: coworkingId,
-        placeType: placeType,
+        placeType: placeType.toString(),
         from: createISODate(date, startHour, startMinute),
         to: createISODate(date, endHour, endMinute),
       }));
