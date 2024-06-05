@@ -30,7 +30,7 @@ export default function SelectOption({ classes = '', option: { value, title }, o
   }, [value, handleClick]);
 
   return (
-    <li className={`${classes} select__option`} ref={optionRef}
+    <li className={`${classes} select-option`} ref={optionRef}
       value={value} onClick={() => handleClick(value)} tabIndex={0}
     >
       {title}

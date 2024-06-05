@@ -47,12 +47,12 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
   }, [password, repeatedPassword]);
 
   return (
-    <form className="new-password__form new-password-form cb-form" action="#" onSubmit={handleSubmit}>
-      <div className="new-password-form__wrapper cb-form-wrapper">
-        <div className="new-password-form__top cb-form-top">
-          <h2 className="new-password-form__title cb-form-title title-reset">Сменить пароль</h2>
+    <form className="new-password__form new-password-form form" action="#" onSubmit={handleSubmit}>
+      <div className="new-password-form__wrapper form-wrapper">
+        <div className="new-password-form__top form-top">
+          <h2 className="new-password-form__title form-title title-reset">Сменить пароль</h2>
         </div>
-        <div className="new-password-form__bottom cb-form-bottom">
+        <div className="new-password-form__bottom form-bottom">
           <FormInputGroup groupClasses='new-password-form__input-group' labelClasses='new-password-form__label' inputClasses='new-password-form__input'
             labelText='Новый пароль' name='password' type='password' autoComplete='new-password' required
             value={password} onChange={handlePasswordChange} showError={passwordError} setShowError={setPasswordError}
@@ -64,7 +64,7 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
             value={repeatedPassword} onChange={handleRepeatedPasswordChange} showError={repeatedPasswordError} setShowError={setRepeatedPasswordError}
             errorClasses='new-password-form__group-error' errorText='Пароли не совпадают'
           />
-          <button className="new-password-form__submit-btn cb-form-btn cb-light-btn btn-reset"
+          <button className="new-password-form__submit-btn form-btn light-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
             Сохранить

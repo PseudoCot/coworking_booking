@@ -31,10 +31,10 @@ export default function Header(): JSX.Element {
       <nav className="header__nav nav">
         <ul className="nav__items list-reset">
           <li className="nav__item">
-            <Link to={AppRoutes.Coworkings.FullPath} className="nav__item-link cb-link">Бронирование</Link>
+            <Link to={AppRoutes.Coworkings.FullPath} className="nav__item-link link">Бронирование</Link>
           </li>
           <li className="nav__item">
-            <Link to={AppRoutes.Calendar.FullPath} className="nav__item-link cb-link">Календарь</Link>
+            <Link to={AppRoutes.Calendar.FullPath} className="nav__item-link link">Календарь</Link>
           </li>
         </ul>
       </nav>
@@ -50,15 +50,15 @@ export default function Header(): JSX.Element {
           <>
             {userTelegramConnected ||
               <ExclamationMarkInCircleSVG classes="main-controls__warning-sign" />}
-            <Link to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn cb-white-btn">{userFullName}</Link>
+            <Link to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn white-btn">{userFullName}</Link>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutClick}>
               <DoorSVG />
             </button>
           </>
           :
           <>
-            <Link to={AppRoutes.Register.FullPath} className="main-controls__register-btn cb-hollow-btn">Регистрация</Link>
-            <Link to={AppRoutes.Login.FullPath} className="main-controls__login-btn cb-white-btn">Вход</Link>
+            <Link to={AppRoutes.Register.FullPath} className="main-controls__register-btn hollow-btn">Регистрация</Link>
+            <Link to={AppRoutes.Login.FullPath} className="main-controls__login-btn white-btn">Вход</Link>
           </>}
       </div>
     </header>

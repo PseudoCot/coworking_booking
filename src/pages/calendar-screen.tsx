@@ -6,7 +6,7 @@ export default function CalendarScreen(): JSX.Element {
   return (
     <Layout>
       <article className="calendar">
-        <h1 className="calendar__title cb-title title-reset">Календарь</h1>
+        <h1 className="calendar__title title title-reset">Календарь</h1>
 
         {/* <div className="calendar__iframe-wrapper">
           <iframe className="calendar__iframe"

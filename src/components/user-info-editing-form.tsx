@@ -67,10 +67,10 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
           </div>
         </div>
         <div className="user-acc__info-btns">
-          <button className="user-acc__info-edit-btn cb-light-btn btn-reset" type='submit' disabled={!submitEnabled}>
+          <button className="user-acc__info-edit-btn light-btn btn-reset" type='submit' disabled={!submitEnabled}>
             Редактировать
           </button>
-          <button className="user-acc__info-change-password-btn cb-light-btn btn-reset" onClick={handleChangePasswordClick}>
+          <button className="user-acc__info-change-password-btn light-btn btn-reset" onClick={handleChangePasswordClick}>
             Сменить пароль
           </button>
         </div>

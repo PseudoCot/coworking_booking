@@ -34,12 +34,12 @@ export default function LoginForm(): JSX.Element {
   }, [email, password, checkEmailValidity]);
 
   return (
-    <form className="login__form login-form cb-form" action="#" onSubmit={handleSubmit}>
-      <div className="login-form__wrapper cb-form-wrapper">
-        <div className="login-form__top cb-form-top">
-          <h2 className="login-form__title cb-form-title title-reset">Вход</h2>
+    <form className="login__form login-form form" action="#" onSubmit={handleSubmit}>
+      <div className="login-form__wrapper form-wrapper">
+        <div className="login-form__top form-top">
+          <h2 className="login-form__title form-title title-reset">Вход</h2>
         </div>
-        <div className="login-form__bottom cb-form-bottom">
+        <div className="login-form__bottom form-bottom">
           {showSubmitError &&
             <span className="login-form__submit-error">Введённые данные не корректны. Попробуйте ещё раз</span>}
           <FormInputGroup groupClasses='login-form__input-group' labelClasses='login-form__label' inputClasses='login-form__input'
@@ -52,10 +52,10 @@ export default function LoginForm(): JSX.Element {
             value={password} onChange={handlePasswordChange}
           />
           <div className="login-form__btns">
-            <button className="login-form__submit-btn cb-form-btn cb-light-btn btn-reset" type='submit' disabled={!submitEnabled}>
+            <button className="login-form__submit-btn form-btn light-btn btn-reset" type='submit' disabled={!submitEnabled}>
               Войти
             </button>
-            <a href={AppRoutes.PasswordRecovery.FullPath} className="login-form__reset-password-btn cb-form-btn cb-light-btn btn-reset">
+            <a href={AppRoutes.PasswordRecovery.FullPath} className="login-form__reset-password-btn form-btn light-btn btn-reset">
               Восстановить пароль
             </a>
           </div>

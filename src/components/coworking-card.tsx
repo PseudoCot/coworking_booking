@@ -1,25 +1,12 @@
 import { PlaceTypeOptions } from '../consts';
 import getRoundedTime from '../shared/get-rounded-time';
-import { ScheduleDto } from '../types/api-shared/schedule-dto';
-import { SeatDto } from '../types/api-shared/seat-dto';
-import { CoworkingCapabilityDto } from '../types/api-shared/coworking-capability-dto';
-import { CoworkingImageDto } from '../types/coworking/coworking-image-dto';
 import ImageCarousel from './image-carousel';
+import { CoworkingDto } from '../types/coworking/coworking-dto';
 
-type CoworkingCardProps = {
-  avatar?: string;
-  title: string;
-  description: string;
-  address: string;
+type CoworkingCardProps = CoworkingDto;
 
-  images: CoworkingImageDto[];
-  seats: SeatDto[];
-  technicalCapabilities: CoworkingCapabilityDto[];
-  workingSchedule: ScheduleDto[];
-};
-
-export default function CoworkingCard({ avatar, title, description, address, seats,
-  workingSchedule, images, technicalCapabilities }: CoworkingCardProps): JSX.Element {
+export default function CoworkingCard({ avatar, title, description, address, seats, working_schedules: workingSchedule,
+  images, technical_capabilities: technicalCapabilities }: CoworkingCardProps): JSX.Element {
   // let avatarURL = avatar && getImageURL(avatar);
   // avatarURL = avatarURL || import.meta.env.DEV
   //   ? 'img/coworking-default-image.png'

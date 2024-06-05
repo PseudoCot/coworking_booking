@@ -25,8 +25,8 @@ export default function TimestampSelectGroup({ subLabelClasses = '', timeGroupCl
 
   return (
     <>
-      <span className={`${subLabelClasses} cb-form-sub-label`}>Начало:</span>
-      <div className={`${timeGroupClasses} cb-form-input`}>
+      <span className={`${subLabelClasses} form-sub-label`}>Начало:</span>
+      <div className={`${timeGroupClasses} form-input`}>
         <select className={timeSelectClasses} name="start-time-hours" id="start-time-hours"
           value={startHour} onChange={(e) => handleStartHourChange(e.target.value)}
         >
@@ -43,8 +43,8 @@ export default function TimestampSelectGroup({ subLabelClasses = '', timeGroupCl
           ))}
         </select>
       </div>
-      <span className={`${subLabelClasses} cb-form-sub-label`}>Конец:</span>
-      <div className={`${timeGroupClasses} cb-form-input`}>
+      <span className={`${subLabelClasses} form-sub-label`}>Конец:</span>
+      <div className={`${timeGroupClasses} form-input`}>
         <select className={timeSelectClasses} name="end-time-hours" id="end-time-hours"
           value={endHour} onChange={(e) => handleEndHourChange(e.target.value)}
         >

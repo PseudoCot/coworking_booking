@@ -44,28 +44,28 @@ export default function BookingForm(): JSX.Element {
   }, [placeType, date]);
 
   return (
-    <form className="booking__form cb-form" action="#" onSubmit={handleSubmit}>
-      <div className="booking__form-wrapper cb-form-wrapper">
-        <div className="booking__form-top cb-form-top">
-          <h2 className="booking__form-title cb-form-title title-reset">Форма бронирования</h2>
+    <form className="booking__form form" action="#" onSubmit={handleSubmit}>
+      <div className="booking__form-wrapper form-wrapper">
+        <div className="booking__form-top form-top">
+          <h2 className="booking__form-title form-title title-reset">Форма бронирования</h2>
         </div>
-        <div className="booking__form-bottom cb-form-bottom">
-          <div className="booking__form-group cb-form-group">
-            <label className="booking__form-label cb-form-label" htmlFor="type">Тип места:</label>
+        <div className="booking__form-bottom form-bottom">
+          <div className="booking__form-group form-group">
+            <label className="booking__form-label form-label" htmlFor="type">Тип места:</label>
             <Select
               options={PlaceTypeOptions}
               selectedOption={selectedPlaceType}
               onChange={setPlaceType}
             />
           </div>
-          <div className="booking__form-group cb-form-group">
-            <label className="booking__form-label cb-form-label" htmlFor="date">Дата:</label>
-            <input className="booking__form-input cb-form-input" type="date" name="date" id="booking-date"
+          <div className="booking__form-group form-group">
+            <label className="booking__form-label form-label" htmlFor="date">Дата:</label>
+            <input className="booking__form-input form-input" type="date" name="date" id="booking-date"
               value={date} onChange={(e) => setDate(e.target.value)} min={currentDate} max={nextMonthDate}
             />
           </div>
-          <div className="booking__form-group cb-form-group">
-            <label className="booking__form-label cb-form-label" htmlFor="time">Время:</label>
+          <div className="booking__form-group form-group">
+            <label className="booking__form-label form-label" htmlFor="time">Время:</label>
             <TimestampSelectGroup subLabelClasses='booking__form-sub-label' timeGroupClasses='booking__form-time-group'
               timeSelectClasses='booking__form-time-select' selectOptionClasses='booking__form-select-option'
               timesSeparatorClasses='booking__form-time-separator' startHour={startHour} startMinute={startMinute}
@@ -73,7 +73,7 @@ export default function BookingForm(): JSX.Element {
               onEndHourChange={setEndHour} onEndMinuteChange={setEndMinute}
             />
           </div>
-          <button className="booking__form-submit-btn cb-form-btn cb-light-btn btn-reset"
+          <button className="booking__form-submit-btn form-btn light-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
             Забронировать

@@ -20,13 +20,13 @@ export default function Toast({ toastClasses = '', toastTitleClasses = '', toast
   };
 
   return (
-    <div className={modalWindow ? 'cb-toast-wrapper' : ''} ref={toastWrapperRef}>
-      <div className={`${toastClasses} cb-toast`}>
-        <button className="cb-close-toast-btn btn-reset" onClick={handleCloseClick}>
+    <div className={modalWindow ? 'toast-wrapper' : ''} ref={toastWrapperRef}>
+      <div className={`${toastClasses} toast`}>
+        <button className="close-toast-btn btn-reset" onClick={handleCloseClick}>
           <CloseCrossSVG />
         </button>
-        <h2 className={`${toastTitleClasses} cb-toast-title title-reset`}>{title}</h2>
-        <p className={`${toastTextClasses} cb-toast-text paragraph-reset`}>
+        <h2 className={`${toastTitleClasses} toast-title title-reset`}>{title}</h2>
+        <p className={`${toastTextClasses} toast-text paragraph-reset`}>
           {text}
         </p>
         {children}

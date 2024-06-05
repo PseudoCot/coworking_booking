@@ -69,13 +69,13 @@ export default function Select({ selectClasses = '', placeholderClasses = '',
 
   return (
     <div className={`${selectClasses} select`} ref={rootRef} data-is-active={isOpen}>
-      <div className={`${placeholderClasses} select__placeholder`} ref={placeholderRef}
+      <div className={`${placeholderClasses} select-placeholder`} ref={placeholderRef}
         data-selected={!!selectedOption?.value} onClick={handlePlaceholderClick} role="button" tabIndex={0}
       >
         {selectedOption?.title || placeholder}
       </div>
       {isOpen && (
-        <ul className={`${optionListClasses} select__option-list list-reset`}>
+        <ul className={`${optionListClasses} select-option-list list-reset`}>
           {options.map((option) => (
             <SelectOption
               key={option.value}

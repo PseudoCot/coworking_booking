@@ -60,7 +60,7 @@ export default function BookedCoworkingCard({ id, title, description, avatar, se
               {PlaceTypeOptions.find((option) => option.value === seat.place_type)?.value}
             </span>
           </div>
-          <button className="booking__info-cancel-btn cb-light-btn btn-reset" onClick={handleBookingCancelToggle}>
+          <button className="booking__info-cancel-btn light-btn btn-reset" onClick={handleBookingCancelToggle}>
             Отменить
           </button>
         </div>

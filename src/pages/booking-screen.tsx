@@ -36,16 +36,13 @@ export default function BookingScreen(): JSX.Element {
   return (
     <Layout>
       <article className="booking">
-        <h1 className="booking__title cb-title title-reset">Коворкинги</h1>
+        <h1 className="booking__title title title-reset">Коворкинги</h1>
 
         <div className="booking__wrapper">
           {coworkingDto
             ?
             <>
-              <CoworkingCard title={coworkingDto.title} description={coworkingDto.description} address={coworkingDto.address}
-                avatar={coworkingDto.avatar} images={coworkingDto.images} seats={coworkingDto.seats}
-                technicalCapabilities={coworkingDto.technical_capabilities} workingSchedule={coworkingDto.working_schedules}
-              />
+              <CoworkingCard {...coworkingDto} />
               <BookingForm />
             </>
             : coworkingFetching && <Loader horizontalAlignCenter />}
@@ -61,7 +58,7 @@ export default function BookingScreen(): JSX.Element {
             Если подтверждение не будет получено за 30 минут до начала брони, то она будет отменена.`}
           >
             <span className="booking__toast-btn-desc">Чтобы добавить бронь в свой календарь, нажмите на кнопку</span>
-            <a href={calendarEventLink} className="booking__toast-btn cb-light-btn">Google Calendar</a>
+            <a href={calendarEventLink} className="booking__toast-btn light-btn">Google Calendar</a>
           </Toast>}
         {showBookingError &&
           <Toast toastClasses='booking__toast' toastTitleClasses='booking__toast-title' toastTextClasses='booking__toast-text'

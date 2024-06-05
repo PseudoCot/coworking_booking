@@ -47,12 +47,12 @@ export default function RegisterForm(): JSX.Element {
   }, [lastName, firstName, email, password, repeatedPassword]);
 
   return (
-    <form className="register__form register-form cb-form" action="#" onSubmit={handleSubmit}>
-      <div className="register-form__wrapper cb-form-wrapper">
-        <div className="register-form__top cb-form-top">
-          <h2 className="register-form__title cb-form-title title-reset">Регистрация</h2>
+    <form className="register__form register-form form" action="#" onSubmit={handleSubmit}>
+      <div className="register-form__wrapper form-wrapper">
+        <div className="register-form__top form-top">
+          <h2 className="register-form__title form-title title-reset">Регистрация</h2>
         </div>
-        <div className="register-form__bottom cb-form-bottom">
+        <div className="register-form__bottom form-bottom">
           <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
             labelText='Фамилия' name='last-name' type='text' autoCapitalize='words' autoComplete='last-name' required
             value={lastName} onChange={handleLastNameChange}
@@ -82,7 +82,7 @@ export default function RegisterForm(): JSX.Element {
             value={repeatedPassword} onChange={handleRepeatedPasswordChange} showError={repeatedPasswordError} setShowError={setRepeatedPasswordError}
             errorClasses='register-form__group-error' errorText='Пароли не совпадают'
           />
-          <button className="register-form__submit-btn cb-form-btn cb-light-btn btn-reset"
+          <button className="register-form__submit-btn form-btn light-btn btn-reset"
             type='submit' disabled={!submitEnabled}
           >
             Зарегистрироваться

@@ -63,11 +63,11 @@ export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingS
         />
       </div>
       <span className="searching__separator-line"></span>
-      <button className="searching__submit-btn cb-blue-btn btn-reset" type="submit">Поиск</button>
+      <button className="searching__submit-btn blue-btn btn-reset" type="submit">Поиск</button>
       {!inMainScreen &&
         <>
           <span className="searching__separator-line"></span>
-          <button className="searching__show-all-btn cb-white-btn btn-reset" onClick={handleShowAllClick}>Показать все</button>
+          <button className="searching__show-all-btn white-btn btn-reset" onClick={handleShowAllClick}>Показать все</button>
         </>}
     </form>
   );

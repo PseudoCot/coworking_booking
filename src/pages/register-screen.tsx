@@ -5,7 +5,7 @@ export default function RegisterScreen(): JSX.Element {
   return (
     <Layout>
       <article className="register">
-        <h1 className="register__title cb-title title-reset">Регистрация</h1>
+        <h1 className="register__title title title-reset">Регистрация</h1>
 
         <RegisterForm />
       </article>

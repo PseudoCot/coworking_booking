@@ -13,6 +13,8 @@ type FormInputGroupProps = {
   errorClasses?: string;
 
   required?: boolean;
+  textarea?: boolean;
+  adminFormStyles?: boolean;
 
   labelText: string;
   name: string;
@@ -22,7 +24,7 @@ type FormInputGroupProps = {
   autoComplete?: string;
 
   value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 
   tooltipText?: string;
   errorText?: string;
@@ -30,8 +32,8 @@ type FormInputGroupProps = {
   setShowError?: (value: boolean) => void;
 };
 
-export default function FormInputGroup({ groupClasses = '', labelClasses = '', inputClasses = '',
-  tooltipClasses = '', errorClasses = '', required, labelText, name, type, inputMode, autoCapitalize, autoComplete,
+export default function FormInputGroup({ groupClasses = '', labelClasses = '', inputClasses = '', tooltipClasses = '',
+  errorClasses = '', required, textarea, adminFormStyles, labelText, name, type, inputMode, autoCapitalize, autoComplete,
   value, onChange: handleChange, tooltipText, errorText, showError, setShowError }: FormInputGroupProps): JSX.Element {
 
   // исчезновение сообщения об ошибке через некоторое количество секунд
@@ -49,26 +51,35 @@ export default function FormInputGroup({ groupClasses = '', labelClasses = '', i
   }, [errorText, showError, setShowError]);
 
   return (
-    <div className={`${groupClasses} cb-form-group ${required ? 'cb-form-group--required' : ''}`}>
-      <label className={`${labelClasses} cb-form-label`} htmlFor={name}>{labelText}</label>
-      <input className={`${inputClasses} cb-form-input`}
-        type={type}
-        name={name}
-        id={name}
-        inputMode={inputMode}
-        autoCapitalize={autoCapitalize}
-        autoComplete={autoComplete}
-        value={value}
-        onChange={handleChange}
-      />
+    <div className={`${groupClasses} ${adminFormStyles ? 'admin-form-group' : 'form-group'} ${required ? 'form-group--required' : ''}`}>
+      <label className={`${labelClasses} ${adminFormStyles ? 'admin-form-label' : 'form-label'}`} htmlFor={name}>{labelText}</label>
+      {textarea
+        ?
+        <textarea className={`${inputClasses} ${adminFormStyles ? 'admin-form-textarea' : 'form-textarea'}`}
+          name={name}
+          id={name}
+          value={value}
+          onChange={handleChange}
+        />
+        :
+        <input className={`${inputClasses} ${adminFormStyles ? 'admin-form-input' : 'form-input'}`}
+          type={type}
+          name={name}
+          id={name}
+          inputMode={inputMode}
+          autoCapitalize={autoCapitalize}
+          autoComplete={autoComplete}
+          value={value}
+          onChange={handleChange}
+        />}
       {tooltipText &&
-        <span className={`${tooltipClasses} cb-form-tooltip`}
+        <span className={`${tooltipClasses} form-tooltip`}
           data-tip={tooltipText}
         >
           <TipSVG />
         </span>}
       {errorText &&
-        <span className={`${errorClasses} ${showError ? 'cb-form-group-error--active' : ''} cb-form-group-error`}>
+        <span className={`${errorClasses} ${showError ? 'form-group-error--active' : ''} form-group-error`}>
           {errorText}
         </span>}
     </div>
