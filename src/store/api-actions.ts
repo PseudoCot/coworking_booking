@@ -50,6 +50,8 @@ import { ScheduleDto } from '../types/api-shared/schedule-dto';
 import { SeatDto } from '../types/api-shared/seat-dto';
 import { CreateSeatsData } from '../types/admin/create-seats-data';
 import { CreateSeatsRequestParams } from '../types/admin/create-seats-request-params';
+import { UploadAvatarData } from '../types/admin/upload-avatar-data';
+import { UploadImageData } from '../types/admin/upload-image-data';
 
 
 export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
@@ -513,16 +515,16 @@ export const postCoworkingSeatsAction = createAsyncThunk<SeatDto[], CreateSeatsD
 );
 
 
-export const postCoworkingAvatarAction = createAsyncThunk<void, File, {
+export const postCoworkingAvatarAction = createAsyncThunk<void, UploadAvatarData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
   'image/postCoworkingAvatar',
-  async (avatar, { extra: { api } }) => {
+  async (avatarData, { extra: { api } }) => {
     const formData = new FormData();
-    formData.append('image', avatar);
-    await api.post(ApiRoutes.UploadCoworkingAvatar, formData, {
+    formData.append('image', avatarData.avatar);
+    await api.post(`${ApiRoutes.UploadCoworkingAvatar}?coworking_id=${avatarData.coworkingId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -530,16 +532,16 @@ export const postCoworkingAvatarAction = createAsyncThunk<void, File, {
   },
 );
 
-export const postCoworkingImageAction = createAsyncThunk<void, File, {
+export const postCoworkingImageAction = createAsyncThunk<void, UploadImageData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
   'image/postCoworkingImage',
-  async (image, { extra: { api } }) => {
+  async (imageData, { extra: { api } }) => {
     const formData = new FormData();
-    formData.append('image', image);
-    await api.post(ApiRoutes.UploadCoworkingImage, formData, {
+    formData.append('image', imageData.image);
+    await api.post(`${ApiRoutes.UploadCoworkingImage}?coworking_id=${imageData.coworkingId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
