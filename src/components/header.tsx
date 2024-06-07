@@ -6,7 +6,7 @@ import LogoSVG from './svg/logo';
 import { AuthStatuses } from '../consts';
 import { logoutAction } from '../store/api-actions';
 import { AppRoutes } from '../routes';
-import ExclamationMarkInCircleSVG from './svg/exclamation-mark-in-circle';
+import ExclamationMarkSVG from './svg/exclamation-mark';
 import useUserFullName from '../hooks/use-user-full-name';
 
 export default function Header(): JSX.Element {
@@ -49,7 +49,7 @@ export default function Header(): JSX.Element {
           ?
           <>
             {userTelegramConnected ||
-              <ExclamationMarkInCircleSVG classes="main-controls__warning-sign" />}
+              <ExclamationMarkSVG classes="main-controls__warning-sign" />}
             <Link to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn white-btn">{userFullName}</Link>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutClick}>
               <DoorSVG />
