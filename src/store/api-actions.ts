@@ -413,22 +413,76 @@ export const postPasswordRecoveryAction = createAsyncThunk<void, PasswordRecover
 );
 
 
+export const postCoworkingAvatarAction = createAsyncThunk<void, UploadAvatarData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'image/postCoworkingAvatar',
+  async (avatarData, { extra: { api } }) => {
+    const formData = new FormData();
+    formData.append('image', avatarData.avatar);
+    await api.post(`${ApiRoutes.UploadCoworkingAvatar}?coworking_id=${avatarData.coworkingId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  },
+);
+
+export const postCoworkingImageAction = createAsyncThunk<void, UploadImageData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'image/postCoworkingImage',
+  async (imageData, { extra: { api } }) => {
+    const formData = new FormData();
+    formData.append('image', imageData.image);
+    await api.post(`${ApiRoutes.UploadCoworkingImage}?coworking_id=${imageData.coworkingId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  },
+);
+
+
 export const postCoworkingAction = createAsyncThunk<CoworkingShortDto, CreateCoworkingDto, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
   'admin/postCoworking',
-  async (createData, { extra: { api } }) => {
+  async (createData, { dispatch, extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<CoworkingShortDto>>(ApiRoutes.CreateCoworking,
       createJsonRpcRequest<CreateCoworkingRequestParams>(
         ApiMethods.CreateCoworking,
         {
-          coworking: createData
+          coworking: {
+            title: createData.title,
+            institute: createData.institute,
+            description: createData.description,
+            address: createData.address
+          }
         }
       ));
 
-    // dispatch(redirectToRoute(AppRoutes.Login.FullPath));
+    if (createData.avatar) {
+      dispatch(postCoworkingAvatarAction({
+        coworkingId: '123',
+        avatar: createData.avatar
+      }));
+    }
+    if (createData.images) {
+      createData.images.forEach((image) => {
+        dispatch(postCoworkingImageAction({
+          coworkingId: '123',
+          image: image
+        }));
+      });
+    }
+
     return data.result;
   },
 );
@@ -511,40 +565,5 @@ export const postCoworkingSeatsAction = createAsyncThunk<SeatDto[], CreateSeatsD
       ));
 
     return data.result;
-  },
-);
-
-
-export const postCoworkingAvatarAction = createAsyncThunk<void, UploadAvatarData, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: ThunkExtraArgument;
-}>(
-  'image/postCoworkingAvatar',
-  async (avatarData, { extra: { api } }) => {
-    const formData = new FormData();
-    formData.append('image', avatarData.avatar);
-    await api.post(`${ApiRoutes.UploadCoworkingAvatar}?coworking_id=${avatarData.coworkingId}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
-  },
-);
-
-export const postCoworkingImageAction = createAsyncThunk<void, UploadImageData, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: ThunkExtraArgument;
-}>(
-  'image/postCoworkingImage',
-  async (imageData, { extra: { api } }) => {
-    const formData = new FormData();
-    formData.append('image', imageData.image);
-    await api.post(`${ApiRoutes.UploadCoworkingImage}?coworking_id=${imageData.coworkingId}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
   },
 );
