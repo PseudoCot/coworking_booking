@@ -6,8 +6,9 @@ import LogoSVG from './svg/logo';
 import { AuthStatuses } from '../consts';
 import { logoutAction } from '../store/api-actions';
 import { AppRoutes } from '../routes';
-import ExclamationMarkSVG from './svg/exclamation-mark';
+import WarningSVG from './svg/warning';
 import useUserFullName from '../hooks/use-user-full-name';
+import Loader from './loader';
 
 export default function Header(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -48,9 +49,11 @@ export default function Header(): JSX.Element {
         {authStatus === AuthStatuses.Auth
           ?
           <>
-            {userTelegramConnected ||
-              <ExclamationMarkSVG classes="main-controls__warning-sign" />}
-            <Link to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn white-btn">{userFullName}</Link>
+            {userTelegramConnected === false &&
+              <WarningSVG classes="main-controls__warning-sign" />}
+            <Link to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn white-btn">
+              {userFullName ?? <Loader />}
+            </Link>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutClick}>
               <DoorSVG />
             </button>
