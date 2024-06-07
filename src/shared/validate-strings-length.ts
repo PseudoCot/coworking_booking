@@ -1,4 +1,6 @@
-export function validateStringsLength(strings: Array<string | undefined>, requiredMinLength = 1): boolean {
+import { Validator } from '../types/validator';
+
+export const validateStringsLength: Validator<boolean> = (strings: Array<string | undefined>, requiredMinLength = 1): boolean => {
   for (const str of strings) {
     if (!str || str.length < requiredMinLength) {
       return false;
@@ -7,4 +9,6 @@ export function validateStringsLength(strings: Array<string | undefined>, requir
   return true;
 
   // return strings.reduce((res, str) => res && str.length >= requiredMinLength, true);
-}
+};
+
+export default validateStringsLength;

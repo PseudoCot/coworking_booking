@@ -1,14 +1,14 @@
 import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
-import emailValidationChecker from '../shared/email-validation-checker';
+import { validateEmail as emailValidator } from '../shared/validate-email';
 import FormInputGroup from './form-input-group';
 import { requestPasswordRecoveryAction } from '../store/api-actions';
 
 export default function RequestPasswordRecoveryForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
+  const [email, setEmail, emailError, setEmailError, validateEmail] = useInput<string>(emailValidator, '');
 
   const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
 
@@ -16,7 +16,7 @@ export default function RequestPasswordRecoveryForm(): JSX.Element {
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    if (checkEmailValidity()) {
+    if (email && validateEmail()) {
       dispatch(requestPasswordRecoveryAction({
         email
       }));

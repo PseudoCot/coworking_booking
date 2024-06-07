@@ -2,9 +2,9 @@ import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
 import { postPasswordChangeAction, postPasswordRecoveryAction } from '../store/api-actions';
-import { validateStringsLength } from '../shared/validate-strings-length';
-import passwordValidationChecker from '../shared/password-validation-checker';
+import { validatePassword as passwordValidator } from '../shared/validate-password';
 import FormInputGroup from './form-input-group';
+import validateStringsLength from '../shared/validate-strings-length';
 
 export type ChangePasswordFormProps = {
   token?: string;
@@ -14,10 +14,10 @@ export type ChangePasswordFormProps = {
 export default function ChangePasswordForm({ token, email }: ChangePasswordFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [password, setPassword, passwordError, setPasswordError, checkPasswordValidity] = useInput(passwordValidationChecker);
-  const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, setRepeatedPasswordError, checkRepeatedPasswordValidity] = useInput(
-    (value: string) => password === value // проверить
-  );
+  const [password, setPassword, passwordError, setPasswordError, validatePassword] =
+    useInput<string>(passwordValidator, '');
+  const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, setRepeatedPasswordError, validateRepeatedPassword] =
+    useInput<string>((value: string) => password === value, '');
 
   const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
   const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
@@ -26,7 +26,7 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    if (checkPasswordValidity() && checkRepeatedPasswordValidity()) {
+    if (validatePassword() && validateRepeatedPassword()) {
       dispatch(token && email
         ? postPasswordRecoveryAction({
           password: password,

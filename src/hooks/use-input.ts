@@ -1,12 +1,16 @@
 import { useState } from 'react';
 
-export default function useInput(validationChecker: (value: string) => boolean | RegExpMatchArray | null, initialValue = '') {
+type Validator<T> = (value: T) => boolean | RegExpMatchArray | null;
+
+export default function useInput<T>(validator: Validator<T>, initialValue: T) {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState(false);
-  const checkValueValidity = () => {
-    const isValueCorrect = validationChecker(value);
+
+  const validateValue = () => {
+    const isValueCorrect = validator(value);
     setError(!isValueCorrect);
     return !!isValueCorrect;
   };
-  return [value, setValue, error, setError, checkValueValidity] as const;
+
+  return [value, setValue, error, setError, validateValue] as const;
 }

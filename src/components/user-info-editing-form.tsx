@@ -1,8 +1,8 @@
 import { useState, FormEventHandler, useEffect } from 'react';
-import { validateStringsLength } from '../shared/validate-strings-length';
 import CloseCrossSVG from './svg/close-cross';
 import { postUserDataAction } from '../store/api-actions';
 import { useAppDispatch } from '../hooks';
+import validateStringsLength from '../shared/validate-strings-length';
 
 type UserInfoEditingFormProps = {
   lastName: string;

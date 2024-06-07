@@ -1,11 +1,11 @@
 import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
-import emailValidationChecker from '../shared/email-validation-checker';
+import { validateEmail as emailValidator } from '../shared/validate-email';
 import { registerAction } from '../store/api-actions';
-import passwordValidationChecker from '../shared/password-validation-checker';
-import { validateStringsLength } from '../shared/validate-strings-length';
+import { validatePassword as passwordValidator } from '../shared/validate-password';
 import FormInputGroup from './form-input-group';
+import validateStringsLength from '../shared/validate-strings-length';
 
 export default function RegisterForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -13,11 +13,12 @@ export default function RegisterForm(): JSX.Element {
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [patronymic, setPatronymic] = useState('');
-  const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
-  const [password, setPassword, passwordError, setPasswordError, checkPasswordValidity] = useInput(passwordValidationChecker);
-  const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, setRepeatedPasswordError, checkRepeatedPasswordValidity] = useInput(
-    (repeatedPass: string) => password === repeatedPass // проверить
-  );
+  const [email, setEmail, emailError, setEmailError, validateEmail] =
+    useInput<string>(emailValidator, '');
+  const [password, setPassword, passwordError, setPasswordError, validatePassword] =
+    useInput<string>(passwordValidator, '');
+  const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, setRepeatedPasswordError, validateRepeatedPassword] =
+    useInput<string>((repeatedPass: string) => password === repeatedPass, '');
 
   const handleLastNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setLastName(e.target.value), [setLastName]);
   const handleFirstNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value), [setFirstName]);
@@ -30,7 +31,7 @@ export default function RegisterForm(): JSX.Element {
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    if (checkEmailValidity() && checkPasswordValidity() && checkRepeatedPasswordValidity()) {
+    if (validateEmail() && validatePassword() && validateRepeatedPassword()) {
       dispatch(registerAction({
         lastName,
         firstName,

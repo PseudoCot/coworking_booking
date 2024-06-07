@@ -1,17 +1,17 @@
 import { ChangeEvent, FormEventHandler, useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from '../hooks';
 import { loginAction } from '../store/api-actions';
-import emailValidationChecker from '../shared/email-validation-checker';
+import { validateEmail as emailValidator } from '../shared/validate-email';
 import useInput from '../hooks/use-input';
 import FormInputGroup from './form-input-group';
-import { validateStringsLength } from '../shared/validate-strings-length';
 import { AppRoutes } from '../routes';
+import validateStringsLength from '../shared/validate-strings-length';
 
 export default function LoginForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const showSubmitError = false; // useAppSelector(getLoginError);
 
-  const [email, setEmail, emailError, setEmailError, checkEmailValidity] = useInput(emailValidationChecker);
+  const [email, setEmail, emailError, setEmailError, validateEmail] = useInput<string>(emailValidator, '');
   const [password, setPassword] = useState('');
 
   const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
@@ -21,7 +21,7 @@ export default function LoginForm(): JSX.Element {
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
-    if (checkEmailValidity()) {
+    if (validateEmail()) {
       dispatch(loginAction({
         email,
         password,
@@ -31,7 +31,7 @@ export default function LoginForm(): JSX.Element {
 
   useEffect(() => {
     setSubmitEnabled(validateStringsLength([email, password]));
-  }, [email, password, checkEmailValidity]);
+  }, [email, password, validateEmail]);
 
   return (
     <form className="login__form login-form form" action="#" onSubmit={handleSubmit}>
