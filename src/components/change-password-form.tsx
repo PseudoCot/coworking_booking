@@ -1,10 +1,11 @@
-import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
+import { useState, FormEventHandler, useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
 import { postPasswordChangeAction, postPasswordRecoveryAction } from '../store/api-actions';
 import { validatePassword as passwordValidator } from '../shared/validate-password';
 import FormInputGroup from './form-input-group';
 import validateStringsLength from '../shared/validate-strings-length';
+import useInputChangeCallback from '../hooks/use-change-callback';
 
 export type ChangePasswordFormProps = {
   token?: string;
@@ -19,8 +20,8 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
   const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, setRepeatedPasswordError, validateRepeatedPassword] =
     useInput<string>((value: string) => password === value, '');
 
-  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
-  const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
+  const handlePasswordChange = useInputChangeCallback(setPassword);
+  const handleRepeatedPasswordChange = useInputChangeCallback(setRepeatedPassword);
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {

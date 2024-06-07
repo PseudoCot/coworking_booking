@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEventHandler, useCallback, useEffect, useState } from 'react';
+import { FormEventHandler, useEffect, useState } from 'react';
 import { useAppDispatch } from '../hooks';
 import { loginAction } from '../store/api-actions';
 import { validateEmail as emailValidator } from '../shared/validate-email';
@@ -6,6 +6,7 @@ import useInput from '../hooks/use-input';
 import FormInputGroup from './form-input-group';
 import { AppRoutes } from '../routes';
 import validateStringsLength from '../shared/validate-strings-length';
+import useInputChangeCallback from '../hooks/use-change-callback';
 
 export default function LoginForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -14,8 +15,8 @@ export default function LoginForm(): JSX.Element {
   const [email, setEmail, emailError, setEmailError, validateEmail] = useInput<string>(emailValidator, '');
   const [password, setPassword] = useState('');
 
-  const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
-  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
+  const handleEmailChange = useInputChangeCallback(setEmail);
+  const handlePasswordChange = useInputChangeCallback(setPassword);
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {

@@ -1,4 +1,4 @@
-import { useState, FormEventHandler, useEffect, ChangeEvent, useCallback } from 'react';
+import { useState, FormEventHandler, useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
 import useInput from '../hooks/use-input';
 import { validateEmail as emailValidator } from '../shared/validate-email';
@@ -6,6 +6,7 @@ import { registerAction } from '../store/api-actions';
 import { validatePassword as passwordValidator } from '../shared/validate-password';
 import FormInputGroup from './form-input-group';
 import validateStringsLength from '../shared/validate-strings-length';
+import useInputChangeCallback from '../hooks/use-change-callback';
 
 export default function RegisterForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -20,12 +21,12 @@ export default function RegisterForm(): JSX.Element {
   const [repeatedPassword, setRepeatedPassword, repeatedPasswordError, setRepeatedPasswordError, validateRepeatedPassword] =
     useInput<string>((repeatedPass: string) => password === repeatedPass, '');
 
-  const handleLastNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setLastName(e.target.value), [setLastName]);
-  const handleFirstNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value), [setFirstName]);
-  const handlePatronymicChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPatronymic(e.target.value), [setPatronymic]);
-  const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), [setEmail]);
-  const handlePasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
-  const handleRepeatedPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value), [setRepeatedPassword]);
+  const handleLastNameChange = useInputChangeCallback(setLastName);
+  const handleFirstNameChange = useInputChangeCallback(setFirstName);
+  const handlePatronymicChange = useInputChangeCallback(setPatronymic);
+  const handleEmailChange = useInputChangeCallback(setEmail);
+  const handlePasswordChange = useInputChangeCallback(setPassword);
+  const handleRepeatedPasswordChange = useInputChangeCallback(setRepeatedPassword);
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmit: FormEventHandler = (e) => {
