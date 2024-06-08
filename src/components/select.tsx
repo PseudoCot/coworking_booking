@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, MouseEventHandler } from 'react';
+import { useState, useRef, useEffect, MouseEventHandler, KeyboardEventHandler } from 'react';
 import { SelectOption as SelectOptionType } from '../types/select-option';
 import SelectOption from './select-option';
 
@@ -13,32 +13,32 @@ export type SelectProps = {
   options: SelectOptionType[];
   selectedOption?: SelectOptionType;
   onChange?: (selectedOption: SelectOptionType['value']) => void;
-  onClose?: () => void;
 };
 
 export default function Select({ selectClasses = '', placeholderClasses = '',
   optionListClasses = '', optionClasses = '', placeholder,
-  options, selectedOption, onChange, onClose }: SelectProps): JSX.Element {
+  options, selectedOption, onChange: handleChange }: SelectProps): JSX.Element {
   const rootRef = useRef<HTMLDivElement>(null);
-  const placeholderRef = useRef<HTMLDivElement>(null);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
   const handlePlaceholderClick: MouseEventHandler<HTMLDivElement> = () => {
-    setIsOpen((prev) => !prev);
+    setIsOpened((prev) => !prev);
   };
   const handleOptionClick = (value: SelectOptionType['value']) => {
-    setIsOpen(false);
-    onChange?.(value);
+    setIsOpened(false);
+    handleChange?.(value);
+  };
+  const handleEnterKeyDown: KeyboardEventHandler<HTMLDivElement> = (e) => {
+    if (e.key === 'Enter') {
+      setIsOpened((prev) => !prev);
+    }
   };
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       if (e.target instanceof Node && !rootRef.current?.contains(e.target)) {
-        if (isOpen) {
-          onClose?.();
-        }
-        setIsOpen(false);
+        setIsOpened(false);
       }
     };
     window.addEventListener('click', handleClick);
@@ -47,34 +47,16 @@ export default function Select({ selectClasses = '', placeholderClasses = '',
       window.removeEventListener('click', handleClick);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // пустой, чтобы не перепривязывать обработчик при каждом изменении isOpen
-
-  useEffect(() => {
-    const placeholderEl = placeholderRef.current;
-    if (!placeholderEl) {
-      return;
-    }
-
-    const handleEnterKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        setIsOpen((prev) => !prev);
-      }
-    };
-    placeholderEl.addEventListener('keydown', handleEnterKeyDown);
-
-    return () => {
-      placeholderEl.removeEventListener('keydown', handleEnterKeyDown);
-    };
-  }, []);
+  }, []); // empty to avoid rebinding the handler every time isMenuOpen is changed
 
   return (
-    <div className={`${selectClasses} select`} ref={rootRef} data-is-active={isOpen}>
-      <div className={`${placeholderClasses} select-placeholder`} ref={placeholderRef}
-        data-selected={!!selectedOption?.value} onClick={handlePlaceholderClick} role="button" tabIndex={0}
+    <div className={`${selectClasses} select`} ref={rootRef} data-is-active={isOpened} onClick={handlePlaceholderClick}>
+      <div className={`${placeholderClasses} select-placeholder`} data-selected={!!selectedOption?.value}
+        role="button" tabIndex={0} onKeyDown={handleEnterKeyDown} onClick={handlePlaceholderClick}
       >
         {selectedOption?.title || placeholder}
       </div>
-      {isOpen && (
+      {isOpened && (
         <ul className={`${optionListClasses} select-option-list list-reset`}>
           {options.map((option) => (
             <SelectOption
