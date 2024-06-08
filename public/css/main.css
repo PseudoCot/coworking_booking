@@ -322,7 +322,7 @@ body,
   padding: 2px 4px;
   width: 290px;
 
-  font-family: var(--roboto-font);
+  font-family: var(--exa-font);
   font-weight: 400;
   font-size: 10px;
   text-align: justify;
@@ -330,7 +330,6 @@ body,
   content: attr(data-tip);
 
   background-color: var(--form-group-error-bg-color);
-  /* 70% */
   border-radius: 5px;
 
   transform: translateX(-87%);
@@ -339,15 +338,9 @@ body,
 .form-tooltip::after {
   bottom: 15px;
   position: absolute;
-  width: 16px;
-  height: 12px;
-
   content: "";
-
   border: 10px solid transparent;
   border-top: 10px solid var(--form-group-error-bg-color);
-  /* 70% */
-
   transform: translateX(-80%);
 }
 
@@ -377,7 +370,7 @@ body,
   min-height: 37px;
   max-width: 250px;
 
-  font-family: var(--roboto-font);
+  font-family: var(--exa-font);
   font-weight: 400;
   font-size: 10px;
   text-align: center;
@@ -385,7 +378,6 @@ body,
   color: #FFFFFFE6;
 
   background-color: var(--form-group-error-bg-color);
-  /* 70% */
   border-radius: 5px;
 
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -398,8 +390,6 @@ body,
   content: "";
   border: 7px solid transparent;
   border-top: 6px solid var(--form-group-error-bg-color);
-  /* 70% */
-
   transform: translateX(-80%);
 }
 
@@ -622,6 +612,289 @@ body,
 .select-option:hover {
   background-color: rgba(0, 0, 0, 0.1);
 } */
+
+
+/* #dnd-file-input */
+.dnd-file-input-wrapper {
+  position: relative;
+  margin-bottom: 18px;
+  width: 350px;
+  height: 275px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: #d9d9d9;
+  border-radius: 15px;
+}
+
+.dnd-file-input-wrapper--drag-active {
+  border: 2px dashed #283593b3;
+}
+
+.dnd-file-input-wrapper--incorrect-file {
+  border: 2px dashed #f26651;
+}
+
+.dnd-file-input-wrapper--preview {
+  justify-content: flex-end;
+  padding-bottom: 20px;
+}
+
+.dnd-file-input-preview {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.dnd-file-input-over {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+
+/* #file-input */
+.file-input {
+  display: none;
+}
+
+.file-input-label {
+  position: relative;
+  min-width: 160px;
+  max-width: 250px;
+  height: 25px;
+  display: inline-block;
+}
+
+.file-input-btn {
+  position: relative;
+  padding: 5px 27px 4px 32px;
+  width: 100%;
+  height: 100%;
+  font-family: var(--exa-family);
+  font-weight: 400;
+  font-size: 11px;
+  text-align: start;
+  color: #000000;
+  border-radius: 4px;
+  border: 1px dashed #283593b3;
+  background-color: #ffffff;
+}
+
+.file-input-label:hover .file-input-btn,
+.file-input-btn--drag-active {
+  background-color: #e9ecff;
+}
+
+.file-input-btn::before {
+  position: absolute;
+  width: 12px;
+  height: 13px;
+  top: 50%;
+  left: 8px;
+  content: '';
+  background-image: url("../img/icons/staple.svg");
+  transform: translateY(-50%);
+}
+
+.file-input-btn:hover {
+  text-decoration-line: underline;
+}
+
+
+/* #file-input-tooltip */
+.file-input-tooltip {
+  position: absolute;
+  padding: 3px;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-45%);
+}
+
+.file-input-tooltip::before {
+  position: absolute;
+  padding: 2px 4px;
+  width: max-content;
+  max-width: 250px;
+  left: -15px;
+  bottom: 31px;
+
+  font-family: var(--exa-font);
+  font-weight: 400;
+  font-size: 10px;
+  text-align: justify;
+  color: #FFFFFFE6;
+  content: attr(data-tip);
+
+  background-color: var(--form-group-error-bg-color);
+  border-radius: 5px;
+}
+
+.file-input-tooltip::after {
+  bottom: 16px;
+  position: absolute;
+  content: "";
+  border: 8px solid transparent;
+  border-top: 8px solid var(--form-group-error-bg-color);
+  transform: translateX(-80%);
+}
+
+.file-input-tooltip::before,
+.file-input-tooltip::after {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: -100;
+}
+
+.file-input-tooltip:hover::before,
+.file-input-tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+
+/* #file-input-error */
+.file-input-error {
+  position: absolute;
+  padding: 3px;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-45%);
+}
+
+.file-input-error::before {
+  position: absolute;
+  padding: 2px 4px;
+  width: max-content;
+  max-width: 250px;
+  left: -15px;
+  bottom: 30px;
+
+  font-family: var(--exa-font);
+  font-weight: 400;
+  font-size: 10px;
+  text-align: justify;
+  color: #FFFFFFE6;
+  content: attr(data-error);
+
+  background-color: #5b5e5e;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.file-input-error::after {
+  bottom: 16px;
+  position: absolute;
+  content: "";
+  border: 8px solid transparent;
+  border-top: 8px solid #5b5e5e;
+  transform: translateX(-80%);
+  z-index: 10;
+}
+
+
+/* #mini-menu */
+.mini-menu-btn {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  border-radius: 2px;
+  background-color: #dfe1fe;
+}
+
+.mini-menu-btn:hover,
+.mini-menu-btn:focus {
+  border: 1px solid #9e9fb3;
+}
+
+.mini-menu-btn-dot {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: #14191a;
+}
+
+.mini-menu {
+  position: absolute;
+  padding: 4px 4px;
+  min-width: 120px;
+  max-width: 250px;
+  top: 100%;
+  left: 80%;
+  color: #14191a;
+  border: 1px dashed #283593b3;
+  background-color: #ffffff;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: -100;
+}
+
+.mini-menu--opened {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+
+/* #file-controller */
+.file-controller {
+  position: relative;
+  padding: 5px 30px 4px 8px;
+  width: fit-content;
+  min-width: 160px;
+  max-width: 250px;
+  height: 25px;
+  display: inline-block;
+  font-family: var(--exa-family);
+  font-weight: 400;
+  font-size: 11px;
+  text-align: start;
+  color: #000000;
+  border-radius: 4px;
+  border: 1px dashed #283593b3;
+  background-color: #ffffff;
+}
+
+.file-controller-menu-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.file-controller-in-menu-btn {
+  padding: 4px 4px;
+  display: block;
+  width: 100%;
+  font-family: var(--exa-family);
+  font-weight: 400;
+  font-size: 11px;
+  text-align: start;
+  color: #14191a;
+  border-radius: 3px;
+}
+
+.file-controller-in-menu-btn:hover,
+.file-controller-in-menu-btn:focus {
+  background-color: #dfe1fe;
+}
 
 
 /* #loader */
@@ -2172,6 +2445,7 @@ body,
 
 .coworking-form__left {
   margin-top: 24px;
+  position: relative;
   grid-column: 1;
   grid-row: 1;
 }
@@ -2191,86 +2465,19 @@ body,
 }
 
 .coworking-form__avatar-area {
-  margin-bottom: 18px;
   width: 100%;
   height: 275px;
+}
+
+.coworking-form__file-label {
+  width: fit-content;
+}
+
+.coworking-form__image-inputs {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  background-color: #d9d9d9;
-  border-radius: 15px;
+  gap: 10px;
 }
-
-.dnd-file-input-wrapper {
-  position: relative;
-  /* height: 16rem;
-  width: 28rem;
-  max-width: 100%; */
-}
-
-.dnd-file-input-wrapper--drag-active {
-  border: 2px dashed #283593b3;
-}
-
-.file-input {
-  display: none;
-}
-
-.file-input-label {
-  min-width: 160px;
-  max-width: 250px;
-  height: 24px;
-  display: inline-block;
-}
-
-.file-input-btn {
-  position: relative;
-  padding: 5px 25px 4px 32px;
-  width: 100%;
-  height: 100%;
-  font-family: var(--exa-family);
-  font-weight: 400;
-  font-size: 11px;
-  text-align: start;
-  color: #000000;
-  border-radius: 4px;
-  border: 1px dashed #283593b3;
-  background-color: #ffffff;
-}
-
-.file-input-label:hover .file-input-btn,
-.file-input-btn--drag-active {
-  background-color: #e9ecff;
-}
-
-.file-input-btn::before {
-  position: absolute;
-  width: 12px;
-  height: 13px;
-  top: 50%;
-  left: 8px;
-  content: '';
-  background-image: url("../img/icons/staple.svg");
-  transform: translateY(-50%);
-}
-
-.file-input-btn:hover {
-  text-decoration-line: underline;
-}
-
-.dnd-file-input-over {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-}
-
-.coworking-form__images-input {}
 
 .coworking-form__label {
   margin: 0 0 5px 5px;

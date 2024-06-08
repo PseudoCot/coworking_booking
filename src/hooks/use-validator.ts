@@ -1,25 +1,34 @@
-import { useState } from 'react';
-import { Validator } from '../types/validator';
+import { useEffect, useState } from 'react';
+import { ValidatorData } from '../types/validator-data';
+import { TimeoutId } from '../types/timeout-id';
 
-// const ERROR_SHOWING_TIME = 5000;
-
-export default function useValidator<T>(validate: Validator<boolean, T>) {
+export default function useValidator<T>(validatorsData?: ValidatorData<boolean | RegExpMatchArray | null, T>[]) {
   const [error, setError] = useState(false);
+  const [errorText, setErrorText] = useState<string>();
+  const [errorTimeoutId, setErrorTimeoutId] = useState<TimeoutId>();
 
-  const validateValue = (value: T) => {
-    const isValueCorrect = validate(value);
-    setError(!isValueCorrect);
-    return !!isValueCorrect;
-  };
+  const validateValue = (value: T) => validatorsData
+    ? validatorsData.every((validatorData) => {
+      if (validatorData.validate(value)) {
+        setError(false);
+        setErrorText(undefined);
+        return true;
+      }
 
-  // const [errorTimeoutId, setErrorTimeoutId] = useState<TimeoutId>();
-  // setFilesError(true);
-  // setErrorTimeoutId(setTimeout(() => {
-  //   setFilesError(false);
-  // }, ERROR_SHOWING_TIME));
-  // useEffect(() => () => {
-  //   clearTimeout(errorTimeoutId);
-  // }, [errorTimeoutId]);
+      setError(true);
+      setErrorText(validatorData.errorText);
+      if (validatorData.showErrorTime) {
+        setErrorTimeoutId(setTimeout(() => {
+          setError(false);
+        }, validatorData.showErrorTime));
+      }
+      return false;
+    })
+    : true;
 
-  return [error, setError, validateValue] as const;
+  useEffect(() => () => {
+    clearTimeout(errorTimeoutId);
+  }, [errorTimeoutId]);
+
+  return [error, errorText, validateValue] as const;
 }
