@@ -12,10 +12,13 @@ type UserProcessState = {
   refreshFetchingStatus: FetchingStatus;
   passwordChangeFetchingStatus: FetchingStatus;
   userDataFetchingStatus: FetchingStatus;
+  userDataChangeFetchingStatus: FetchingStatus;
   authStatus: AuthStatus;
   userData?: UserData;
   // showCheckEmailMessage: boolean;
 };
+
+export type UserFetchingField = keyof Omit<UserProcessState, 'authStatus' | 'userData'>;
 
 const initialState: UserProcessState = {
   registerFetchingStatus: FetchingStatuses.None,
@@ -23,6 +26,7 @@ const initialState: UserProcessState = {
   refreshFetchingStatus: FetchingStatuses.None,
   passwordChangeFetchingStatus: FetchingStatuses.None,
   userDataFetchingStatus: FetchingStatuses.None,
+  userDataChangeFetchingStatus: FetchingStatuses.None,
   authStatus: Status.Unknown,
   userData: undefined,
   // showCheckEmailMessage: false,
@@ -32,9 +36,11 @@ export const userProcess = createSlice({
   name: NameSpaces.User,
   initialState,
   reducers: {
-    // setShowCheckEmailMessage: (state, action: PayloadAction<boolean>) => {
-    //   state.showCheckEmailMessage = action.payload;
-    // },
+    resetUserFetchingStatus: (state, action: PayloadAction<UserFetchingField>) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore:
+      state[action] = FetchingStatuses.None;
+    },
     clearUserData: (state) => {
       state.userData = undefined;
     },
@@ -110,10 +116,10 @@ export const userProcess = createSlice({
       })
 
       .addCase(postUserDataAction.pending, (state) => {
-        state.userDataFetchingStatus = FetchingStatuses.Pending;
+        state.userDataChangeFetchingStatus = FetchingStatuses.Pending;
       })
       .addCase(postUserDataAction.fulfilled, (state, action: PayloadAction<UserDto>) => {
-        state.userDataFetchingStatus = FetchingStatuses.Fulfilled;
+        state.userDataChangeFetchingStatus = FetchingStatuses.Fulfilled;
         if (!state.userData) {
           return;
         }
@@ -122,9 +128,9 @@ export const userProcess = createSlice({
         state.userData.patronymic = action.payload.patronymic;
       })
       .addCase(postUserDataAction.rejected, (state) => {
-        state.userDataFetchingStatus = FetchingStatuses.Rejected;
+        state.userDataChangeFetchingStatus = FetchingStatuses.Rejected;
       });
   }
 });
 
-export const { clearUserData } = userProcess.actions;
+export const { clearUserData, resetUserFetchingStatus } = userProcess.actions;

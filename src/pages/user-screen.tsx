@@ -2,24 +2,26 @@ import { FormEventHandler, useCallback, useState } from 'react';
 import Layout from '../components/layout';
 import UserInfoCard from '../components/user-info-card';
 import WarningMessage from '../components/warning-message';
-import { useAppSelector } from '../hooks';
 import UserInfoEditingForm from '../components/user-info-editing-form';
 import SubmitForm from '../components/submit-form';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../routes';
 import Loader from '../components/loader';
-import useUserData from '../hooks/use-user-data';
-import { showCheckEmailMessage } from '../store/user-process/selectors';
 import BookedCoworkingList from '../components/booked-coworking-list';
+import { useAppSelector } from '../hooks';
+import { getUserData } from '../store/user-process/selectors';
+import { useUserFetchingStatus } from '../hooks/use-user-fetching-status';
+import { FetchingStatuses } from '../consts';
 
 export default function UserScreen(): JSX.Element {
   const navigate = useNavigate();
 
-  const userData = useUserData();
-  const showEmailMessage = useAppSelector(showCheckEmailMessage);
+  const userData = useAppSelector(getUserData);
+  const fetchingStatus = useUserFetchingStatus('userDataFetchingStatus');
+  // const showEmailMessage = useAppSelector(showCheckEmailMessage);
 
   const [editingInfo, setEditingInfo] = useState(false);
-  const [showChangePasswordSubmit, setShowChangePasswordSubmit] = useState(false);
+  const [showPasswordChangeSubmit, setShowPasswordChangeSubmit] = useState(false);
 
   const handleEditClick: FormEventHandler = useCallback((e) => {
     e.preventDefault();
@@ -27,11 +29,11 @@ export default function UserScreen(): JSX.Element {
   }, [setEditingInfo]);
   const handleChangePasswordClick: FormEventHandler = useCallback((e) => {
     e.preventDefault();
-    setShowChangePasswordSubmit(true);
+    setShowPasswordChangeSubmit(true);
   }, []);
 
   const handleChangePasswordDismiss = useCallback(() => {
-    setShowChangePasswordSubmit((prev) => !prev);
+    setShowPasswordChangeSubmit((prev) => !prev);
   }, []);
   const handleChangePasswordSubmit = useCallback(() => {
     navigate(AppRoutes.ChangePassword.FullPath);
@@ -42,7 +44,7 @@ export default function UserScreen(): JSX.Element {
       <article className="user-acc">
         <h1 className="user-acc__title title title-reset">Личный кабинет</h1>
 
-        {userData
+        {fetchingStatus === FetchingStatuses.Pending && userData
           ?
           <>
             {userData.telegramConnected ||
@@ -57,14 +59,14 @@ export default function UserScreen(): JSX.Element {
             {editingInfo &&
               <UserInfoEditingForm {...userData} onCloseEditingClick={handleEditClick} onChangePasswordClick={handleChangePasswordClick} />}
 
-            {showEmailMessage &&
+            {/* {showEmailMessage &&
               <WarningMessage title='Предупреждение!' >
                 Проверьте свою корпоративную почту, на неё должна прийти ссылка для обновления пароля.
-              </WarningMessage>}
+              </WarningMessage>} */}
 
             <BookedCoworkingList />
 
-            {showChangePasswordSubmit &&
+            {showPasswordChangeSubmit &&
               <SubmitForm title={'Смена пароля'} question={'Вы уверены, что хотите сменить пароль?'}
                 dismissText={'Нет'} submitText={'Да'} onDismiss={handleChangePasswordDismiss}
                 onSubmit={handleChangePasswordSubmit}

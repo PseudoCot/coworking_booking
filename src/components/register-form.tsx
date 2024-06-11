@@ -7,9 +7,13 @@ import { validatePassword as passwordValidator } from '../shared/validate-passwo
 import FormInputGroup from './form-input-group';
 import validateStringsLength from '../shared/validate-strings-length';
 import useInputChangeCallback from '../hooks/use-change-callback';
+import Loader from './loader';
+import { FetchingStatuses } from '../consts';
+import { useUserFetchingStatus } from '../hooks/use-user-fetching-status';
 
 export default function RegisterForm(): JSX.Element {
   const dispatch = useAppDispatch();
+  const fetchingStatus = useUserFetchingStatus('registerFetchingStatus');
 
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -55,6 +59,8 @@ export default function RegisterForm(): JSX.Element {
           <h2 className="register-form__title form-title title-reset">Регистрация</h2>
         </div>
         <div className="register-form__bottom form-bottom">
+          {fetchingStatus === FetchingStatuses.Rejected &&
+            <span className="login-form__submit-error">Не удалось зарегистрироваться. Попробуйте ещё раз</span>}
           <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
             labelText='Фамилия' name='last-name' type='text' autoCapitalize='words' autoComplete='last-name' required
             value={lastName} onChange={handleLastNameChange}
@@ -87,7 +93,7 @@ export default function RegisterForm(): JSX.Element {
           <button className="register-form__submit-btn form-btn light-btn btn-reset"
             type='submit' disabled={!submitEnabled}
           >
-            Зарегистрироваться
+            {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Зарегистрироваться'}
           </button>
         </div>
       </div>

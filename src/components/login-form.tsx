@@ -7,10 +7,14 @@ import FormInputGroup from './form-input-group';
 import { AppRoutes } from '../routes';
 import validateStringsLength from '../shared/validate-strings-length';
 import useInputChangeCallback from '../hooks/use-change-callback';
+import { FetchingStatuses } from '../consts';
+import Loader from './loader';
+import { useUserFetchingStatus } from '../hooks/use-user-fetching-status';
+import { Link } from 'react-router-dom';
 
 export default function LoginForm(): JSX.Element {
   const dispatch = useAppDispatch();
-  const showSubmitError = false; // useAppSelector(getLoginError);
+  const fetchingStatus = useUserFetchingStatus('loginFetchingStatus');
 
   const [email, setEmail, emailError, setEmailError, validateEmail] = useInput<string>(emailValidator, '');
   const [password, setPassword] = useState('');
@@ -41,7 +45,7 @@ export default function LoginForm(): JSX.Element {
           <h2 className="login-form__title form-title title-reset">Вход</h2>
         </div>
         <div className="login-form__bottom form-bottom">
-          {showSubmitError &&
+          {fetchingStatus === FetchingStatuses.Rejected &&
             <span className="login-form__submit-error">Введённые данные не корректны. Попробуйте ещё раз</span>}
           <FormInputGroup groupClasses='login-form__input-group' labelClasses='login-form__label' inputClasses='login-form__input'
             labelText='Почта' name='email' type='email' inputMode='email' autoComplete='email current-login current-email' required
@@ -54,11 +58,11 @@ export default function LoginForm(): JSX.Element {
           />
           <div className="login-form__btns">
             <button className="login-form__submit-btn form-btn light-btn btn-reset" type='submit' disabled={!submitEnabled}>
-              Войти
+              {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Войти'}
             </button>
-            <a href={AppRoutes.PasswordRecovery.FullPath} className="login-form__reset-password-btn form-btn light-btn btn-reset">
+            <Link to={AppRoutes.PasswordRecovery.FullPath} className="login-form__reset-password-btn form-btn light-btn">
               Восстановить пароль
-            </a>
+            </Link>
           </div>
         </div>
       </div>

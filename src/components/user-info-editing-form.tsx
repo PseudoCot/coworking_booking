@@ -3,6 +3,9 @@ import CloseCrossSVG from './svg/close-cross';
 import { postUserDataAction } from '../store/api-actions';
 import { useAppDispatch } from '../hooks';
 import validateStringsLength from '../shared/validate-strings-length';
+import { useUserFetchingStatus } from '../hooks/use-user-fetching-status';
+import { FetchingStatuses } from '../consts';
+import Loader from './loader';
 
 type UserInfoEditingFormProps = {
   lastName: string;
@@ -17,6 +20,7 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
   onCloseEditingClick: handleCloseEditingClick, onChangePasswordClick: handleChangePasswordClick }
   : UserInfoEditingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const fetchingStatus = useUserFetchingStatus('userDataChangeFetchingStatus');
 
   const [lastName, setLastName] = useState(initialLastName);
   const [firstName, setFirstName] = useState(initialFirstName);
@@ -68,7 +72,7 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
         </div>
         <div className="user-acc__info-btns">
           <button className="user-acc__info-edit-btn light-btn btn-reset" type='submit' disabled={!submitEnabled}>
-            Редактировать
+            {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Редактировать'}
           </button>
           <button className="user-acc__info-change-password-btn light-btn btn-reset" onClick={handleChangePasswordClick}>
             Сменить пароль
