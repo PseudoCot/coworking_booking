@@ -109,7 +109,6 @@
   --bg-color: #e3f2fdc9;
   --darker-theme-color: #7e8bff42;
 
-  --transparent-card-color: #ffffffa8;
   --light-card-bg-color: #fff;
   --form-bg-color: #fff;
   --admin-form-bg-color: #f7fbfe;
@@ -995,6 +994,18 @@ body,
   z-index: 100;
 }
 
+body .toast-wrapper:not(.toast-wrapper--hide) {
+  height: 100vh;
+  overflow-y: hidden;
+  padding-right: 15px;
+}
+
+.toast-wrapper--hide {
+  display: none;
+  opacity: 0;
+  z-index: -100;
+}
+
 .toast {
   position: absolute;
   padding: 30px 30px 20px;
@@ -1437,7 +1448,7 @@ body,
 .coworkings__list {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -1457,10 +1468,16 @@ body,
   flex-direction: column;
   align-items: center;
   border-radius: 15px;
-  background-color: var(--transparent-card-color);
+  /* поменять на градиент */
+  background-color: var(--light-card-bg-color);
   box-shadow: 0 0 4px 0 var(--theme-button-text-color);
   cursor: pointer;
-  /* поменять на градиент */
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.coworkings__list-item:hover {
+  box-shadow: 0 0 8px 0 var(--theme-button-text-color);
+  transform: scale(1.05, 1.05);
 }
 
 .coworkings__item-img {
@@ -1516,35 +1533,6 @@ body,
 .calendar__title {
   margin-bottom: 35px;
 }
-
-/* .calendar__iframe-wrapper {
-  position: relative;
-  margin: 0 auto 30px;
-  /* размеры должны соответствовать размерам iframe
-  width: 928px;
-  height: 599px;
-  background-color: var(--theme-button-color);
-  border: 1px solid #525da9;
-}
-
-.calendar__iframe {
-  position: relative;
-  margin: -2px -2px;
-  border-width: 0;
-  z-index: 5;
-}
-
-.calendar__iframe-title {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  font-family: var(--second-family);
-  font-weight: 400;
-  font-size: 32px;
-  color: var(--dark-text-color);
-  transform: translateX(-50%);
-  z-index: 1;
-} */
 
 
 /* не знаю, как назвать класс для самого компонента календаря, но не потерять связь с названием страницы,
@@ -1603,8 +1591,8 @@ body,
 }
 
 .calendar__self-controls-month-title {
-  /* width: 175px; */
   /* чтобы кнопки управленя не прыгали при смене месяца */
+  /* width: 175px; */
   font-family: var(--tera-font);
   font-weight: 600;
   font-size: 16px;
@@ -1772,7 +1760,6 @@ body,
   font-size: 10px;
   color: #000000cc;
   /* 80% */
-
 }
 
 
@@ -1781,9 +1768,23 @@ body,
   background: no-repeat 80% 50% url("../img/stars.svg");
 }
 
-/* за основы для карточек берётся элемент из coworkings */
-.calendar .coworking__list-item {
-  background-color: var(--light-card-bg-color);
+.calendar .coworking__list {
+  justify-content: flex-start;
+  align-self: flex-start;
+}
+
+.calendar .coworkings__list-item:nth-last-child(2):not(:nth-child(3n)) {
+  margin-left: auto;
+}
+
+.calendar .coworkings__list-item:nth-last-child(1) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.calendar .coworkings__list-item:nth-last-child(1):not(:nth-child(3n+1)) {
+  margin-left: 0;
+  margin-right: auto;
 }
 
 
@@ -2202,6 +2203,7 @@ body,
 .login-form__reset-password-btn {
   padding: 18px 5px;
 }
+
 
 
 /* /// user-acc /// */
