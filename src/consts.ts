@@ -97,6 +97,13 @@ export const JsonRpcErrorCodes = {
   [-32603]: 'Internal error',
 } as const;
 
+export const FetchingStatuses = {
+  None: 'None',
+  Pending: 'Pending',
+  Fulfilled: 'Fulfilled',
+  Rejected: 'Rejected',
+} as const;
+
 export const AuthStatuses = {
   Auth: 'Auth',
   NoAuth: 'NoAuth',

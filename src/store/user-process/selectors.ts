@@ -1,17 +1,16 @@
 import { NameSpaces } from '../../consts';
 import { AuthStatus } from '../../types/auth-status';
+import { FetchingStatus } from '../../types/fetching-status';
 import { State } from '../../types/state';
 import { UserData } from '../../types/user/user-data';
 
-export const getUserLastName = (state: State): string | undefined => state[NameSpaces.User].lastName;
-export const getUserFirstName = (state: State): string | undefined => state[NameSpaces.User].firstName;
-export const getUserPatronymic = (state: State): string | undefined => state[NameSpaces.User].patronymic;
-export const getUserEmail = (state: State): string | undefined => state[NameSpaces.User].email;
-export const isUserStudent = (state: State): boolean | undefined => state[NameSpaces.User].isStudent;
-export const isUserTelegramConnected = (state: State): boolean | undefined => state[NameSpaces.User].telegramConnected;
-export const getUserAvatarFileName = (state: State): string | undefined => state[NameSpaces.User].avatarFileName;
-export const showCheckEmailMessage = (state: State): boolean => state[NameSpaces.User].showCheckEmailMessage;
-
-export const getUserData = (state: State): Partial<UserData> => state[NameSpaces.User];
+export const getRegisterFetchingStatus = (state: State): FetchingStatus => state[NameSpaces.User].registerFetchingStatus;
+export const getLoginFetchingStatus = (state: State): FetchingStatus => state[NameSpaces.User].loginFetchingStatus;
+export const getRefreshFetchingStatus = (state: State): FetchingStatus => state[NameSpaces.User].refreshFetchingStatus;
+export const getPasswordChangeFetchingStatus = (state: State): FetchingStatus => state[NameSpaces.User].passwordChangeFetchingStatus;
+export const getUserDataFetchingStatus = (state: State): FetchingStatus => state[NameSpaces.User].userDataFetchingStatus;
 
 export const getAuthStatus = (state: State): AuthStatus => state[NameSpaces.User].authStatus;
+export const getUserData = (state: State): UserData | undefined => state[NameSpaces.User].userData;
+// export const showCheckEmailMessage = (state: State): boolean => state[NameSpaces.User].showCheckEmailMessage;
+
