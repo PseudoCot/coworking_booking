@@ -58,7 +58,7 @@ export default function LoginForm(): JSX.Element {
           />
           <div className="login-form__btns">
             <button className="login-form__submit-btn form-btn light-btn btn-reset" type='submit' disabled={!submitEnabled}>
-              {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Войти'}
+              {fetchingStatus === FetchingStatuses.Pending ? <Loader alignCenter /> : 'Войти'}
             </button>
             <Link to={AppRoutes.PasswordRecovery.FullPath} className="login-form__reset-password-btn form-btn light-btn">
               Восстановить пароль

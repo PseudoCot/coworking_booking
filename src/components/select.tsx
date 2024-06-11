@@ -50,7 +50,8 @@ export default function Select({ selectClasses = '', placeholderClasses = '',
   }, []); // empty to avoid rebinding the handler every time isMenuOpen is changed
 
   return (
-    <div className={`${selectClasses} select`} ref={rootRef} data-is-active={isOpened} onClick={handlePlaceholderClick}>
+    // <div className={`${selectClasses} select`} ref={rootRef} data-is-active={isOpened} onClick={handlePlaceholderClick}>
+    <div className={`${selectClasses} select`} ref={rootRef} data-is-active={isOpened}>
       <div className={`${placeholderClasses} select-placeholder`} data-selected={!!selectedOption?.value}
         role="button" tabIndex={0} onKeyDown={handleEnterKeyDown} onClick={handlePlaceholderClick}
       >

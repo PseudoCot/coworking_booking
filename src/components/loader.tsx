@@ -1,13 +1,20 @@
+import classNames from 'classnames';
+
 export type LoaderProps = {
   classes?: string;
+  alignCenter?: boolean;
   verticalAlignCenter?: boolean;
   horizontalAlignCenter?: boolean;
 };
 
-export default function Loader({ classes = '', verticalAlignCenter = false, horizontalAlignCenter = false }: LoaderProps): JSX.Element {
+export default function Loader({ classes = '', alignCenter = false, verticalAlignCenter = false,
+  horizontalAlignCenter = false }: LoaderProps): JSX.Element {
   return (
-    <span className={`${classes} ${verticalAlignCenter ? 'loader-vertical-center' : ''}
-      ${horizontalAlignCenter ? 'loader-horizontal-center' : ''} loader`}
+    <span className={classNames(classes, 'loader', {
+      'loader-vertical-center': verticalAlignCenter,
+      'loader-horizontal-center': horizontalAlignCenter,
+      'loader-center': alignCenter
+    })}
     />
   );
 }

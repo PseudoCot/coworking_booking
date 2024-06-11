@@ -197,7 +197,8 @@ body,
   padding: 0 100px;
   margin: 0 auto;
   max-width: var(--max-content-width);
-  min-height: calc(100% - var(--header-and-footer-height));
+  min-height: 500px;
+  /* min-height: calc(100% - var(--header-and-footer-height)); */
 }
 
 
@@ -299,7 +300,10 @@ body,
 }
 
 .form-btn {
+  position: relative;
   padding: 18px 24px;
+  min-width: 100px;
+  min-height: 56px;
   font-weight: 400;
   font-size: 20px;
   border-radius: 15px;
@@ -649,11 +653,11 @@ body,
 
 /* .select-option[aria-selected="true"] {
   background-color: rgba(0, 0, 0, 0.05);
-}
+} */
 
 .select-option:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-} */
+  background-color: #f4f6ff;
+}
 
 
 /* #dnd-file-input */
@@ -963,6 +967,13 @@ body,
   transform: translateX(-50%);
 }
 
+.loader-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @keyframes loader {
   0% {
     background-color: var(--loader-light-color);
@@ -1238,8 +1249,11 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
 }
 
 .main-controls__user-acc-btn {
-  margin-right: 20px;
+  position: relative;
   padding: 12px 11px;
+  margin-right: 20px;
+  min-width: 120px;
+  min-height: 39px;
   font-weight: 400;
   font-size: 15px;
   border-radius: 15px;
@@ -1415,7 +1429,6 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
 
 /* /// coworkings /// */
 .coworkings {
-  min-height: 500px;
   margin-bottom: 80px;
   display: flex;
   flex-direction: column;
@@ -1477,7 +1490,7 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
 
 .coworkings__list-item:hover {
   box-shadow: 0 0 8px 0 var(--theme-button-text-color);
-  transform: scale(1.05, 1.05);
+  transform: scale(1.03, 1.03);
 }
 
 .coworkings__item-img {
@@ -1629,11 +1642,16 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
   background-color: #ffffffb3;
 }
 
-.calendar__self-grid-cell--inactive {
+.calendar__self-grid-cell--extraneus {
   background-color: #ffffff66;
+  cursor: initial;
 }
 
-.calendar__self-grid-cell:hover,
+.calendar__self-grid-cell--inactive {
+  cursor: initial;
+}
+
+.calendar__self-grid-cell:hover:not(.calendar__self-grid-cell--extraneus):not(.calendar__self-grid-cell--inactive),
 .calendar__self-grid-cell--selected {
   background-color: #ffffffd2;
 }
@@ -1662,12 +1680,12 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
   background-color: #ffd968;
 }
 
-.calendar__self-grid-cell--current:hover .calendar__self-grid-cell-top,
+.calendar__self-grid-cell--current .calendar__self-grid-cell-top,
 .calendar__self-grid-cell--current.calendar__self-grid-cell--selected .calendar__self-grid-cell-top {
   background-color: #fde08a;
 }
 
-.calendar__self-grid-cell:hover .calendar__self-grid-cell-top,
+.calendar__self-grid-cell:hover:not(.calendar__self-grid-cell--extraneus):not(.calendar__self-grid-cell--inactive) .calendar__self-grid-cell-top,
 .calendar__self-grid-cell--selected .calendar__self-grid-cell-top {
   background-color: #ffffffe1;
 }
@@ -1765,12 +1783,9 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
 
 .calendar__coworking-list {
   padding-bottom: 50px;
-  background: no-repeat 80% 50% url("../img/stars.svg");
-}
-
-.calendar .coworking__list {
   justify-content: flex-start;
   align-self: flex-start;
+  background: no-repeat 80% 50% url("../img/stars.svg");
 }
 
 .calendar .coworkings__list-item:nth-last-child(2):not(:nth-child(3n)) {
@@ -2100,7 +2115,7 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
   padding: 1px 2px;
   font-family: var(--roboto-font);
   font-weight: 400;
-  font-size: 10px;
+  font-size: 11px;
   color: #000000CC;
   border-radius: 10px;
   border: 1px solid #2835934D;
@@ -2372,7 +2387,7 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
 
 .user-acc__booked-item {
   padding: 30px;
-  max-width: 930px;
+  width: 925px;
   gap: 0 25px;
 }
 

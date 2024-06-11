@@ -93,7 +93,7 @@ export default function RegisterForm(): JSX.Element {
           <button className="register-form__submit-btn form-btn light-btn btn-reset"
             type='submit' disabled={!submitEnabled}
           >
-            {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Зарегистрироваться'}
+            {fetchingStatus === FetchingStatuses.Pending ? <Loader alignCenter /> : 'Зарегистрироваться'}
           </button>
         </div>
       </div>

@@ -108,7 +108,7 @@ export default function BookingForm(): JSX.Element {
           <button className="booking__form-submit-btn form-btn light-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
-            {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Забронировать'}
+            {fetchingStatus === FetchingStatuses.Pending ? <Loader alignCenter /> : 'Забронировать'}
           </button>
         </div>
       </div>

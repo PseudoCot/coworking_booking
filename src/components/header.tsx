@@ -52,7 +52,7 @@ export default function Header(): JSX.Element {
             {userTelegramConnected === false &&
               <WarningSVG classes="main-controls__warning-sign" />}
             <Link to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn white-btn">
-              {userFullName ?? <Loader />}
+              {userFullName ?? <Loader alignCenter />}
             </Link>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutClick}>
               <DoorSVG />

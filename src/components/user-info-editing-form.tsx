@@ -72,7 +72,7 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
         </div>
         <div className="user-acc__info-btns">
           <button className="user-acc__info-edit-btn light-btn btn-reset" type='submit' disabled={!submitEnabled}>
-            {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Редактировать'}
+            {fetchingStatus === FetchingStatuses.Pending ? <Loader alignCenter /> : 'Редактировать'}
           </button>
           <button className="user-acc__info-change-password-btn light-btn btn-reset" onClick={handleChangePasswordClick}>
             Сменить пароль

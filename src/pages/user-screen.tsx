@@ -44,7 +44,7 @@ export default function UserScreen(): JSX.Element {
       <article className="user-acc">
         <h1 className="user-acc__title title title-reset">Личный кабинет</h1>
 
-        {userDataFetchingStatus === FetchingStatuses.Pending && userData
+        {userDataFetchingStatus !== FetchingStatuses.Pending && userData
           ?
           <>
             {userData.telegramConnected ||

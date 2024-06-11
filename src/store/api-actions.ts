@@ -303,15 +303,11 @@ export const fetchBookedCoworkingsAction = createAsyncThunk<BookedCoworkingDto[]
   extra: ThunkExtraArgument;
 }>(
   'booking/fethBookedCoworkings',
-  async (_, { dispatch, extra: { api } }) => {
+  async (_, { extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<BookedCoworkingDto[]>>(ApiRoutes.FetchBookedCoworkings, createJsonRpcRequest<EmptyObject>(
       ApiMethods.FetchBookedCoworkings,
       {}
     ));
-
-    for (const bookedCoworkingDto of data.result) {
-      await dispatch(fetchCoworkingAction(bookedCoworkingDto.seat.coworking_id)); // temp
-    }
 
     return data.result;
   },
@@ -346,7 +342,7 @@ export const deleteBookingAction = createAsyncThunk<void, number, {
   extra: ThunkExtraArgument;
 }>(
   'booking/deleteBooking',
-  async (bookingId, { extra: { api } }) => {
+  async (bookingId, { dispatch, extra: { api } }) => {
     await api.post<JsonRpcResponse<null>>(ApiRoutes.CancelBooking, createJsonRpcRequest<CancelBookingRequestParams>(
       ApiMethods.CancelBooking,
       {
@@ -354,7 +350,7 @@ export const deleteBookingAction = createAsyncThunk<void, number, {
       }
     ));
 
-    // обновить список брони?
+    dispatch(fetchBookedCoworkingsAction());
   },
 );
 

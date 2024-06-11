@@ -46,8 +46,8 @@ export default function Calendar(): JSX.Element {
     setFirstDayOfActiveMonth(today.startOf('month'));
   };
 
-  const handleCalendarDayClick = (dayOfMonth: DateTime<true>, isDayHoliday: boolean, isDayInactive: boolean) => {
-    if (isDayHoliday || isDayInactive || dayOfMonth.diffNow('day').days < -1) {
+  const handleCalendarDayClick = (dayOfMonth: DateTime<true>, isDayHoliday: boolean, isDayExtraneus: boolean, isDayPast: boolean) => {
+    if (isDayHoliday || isDayExtraneus || isDayPast) {
       return;
     }
 
@@ -87,16 +87,18 @@ export default function Calendar(): JSX.Element {
         {daysOfMonth.map((dayOfMonth, index) => {
           const dayISOFormat = dayOfMonth.toISODate();
           const isDayHoliday = HOLIDAYS[dayOfMonth.month - 1].includes(dayOfMonth.day);
-          const isDayInactive = dayOfMonth.month !== firstDayOfActiveMonth.month;
+          const isDayExtraneus = dayOfMonth.month !== firstDayOfActiveMonth.month;
+          const isDayPast = dayOfMonth.diffNow('day').days < -1;
           return (
             <button
               key={`${dayOfMonth.day}/${dayOfMonth.month}`}
               className={classnames('calendar__self-grid-cell btn-reset', {
-                'calendar__self-grid-cell--inactive': isDayInactive,
-                'calendar__self-grid-cell--selected': dayISOFormat === selectedDayISOFormat && !isDayInactive,
+                'calendar__self-grid-cell--extraneus': isDayExtraneus,
+                'calendar__self-grid-cell--inactive': isDayPast || isDayHoliday,
+                'calendar__self-grid-cell--selected': dayISOFormat === selectedDayISOFormat && !isDayExtraneus && !isDayPast,
                 'calendar__self-grid-cell--current': dayISOFormat === today.toISODate(),
               })}
-              onClick={() => handleCalendarDayClick(dayOfMonth, isDayHoliday, isDayInactive)}
+              onClick={() => handleCalendarDayClick(dayOfMonth, isDayHoliday, isDayExtraneus, isDayPast)}
             >
               <div className="calendar__self-grid-cell-top">
                 {(dayOfMonth.day === 1 || index === 0) &&

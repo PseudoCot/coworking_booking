@@ -76,7 +76,7 @@ export default function ChangePasswordForm({ token, email }: ChangePasswordFormP
           <button className="new-password-form__submit-btn form-btn light-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
-            {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Сохранить'}
+            {fetchingStatus === FetchingStatuses.Pending ? <Loader alignCenter /> : 'Сохранить'}
           </button>
         </div>
       </div>

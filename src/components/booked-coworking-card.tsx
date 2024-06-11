@@ -30,7 +30,7 @@ export default function BookedCoworkingCard({ id, seat, coworking, session_start
     <>
       <li className="user-acc__booked-item booking__info">
         <div className="booking__left-info">
-          <div className="booking__info-carousel info-carousel">
+          <div className="booking__info-img">
             <img className="info-carousel__image" src={imageURL} alt={coworking.title} />
           </div>
           <h3 className="booking__info-header title-reset">{coworking.title}</h3>

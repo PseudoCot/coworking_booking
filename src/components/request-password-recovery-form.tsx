@@ -51,7 +51,7 @@ export default function RequestPasswordRecoveryForm(): JSX.Element {
           <button className="password-recovery-form__submit-btn form-btn light-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
-            {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Восстановить пароль'}
+            {fetchingStatus === FetchingStatuses.Pending ? <Loader alignCenter /> : 'Восстановить пароль'}
           </button>
         </div>
       </div>
