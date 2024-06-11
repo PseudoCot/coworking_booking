@@ -47,7 +47,7 @@ export default function Calendar(): JSX.Element {
   };
 
   const handleCalendarDayClick = (dayOfMonth: DateTime<true>, isDayHoliday: boolean, isDayInactive: boolean) => {
-    if (isDayHoliday || isDayInactive) {
+    if (isDayHoliday || isDayInactive || dayOfMonth.diffNow('day').days < -1) {
       return;
     }
 
@@ -93,7 +93,7 @@ export default function Calendar(): JSX.Element {
               key={`${dayOfMonth.day}/${dayOfMonth.month}`}
               className={classnames('calendar__self-grid-cell btn-reset', {
                 'calendar__self-grid-cell--inactive': isDayInactive,
-                'calendar__self-grid-cell--selected': dayISOFormat === selectedDay?.toISODate() && !isDayInactive,
+                'calendar__self-grid-cell--selected': dayISOFormat === selectedDayISOFormat && !isDayInactive,
                 'calendar__self-grid-cell--current': dayISOFormat === today.toISODate(),
               })}
               onClick={() => handleCalendarDayClick(dayOfMonth, isDayHoliday, isDayInactive)}
