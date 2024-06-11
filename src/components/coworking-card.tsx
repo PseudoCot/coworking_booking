@@ -34,12 +34,7 @@ export default function CoworkingCard({ avatar, title, description, address, sea
           <span className="booking__opening-title">Режим работы</span>
           <span className="booking__opening-text">
             с&nbsp;{openingTime} до&nbsp;{endingTime}
-            {/* {true &&
-              <>
-                , <br />по&nbsp;заявкам
-              </>} */}
           </span>
-          {/* расширить инфу по каждому дню недели? */}
         </div>
       </div>
       <div className="booking__right-info">

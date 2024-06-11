@@ -7,17 +7,13 @@ import { deleteBookingAction } from '../store/api-actions';
 import { BookedCoworkingDto } from '../types/booking/booked-coworking-dto';
 import SubmitForm from './submit-form';
 
-type BookedCoworkingCardProps = BookedCoworkingDto & {
-  title: string;
-  description: string;
-  avatar?: string;
-};
+type BookedCoworkingCardProps = BookedCoworkingDto;
 
-export default function BookedCoworkingCard({ id, title, description, avatar, seat, session_start: from, session_end: to, }
+export default function BookedCoworkingCard({ id, seat, coworking, session_start: from, session_end: to, }
   : BookedCoworkingCardProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const imageURL = getImageURL(avatar);
+  const imageURL = getImageURL(coworking.avatar);
   const [date, timestamp] = getDateAndTimestamp(from, to);
 
   const [showBookingCancelSubmit, setShowBookingCancelSubmit] = useState(false);
@@ -35,15 +31,15 @@ export default function BookedCoworkingCard({ id, title, description, avatar, se
       <li className="user-acc__booked-item booking__info">
         <div className="booking__left-info">
           <div className="booking__info-carousel info-carousel">
-            <img className="info-carousel__image" src={imageURL} alt={title} />
+            <img className="info-carousel__image" src={imageURL} alt={coworking.title} />
           </div>
-          <h3 className="booking__info-header title-reset">{title}</h3>
+          <h3 className="booking__info-header title-reset">{coworking.title}</h3>
         </div>
         <div className="booking__right-info">
           <div className="booking__info-group">
             <h3 className="booking__info-title title-reset">Описание:</h3>
             <p className="booking__info-text paragraph-reset">
-              {description}
+              {coworking.description}
             </p>
           </div>
           <div className="booking__info-group">
@@ -57,7 +53,7 @@ export default function BookedCoworkingCard({ id, title, description, avatar, se
           <div className="booking__info-group">
             <h3 className="booking__info-title title-reset">Тип места:</h3>
             <span className="booking__info-inline-text">
-              {PlaceTypeOptions.find((option) => option.value === seat.place_type)?.value}
+              {PlaceTypeOptions.find((option) => option.value === seat.place_type)?.title}
             </span>
           </div>
           <button className="booking__info-cancel-btn light-btn btn-reset" onClick={handleBookingCancelToggle}>

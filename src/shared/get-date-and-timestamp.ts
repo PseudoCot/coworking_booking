@@ -1,7 +1,15 @@
 import { DateTime } from 'luxon';
+import stringifyInteger from './stringify-integer';
 
 export default function getDateAndTimestamp(datetimeStart: string, datetimeEnd: string) {
   const start = DateTime.fromISO(datetimeStart);
   const end = DateTime.fromISO(datetimeEnd);
-  return [start.toLocaleString().replace('/', '.'), `${start.hour}:${start.minute} - ${end.hour}:${end.minute}`];
+
+  const date = start.toLocaleString().replace('/', '.');
+  const startHour = stringifyInteger(start.hour);
+  const startMinute = stringifyInteger(start.minute);
+  const endHour = stringifyInteger(end.hour);
+  const endMinute = stringifyInteger(end.minute);
+
+  return [date, `${startHour}:${startMinute} - ${endHour}:${endMinute}`];
 }

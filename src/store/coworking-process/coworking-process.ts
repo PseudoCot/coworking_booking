@@ -23,14 +23,16 @@ export const coworkingProcess = createSlice({
     builder
       .addCase(fetchCoworkingAction.pending, (state) => {
         state.coworkingFetching = true;
+        state.coworkingFetchingError = false;
       })
       .addCase(fetchCoworkingAction.fulfilled, (state, action: PayloadAction<CoworkingDto>) => {
         state.coworkingDto = action.payload;
         state.coworkingFetching = false;
       })
       .addCase(fetchCoworkingAction.rejected, (state) => {
-        state.coworkingDto = undefined; // перепроверить
+        state.coworkingDto = undefined;
         state.coworkingFetching = false;
+        state.coworkingFetchingError = true;
       });
   },
 });

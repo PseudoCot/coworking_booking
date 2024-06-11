@@ -9,7 +9,6 @@ import { isBookingError, isBookingSucces } from '../store/booking-process/select
 import { useEffect } from 'react';
 import { fetchCoworkingAction } from '../store/api-actions';
 import { useParams } from 'react-router-dom';
-import { clearBookedCoworkingsFullDto } from '../store/booked-coworkings-process/booked-coworkings-process';
 import { TECHNICAL_SUPPORT_EMAIL, TELEGRAM_BOT_NAME } from '../consts';
 
 export default function BookingScreen(): JSX.Element {
@@ -27,10 +26,6 @@ export default function BookingScreen(): JSX.Element {
     if (urlParams.id) {
       dispatch(fetchCoworkingAction(urlParams.id));
     }
-
-    return () => {
-      dispatch(clearBookedCoworkingsFullDto()); // temp
-    };
   }, [dispatch, urlParams.id]);
 
   return (

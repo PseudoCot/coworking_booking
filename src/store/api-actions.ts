@@ -470,14 +470,14 @@ export const postCoworkingAction = createAsyncThunk<CoworkingShortDto, CreateCow
 
     if (createData.avatar) {
       dispatch(postCoworkingAvatarAction({
-        coworkingId: '123',
+        coworkingId: data.result.id,
         avatar: createData.avatar
       }));
     }
     if (createData.images) {
       createData.images.forEach((image) => {
         dispatch(postCoworkingImageAction({
-          coworkingId: '123',
+          coworkingId: data.result.id,
           image: image
         }));
       });

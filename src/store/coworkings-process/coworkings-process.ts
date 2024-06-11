@@ -34,6 +34,7 @@ export const coworkingsProcess = createSlice({
       .addCase(fetchCoworkingsBySearchAction.pending, (state) => {
         state.coworkingsDto = [];
         state.coworkingsFetching = true;
+        state.coworkingsFetchingError = false;
       })
       .addCase(fetchCoworkingsBySearchAction.fulfilled, (state, action: PayloadAction<CoworkingShortDto[]>) => {
         state.coworkingsDto = action.payload;
@@ -44,8 +45,9 @@ export const coworkingsProcess = createSlice({
         state.coworkingsFetchingError = true;
       })
       .addCase(fetchCoworkingsByTimestampAction.pending, (state) => {
-        state.coworkingsDto = []; // перепроверить
+        state.coworkingsDto = [];
         state.coworkingsFetching = true;
+        state.coworkingsFetchingError = false;
       })
       .addCase(fetchCoworkingsByTimestampAction.fulfilled, (state, action: PayloadAction<CoworkingShortDto[]>) => {
         state.coworkingsDto = action.payload;
