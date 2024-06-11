@@ -8,14 +8,17 @@ type CoworkingsProcessState = {
   coworkingsFetching: boolean;
   coworkingsFetchingError: boolean;
   coworkingsDto?: CoworkingShortDto[];
-  searchParams?: CoworkingsSearchDto;
+  searchParams: CoworkingsSearchDto;
 }
 
 const initialState: CoworkingsProcessState = {
   coworkingsFetching: false,
   coworkingsFetchingError: false,
   coworkingsDto: [],
-  searchParams: undefined,
+  searchParams: {
+    title: '',
+    institute: ''
+  },
 };
 
 export const coworkingsProcess = createSlice({
@@ -26,7 +29,11 @@ export const coworkingsProcess = createSlice({
       state.searchParams = action.payload;
     },
     resetCoworkingSearchParams: (state) => {
-      state.searchParams = undefined;
+      state.searchParams.title = '';
+      state.searchParams.institute = '';
+    },
+    clearCoworkingsData: (state) => {
+      state.coworkingsDto = [];
     },
   },
   extraReducers(builder) {
@@ -60,4 +67,4 @@ export const coworkingsProcess = createSlice({
   },
 });
 
-export const { setCoworkingSearchParams, resetCoworkingSearchParams } = coworkingsProcess.actions;
+export const { setCoworkingSearchParams, resetCoworkingSearchParams, clearCoworkingsData } = coworkingsProcess.actions;

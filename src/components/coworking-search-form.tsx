@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { fetchCoworkingsBySearchAction } from '../store/api-actions';
 import { getCoworkingsSearchParams } from '../store/coworkings-process/selectors';
 import { resetCoworkingSearchParams, setCoworkingSearchParams } from '../store/coworkings-process/coworkings-process';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../routes';
 
 export type CoworkingSearchFormProps = {
   inMainScreen?: boolean;
@@ -16,6 +18,7 @@ export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingS
   });
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const coworkingSearchParams = useAppSelector(getCoworkingsSearchParams);
 
   const [title, setTitle] = useState(coworkingSearchParams?.title);
@@ -32,17 +35,21 @@ export default function CoworkingSearchForm({ inMainScreen = false }: CoworkingS
       title,
       institute,
     }));
+
+    if (inMainScreen) {
+      navigate(AppRoutes.Coworkings.FullPath);
+    }
   };
 
   const handleShowAllClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
-    setTitle(undefined);
-    setInstitute(undefined);
+    setTitle('');
+    setInstitute('');
 
     dispatch(fetchCoworkingsBySearchAction({
-      title: undefined,
-      institute: undefined,
+      title: '',
+      institute: '',
     }));
     dispatch(resetCoworkingSearchParams());
   };

@@ -235,7 +235,6 @@ export const fetchCoworkingsByTimestampAction = createAsyncThunk<CoworkingShortD
       ));
 
     return data.result;
-    // return coworkingShortDataMock;
   },
 );
 
@@ -245,7 +244,7 @@ export const fetchCoworkingsBySearchAction = createAsyncThunk<CoworkingShortDto[
   extra: ThunkExtraArgument;
 }>(
   'coworking/fetchCoworkingsBySearch',
-  async (searchData, { dispatch, extra: { api } }) => {
+  async (searchData, { extra: { api } }) => {
     const { data } = await api.post<JsonRpcResponse<CoworkingShortDto[]>>(ApiRoutes.FetchCoworkingsBySearch,
       createJsonRpcRequest<CoworkingBySearchRequestParams>(
         ApiMethods.FetchCoworkingsBySearch,
@@ -257,9 +256,7 @@ export const fetchCoworkingsBySearchAction = createAsyncThunk<CoworkingShortDto[
         }
       ));
 
-    dispatch(redirectToRoute(AppRoutes.Coworkings.FullPath));
     return data.result;
-    // return coworkingShortDataMock;
   },
 );
 
@@ -278,7 +275,6 @@ export const fetchCoworkingAction = createAsyncThunk<CoworkingDto, string, {
     ));
 
     return data.result;
-    // return await coworkingDataMock[coworkingId];
   },
 );
 
