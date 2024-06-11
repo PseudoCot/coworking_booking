@@ -1,12 +1,24 @@
 import { useState, FormEventHandler, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import TimestampSelectGroup from './timestamp-select-group';
-import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE, PlaceTypeOptions } from '../consts';
+import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE, FetchingStatuses, PlaceTypeOptions } from '../consts';
 import Select from './select';
 import { DateTime } from 'luxon';
 import { postBookedCoworkingAction } from '../store/api-actions';
 import { getCoworkingId } from '../store/coworking-process/selectors';
 import createISODate from '../shared/create-iso-date';
+import { getBookFetchingStatus } from '../store/booking-process/selectors';
+import { resetBookFetchingStatus } from '../store/booking-process/booking-process';
+import Loader from './loader';
+
+const DEFAULT_FIELDS_VALUES = {
+  PlaceType: undefined,
+  Date: undefined,
+  StartHour: FIRST_AVAILABLE_HOUR,
+  StartMinute: FIRST_AVAILABLE_MINUTE,
+  EndHour: FIRST_AVAILABLE_HOUR,
+  EndMinute: FIRST_AVAILABLE_MINUTE,
+};
 
 export default function BookingForm(): JSX.Element {
   const today = DateTime.local();
@@ -15,13 +27,14 @@ export default function BookingForm(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const coworkingId = useAppSelector(getCoworkingId);
+  const fetchingStatus = useAppSelector(getBookFetchingStatus);
 
-  const [placeType, setPlaceType] = useState<string | number>();
-  const [date, setDate] = useState<string>();
-  const [startHour, setStartHour] = useState(FIRST_AVAILABLE_HOUR);
-  const [startMinute, setStartMinute] = useState(FIRST_AVAILABLE_MINUTE);
-  const [endHour, setEndHour] = useState(FIRST_AVAILABLE_HOUR);
-  const [endMinute, setEndMinute] = useState(FIRST_AVAILABLE_MINUTE);
+  const [placeType, setPlaceType] = useState<string | number | undefined>(DEFAULT_FIELDS_VALUES.PlaceType);
+  const [date, setDate] = useState<string | undefined>(DEFAULT_FIELDS_VALUES.Date);
+  const [startHour, setStartHour] = useState(DEFAULT_FIELDS_VALUES.StartHour);
+  const [startMinute, setStartMinute] = useState(DEFAULT_FIELDS_VALUES.StartMinute);
+  const [endHour, setEndHour] = useState(DEFAULT_FIELDS_VALUES.EndHour);
+  const [endMinute, setEndMinute] = useState(DEFAULT_FIELDS_VALUES.EndMinute);
 
   const selectedPlaceType = PlaceTypeOptions.find((item) => item.value === placeType);
 
@@ -42,6 +55,25 @@ export default function BookingForm(): JSX.Element {
   useEffect(() => {
     setSubmitEnabled(!!placeType && !!date);
   }, [placeType, date]);
+
+  useEffect(() => {
+    dispatch(resetBookFetchingStatus());
+
+    return () => {
+      dispatch(resetBookFetchingStatus());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (fetchingStatus === FetchingStatuses.Fulfilled) {
+      setPlaceType(DEFAULT_FIELDS_VALUES.PlaceType);
+      setDate(DEFAULT_FIELDS_VALUES.Date);
+      setStartHour(DEFAULT_FIELDS_VALUES.StartHour);
+      setStartMinute(DEFAULT_FIELDS_VALUES.StartMinute);
+      setEndHour(DEFAULT_FIELDS_VALUES.EndHour);
+      setEndMinute(DEFAULT_FIELDS_VALUES.EndMinute);
+    }
+  }, [fetchingStatus]);
 
   return (
     <form className="booking__form form" action="#" onSubmit={handleSubmit}>
@@ -76,7 +108,7 @@ export default function BookingForm(): JSX.Element {
           <button className="booking__form-submit-btn form-btn light-btn btn-reset"
             type="submit" disabled={!submitEnabled}
           >
-            Забронировать
+            {fetchingStatus === FetchingStatuses.Pending ? <Loader horizontalAlignCenter /> : 'Забронировать'}
           </button>
         </div>
       </div>

@@ -1,42 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpaces } from '../../consts';
+import { FetchingStatuses, NameSpaces } from '../../consts';
 import { postBookedCoworkingAction } from '../api-actions';
+import { FetchingStatus } from '../../types/fetching-status';
 
 type BookingProcessState = {
-  bookRequesting: boolean;
-  bookingSuccess: boolean;
-  bookingError: boolean;
+  bookFetchingStatus: FetchingStatus;
   bookedEventLink?: string;
 }
 
 const initialState: BookingProcessState = {
-  bookRequesting: false,
-  bookingSuccess: false,
-  bookingError: false,
+  bookFetchingStatus: FetchingStatuses.None,
   bookedEventLink: undefined,
 };
 
 export const bookingProcess = createSlice({
   name: NameSpaces.Coworking,
   initialState,
-  reducers: {},
+  reducers: {
+    resetBookFetchingStatus: (state) => {
+      state.bookFetchingStatus = FetchingStatuses.None;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(postBookedCoworkingAction.pending, (state) => {
-        state.bookRequesting = true;
-        state.bookingSuccess = false;
-        state.bookingError = false;
+        state.bookFetchingStatus = FetchingStatuses.Pending;
       })
       .addCase(postBookedCoworkingAction.fulfilled, (state) => {
         // state.bookedEventLink = action.payload.eventLink;
-        state.bookRequesting = false;
-        state.bookingSuccess = true;
+        state.bookFetchingStatus = FetchingStatuses.Fulfilled;
       })
       .addCase(postBookedCoworkingAction.rejected, (state) => {
-        state.bookRequesting = false;
-        state.bookingError = true;
+        state.bookFetchingStatus = FetchingStatuses.Rejected;
       });
   },
 });
 
-// export const { someAction } = coworkingProcess.actions;
+export const { resetBookFetchingStatus } = bookingProcess.actions;

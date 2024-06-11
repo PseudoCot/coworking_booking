@@ -1,4 +1,3 @@
-// import CoworkingCreatingForm from '../components/coworking-creating-form';
 import CoworkingList from '../components/coworking-list';
 import CoworkingSearchForm from '../components/coworking-search-form';
 import Layout from '../components/layout';
@@ -12,8 +11,6 @@ export default function CoworkingsScreen(): JSX.Element {
         <CoworkingSearchForm />
 
         <CoworkingList />
-
-        {/* <CoworkingCreatingForm /> */}
       </article>
     </Layout>
   );

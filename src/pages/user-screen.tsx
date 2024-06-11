@@ -17,7 +17,7 @@ export default function UserScreen(): JSX.Element {
   const navigate = useNavigate();
 
   const userData = useAppSelector(getUserData);
-  const fetchingStatus = useUserFetchingStatus('userDataFetchingStatus');
+  const userDataFetchingStatus = useUserFetchingStatus('userDataFetchingStatus');
   // const showEmailMessage = useAppSelector(showCheckEmailMessage);
 
   const [editingInfo, setEditingInfo] = useState(false);
@@ -44,7 +44,7 @@ export default function UserScreen(): JSX.Element {
       <article className="user-acc">
         <h1 className="user-acc__title title title-reset">Личный кабинет</h1>
 
-        {fetchingStatus === FetchingStatuses.Pending && userData
+        {userDataFetchingStatus === FetchingStatuses.Pending && userData
           ?
           <>
             {userData.telegramConnected ||
