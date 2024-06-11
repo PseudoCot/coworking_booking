@@ -51,7 +51,9 @@ export default function FormInputGroup({ groupClasses = '', labelClasses = '', i
   }, [errorText, showError, setShowError]);
 
   return (
-    <div className={`${groupClasses} ${adminFormStyles ? 'admin-form-input-group' : 'form-group'} ${required ? 'form-group--required' : ''}`}>
+    <div className={`${groupClasses} ${adminFormStyles ? 'admin-form-input-group' : 'form-input-group'}
+      ${required ? 'form-input-group--required' : ''}`}
+    >
       <label className={`${labelClasses} ${adminFormStyles ? 'admin-form-label' : 'form-label'}`} htmlFor={name}>{labelText}</label>
       {textarea
         ?
@@ -79,7 +81,7 @@ export default function FormInputGroup({ groupClasses = '', labelClasses = '', i
           <TipSVG />
         </span>}
       {errorText &&
-        <span className={`${errorClasses} ${showError ? 'form-group-error--active' : ''} form-group-error`}>
+        <span className={`${errorClasses} ${showError ? 'form-input-group-error--active' : ''} form-input-group-error`}>
           {errorText}
         </span>}
     </div>
