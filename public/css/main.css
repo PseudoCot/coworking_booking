@@ -266,7 +266,8 @@ body,
   color: var(--theme-text-color);
 }
 
-.form-input-group--required .form-label::after {
+.form-input-group--required .form-label::after,
+.form-input-group--required .admin-form-label::after {
   content: '*';
   color: #B71C1CBF;
 }
@@ -477,7 +478,8 @@ body,
 }
 
 .admin-form-textarea {
-  min-height: 30px;
+  width: 100%;
+  min-height: 62px;
   max-height: 200px;
   resize: vertical;
 }
@@ -2576,7 +2578,10 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
 
 
 /* /// event-form /// */
-.event-form {}
+.event-form__date-input {
+  width: 180px;
+  font-size: 15px;
+}
 
 
 

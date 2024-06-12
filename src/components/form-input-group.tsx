@@ -51,8 +51,7 @@ export default function FormInputGroup({ groupClasses = '', labelClasses = '', i
   }, [errorText, showError, setShowError]);
 
   return (
-    <div className={`${groupClasses} ${adminFormStyles ? 'admin-form-input-group' : 'form-input-group'}
-      ${required ? 'form-input-group--required' : ''}`}
+    <div className={`${groupClasses} ${adminFormStyles ? 'admin-form-input-group' : 'form-input-group'} ${required ? 'form-input-group--required' : ''}`}
     >
       <label className={`${labelClasses} ${adminFormStyles ? 'admin-form-label' : 'form-label'}`} htmlFor={name}>{labelText}</label>
       {textarea
