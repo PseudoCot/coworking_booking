@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '.';
-import { getUserFetchingStatus } from '../store/user-process/selectors';
+import { createUserFetchingStatusGetter } from '../store/user-process/selectors';
 import { UserFetchingField, resetUserFetchingStatus } from '../store/user-process/user-process';
 
 export function useUserFetchingStatus(type: UserFetchingField) {
   const dispatch = useAppDispatch();
-  const fetchingStatus = useAppSelector(getUserFetchingStatus(type));
+  const fetchingStatus = useAppSelector(createUserFetchingStatusGetter(type));
 
   useEffect(() => {
     dispatch(resetUserFetchingStatus(type));
@@ -14,5 +14,6 @@ export function useUserFetchingStatus(type: UserFetchingField) {
       dispatch(resetUserFetchingStatus(type));
     };
   }, [dispatch, type]);
+
   return fetchingStatus;
 }

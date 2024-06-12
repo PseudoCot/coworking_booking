@@ -149,6 +149,7 @@ export const NameSpaces = {
   Booking: 'Booking',
   BookedCoworkings: 'BookedCoworkings',
   User: 'User',
+  Admin: 'Admin',
   Error: 'Error',
 } as const;
 

@@ -5,7 +5,7 @@ import { State } from '../../types/state';
 import { UserData } from '../../types/user/user-data';
 import { UserFetchingField } from './user-process';
 
-export const getUserFetchingStatus = (type: UserFetchingField) => (state: State): FetchingStatus => state[NameSpaces.User][type];
+export const createUserFetchingStatusGetter = (type: UserFetchingField) => (state: State): FetchingStatus => state[NameSpaces.User][type];
 
 export const getAuthStatus = (state: State): AuthStatus => state[NameSpaces.User].authStatus;
 export const getUserData = (state: State): UserData | undefined => state[NameSpaces.User].userData;

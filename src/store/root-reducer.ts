@@ -6,6 +6,7 @@ import { coworkingsProcess } from './coworkings-process/coworkings-process';
 import { coworkingProcess } from './coworking-process/coworking-process';
 import { bookingProcess } from './booking-process/booking-process';
 import { bookedCoworkingsProcess } from './booked-coworkings-process/booked-coworkings-process';
+import { adminProcess } from './admin-process/admin-process';
 
 export const rootReducer = combineReducers({
   [NameSpaces.Coworkings]: coworkingsProcess.reducer,
@@ -13,5 +14,6 @@ export const rootReducer = combineReducers({
   [NameSpaces.Booking]: bookingProcess.reducer,
   [NameSpaces.BookedCoworkings]: bookedCoworkingsProcess.reducer,
   [NameSpaces.User]: userProcess.reducer,
+  [NameSpaces.Admin]: adminProcess.reducer,
   [NameSpaces.Error]: errorProcess.reducer,
 });
