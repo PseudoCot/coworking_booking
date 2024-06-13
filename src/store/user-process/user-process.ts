@@ -109,6 +109,7 @@ export const userProcess = createSlice({
         state.userData.email = action.payload.email;
         state.userData.isStudent = action.payload.is_student;
         state.userData.telegramConnected = action.payload.is_telegram_logged_in;
+        state.userData.admin = action.payload.is_admin;
         state.userData.avatarFileName = action.payload.avatar_filename;
       })
       .addCase(fetchUserAction.rejected, (state) => {

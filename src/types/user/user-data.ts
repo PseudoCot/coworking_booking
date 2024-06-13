@@ -6,5 +6,6 @@ export type UserData = {
   patronymic?: string;
   isStudent: boolean;
   telegramConnected: boolean;
+  admin: boolean;
   avatarFileName?: string;
 }

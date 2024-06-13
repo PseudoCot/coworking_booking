@@ -10,5 +10,6 @@ export const createUserFetchingStatusGetter = (type: UserFetchingField) => (stat
 export const getAuthStatus = (state: State): AuthStatus => state[NameSpaces.User].authStatus;
 export const getUserData = (state: State): UserData | undefined => state[NameSpaces.User].userData;
 export const isUserTelegramConnected = (state: State): boolean | undefined => state[NameSpaces.User].userData?.telegramConnected;
+export const isUserAdmin = (state: State): boolean | undefined => state[NameSpaces.User].userData?.admin;
 // export const showCheckEmailMessage = (state: State): boolean => state[NameSpaces.User].showCheckEmailMessage;
 

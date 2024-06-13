@@ -6,5 +6,6 @@ export type UserDto = {
   patronymic?: string;
   is_student: boolean;
   avatar_filename: string;
+  is_admin: boolean;
   is_telegram_logged_in: boolean;
 };
