@@ -58,11 +58,11 @@ export default function EventCreatingForm({ coworkingId }: EventCreatingFormProp
             />
           </div>
           <FormInputGroup groupClasses='event-form__input-group' labelClasses='event-form__label' inputClasses='event-form__input'
-            labelText='Название' name='event-name' type='text' autoComplete='event-name' adminFormStyles required
+            adminFormStyles labelText='Название' name='event-name' type='text' autoComplete='event-name' required
             value={name} onChange={handleNameChange}
           />
           <FormInputGroup groupClasses='event-form__input-group' labelClasses='event-form__label' inputClasses='event-form__input'
-            labelText='Описание' name='description' type='text' adminFormStyles textarea
+            adminFormStyles textarea labelText='Описание' name='description' type='text'
             value={description} onChange={handleDescriptionChange}
           />
           <button className="event-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>

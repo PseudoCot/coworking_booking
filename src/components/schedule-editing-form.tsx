@@ -96,9 +96,10 @@ export default function ScheduleEditingForm({ coworkingId }: ScheduleEditingForm
           </div>
           <TimestampSelectGroup subLabelClasses='event-form__sub-label' timeGroupClasses='event-form__time-group'
             timeSelectClasses='event-form__time-select' selectOptionClasses='event-form__select-option'
-            timesSeparatorClasses='event-form__time-separator' startLabel='Время начала работы'
-            endLabel='Время окончания работы' adminStyles startHour={startHour} startMinute={startMinute}
-            endHour={endHour} endMinute={endMinute} onStartHourChange={setStartHour} onStartMinuteChange={setStartMinute}
+            timesSeparatorClasses='event-form__time-separator' adminStyles
+            startLabel='Время начала работы' endLabel='Время окончания работы'
+            startHour={startHour} startMinute={startMinute} endHour={endHour} endMinute={endMinute}
+            onStartHourChange={setStartHour} onStartMinuteChange={setStartMinute}
             onEndHourChange={setEndHour} onEndMinuteChange={setEndMinute}
           />
           <button className="event-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>

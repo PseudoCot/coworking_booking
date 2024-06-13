@@ -60,9 +60,9 @@ export default function CapabilitiesEditingForm({ coworkingId }: CapabilitiesEdi
           <div className="capabilities-form__input-group admin-form-input-group">
             <h3 className="capabilities-form__input-label admin-form-label title-reset">Технические возможности</h3>
             {capabilities.map((capability, index) => (
-              <input className="capabilities-form__input admin-form-input" type="text" name={`capability-${index}`} id={`capability-${index}`}
-                // eslint-disable-next-line react/no-array-index-key
-                key={index} value={capability}
+              // eslint-disable-next-line react/no-array-index-key
+              <input className="capabilities-form__input admin-form-input" key={index}
+                type="text" name={`capability-${index}`} id={`capability-${index}`} value={capability}
                 onChange={(e) => handleCapabilityChange(e, index)} onBlur={() => handleCapabilityBlur(index)}
               />
             ))}

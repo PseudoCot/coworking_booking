@@ -113,8 +113,9 @@ export default function Calendar(): JSX.Element {
                 {dayISOFormat === selectedDayISOFormat &&
                   <TimestampSelectGroup subLabelClasses='calendar__form-sub-label' timeGroupClasses='calendar__form-time-group'
                     timeSelectClasses='calendar__form-time-select' selectOptionClasses='calendar__form-select-option'
-                    timesSeparatorClasses='calendar__form-time-separator' startHour={startHour} startMinute={startMinute}
-                    endHour={endHour} endMinute={endMinute} onStartHourChange={setStartHour} onStartMinuteChange={setStartMinute}
+                    timesSeparatorClasses='calendar__form-time-separator'
+                    startHour={startHour} startMinute={startMinute} endHour={endHour} endMinute={endMinute}
+                    onStartHourChange={setStartHour} onStartMinuteChange={setStartMinute}
                     onEndHourChange={setEndHour} onEndMinuteChange={setEndMinute}
                   />}
               </div>
