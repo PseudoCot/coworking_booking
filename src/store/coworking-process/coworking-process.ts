@@ -7,6 +7,7 @@ import { EventDto } from '../../types/api-shared/event-dto';
 import { CoworkingCapabilityDto } from '../../types/api-shared/coworking-capability-dto';
 import { SeatDto } from '../../types/api-shared/seat-dto';
 import { ScheduleDto } from '../../types/api-shared/schedule-dto';
+import sortedArrayByElementField from '../../shared/sorted-array-by-element-field';
 
 type CoworkingProcessState = {
   coworkingFetching: boolean;
@@ -32,6 +33,8 @@ export const coworkingProcess = createSlice({
       })
       .addCase(fetchCoworkingAction.fulfilled, (state, action: PayloadAction<CoworkingDto>) => {
         state.coworkingDto = action.payload;
+        // eslint-disable-next-line camelcase
+        state.coworkingDto.working_schedules = sortedArrayByElementField<ScheduleDto>(action.payload.working_schedules, 'week_day');
         state.coworkingFetching = false;
       })
       .addCase(fetchCoworkingAction.rejected, (state) => {
