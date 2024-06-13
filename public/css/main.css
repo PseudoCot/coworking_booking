@@ -2680,7 +2680,85 @@ body .toast-wrapper:not(.toast-wrapper--hide) {
 
 
 /* /// seats-form /// */
-.seats-form {}
+.seats-form__meetings-list {
+  margin-bottom: 20px;
+}
+
+.seats-form__empty-meetings-list-text {
+  font-family: var(--exa-family);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--theme-text-color);
+}
+
+.seats-form__meeting {
+  padding: 2px 5px;
+  margin-left: 5px;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 0.5px solid #283593e6;
+}
+
+.seats-form__meeting-name {
+  font-family: var(--exa-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: var(--theme-text-color);
+}
+
+.seats-form__meeting:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.seats-form__meeting-toggle {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  border: 1px solid #28359326;
+}
+
+.seats-form__meeting-toggle:hover {
+  background-color: #ffffff;
+  border: 1px solid #28349393;
+}
+
+.seats-form__meeting-toggle--toggled {
+  background-color: #283593e6;
+}
+
+.seats-form__meeting-toggle--toggled:hover {
+  background-color: #5064ffe6;
+}
+
+.seats-form__meeting-edit-btn,
+.seats-form__meeting-delete-btn {
+  padding: 2px;
+  font-size: 0px;
+}
+
+.seats-form__label {
+  width: 356px;
+}
+
+.seats-form__textarea {
+  width: 356px;
+  min-height: 120px;
+}
+
+.seats-form__add-meeting-btn {
+  padding: 5px 6px;
+  margin: 0 0 20px;
+  font-size: 14px;
+}
 
 
 

@@ -5,4 +5,6 @@ export type SeatDto = {
   description: string;
   place_type: string;
   seats_count: number;
+
+  active?: boolean; // allways null
 };

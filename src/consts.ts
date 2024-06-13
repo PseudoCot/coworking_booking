@@ -118,6 +118,11 @@ export const BookingStatuses = { // значения соответствуют 
   Passed: 'passed',
 } as const;
 
+export const PlaceTypes = {
+  Table: 'table',
+  MeetingRoom: 'meeting_room',
+} as const;
+
 export const PlaceTypeOptions: SelectOption<string>[] = [ // value соответствуют api
   { title: 'Столы', value: 'table' },
   { title: 'Переговорные', value: 'meeting_room' },

@@ -22,8 +22,13 @@ type FormInputGroupProps = {
   inputMode?: InputMode;
   autoCapitalize?: string;
   autoComplete?: string;
+  min?: number;
+  max?: number;
+  step?: number;
+  minLenght?: number;
+  maxLenght?: number;
 
-  value: string;
+  value?: string | number;
   onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 
   tooltipText?: string;
@@ -34,7 +39,8 @@ type FormInputGroupProps = {
 
 export default function FormInputGroup({ groupClasses = '', labelClasses = '', inputClasses = '', tooltipClasses = '',
   errorClasses = '', required, textarea, adminFormStyles, labelText, name, type, inputMode, autoCapitalize, autoComplete,
-  value, onChange: handleChange, tooltipText, errorText, showError, setShowError }: FormInputGroupProps): JSX.Element {
+  min, max, step, value, minLenght, maxLenght, tooltipText, errorText, showError, onChange: handleChange,
+  setShowError }: FormInputGroupProps): JSX.Element {
 
   // исчезновение сообщения об ошибке через некоторое количество секунд
   useEffect(() => {
@@ -51,14 +57,20 @@ export default function FormInputGroup({ groupClasses = '', labelClasses = '', i
   }, [errorText, showError, setShowError]);
 
   return (
-    <div className={`${groupClasses} ${adminFormStyles ? 'admin-form-input-group' : 'form-input-group'} ${required ? 'form-input-group--required' : ''}`}
+    <div className={`${groupClasses} ${adminFormStyles ? 'admin-form-input-group' : 'form-input-group'}
+      ${required ? 'form-input-group--required' : ''}`}
     >
-      <label className={`${labelClasses} ${adminFormStyles ? 'admin-form-label' : 'form-label'}`} htmlFor={name}>{labelText}</label>
+      <label className={`${labelClasses} ${adminFormStyles ? 'admin-form-label' : 'form-label'}`} htmlFor={name}>
+        {labelText}
+      </label>
+
       {textarea
         ?
         <textarea className={`${inputClasses} ${adminFormStyles ? 'admin-form-textarea' : 'form-textarea'}`}
           name={name}
           id={name}
+          minLength={minLenght}
+          maxLength={maxLenght}
           value={value}
           onChange={handleChange}
         />
@@ -70,6 +82,11 @@ export default function FormInputGroup({ groupClasses = '', labelClasses = '', i
           inputMode={inputMode}
           autoCapitalize={autoCapitalize}
           autoComplete={autoComplete}
+          min={min}
+          max={max}
+          step={step}
+          minLength={minLenght}
+          maxLength={maxLenght}
           value={value}
           onChange={handleChange}
         />}
