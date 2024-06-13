@@ -9,7 +9,7 @@ export const FIRST_AVAILABLE_HOUR = AVAILABLE_HOURS.at(0) as string;
 export const FIRST_AVAILABLE_MINUTE = AVAILABLE_MINUTES.at(0) as string;
 export const COWORKING_DEFAULT_IMAGE = 'coworking-default-image.png';
 export const TELEGRAM_BOT_NAME = '@test_coworking_booking_urfu_bot';
-export const TECHNICAL_SUPPORT_EMAIL = 'ap.makarov@urfu.me';
+export const TECHNICAL_SUPPORT_EMAIL = 'V.eremenko@brusnika.ru';
 
 export const BACKEND_URL = import.meta.env.DEV && import.meta.env.VITE_DEV_REQUESTS_THROUGH_PROXY === 'true'
   ? import.meta.env.VITE_DEV_PROXY_URL
@@ -118,12 +118,12 @@ export const BookingStatuses = { // значения соответствуют 
   Passed: 'passed',
 } as const;
 
-export const PlaceTypeOptions: SelectOption[] = [ // value соответствуют api
+export const PlaceTypeOptions: SelectOption<string>[] = [ // value соответствуют api
   { title: 'Столы', value: 'table' },
   { title: 'Переговорные', value: 'meeting_room' },
 ];
 
-export const WeekdayOptions: SelectOption[] = [
+export const WeekdayOptions: SelectOption<number>[] = [
   { title: 'Понедельник', value: 0 },
   { title: 'Вторник', value: 1 },
   { title: 'Среда', value: 2 },
