@@ -1,23 +1,28 @@
-import { useState, useRef, useEffect, MouseEventHandler, KeyboardEventHandler } from 'react';
+import { useState, useRef, useEffect, MouseEventHandler, KeyboardEventHandler, Key } from 'react';
 import { SelectOption as SelectOptionType } from '../types/select-option';
 import SelectOption from './select-option';
+import { OptionToggles } from '../types/option-toggles';
 
-export type SelectProps = {
+export type SelectProps<V> = {
   selectClasses?: string;
   placeholderClasses?: string;
   optionListClasses?: string;
   optionClasses?: string;
+  optionToggleClasses?: string;
 
+  adminStyles?: boolean;
   placeholder?: string;
 
-  options: SelectOptionType[];
-  selectedOption?: SelectOptionType;
-  onChange?: (selectedOption: SelectOptionType['value']) => void;
+  options: SelectOptionType<V>[];
+  selectedOption?: SelectOptionType<V>;
+  optionToggles?: OptionToggles;
+  onChange?: (selectedOption: SelectOptionType<V>['value']) => void;
+  onToggle?: (selectedOption: SelectOptionType<V>['value']) => void;
 };
 
-export default function Select({ selectClasses = '', placeholderClasses = '',
-  optionListClasses = '', optionClasses = '', placeholder,
-  options, selectedOption, onChange: handleChange }: SelectProps): JSX.Element {
+export default function Select<V extends Key = string | number>({ selectClasses = '', placeholderClasses = '',
+  optionListClasses = '', optionClasses = '', optionToggleClasses = '', adminStyles = false, placeholder,
+  options, selectedOption, optionToggles, onChange: handleChange, onToggle: handleOptionToggle }: SelectProps<V>): JSX.Element {
   const rootRef = useRef<HTMLDivElement>(null);
 
   const [isOpened, setIsOpened] = useState(false);
@@ -25,7 +30,7 @@ export default function Select({ selectClasses = '', placeholderClasses = '',
   const handlePlaceholderClick: MouseEventHandler<HTMLDivElement> = () => {
     setIsOpened((prev) => !prev);
   };
-  const handleOptionClick = (value: SelectOptionType['value']) => {
+  const handleOptionClick = (value: SelectOptionType<V>['value']) => {
     setIsOpened(false);
     handleChange?.(value);
   };
@@ -51,20 +56,25 @@ export default function Select({ selectClasses = '', placeholderClasses = '',
 
   return (
     // <div className={`${selectClasses} select`} ref={rootRef} data-is-active={isOpened} onClick={handlePlaceholderClick}>
-    <div className={`${selectClasses} select`} ref={rootRef} data-is-active={isOpened}>
-      <div className={`${placeholderClasses} select-placeholder`} data-selected={!!selectedOption?.value}
-        role="button" tabIndex={0} onKeyDown={handleEnterKeyDown} onClick={handlePlaceholderClick}
+    <div className={`${selectClasses} ${adminStyles ? 'admin-select' : 'select'}`} ref={rootRef} data-is-active={isOpened}>
+      <div className={`${placeholderClasses} ${adminStyles ? 'admin-select-placeholder' : 'select-placeholder'}`}
+        data-selected={!!selectedOption?.value} role="button" tabIndex={0}
+        onKeyDown={handleEnterKeyDown} onClick={handlePlaceholderClick}
       >
         {selectedOption?.title || placeholder}
       </div>
       {isOpened && (
-        <ul className={`${optionListClasses} select-option-list list-reset`}>
+        <ul className={`${optionListClasses} ${adminStyles ? 'admin-select-option-list' : 'select-option-list'} list-reset`}>
           {options.map((option) => (
-            <SelectOption
+            <SelectOption<V>
               key={option.value}
-              classes={optionClasses}
+              optionClasses={optionClasses}
+              optionToggleClasses={optionToggleClasses}
+              adminStyles={adminStyles}
               option={option}
+              toggled={optionToggles?.[option.value]}
               onClick={handleOptionClick}
+              onToggle={handleOptionToggle}
             />
           ))}
         </ul>

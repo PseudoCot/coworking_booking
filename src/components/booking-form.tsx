@@ -82,22 +82,22 @@ export default function BookingForm(): JSX.Element {
           <h2 className="booking__form-title form-title title-reset">Форма бронирования</h2>
         </div>
         <div className="booking__form-bottom form-bottom">
-          <div className="booking__form-input-group form-input-group">
-            <label className="booking__form-label form-label" htmlFor="type">Тип места:</label>
+          <div className="booking__form-input-group form-input-group form-input-group--required">
+            <label className="booking__form-label form-label" htmlFor="type">Тип места</label>
             <Select
               options={PlaceTypeOptions}
               selectedOption={selectedPlaceType}
               onChange={setPlaceType}
             />
           </div>
-          <div className="booking__form-input-group form-input-group">
-            <label className="booking__form-label form-label" htmlFor="date">Дата:</label>
+          <div className="booking__form-input-group form-input-group form-input-group--required">
+            <label className="booking__form-label form-label" htmlFor="date">Дата</label>
             <input className="booking__form-input form-input" type="date" name="date" id="booking-date"
               value={date} onChange={(e) => setDate(e.target.value)} min={currentDate} max={nextMonthDate}
             />
           </div>
-          <div className="booking__form-input-group form-input-group">
-            <label className="booking__form-label form-label" htmlFor="time">Время:</label>
+          <div className="booking__form-input-group form-input-group form-input-group--required">
+            <label className="booking__form-label form-label" htmlFor="time">Время</label>
             <TimestampSelectGroup subLabelClasses='booking__form-sub-label' timeGroupClasses='booking__form-time-group'
               timeSelectClasses='booking__form-time-select' selectOptionClasses='booking__form-select-option'
               timesSeparatorClasses='booking__form-time-separator' startHour={startHour} startMinute={startMinute}
