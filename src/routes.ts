@@ -14,7 +14,7 @@ export const AppRoutes = {
   },
   CoworkingEditing: {
     FullPath: '/coworkings/:id/editing',
-    RelativePath: '/editing',
+    RelativePath: 'editing',
   },
   Register: {
     FullPath: '/register',

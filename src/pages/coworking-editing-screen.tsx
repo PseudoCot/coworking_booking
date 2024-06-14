@@ -35,10 +35,25 @@ export default function CoworkingEditingScreen(): JSX.Element {
     }
   }, [dispatch, coworkingData, urlParams.id]);
 
+  // const temp = ['coworking.jpg', 'coworking.jpg', 'coworking.jpg'];
+  // const aRef = useRef<HTMLAnchorElement>(null);
+  // const imgRef = useRef<HTMLImageElement>(null);
+  // const [images, setImages] = useRemoteImages(temp);
+  // useEffect(() => {
+  //   if (imgRef.current && aRef.current) {
+  //     const url = window.URL.createObjectURL(new Blob([(images as File[])[0]]));
+  //     aRef.current.href = url;
+  //     imgRef.current.src = url;
+
+  // }, [images]);
+
   return (
     <Layout>
       <article className="coworking-editing">
         <h1 className="title title-reset">Редактирование коворкинга</h1>
+
+        {/* <a ref={aRef} href='#' download={coworkingData?.avatar}>LOL</a>
+        <img ref={imgRef} src="" alt="KEK" /> */}
 
         {coworkingData
           ?

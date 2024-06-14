@@ -9,7 +9,13 @@ import useInputChangeCallback from '../hooks/use-change-callback';
 import FileController from './file-controller';
 import { IMAGE_INPUT_TOOLTIP_TEXT, ImageValidatorsData, MAX_IMAGES_COUNT } from '../consts';
 
-export default function CoworkingCreatingForm(): JSX.Element {
+type CoworkingCreatingFormProps = {
+  onSubmit: () => void;
+  onCancel: () => void;
+};
+
+export default function CoworkingCreatingForm({ onSubmit: handleSubmit, onCancel: handleCancel }
+  : CoworkingCreatingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [avatar, setAvatar] = useState<File[]>();
@@ -26,7 +32,7 @@ export default function CoworkingCreatingForm(): JSX.Element {
   const handleAddressChange = useInputChangeCallback(setAddress);
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
-  const handleSubmit: FormEventHandler = (e) => {
+  const handleSubmitClick: FormEventHandler = (e) => {
     e.preventDefault();
 
     dispatch(postCoworkingAction({
@@ -37,6 +43,14 @@ export default function CoworkingCreatingForm(): JSX.Element {
       institute,
       address
     }));
+
+    handleSubmit();
+  };
+
+  const handleCancelClick: FormEventHandler = (e) => {
+    e.preventDefault();
+
+    handleCancel();
   };
 
   useEffect(() => {
@@ -44,7 +58,7 @@ export default function CoworkingCreatingForm(): JSX.Element {
   }, [title, description, institute, address]);
 
   return (
-    <form className="coworking-form" action="#" onSubmit={handleSubmit}>
+    <form className="coworking-form" action="#" onSubmit={handleSubmitClick}>
       <div className="coworking-form__left">
         <DragAndDropFileInput areaClasses="coworking-form__avatar-area" imagePreview tooltipText={IMAGE_INPUT_TOOLTIP_TEXT}
           validatorsData={ImageValidatorsData} files={avatar} setFiles={setAvatar}
@@ -86,7 +100,7 @@ export default function CoworkingCreatingForm(): JSX.Element {
         <button className="coworking-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
           Сохранить
         </button>
-        <button className="coworking-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={ }>
+        <button className="coworking-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
           Отменить
         </button>
       </div>

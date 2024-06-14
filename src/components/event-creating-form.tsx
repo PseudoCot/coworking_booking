@@ -46,6 +46,12 @@ export default function EventCreatingForm({ coworkingId, onSubmit: handleSubmit,
     handleSubmit();
   };
 
+  const handleCancelClick: FormEventHandler = (e) => {
+    e.preventDefault();
+
+    handleCancel();
+  };
+
   useEffect(() => {
     setSubmitEnabled(validateStringsLength([date, name]));
   }, [date, name]);
@@ -75,7 +81,7 @@ export default function EventCreatingForm({ coworkingId, onSubmit: handleSubmit,
             <button className="event-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
               Сохранить
             </button>
-            <button className="event-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancel}>
+            <button className="event-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
               Отменить
             </button>
           </div>

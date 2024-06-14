@@ -2,11 +2,17 @@ import { PlaceTypeOptions } from '../consts';
 import getRoundedTime from '../shared/get-rounded-time';
 import ImageCarousel from './image-carousel';
 import { CoworkingDto } from '../types/coworking/coworking-dto';
+import { useAppSelector } from '../hooks';
+import { isUserAdmin } from '../store/user-process/selectors';
+import { AppRoutes } from '../routes';
+import { Link } from 'react-router-dom';
 
 type CoworkingCardProps = CoworkingDto;
 
 export default function CoworkingCard({ avatar, title, description, address, seats, working_schedules: workingSchedule,
   images, technical_capabilities: technicalCapabilities }: CoworkingCardProps): JSX.Element {
+  const isAdmin = useAppSelector(isUserAdmin);
+
   // let avatarURL = avatar && getImageURL(avatar);
   // avatarURL = avatarURL || import.meta.env.DEV
   //   ? 'img/coworking-default-image.png'
@@ -66,6 +72,10 @@ export default function CoworkingCard({ avatar, title, description, address, sea
             </ul>
           </div>}
       </div>
+      {isAdmin &&
+        <Link to={AppRoutes.CoworkingEditing.RelativePath} className="booking__info-edit-btn light-btn">
+          Редактировать
+        </Link>}
       {/* <ul className="booking__image-list list-reset">
         {images.map((imageData) => (
           <li className="booking__image-item" key={imageData.image_filename}>

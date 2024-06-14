@@ -80,6 +80,12 @@ export default function ScheduleEditingForm({ coworkingId, schedule, onSubmit: h
     handleSubmit();
   };
 
+  const handleCancelClick: FormEventHandler = (e) => {
+    e.preventDefault();
+
+    handleCancel();
+  };
+
   return (
     <form className="schedule-form admin-form" action="#" onSubmit={handleSubmitClick}>
       <div className="schedule-form__wrapper admin-form-wrapper">
@@ -111,7 +117,7 @@ export default function ScheduleEditingForm({ coworkingId, schedule, onSubmit: h
             <button className="schedule-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
               Сохранить
             </button>
-            <button className="schedule-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancel}>
+            <button className="schedule-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
               Отменить
             </button>
           </div>

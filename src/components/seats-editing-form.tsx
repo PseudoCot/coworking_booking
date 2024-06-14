@@ -48,6 +48,12 @@ export default function SeatsEditingForm({ coworkingId, seats,
     handleSubmit();
   };
 
+  const handleCancelClick: FormEventHandler = (e) => {
+    e.preventDefault();
+
+    handleCancel();
+  };
+
   return (
     <form className="seats-form admin-form" action="#" onSubmit={handleSubmitClick}>
       <div className="seats-form__wrapper admin-form-wrapper">
@@ -68,7 +74,7 @@ export default function SeatsEditingForm({ coworkingId, seats,
             <button className="seats-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
               Сохранить
             </button>
-            <button className="seats-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancel}>
+            <button className="seats-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
               Отменить
             </button>
           </div>

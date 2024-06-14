@@ -10,10 +10,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchCoworkingAction } from '../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { FetchingStatuses, TECHNICAL_SUPPORT_EMAIL, TELEGRAM_BOT_NAME } from '../consts';
+import { isUserAdmin } from '../store/user-process/selectors';
 
 export default function BookingScreen(): JSX.Element {
   const urlParams = useParams();
   const dispatch = useAppDispatch();
+  const isAdmin = useAppSelector(isUserAdmin);
 
   const coworkingFetching = useAppSelector(isCoworkingFetching);
   const coworkingData = useAppSelector(getCoworkingDto);
@@ -49,7 +51,7 @@ export default function BookingScreen(): JSX.Element {
             ?
             <>
               <CoworkingCard {...coworkingData} />
-              <BookingForm />
+              {isAdmin || <BookingForm />}
             </>
             : coworkingFetching && <Loader horizontalAlignCenter />}
         </div>

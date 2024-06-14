@@ -50,6 +50,12 @@ export default function CapabilitiesEditingForm({ coworkingId, capabilities,
     handleSubmit();
   };
 
+  const handleCancelClick: FormEventHandler = (e) => {
+    e.preventDefault();
+
+    handleCancel();
+  };
+
   return (
     <form className="capabilities-form admin-form" action="#" onSubmit={handleSubmitClick}>
       <div className="capabilities-form__wrapper admin-form-wrapper">
@@ -71,7 +77,7 @@ export default function CapabilitiesEditingForm({ coworkingId, capabilities,
             <button className="capabilities-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
               Сохранить
             </button>
-            <button className="capabilities-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancel}>
+            <button className="capabilities-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
               Отменить
             </button>
           </div>
