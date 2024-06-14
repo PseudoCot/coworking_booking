@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getAuthStatus, isUserTelegramConnected } from '../store/user-process/selectors';
 import DoorSVG from './svg/door';
@@ -25,17 +25,17 @@ export default function Header(): JSX.Element {
   return (
     <header className="header">
       <div className="header__logo">
-        <Link to={AppRoutes.Main.FullPath} className="header__logo-link">
+        <NavLink to={AppRoutes.Main.FullPath} className="header__logo-link">
           <LogoSVG />
-        </Link>
+        </NavLink>
       </div>
       <nav className="header__nav nav">
         <ul className="nav__items list-reset">
           <li className="nav__item">
-            <Link to={AppRoutes.Coworkings.FullPath} className="nav__item-link link">Бронирование</Link>
+            <NavLink to={AppRoutes.Coworkings.FullPath} className="nav__item-link link">Бронирование</NavLink>
           </li>
           <li className="nav__item">
-            <Link to={AppRoutes.Calendar.FullPath} className="nav__item-link link">Календарь</Link>
+            <NavLink to={AppRoutes.Calendar.FullPath} className="nav__item-link link">Календарь</NavLink>
           </li>
         </ul>
       </nav>
@@ -51,17 +51,17 @@ export default function Header(): JSX.Element {
           <>
             {userTelegramConnected === false &&
               <WarningSVG classes="main-controls__warning-sign" />}
-            <Link to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn white-btn">
+            <NavLink to={AppRoutes.User.FullPath} className="main-controls__user-acc-btn white-btn">
               {userFullName ?? <Loader alignCenter />}
-            </Link>
+            </NavLink>
             <button className="main-controls__logout-btn btn-reset" onClick={handleLogoutClick}>
               <DoorSVG />
             </button>
           </>
           :
           <>
-            <Link to={AppRoutes.Register.FullPath} className="main-controls__register-btn hollow-btn">Регистрация</Link>
-            <Link to={AppRoutes.Login.FullPath} className="main-controls__login-btn white-btn">Вход</Link>
+            <NavLink to={AppRoutes.Register.FullPath} className="main-controls__register-btn hollow-btn">Регистрация</NavLink>
+            <NavLink to={AppRoutes.Login.FullPath} className="main-controls__login-btn white-btn">Вход</NavLink>
           </>}
       </div>
     </header>
