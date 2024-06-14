@@ -52,6 +52,7 @@ import { CreateSeatsData } from '../types/admin/create-seats-data';
 import { CreateSeatsRequestParams } from '../types/admin/create-seats-request-params';
 import { UploadAvatarData } from '../types/admin/upload-avatar-data';
 import { UploadImageData } from '../types/admin/upload-image-data';
+import { coworkingDataMock } from '../mocks/coworking-data-mock';
 
 
 export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
@@ -267,6 +268,8 @@ export const fetchCoworkingAction = createAsyncThunk<CoworkingDto, string, {
 }>(
   'coworking/fetchCoworking',
   async (coworkingId, { extra: { api } }) => {
+    return coworkingDataMock;
+
     const { data } = await api.post<JsonRpcResponse<CoworkingDto>>(ApiRoutes.FetchCoworking, createJsonRpcRequest<CoworkingRequestParams>(
       ApiMethods.FetchCoworking,
       {

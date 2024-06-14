@@ -16,7 +16,7 @@ export default function BookingScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const coworkingFetching = useAppSelector(isCoworkingFetching);
-  const coworkingDto = useAppSelector(getCoworkingDto);
+  const coworkingData = useAppSelector(getCoworkingDto);
   const bookFetchingStatus = useAppSelector(getBookFetchingStatus);
   const calendarEventLink = '#'; // useAppSelector(getBookedEventLink);
 
@@ -45,10 +45,10 @@ export default function BookingScreen(): JSX.Element {
         <h1 className="booking__title title title-reset">Коворкинги</h1>
 
         <div className="booking__wrapper">
-          {coworkingDto
+          {coworkingData
             ?
             <>
-              <CoworkingCard {...coworkingDto} />
+              <CoworkingCard {...coworkingData} />
               <BookingForm />
             </>
             : coworkingFetching && <Loader horizontalAlignCenter />}

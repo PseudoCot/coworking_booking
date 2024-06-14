@@ -1,5 +1,156 @@
 // import { CoworkingData } from '../types/coworking/coworking-data';
 
+export const coworkingDataMock = {
+  'id': '7a9502ff3999dd4e38c6d3e78da4a654',
+  'avatar': 'coworking.jpg',
+  'title': 'Студенческий коворкинг-буфет «Территория идей»',
+  'institute': 'ИНМИТ',
+  'description': 'Описание коворкинга',
+  'address': 'ул. Мира, д.28',
+  'seats': [
+    {
+      'id': 1,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': null,
+      'description': null,
+      'place_type': 'table',
+      'seats_count': 1
+    },
+    {
+      'id': 2,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': null,
+      'description': null,
+      'place_type': 'table',
+      'seats_count': 1
+    },
+    {
+      'id': 3,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': null,
+      'description': null,
+      'place_type': 'table',
+      'seats_count': 1
+    },
+    {
+      'id': 4,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': null,
+      'description': null,
+      'place_type': 'table',
+      'seats_count': 1
+    },
+    {
+      'id': 5,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': null,
+      'description': null,
+      'place_type': 'table',
+      'seats_count': 1
+    },
+    {
+      'id': 6,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': null,
+      'description': null,
+      'place_type': 'table',
+      'seats_count': 1
+    },
+    {
+      'id': 7,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': null,
+      'description': null,
+      'place_type': 'table',
+      'seats_count': 1
+    },
+    {
+      'id': 8,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': 'Переговорная-1',
+      'description': 'Описание',
+      'place_type': 'meeting_room',
+      'seats_count': 10
+    },
+    {
+      'id': 9,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': 'Переговорная-2',
+      'description': 'Описание',
+      'place_type': 'meeting_room',
+      'seats_count': 10
+    },
+    {
+      'id': 10,
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654',
+      'label': 'Переговорная-3',
+      'description': 'Описание',
+      'place_type': 'meeting_room',
+      'seats_count': 10
+    }
+  ],
+  'working_schedules': [
+    {
+      'week_day': 0,
+      'start_time': '08:00:00',
+      'end_time': '18:00:00',
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654'
+    },
+    {
+      'week_day': 1,
+      'start_time': '08:00:00',
+      'end_time': '18:00:00',
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654'
+    },
+    {
+      'week_day': 2,
+      'start_time': '08:00:00',
+      'end_time': '18:00:00',
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654'
+    },
+    {
+      'week_day': 3,
+      'start_time': '08:00:00',
+      'end_time': '18:00:00',
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654'
+    },
+    {
+      'week_day': 4,
+      'start_time': '08:00:00',
+      'end_time': '18:00:00',
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654'
+    },
+    {
+      'week_day': 5,
+      'start_time': '08:00:00',
+      'end_time': '18:00:00',
+      'coworking_id': '7a9502ff3999dd4e38c6d3e78da4a654'
+    }
+  ],
+  'images': [],
+  'events': [],
+  'technical_capabilities': [
+    {
+      'capability': 'Плазменная панель'
+    },
+    {
+      'capability': 'дополнительные эл. розетки'
+    },
+    {
+      'capability': 'столы'
+    },
+    {
+      'capability': 'стулья'
+    },
+    {
+      'capability': 'диванчики'
+    },
+    {
+      'capability': 'места для верхней одежды'
+    }
+  ]
+};
+
 // export const coworkingDataMock: CoworkingData[] = [
 //   {
 //     id: 'irit',

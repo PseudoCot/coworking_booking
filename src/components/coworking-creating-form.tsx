@@ -4,30 +4,10 @@ import { postCoworkingAction } from '../store/api-actions';
 import FormInputGroup from './form-input-group';
 import FileInput from './file-input';
 import DragAndDropFileInput from './drag-and-drop-file-input';
-import validateFilesExtension from '../shared/validate-files-extension';
-import validateFilesMaxSize from '../shared/validate-files-max-size';
-import { ValidatorData } from '../types/validator-data';
 import validateStringsLength from '../shared/validate-strings-length';
 import useInputChangeCallback from '../hooks/use-change-callback';
 import FileController from './file-controller';
-
-const MAX_IMAGES_COUNT = 6;
-const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
-const REQUIRED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg'];
-const IMAGE_INPUT_TOOLTIP_TEXT = 'Максимальный размер 10МБ; допустимые расширения: png, jpg и jpeg';
-
-const validatorsData: ValidatorData<boolean>[] = [
-  {
-    validate: (value: FileList) => validateFilesMaxSize(value, MAX_IMAGE_SIZE),
-    errorText: 'Превышен максимально допустимый размер файла',
-    showErrorTime: 5000,
-  },
-  {
-    validate: (value: FileList) => validateFilesExtension(value, REQUIRED_IMAGE_EXTENSIONS),
-    errorText: 'Загружен файл с недопустимым расширением',
-    showErrorTime: 5000,
-  },
-];
+import { IMAGE_INPUT_TOOLTIP_TEXT, ImageValidatorsData, MAX_IMAGES_COUNT } from '../consts';
 
 export default function CoworkingCreatingForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -67,7 +47,7 @@ export default function CoworkingCreatingForm(): JSX.Element {
     <form className="coworking-form" action="#" onSubmit={handleSubmit}>
       <div className="coworking-form__left">
         <DragAndDropFileInput areaClasses="coworking-form__avatar-area" imagePreview tooltipText={IMAGE_INPUT_TOOLTIP_TEXT}
-          validatorsData={validatorsData} files={avatar} setFiles={setAvatar}
+          validatorsData={ImageValidatorsData} files={avatar} setFiles={setAvatar}
         />
         <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label' inputClasses='coworking-form__input'
           labelText='Название коворкинга' name='title' type='text' adminFormStyles required
@@ -81,8 +61,8 @@ export default function CoworkingCreatingForm(): JSX.Element {
               return image
                 ? <FileController key={image.name} orderNumber={index} files={images} setFiles={setImages} />
                 :
-                <FileInput key="new-image-input" labelClasses='coworking-form__file-label' tooltipText={IMAGE_INPUT_TOOLTIP_TEXT}
-                  validatorsData={validatorsData} orderNumber={index} files={images} setFiles={setImages}
+                <FileInput key="new-image-input" tooltipText={IMAGE_INPUT_TOOLTIP_TEXT}
+                  validatorsData={ImageValidatorsData} orderNumber={index} files={images} setFiles={setImages}
                 />;
             })}
           </div>
@@ -102,9 +82,12 @@ export default function CoworkingCreatingForm(): JSX.Element {
           value={address} onChange={handleAddressChange}
         />
       </div>
-      <div className="coworking-form__bottom">
+      <div className="coworking-form__bottom admin-form-btns">
         <button className="coworking-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
           Сохранить
+        </button>
+        <button className="coworking-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={ }>
+          Отменить
         </button>
       </div>
     </form>

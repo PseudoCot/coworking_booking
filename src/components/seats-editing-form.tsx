@@ -1,23 +1,25 @@
 import { useState, FormEventHandler, ChangeEvent, useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch } from '../hooks';
 import { postCoworkingSeatsAction } from '../store/api-actions';
 import FormInputGroup from './form-input-group';
 import MeetingRoomsEditingInputs from './meeting-rooms-editing-inputs';
-import { getCoworkingSeats } from '../store/coworking-process/selectors';
 import { PlaceTypes } from '../consts';
 import { SeatDto } from '../types/api-shared/seat-dto';
 
 type SeatsEditingFormProps = {
   coworkingId: string;
+  seats?: SeatDto[];
+
+  onSubmit: () => void;
+  onCancel: () => void;
 };
 
-export default function SeatsEditingForm({ coworkingId }: SeatsEditingFormProps): JSX.Element {
+export default function SeatsEditingForm({ coworkingId, seats,
+  onSubmit: handleSubmit, onCancel: handleCancel }: SeatsEditingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const seatsData = useAppSelector(getCoworkingSeats);
-
   const initialReduceValue = { tableSeatsCount: 0, meetingRoomsData: [] as SeatDto[] };
-  const { tableSeatsCount, meetingRoomsData } = seatsData?.reduce((res, elem) => {
+  const { tableSeatsCount, meetingRoomsData } = seats?.reduce((res, elem) => {
     if (elem.place_type === PlaceTypes.MeetingRoom) {
       res.meetingRoomsData.push(elem);
     } else {
@@ -32,7 +34,7 @@ export default function SeatsEditingForm({ coworkingId }: SeatsEditingFormProps)
   const handleTableSeatsCountChange = useCallback((e: ChangeEvent<HTMLInputElement>) =>
     setNewTableSeatsCount(+e.target.value), [setNewTableSeatsCount]);
 
-  const handleSubmit: FormEventHandler = (e) => {
+  const handleSubmitClick: FormEventHandler = (e) => {
     e.preventDefault();
 
     if (newTableSeatsCount) {
@@ -42,10 +44,12 @@ export default function SeatsEditingForm({ coworkingId }: SeatsEditingFormProps)
         meetingRooms: newMeetingRooms
       }));
     }
+
+    handleSubmit();
   };
 
   return (
-    <form className="seats-form admin-form" action="#" onSubmit={handleSubmit}>
+    <form className="seats-form admin-form" action="#" onSubmit={handleSubmitClick}>
       <div className="seats-form__wrapper admin-form-wrapper">
         <div className="seats-form__top admin-form-top">
           <h2 className="seats-form__title admin-form-title title-reset">Количество мест</h2>
@@ -60,9 +64,14 @@ export default function SeatsEditingForm({ coworkingId }: SeatsEditingFormProps)
 
           <MeetingRoomsEditingInputs meetingRooms={newMeetingRooms} setMeetingRooms={setNewMeetingRooms} />
 
-          <button className="seats-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
-            Сохранить
-          </button>
+          <div className="admin-form-btns">
+            <button className="seats-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
+              Сохранить
+            </button>
+            <button className="seats-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancel}>
+              Отменить
+            </button>
+          </div>
         </div>
       </div>
     </form>

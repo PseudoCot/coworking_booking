@@ -59,18 +59,18 @@ export default function ImageCarousel({ wrapperClasses = '', leftButtonClasses =
   };
 
   return (
-    <div className={wrapperClasses}>
-      <button className={`${leftButtonClasses} btn-reset`}
+    <div className={`${wrapperClasses} image-carousel`}>
+      <button className={`${leftButtonClasses} image-carousel__left-btn btn-reset`}
         onClick={handlePreviousImageClick} disabled={onLeftBorder}
       />
-      <img className={imageClasses} src={currentImageURL} alt={imageAlt} />
-      <button className={`${rightButtonClasses} btn-reset`}
+      <img className={`${imageClasses} image-carousel__image`} src={currentImageURL} alt={imageAlt} />
+      <button className={`${rightButtonClasses} image-carousel__right-btn btn-reset`}
         onClick={handleNextImageClick} disabled={onRightBorder}
       />
-      <div className={`${bulletContainerClasses} bullets`}>
-        <span className={`${bulletClasses} bullet ${onLeftBorder ? '' : 'bullet--active'}`} />
-        <span className={`${bulletClasses} bullet bullet--active`} />
-        <span className={`${bulletClasses} bullet ${onRightBorder ? '' : 'bullet--active'}`} />
+      <div className={`${bulletContainerClasses} image-carousel__bullets`}>
+        <span className={`${bulletClasses} image-carousel__bullet ${onLeftBorder ? '' : 'image-carousel__bullet--active'}`} />
+        <span className={`${bulletClasses} image-carousel__bullet image-carousel__bullet--active`} />
+        <span className={`${bulletClasses} image-carousel__bullet ${onRightBorder ? '' : 'image-carousel__bullet--active'}`} />
       </div>
     </div>
   );

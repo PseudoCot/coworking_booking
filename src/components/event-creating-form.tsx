@@ -8,9 +8,13 @@ import useInputChangeCallback from '../hooks/use-change-callback';
 
 type EventCreatingFormProps = {
   coworkingId: string;
+
+  onSubmit: () => void;
+  onCancel: () => void;
 };
 
-export default function EventCreatingForm({ coworkingId }: EventCreatingFormProps): JSX.Element {
+export default function EventCreatingForm({ coworkingId, onSubmit: handleSubmit,
+  onCancel: handleCancel }: EventCreatingFormProps): JSX.Element {
   const today = DateTime.local();
   const currentDate = today.toISODate();
   const nextMonthDate = today.plus({ month: 3 }).toISODate();
@@ -25,7 +29,7 @@ export default function EventCreatingForm({ coworkingId }: EventCreatingFormProp
   const handleDescriptionChange = useInputChangeCallback(setDescription);
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
-  const handleSubmit: FormEventHandler = (e) => {
+  const handleSubmitClick: FormEventHandler = (e) => {
     e.preventDefault();
 
     if (date) {
@@ -38,6 +42,8 @@ export default function EventCreatingForm({ coworkingId }: EventCreatingFormProp
         }
       }));
     }
+
+    handleSubmit();
   };
 
   useEffect(() => {
@@ -45,7 +51,7 @@ export default function EventCreatingForm({ coworkingId }: EventCreatingFormProp
   }, [date, name, description]);
 
   return (
-    <form className="event-form admin-form" action="#" onSubmit={handleSubmit}>
+    <form className="event-form admin-form" action="#" onSubmit={handleSubmitClick}>
       <div className="event-form__wrapper admin-form-wrapper">
         <div className="event-form__top admin-form-top">
           <h2 className="event-form__title admin-form-title title-reset">Добавление мероприятия</h2>
@@ -65,9 +71,14 @@ export default function EventCreatingForm({ coworkingId }: EventCreatingFormProp
             adminFormStyles textarea labelText='Описание' name='description' type='text'
             value={description} onChange={handleDescriptionChange}
           />
-          <button className="event-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
-            Сохранить
-          </button>
+          <div className="admin-form-btns">
+            <button className="event-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
+              Сохранить
+            </button>
+            <button className="event-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancel}>
+              Отменить
+            </button>
+          </div>
         </div>
       </div>
     </form>

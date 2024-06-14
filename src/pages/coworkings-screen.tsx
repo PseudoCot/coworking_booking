@@ -1,7 +1,6 @@
-// import CoworkingList from '../components/coworking-list';
-// import CoworkingSearchForm from '../components/coworking-search-form';
+import CoworkingList from '../components/coworking-list';
+import CoworkingSearchForm from '../components/coworking-search-form';
 import Layout from '../components/layout';
-import SeatsEditingForm from '../components/seats-editing-form';
 
 export default function CoworkingsScreen(): JSX.Element {
   return (
@@ -9,11 +8,9 @@ export default function CoworkingsScreen(): JSX.Element {
       <article className="coworkings">
         <h1 className="coworkings__title title title-reset">Коворкинги</h1>
 
-        {/* <CoworkingSearchForm />
+        <CoworkingSearchForm />
 
-        <CoworkingList /> */}
-
-        <SeatsEditingForm coworkingId={'123'} />
+        <CoworkingList />
       </article>
     </Layout>
   );

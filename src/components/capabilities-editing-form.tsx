@@ -6,52 +6,58 @@ import { CoworkingCapabilityDto } from '../types/api-shared/coworking-capability
 
 type CapabilitiesEditingFormProps = {
   coworkingId: string;
+  capabilities?: CoworkingCapabilityDto[];
+
+  onSubmit: () => void;
+  onCancel: () => void;
 };
 
-export default function CapabilitiesEditingForm({ coworkingId }: CapabilitiesEditingFormProps): JSX.Element {
+export default function CapabilitiesEditingForm({ coworkingId, capabilities,
+  onSubmit: handleSubmit, onCancel: handleCancel }: CapabilitiesEditingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const temp: CoworkingCapabilityDto[] = [];
-  const capabilitiesDto: string[] = temp.map((capabilityDto) => capabilityDto.capability); // useAppSelector(getCoworkingCapabilities);
-  capabilitiesDto.push('');
+  const capabilitiesData: string[] = capabilities?.map((capabilityDto) => capabilityDto.capability) ?? [];
+  capabilitiesData.push('');
 
-  const [capabilities, setCapabilities] = useState(capabilitiesDto);
+  const [newCapabilities, setNewCapabilities] = useState(capabilitiesData);
 
   const handleCapabilityChange = (e: FormEvent<HTMLInputElement>, index: number) => {
-    const newData = [...capabilities];
+    const newData = [...newCapabilities];
     newData[index] = e.currentTarget.value;
 
     if (newData[newData.length - 1]) {
       newData[newData.length] = '';
     }
 
-    setCapabilities(newData);
+    setNewCapabilities(newData);
   };
   const handleCapabilityBlur = (index: number) => {
-    if (!capabilities[index] && capabilities.length > 1 && capabilities.length - 1 !== index) {
-      const newData = [...capabilities];
+    if (!newCapabilities[index] && newCapabilities.length > 1 && newCapabilities.length - 1 !== index) {
+      const newData = [...newCapabilities];
       newData.splice(index, 1);
-      setCapabilities(newData);
+      setNewCapabilities(newData);
     }
   };
 
   const [submitEnabled, setSubmitEnabled] = useState(false);
-  const handleSubmit: FormEventHandler = (e) => {
+  const handleSubmitClick: FormEventHandler = (e) => {
     e.preventDefault();
 
-    capabilities.pop();
+    newCapabilities.pop();
     dispatch(postCoworkingCapabilityAction({
       coworkingId: coworkingId,
-      capabilities: capabilities.map((item) => ({ capability: item }))
+      capabilities: newCapabilities.map((item) => ({ capability: item }))
     }));
+
+    handleSubmit();
   };
 
   useEffect(() => {
-    setSubmitEnabled(validateStringsLength(capabilities));
-  }, [capabilities]);
+    setSubmitEnabled(validateStringsLength(newCapabilities));
+  }, [newCapabilities]);
 
   return (
-    <form className="capabilities-form admin-form" action="#" onSubmit={handleSubmit}>
+    <form className="capabilities-form admin-form" action="#" onSubmit={handleSubmitClick}>
       <div className="capabilities-form__wrapper admin-form-wrapper">
         <div className="capabilities-form__top admin-form-top">
           <h2 className="capabilities-form__title admin-form-title title-reset">Технические возможности</h2>
@@ -59,7 +65,7 @@ export default function CapabilitiesEditingForm({ coworkingId }: CapabilitiesEdi
         <div className="capabilities-form__bottom admin-form-bottom">
           <div className="capabilities-form__input-group admin-form-input-group">
             <h3 className="capabilities-form__input-label admin-form-label title-reset">Технические возможности</h3>
-            {capabilities.map((capability, index) => (
+            {newCapabilities.map((capability, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <input className="capabilities-form__input admin-form-input" key={index}
                 type="text" name={`capability-${index}`} id={`capability-${index}`} value={capability}
@@ -67,9 +73,14 @@ export default function CapabilitiesEditingForm({ coworkingId }: CapabilitiesEdi
               />
             ))}
           </div>
-          <button className="capabilities-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
-            Сохранить
-          </button>
+          <div className="admin-form-btns">
+            <button className="capabilities-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
+              Сохранить
+            </button>
+            <button className="capabilities-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancel}>
+              Отменить
+            </button>
+          </div>
         </div>
       </div>
     </form>

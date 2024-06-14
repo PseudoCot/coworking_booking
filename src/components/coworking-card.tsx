@@ -24,8 +24,7 @@ export default function CoworkingCard({ avatar, title, description, address, sea
   return (
     <div className="booking__info">
       <div className="booking__left-info">
-        <ImageCarousel wrapperClasses='booking__info-carousel info-carousel' leftButtonClasses='info-carousel__left-btn'
-          rightButtonClasses='info-carousel__right-btn' imageClasses='info-carousel__image'
+        <ImageCarousel wrapperClasses='booking__info-carousel'
           imageAlt={title} mainImage={avatar}
           images={images.map((imageData) => imageData.image_filename)}
         />

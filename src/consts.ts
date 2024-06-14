@@ -1,5 +1,8 @@
 import generateTimeArray from './shared/generate-time-array';
+import validateFilesExtension from './shared/validate-files-extension';
+import validateFilesMaxSize from './shared/validate-files-max-size';
 import { SelectOption } from './types/select-option';
+import { ValidatorData } from './types/validator-data';
 
 export const AVAILABLE_HOURS_START = 8;
 export const AVAILABLE_HOURS_END = 20;
@@ -10,6 +13,10 @@ export const FIRST_AVAILABLE_MINUTE = AVAILABLE_MINUTES.at(0) as string;
 export const COWORKING_DEFAULT_IMAGE = 'coworking-default-image.png';
 export const TELEGRAM_BOT_NAME = '@test_coworking_booking_urfu_bot';
 export const TECHNICAL_SUPPORT_EMAIL = 'V.eremenko@brusnika.ru';
+export const MAX_IMAGES_COUNT = 6;
+export const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
+export const REQUIRED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg'];
+export const IMAGE_INPUT_TOOLTIP_TEXT = 'Максимальный размер 10МБ; допустимые расширения: png, jpg и jpeg';
 
 export const BACKEND_URL = import.meta.env.DEV && import.meta.env.VITE_DEV_REQUESTS_THROUGH_PROXY === 'true'
   ? import.meta.env.VITE_DEV_PROXY_URL
@@ -168,3 +175,17 @@ export const ErrorCodesDesc: { [key: number]: string } = {
   503: 'Service Unavailable',
   504: 'Gateway Timeout',
 } as const;
+
+export const ImageValidatorsData: ValidatorData<boolean>[] = [
+  {
+    validate: (value: FileList) => validateFilesMaxSize(value, MAX_IMAGE_SIZE),
+    errorText: 'Превышен максимально допустимый размер файла',
+    showErrorTime: 5000,
+  },
+  {
+    validate: (value: FileList) => validateFilesExtension(value, REQUIRED_IMAGE_EXTENSIONS),
+    errorText: 'Загружен файл с недопустимым расширением',
+    showErrorTime: 5000,
+  },
+];
+
