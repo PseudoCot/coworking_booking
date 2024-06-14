@@ -13,6 +13,7 @@ import CoworkingsScreen from './pages/coworkings-screen';
 import CalendarScreen from './pages/calendar-screen';
 import BookingScreen from './pages/booking-screen';
 import PasswordRecoveryScreen from './pages/password-recovery-screen';
+import CoworkingEditingScreen from './pages/coworking-editing-screen';
 
 export default function App(): JSX.Element {
   return (
@@ -21,10 +22,16 @@ export default function App(): JSX.Element {
         <Route path={AppRoutes.Main.FullPath} element={<MainScreen />} />
         <Route path={AppRoutes.Coworkings.FullPath}>
           <Route index element={<CoworkingsScreen />} />
-          <Route path={AppRoutes.Booking.FullPath} element={
-            <PrivateRoute> <BookingScreen /> </PrivateRoute>
-          }
-          />
+          <Route path={AppRoutes.Booking.FullPath}>
+            <Route index element={
+              <PrivateRoute> <BookingScreen /> </PrivateRoute>
+            }
+            />
+            <Route path={AppRoutes.CoworkingEditing.FullPath} element={
+              <PrivateRoute> <CoworkingEditingScreen /> </PrivateRoute>
+            }
+            />
+          </Route>
         </Route>
         <Route path={AppRoutes.Calendar.FullPath} element={<CalendarScreen />} />
 
@@ -34,6 +41,7 @@ export default function App(): JSX.Element {
           <PrivateRoute> <UserScreen /> </PrivateRoute>
         }
         />
+
         <Route path={AppRoutes.ChangePassword.FullPath} element={
           <PrivateRoute> <NewPasswordScreen /> </PrivateRoute>
         }
