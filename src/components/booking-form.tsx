@@ -15,7 +15,6 @@ import generateTimeArray from '../shared/generate-time-array';
 
 const DEFAULT_FIELDS_VALUES = {
   PlaceType: undefined,
-  Date: undefined,
   StartHour: FIRST_AVAILABLE_HOUR,
   StartMinute: FIRST_AVAILABLE_MINUTE,
   EndHour: FIRST_AVAILABLE_HOUR,
@@ -39,7 +38,7 @@ export default function BookingForm({ schedule }: BookingFormProps): JSX.Element
     +schedule.end_time.substring(0, 2), 1);
 
   const [placeType, setPlaceType] = useState<string | number | undefined>(DEFAULT_FIELDS_VALUES.PlaceType);
-  const [date, setDate] = useState<string | undefined>(DEFAULT_FIELDS_VALUES.Date);
+  const [date, setDate] = useState<string | undefined>(currentDate);
   const [startHour, setStartHour] = useState(availableHours?.[0] ?? DEFAULT_FIELDS_VALUES.StartHour);
   const [startMinute, setStartMinute] = useState(DEFAULT_FIELDS_VALUES.StartMinute);
   const [endHour, setEndHour] = useState(availableHours?.[0] ?? DEFAULT_FIELDS_VALUES.EndHour);
@@ -62,8 +61,8 @@ export default function BookingForm({ schedule }: BookingFormProps): JSX.Element
   };
 
   useEffect(() => {
-    setSubmitEnabled(!!placeType && !!date);
-  }, [placeType, date]);
+    setSubmitEnabled(!!placeType);
+  }, [placeType]);
 
   useEffect(() => {
     dispatch(resetBookFetchingStatus());
@@ -76,13 +75,13 @@ export default function BookingForm({ schedule }: BookingFormProps): JSX.Element
   useEffect(() => {
     if (fetchingStatus === FetchingStatuses.Fulfilled) {
       setPlaceType(DEFAULT_FIELDS_VALUES.PlaceType);
-      setDate(DEFAULT_FIELDS_VALUES.Date);
+      setDate(currentDate);
       setStartHour(DEFAULT_FIELDS_VALUES.StartHour);
       setStartMinute(DEFAULT_FIELDS_VALUES.StartMinute);
       setEndHour(DEFAULT_FIELDS_VALUES.EndHour);
       setEndMinute(DEFAULT_FIELDS_VALUES.EndMinute);
     }
-  }, [fetchingStatus]);
+  }, [currentDate, fetchingStatus]);
 
   return (
     <form className="booking__form form" action="#" onSubmit={handleSubmit}>

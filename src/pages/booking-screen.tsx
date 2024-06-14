@@ -11,6 +11,7 @@ import { fetchCoworkingAction } from '../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { FetchingStatuses, TECHNICAL_SUPPORT_EMAIL, TELEGRAM_BOT_NAME } from '../consts';
 import { isUserAdmin } from '../store/user-process/selectors';
+import EventBanner from '../components/event-banner';
 
 export default function BookingScreen(): JSX.Element {
   const urlParams = useParams();
@@ -46,15 +47,16 @@ export default function BookingScreen(): JSX.Element {
       <article className="booking">
         <h1 className="booking__title title title-reset">Коворкинги</h1>
 
-        <div className="booking__wrapper">
-          {coworkingData
-            ?
-            <>
+        {coworkingData
+          ?
+          <>
+            <EventBanner events={coworkingData.events} />
+            <div className="booking__wrapper">
               <CoworkingCard {...coworkingData} />
               {isAdmin || <BookingForm schedule={coworkingData.working_schedules?.[0]} />}
-            </>
-            : coworkingFetching && <Loader horizontalAlignCenter />}
-        </div>
+            </div>
+          </>
+          : coworkingFetching && <Loader horizontalAlignCenter />}
 
         <Toast toastClasses='booking__toast' toastTitleClasses='booking__toast-title' toastTextClasses='booking__toast-text'
           show={showSuccesToast} onCloseClick={handleSuccesToastClose}

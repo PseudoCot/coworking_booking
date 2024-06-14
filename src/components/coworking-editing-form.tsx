@@ -30,7 +30,7 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
 
   const [openingTime, endingTime] = workingSchedule?.length
     ? [getRoundedTime(workingSchedule[0].start_time), getRoundedTime(workingSchedule[0].end_time)]
-    : ['08:00', '20:00'];
+    : ['', ''];
 
   const seatsTotalInfo = seats?.reduce((result, seatDto) => {
     result[seatDto.place_type] = (result[seatDto.place_type] ?? 0) + seatDto.seats_count;
@@ -70,7 +70,9 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
           <div className="coworking-editing__schedule">
             <span className="coworking-editing__title">Режим работы:</span>
             <span className="coworking-editing__text">
-              с&nbsp;{openingTime} до&nbsp;{endingTime}
+              {openingTime && endingTime
+                ? `с ${openingTime} до ${endingTime}`
+                : 'Не указано'}
             </span>
             <button className="coworking-editing__schedule-btn btn-reset" onClick={handleEditScheduleClick}>
               <PenInCircleSVG />
@@ -85,7 +87,7 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
               <li className="coworking-editing__image-item" key={imageData.image_filename}>
                 <img className="coworking-editing__image" src={getImageURL(imageData.image_filename)} alt={imageData.image_filename} />
               </li>))}
-            {images?.length && images.length < 6 &&
+            {images && images.length < 6 &&
               <span className='coworking-editing__image-item-template' />}
           </ul>
           <div className="coworking-editing__image-inputs">
@@ -124,7 +126,7 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
                   <li className="coworking-editing__info-point" key={capabilityData.capability}>{capabilityData.capability}</li>
                 ))}
               </ul>
-              : <span className='coworking-editing__empty-info-text'>Пусто</span>}
+              : <span className='coworking-editing__empty-info-text'>Не указано</span>}
           </div>
         </div>
 
@@ -151,7 +153,7 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
                   {PlaceTypeOptions.find((option) => option.value === seatType)?.title}: {seatCount}
                 </span>
               ))
-              : <span className='coworking-editing__empty-info-text'>Пусто</span>}
+              : <span className='coworking-editing__empty-info-text'>Не указано</span>}
           </div>
         </div>
       </div>

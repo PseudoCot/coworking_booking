@@ -15,7 +15,7 @@ export default function CoworkingCard({ avatar, title, description, address, sea
 
   const [openingTime, endingTime] = workingSchedule?.length
     ? [getRoundedTime(workingSchedule[0].start_time), getRoundedTime(workingSchedule[0].end_time)]
-    : ['08:00', '20:00'];
+    : ['', ''];
 
   const seatsTotalInfo = seats?.reduce((result, seatDto) => {
     result[seatDto.place_type] = (result[seatDto.place_type] ?? 0) + seatDto.seats_count;
@@ -33,7 +33,9 @@ export default function CoworkingCard({ avatar, title, description, address, sea
         <div className="booking__info-opening">
           <span className="booking__opening-title">Режим работы</span>
           <span className="booking__opening-text">
-            с&nbsp;{openingTime} до&nbsp;{endingTime}
+            {openingTime && endingTime
+              ? `с ${openingTime} до ${endingTime}`
+              : 'Не указано'}
           </span>
         </div>
       </div>
@@ -48,24 +50,28 @@ export default function CoworkingCard({ avatar, title, description, address, sea
           <h3 className="booking__info-title title-reset">Адрес:</h3>
           <address className="booking__info-text">{address}</address>
         </div>
-        {!!seats?.length && seatsTotalInfo &&
-          <div className="booking__info-group">
-            <h3 className="booking__info-title title-reset">Количество мест:</h3>
-            {Object.entries(seatsTotalInfo).map(([seatType, seatCount]) => (
+        <div className="booking__info-group">
+          <h3 className="booking__info-title title-reset">Количество мест:</h3>
+          {seats?.length && seatsTotalInfo
+            ?
+            Object.entries(seatsTotalInfo).map(([seatType, seatCount]) => (
               <span className="booking__info-text" key={seatType}>
                 {PlaceTypeOptions.find((option) => option.value === seatType)?.title}: {seatCount}
               </span>
-            ))}
-          </div>}
-        {!!technicalCapabilities?.length &&
-          <div className="booking__info-group">
-            <h3 className="booking__info-title title-reset">Технические возможности:</h3>
+            ))
+            : <span className='booking__empty-info-text'>Не указано</span>}
+        </div>
+        <div className="booking__info-group">
+          <h3 className="booking__info-title title-reset">Технические возможности:</h3>
+          {technicalCapabilities?.length
+            ?
             <ul className="booking__info-list list-reset">
-              {technicalCapabilities.map((techCapabilityData) => (
-                <li className="booking__info-point" key={techCapabilityData.capability}>{techCapabilityData.capability}</li>
+              {technicalCapabilities.map((capabilityData) => (
+                <li className="booking__info-point" key={capabilityData.capability}>{capabilityData.capability}</li>
               ))}
             </ul>
-          </div>}
+            : <span className='booking__empty-info-text'>Не указано</span>}
+        </div>
       </div>
       {isAdmin &&
         <Link to={AppRoutes.CoworkingEditing.RelativePath} className="booking__info-edit-btn light-btn">
