@@ -11,9 +11,9 @@ export type CoworkingDto = {
   institute: string;
   description: string;
   address: string;
-  seats: SeatDto[];
-  working_schedules: ScheduleDto[];
-  images: CoworkingImageDto[];
-  events: EventDto[];
-  technical_capabilities: CoworkingCapabilityDto[];
+  seats?: SeatDto[];
+  working_schedules?: ScheduleDto[];
+  images?: CoworkingImageDto[];
+  events?: EventDto[];
+  technical_capabilities?: CoworkingCapabilityDto[];
 };

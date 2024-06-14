@@ -32,7 +32,7 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
     ? [getRoundedTime(workingSchedule[0].start_time), getRoundedTime(workingSchedule[0].end_time)]
     : ['08:00', '20:00'];
 
-  const seatsTotalInfo = seats.reduce((result, seatDto) => {
+  const seatsTotalInfo = seats?.reduce((result, seatDto) => {
     result[seatDto.place_type] = (result[seatDto.place_type] ?? 0) + seatDto.seats_count;
     return result;
   }, {} as { [key: string]: number });
@@ -60,7 +60,7 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
               :
               <ImageCarousel wrapperClasses='coworking-editing__images-carousel'
                 imageAlt={title} mainImage={avatar}
-                images={images.map((imageData) => imageData.image_filename)}
+                images={images?.map((imageData) => imageData.image_filename) ?? []}
               />}
             <button className="coworking-editing__avatar-btn btn-reset" onClick={() => setEditingAvatar((prev) => !prev)}>
               <PenInCircleSVG />
@@ -81,12 +81,12 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
         <div className="coworking-editing__top-right">
           <h3 className="coworking-editing__title title-reset">Изображения:</h3>
           <ul className="coworking-editing__image-list list-reset">
-            {images.map((imageData) => (
+            {images?.map((imageData) => (
               <li className="coworking-editing__image-item" key={imageData.image_filename}>
                 <img className="coworking-editing__image" src={getImageURL(imageData.image_filename)} alt={imageData.image_filename} />
               </li>))}
-            {images.length < 6
-              && <span className='coworking-editing__image-item-template' />}
+            {images?.length && images.length < 6 &&
+              <span className='coworking-editing__image-item-template' />}
           </ul>
           <div className="coworking-editing__image-inputs">
             {Array.from({ length: Math.min((imageFiles?.length ?? 0) + 1, MAX_IMAGES_COUNT) }).map((_, index) => {
@@ -117,7 +117,7 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
                 <PenInCircleSVG />
               </button>
             </h3>
-            {technicalCapabilities.length
+            {technicalCapabilities?.length
               ?
               <ul className="coworking-editing__info-list list-reset">
                 {technicalCapabilities.map((capabilityData) => (
@@ -144,7 +144,7 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
                 <PenInCircleSVG />
               </button>
             </h3>
-            {seats.length
+            {seats?.length && seatsTotalInfo
               ?
               Object.entries(seatsTotalInfo).map(([seatType, seatCount]) => (
                 <span className="coworking-editing__text" key={seatType}>

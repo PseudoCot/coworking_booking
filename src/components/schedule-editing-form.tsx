@@ -9,6 +9,7 @@ import getScheduleOrDefault from '../shared/get-schedule-or-default';
 import { WeekdayNumber } from '../types/weekday';
 import { OptionToggles } from '../types/option-toggles';
 import { ScheduleDto } from '../types/api-shared/schedule-dto';
+import sortedArrayByElementField from '../shared/sorted-array-by-element-field';
 
 type ScheduleEditingFormProps = {
   coworkingId: string;
@@ -21,9 +22,9 @@ type ScheduleEditingFormProps = {
 export default function ScheduleEditingForm({ coworkingId, schedule, onSubmit: handleSubmit,
   onCancel: handleCancel }: ScheduleEditingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const [newSchedule, setNewSchedule] = useState(schedule ?? []);
+  const [newSchedule, setNewSchedule] = useState(schedule ? sortedArrayByElementField<ScheduleDto>(schedule, 'week_day') : []);
 
-  const [selectedWeekday, setSelectedWeekday] = useState<number>(schedule?.[0].week_day ?? 0);
+  const [selectedWeekday, setSelectedWeekday] = useState<number>(schedule?.[0]?.week_day ?? 0);
   const selectedWeekdayOption = WeekdayOptions.find((item) => item.value === selectedWeekday);
 
   const optionToggles = schedule?.reduce((res, elem) => {

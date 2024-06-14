@@ -51,7 +51,7 @@ export default function BookingScreen(): JSX.Element {
             ?
             <>
               <CoworkingCard {...coworkingData} />
-              {isAdmin || <BookingForm />}
+              {isAdmin || <BookingForm schedule={coworkingData.working_schedules?.[0]} />}
             </>
             : coworkingFetching && <Loader horizontalAlignCenter />}
         </div>

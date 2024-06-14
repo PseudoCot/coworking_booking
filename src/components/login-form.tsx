@@ -44,6 +44,7 @@ export default function LoginForm(): JSX.Element {
         <div className="login-form__top form-top">
           <h2 className="login-form__title form-title title-reset">Вход</h2>
         </div>
+
         <div className="login-form__bottom form-bottom">
           {fetchingStatus === FetchingStatuses.Rejected &&
             <span className="login-form__submit-error">Введённые данные не корректны. Попробуйте ещё раз</span>}

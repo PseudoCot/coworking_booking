@@ -52,7 +52,6 @@ import { CreateSeatsData } from '../types/admin/create-seats-data';
 import { CreateSeatsRequestParams } from '../types/admin/create-seats-request-params';
 import { UploadAvatarData } from '../types/admin/upload-avatar-data';
 import { UploadImageData } from '../types/admin/upload-image-data';
-import { coworkingDataMock } from '../mocks/coworking-data-mock';
 
 
 export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
@@ -268,7 +267,7 @@ export const fetchCoworkingAction = createAsyncThunk<CoworkingDto, string, {
 }>(
   'coworking/fetchCoworking',
   async (coworkingId, { extra: { api } }) => {
-    return coworkingDataMock;
+    // return coworkingDataMock;
 
     const { data } = await api.post<JsonRpcResponse<CoworkingDto>>(ApiRoutes.FetchCoworking, createJsonRpcRequest<CoworkingRequestParams>(
       ApiMethods.FetchCoworking,
@@ -535,6 +534,11 @@ export const postCoworkingScheduleAction = createAsyncThunk<ScheduleDto[], Creat
         {
           coworking_id: createData.coworkingId,
           schedules: createData.schedules
+            .map((elem) => ({
+              week_day: elem.week_day,
+              start_time: elem.start_time,
+              end_time: elem.end_time
+            }))
         }
       ));
 
@@ -554,7 +558,12 @@ export const postCoworkingSeatsAction = createAsyncThunk<SeatDto[], CreateSeatsD
         ApiMethods.CreateCoworkingSeats,
         {
           coworking_id: createData.coworkingId,
-          meeting_rooms: createData.meetingRooms,
+          meeting_rooms: createData.meetingRooms
+            .map((elem) => ({
+              label: elem.label,
+              description: elem.description,
+              seats_count: elem.seats_count
+            })),
           table_places: createData.tablePlaces
         }
       ));

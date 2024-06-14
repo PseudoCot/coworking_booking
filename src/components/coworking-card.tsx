@@ -13,16 +13,11 @@ export default function CoworkingCard({ avatar, title, description, address, sea
   images, technical_capabilities: technicalCapabilities }: CoworkingCardProps): JSX.Element {
   const isAdmin = useAppSelector(isUserAdmin);
 
-  // let avatarURL = avatar && getImageURL(avatar);
-  // avatarURL = avatarURL || import.meta.env.DEV
-  //   ? 'img/coworking-default-image.png'
-  //   : getImageURL(''); // добавить название дефолтной картинки
-
-  const [openingTime, endingTime] = workingSchedule.length
+  const [openingTime, endingTime] = workingSchedule?.length
     ? [getRoundedTime(workingSchedule[0].start_time), getRoundedTime(workingSchedule[0].end_time)]
     : ['08:00', '20:00'];
 
-  const seatsTotalInfo = seats.reduce((result, seatDto) => {
+  const seatsTotalInfo = seats?.reduce((result, seatDto) => {
     result[seatDto.place_type] = (result[seatDto.place_type] ?? 0) + seatDto.seats_count;
     return result;
   }, {} as { [key: string]: number });
@@ -32,7 +27,7 @@ export default function CoworkingCard({ avatar, title, description, address, sea
       <div className="booking__left-info">
         <ImageCarousel wrapperClasses='booking__info-carousel'
           imageAlt={title} mainImage={avatar}
-          images={images.map((imageData) => imageData.image_filename)}
+          images={images?.map((imageData) => imageData.image_filename) ?? []}
         />
         <h2 className="booking__info-header title-reset">{title}</h2>
         <div className="booking__info-opening">
@@ -53,7 +48,7 @@ export default function CoworkingCard({ avatar, title, description, address, sea
           <h3 className="booking__info-title title-reset">Адрес:</h3>
           <address className="booking__info-text">{address}</address>
         </div>
-        {seats.length &&
+        {!!seats?.length && seatsTotalInfo &&
           <div className="booking__info-group">
             <h3 className="booking__info-title title-reset">Количество мест:</h3>
             {Object.entries(seatsTotalInfo).map(([seatType, seatCount]) => (
@@ -62,7 +57,7 @@ export default function CoworkingCard({ avatar, title, description, address, sea
               </span>
             ))}
           </div>}
-        {technicalCapabilities.length &&
+        {!!technicalCapabilities?.length &&
           <div className="booking__info-group">
             <h3 className="booking__info-title title-reset">Технические возможности:</h3>
             <ul className="booking__info-list list-reset">

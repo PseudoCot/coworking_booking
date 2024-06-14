@@ -1,7 +1,7 @@
 import { useState, FormEventHandler, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import TimestampSelectGroup from './timestamp-select-group';
-import { FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE, FetchingStatuses, PlaceTypeOptions } from '../consts';
+import { AVAILABLE_MINUTES, FIRST_AVAILABLE_HOUR, FIRST_AVAILABLE_MINUTE, FetchingStatuses, PlaceTypeOptions } from '../consts';
 import Select from './select';
 import { DateTime } from 'luxon';
 import { postBookedCoworkingAction } from '../store/api-actions';
@@ -10,6 +10,8 @@ import createISODate from '../shared/create-iso-date';
 import { getBookFetchingStatus } from '../store/booking-process/selectors';
 import { resetBookFetchingStatus } from '../store/booking-process/booking-process';
 import Loader from './loader';
+import { ScheduleDto } from '../types/api-shared/schedule-dto';
+import generateTimeArray from '../shared/generate-time-array';
 
 const DEFAULT_FIELDS_VALUES = {
   PlaceType: undefined,
@@ -20,7 +22,11 @@ const DEFAULT_FIELDS_VALUES = {
   EndMinute: FIRST_AVAILABLE_MINUTE,
 };
 
-export default function BookingForm(): JSX.Element {
+type BookingFormProps = {
+  schedule?: ScheduleDto;
+};
+
+export default function BookingForm({ schedule }: BookingFormProps): JSX.Element {
   const today = DateTime.local();
   const currentDate = today.toISODate();
   const nextMonthDate = today.plus({ month: 1 }).toISODate();
@@ -29,11 +35,14 @@ export default function BookingForm(): JSX.Element {
   const coworkingId = useAppSelector(getCoworkingId);
   const fetchingStatus = useAppSelector(getBookFetchingStatus);
 
+  const availableHours = schedule && generateTimeArray(+schedule.start_time.substring(0, 2),
+    +schedule.end_time.substring(0, 2), 1);
+
   const [placeType, setPlaceType] = useState<string | number | undefined>(DEFAULT_FIELDS_VALUES.PlaceType);
   const [date, setDate] = useState<string | undefined>(DEFAULT_FIELDS_VALUES.Date);
-  const [startHour, setStartHour] = useState(DEFAULT_FIELDS_VALUES.StartHour);
+  const [startHour, setStartHour] = useState(availableHours?.[0] ?? DEFAULT_FIELDS_VALUES.StartHour);
   const [startMinute, setStartMinute] = useState(DEFAULT_FIELDS_VALUES.StartMinute);
-  const [endHour, setEndHour] = useState(DEFAULT_FIELDS_VALUES.EndHour);
+  const [endHour, setEndHour] = useState(availableHours?.[0] ?? DEFAULT_FIELDS_VALUES.EndHour);
   const [endMinute, setEndMinute] = useState(DEFAULT_FIELDS_VALUES.EndMinute);
 
   const selectedPlaceType = PlaceTypeOptions.find((item) => item.value === placeType);
@@ -101,6 +110,7 @@ export default function BookingForm(): JSX.Element {
             <TimestampSelectGroup subLabelClasses='booking__form-sub-label' timeGroupClasses='booking__form-time-group'
               timeSelectClasses='booking__form-time-select' selectOptionClasses='booking__form-select-option'
               timesSeparatorClasses='booking__form-time-separator'
+              availableHours={availableHours} availableMinutes={AVAILABLE_MINUTES}
               startHour={startHour} startMinute={startMinute} endHour={endHour} endMinute={endMinute}
               onStartHourChange={setStartHour} onStartMinuteChange={setStartMinute}
               onEndHourChange={setEndHour} onEndMinuteChange={setEndMinute}
