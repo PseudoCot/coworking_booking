@@ -84,15 +84,15 @@ export default function CoworkingCreatingForm({ onSubmit: handleSubmit, onCancel
       </div>
       <div className="coworking-form__right">
         <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label' inputClasses='coworking-form__textarea'
-          labelText='Описание' name='description' type='text' adminFormStyles textarea
+          labelText='Описание' name='description' type='text' adminFormStyles textarea maxLenght={1500}
           value={description} onChange={handleDescriptionChange}
         />
         <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label' inputClasses='coworking-form__input'
-          labelText='Институт' name='institute' type='text' autoComplete='institute' adminFormStyles required
+          labelText='Институт' name='institute' type='text' autoComplete='institute' adminFormStyles required maxLenght={100}
           value={institute} onChange={handleInstituteChange}
         />
         <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label' inputClasses='coworking-form__input'
-          labelText='Адрес' name='address' type='text' adminFormStyles required
+          labelText='Адрес' name='address' type='text' adminFormStyles required maxLenght={100}
           value={address} onChange={handleAddressChange}
         />
       </div>

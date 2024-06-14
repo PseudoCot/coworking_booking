@@ -43,7 +43,7 @@ export default function RequestPasswordRecoveryForm(): JSX.Element {
             <span className="login-form__submit-error">Не удалось восстановить пароль. Попробуйте ещё раз</span>}
           <FormInputGroup groupClasses='password-recovery-form__input-group' labelClasses='password-recovery-form__label'
             inputClasses='password-recovery-form__input' labelText='Укажите почту'
-            name='email' type='email' inputMode='email' autoComplete='email current-login current-email' required
+            name='email' type='email' inputMode='email' autoComplete='email current-login current-email' required maxLenght={100}
             value={email} onChange={handleEmailChange} showError={emailError} setShowError={setEmailError}
             tooltipClasses='password-recovery-form__tooltip' tooltipText='Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me'
             errorClasses='password-recovery-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'

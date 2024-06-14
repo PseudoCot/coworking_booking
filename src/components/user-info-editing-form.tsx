@@ -54,19 +54,19 @@ export default function UserInfoEditingForm({ lastName: initialLastName, firstNa
           <div className="user-acc__info-group">
             <label className="user-acc__info-title" htmlFor="last-name">Фамилия:</label>
             <input className="user-acc__info-input" type="text" name="last-name" id="last-name" autoCapitalize="words"
-              value={lastName} onChange={(e) => setLastName(e.target.value)}
+              value={lastName} onChange={(e) => setLastName(e.target.value)} maxLength={100}
             />
           </div>
           <div className="user-acc__info-group">
             <label className="user-acc__info-title" htmlFor="first-name">Имя:</label>
             <input className="user-acc__info-input" type="text" name="first-name" id="first-name" autoCapitalize="words"
-              value={firstName} onChange={(e) => setFirstName(e.target.value)}
+              value={firstName} onChange={(e) => setFirstName(e.target.value)} maxLength={100}
             />
           </div>
           <div className="user-acc__info-group">
             <label className="user-acc__info-title" htmlFor="patronymic">Отчество:</label>
             <input className="user-acc__info-input" type="text" name="patronymic" id="patronymic" autoCapitalize="words"
-              value={patronymic} onChange={(e) => setPatronymic(e.target.value)}
+              value={patronymic} onChange={(e) => setPatronymic(e.target.value)} maxLength={100}
             />
           </div>
         </div>

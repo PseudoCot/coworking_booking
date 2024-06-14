@@ -131,7 +131,7 @@ export default function MeetingRoomsEditingInputs({ meetingRooms, setMeetingRoom
         value={name} onChange={handleNameChange}
       />
       <FormInputGroup groupClasses='seats-form__input-group' labelClasses='seats-form__label' inputClasses='seats-form__textarea'
-        adminFormStyles labelText='Описание' name='meeting-description' type='text' textarea
+        adminFormStyles labelText='Описание' name='meeting-description' type='text' textarea maxLenght={500}
         value={description} onChange={handleDescriptionChange}
       />
       <FormInputGroup groupClasses='seats-form__input-group' labelClasses='seats-form__label' inputClasses='seats-form__input'

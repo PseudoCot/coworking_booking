@@ -61,33 +61,40 @@ export default function RegisterForm(): JSX.Element {
         <div className="register-form__bottom form-bottom">
           {fetchingStatus === FetchingStatuses.Rejected &&
             <span className="login-form__submit-error">Не удалось зарегистрироваться. Попробуйте ещё раз</span>}
-          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
-            labelText='Фамилия' name='last-name' type='text' autoCapitalize='words' autoComplete='last-name' required
+          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label'
+            inputClasses='register-form__input' labelText='Фамилия'
+            name='last-name' type='text' autoCapitalize='words' autoComplete='last-name' required maxLenght={100}
             value={lastName} onChange={handleLastNameChange}
           />
-          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
-            labelText='Имя' name='first-name' type='text' autoCapitalize='words' autoComplete='first-name' required
+          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label'
+            inputClasses='register-form__input' labelText='Имя'
+            name='first-name' type='text' autoCapitalize='words' autoComplete='first-name' required maxLenght={100}
             value={firstName} onChange={handleFirstNameChange}
           />
-          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
-            labelText='Отчество' name='patronymic' type='text' autoCapitalize='words' autoComplete='patronymic'
+          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label'
+            inputClasses='register-form__input' labelText='Отчество'
+            name='patronymic' type='text' autoCapitalize='words' autoComplete='patronymic' maxLenght={100}
             value={patronymic} onChange={handlePatronymicChange}
           />
-          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
-            labelText='Почта' name='email' type='email' inputMode='email' autoComplete='email' required
+          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label'
+            inputClasses='register-form__input' labelText='Почта'
+            name='email' type='email' inputMode='email' autoComplete='email' required maxLenght={100}
             value={email} onChange={handleEmailChange} showError={emailError} setShowError={setEmailError}
             tooltipClasses='register-form__tooltip' tooltipText='Используйте адрес электронной почты, который содержит домен urfu.ru или ufru.me'
             errorClasses='register-form__group-error' errorText='Адрес электронной почты не соответствует домену urfu.ru или ufru.me'
           />
-          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
-            labelText='Пароль' name='password' type='password' autoComplete='new-password' required
+          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label'
+            inputClasses='register-form__input' labelText='Пароль'
+            name='password' type='password' autoComplete='new-password' required maxLenght={200}
             value={password} onChange={handlePasswordChange} showError={passwordError} setShowError={setPasswordError}
             tooltipClasses='register-form__tooltip' tooltipText='Пароль должен содержать не менее 8 символов, среди которых есть латинские буквы, хотя бы 1 строчная и заглавная буква, не менее 1 цифры и хотя бы 1 спец. символ'
             errorClasses='register-form__group-error' errorText='Пароль не соответствует требованиям сложности'
           />
-          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label' inputClasses='register-form__input'
-            labelText='Повторите пароль' name='password-repeat' type='password' autoComplete='new-password' required
-            value={repeatedPassword} onChange={handleRepeatedPasswordChange} showError={repeatedPasswordError} setShowError={setRepeatedPasswordError}
+          <FormInputGroup groupClasses='register-form__input-group' labelClasses='register-form__label'
+            inputClasses='register-form__input' labelText='Повторите пароль'
+            name='password-repeat' type='password' autoComplete='new-password' required maxLenght={200}
+            value={repeatedPassword} onChange={handleRepeatedPasswordChange}
+            showError={repeatedPasswordError} setShowError={setRepeatedPasswordError}
             errorClasses='register-form__group-error' errorText='Пароли не совпадают'
           />
           <button className="register-form__submit-btn form-btn light-btn btn-reset"
