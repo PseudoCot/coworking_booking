@@ -107,7 +107,7 @@ export default function ScheduleEditingForm({ coworkingId, schedule, onSubmit: h
             onStartHourChange={setStartHour} onStartMinuteChange={setStartMinute}
             onEndHourChange={setEndHour} onEndMinuteChange={setEndMinute}
           />
-          <div className="admin-form-btns">
+          <div className="schedule-form__btns admin-form-btns">
             <button className="schedule-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
               Сохранить
             </button>

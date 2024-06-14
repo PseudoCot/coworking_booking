@@ -1,6 +1,5 @@
-import { useState, FormEventHandler, FormEvent, useEffect } from 'react';
+import { useState, FormEventHandler, FormEvent } from 'react';
 import { useAppDispatch } from '../hooks';
-import { validateStringsLength } from '../shared/validate-strings-length';
 import { postCoworkingCapabilityAction } from '../store/api-actions';
 import { CoworkingCapabilityDto } from '../types/api-shared/coworking-capability-dto';
 
@@ -39,7 +38,6 @@ export default function CapabilitiesEditingForm({ coworkingId, capabilities,
     }
   };
 
-  const [submitEnabled, setSubmitEnabled] = useState(false);
   const handleSubmitClick: FormEventHandler = (e) => {
     e.preventDefault();
 
@@ -51,10 +49,6 @@ export default function CapabilitiesEditingForm({ coworkingId, capabilities,
 
     handleSubmit();
   };
-
-  useEffect(() => {
-    setSubmitEnabled(validateStringsLength(newCapabilities));
-  }, [newCapabilities]);
 
   return (
     <form className="capabilities-form admin-form" action="#" onSubmit={handleSubmitClick}>
@@ -74,7 +68,7 @@ export default function CapabilitiesEditingForm({ coworkingId, capabilities,
             ))}
           </div>
           <div className="admin-form-btns">
-            <button className="capabilities-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
+            <button className="capabilities-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
               Сохранить
             </button>
             <button className="capabilities-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancel}>

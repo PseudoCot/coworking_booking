@@ -10,6 +10,7 @@ import CapabilitiesEditingForm from '../components/capabilities-editing-form';
 import EventCreatingForm from '../components/event-creating-form';
 import SeatsEditingForm from '../components/seats-editing-form';
 import ScheduleEditingForm from '../components/schedule-editing-form';
+import ModalWindow from '../components/modal-window';
 
 export default function CoworkingEditingScreen(): JSX.Element {
   const urlParams = useParams();
@@ -37,7 +38,7 @@ export default function CoworkingEditingScreen(): JSX.Element {
   return (
     <Layout>
       <article className="coworking-editing">
-        <h1 className="coworking-editing__title title title-reset">Редактирование коворкинга</h1>
+        <h1 className="title title-reset">Редактирование коворкинга</h1>
 
         {coworkingData
           ?
@@ -47,25 +48,29 @@ export default function CoworkingEditingScreen(): JSX.Element {
               onEditSeatsClick={toggleEditingSeats} onEditScheduleClick={toggleEditingSchedule}
             />
 
-            {editingCapabilities &&
+            <ModalWindow show={editingCapabilities}>
               <CapabilitiesEditingForm coworkingId={coworkingData.id} capabilities={coworkingData.technical_capabilities}
                 onSubmit={toggleEditingCapabilities} onCancel={toggleEditingCapabilities}
-              />}
+              />
+            </ModalWindow>
 
-            {creatingEvent &&
+            <ModalWindow show={creatingEvent}>
               <EventCreatingForm coworkingId={coworkingData.id}
                 onSubmit={toggleCreatingEvent} onCancel={toggleCreatingEvent}
-              />}
+              />
+            </ModalWindow>
 
-            {editingSeats &&
+            <ModalWindow show={editingSeats}>
               <SeatsEditingForm coworkingId={coworkingData.id} seats={coworkingData.seats}
                 onSubmit={toggleEditingSeats} onCancel={toggleEditingSeats}
-              />}
+              />
+            </ModalWindow>
 
-            {editingSchedule &&
+            <ModalWindow show={editingSchedule}>
               <ScheduleEditingForm coworkingId={coworkingData.id} schedule={coworkingData.working_schedules}
                 onSubmit={toggleEditingSchedule} onCancel={toggleEditingSchedule}
-              />}
+              />
+            </ModalWindow>
           </>
           : coworkingFetching && <Loader horizontalAlignCenter />}
       </article>

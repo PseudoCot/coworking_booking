@@ -55,7 +55,7 @@ export default function BookingScreen(): JSX.Element {
         </div>
 
         <Toast toastClasses='booking__toast' toastTitleClasses='booking__toast-title' toastTextClasses='booking__toast-text'
-          modalWindow show={showSuccesToast} onCloseClick={handleSuccesToastClose}
+          show={showSuccesToast} onCloseClick={handleSuccesToastClose}
           title='Спасибо, место в коворкинге забронировано!'
           text={`Сейчас вам необходимо написать нашему telegram-боту - ${TELEGRAM_BOT_NAME}.
           За 2 часа до начала брони вам придет оповещение для подтверждения бронирования. Нажмите
@@ -67,7 +67,7 @@ export default function BookingScreen(): JSX.Element {
           <a href={calendarEventLink} className="booking__toast-btn light-btn">Google Calendar</a>
         </Toast>
         <Toast toastClasses='booking__toast' toastTitleClasses='booking__toast-title' toastTextClasses='booking__toast-text'
-          modalWindow show={showErrorToast} onCloseClick={handleErrorToastClose}
+          show={showErrorToast} onCloseClick={handleErrorToastClose}
           title='Ошибка оформления бронирования!'
           text={`Для оформления бронирования вам необходимо написать нашему telegram-боту - ${TELEGRAM_BOT_NAME}.
           Создайте бронирование в системе повторно после старта чата с ним.

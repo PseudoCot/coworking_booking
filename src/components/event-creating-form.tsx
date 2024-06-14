@@ -47,8 +47,8 @@ export default function EventCreatingForm({ coworkingId, onSubmit: handleSubmit,
   };
 
   useEffect(() => {
-    setSubmitEnabled(validateStringsLength([date, name, description]));
-  }, [date, name, description]);
+    setSubmitEnabled(validateStringsLength([date, name]));
+  }, [date, name]);
 
   return (
     <form className="event-form admin-form" action="#" onSubmit={handleSubmitClick}>
