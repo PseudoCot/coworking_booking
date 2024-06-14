@@ -7,7 +7,11 @@ export type ErrorScreenProps = {
 export default function ErrorScreen({ errorStatusCode }: ErrorScreenProps): JSX.Element {
   return (
     <Layout>
-      <div>An error occured {errorStatusCode}</div>
+      <article className='error-screen'>
+        <h1 className='error-screen__title title-reset'>
+          Произошла непредвиденная<br />ошибка {errorStatusCode}
+        </h1>
+      </article>
     </Layout>
   );
 }
