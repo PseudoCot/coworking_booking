@@ -66,6 +66,11 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
   };
 
   useEffect(() => {
+    dispatch(resetAdminFetchingStatus('avatarUploadingFetchingStatus'));
+    dispatch(resetImageFetchingStatuses());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (avatarUploadingStatus === FetchingStatuses.Fulfilled) {
       navigate(generatePath(AppRoutes.Booking.FullPath, { id: id }));
     }

@@ -61,8 +61,12 @@ export default function CapabilitiesEditingForm({ coworkingId, capabilities,
     handleCancel();
   };
 
-  useEffect(() => () => {
+  useEffect(() => {
     dispatch(resetAdminFetchingStatus('capabilitiesEditingFetchingStatus'));
+
+    return () => {
+      dispatch(resetAdminFetchingStatus('capabilitiesEditingFetchingStatus'));
+    };
   }, [dispatch]);
 
   return (

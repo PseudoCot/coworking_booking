@@ -70,6 +70,11 @@ export default function CoworkingCreatingForm({ onSubmit: handleSubmit, onCancel
   }, [title, description, institute, address]);
 
   useEffect(() => {
+    dispatch(resetAdminFetchingStatus('coworkingCreatingFetchingStatus'));
+    dispatch(resetAdminFetchingStatus('avatarUploadingFetchingStatus'));
+  }, [dispatch]);
+
+  useEffect(() => {
     if (coworkingCreatingStatus === FetchingStatuses.Fulfilled && avatarUploadingStatus === FetchingStatuses.Fulfilled
       && newCoworkingId) {
       navigate(newCoworkingId);

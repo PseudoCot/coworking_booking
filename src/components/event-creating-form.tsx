@@ -61,8 +61,12 @@ export default function EventCreatingForm({ coworkingId, onSubmit: handleSubmit,
     setSubmitEnabled(validateStringsLength([date, name]));
   }, [date, name]);
 
-  useEffect(() => () => {
+  useEffect(() => {
     dispatch(resetAdminFetchingStatus('eventCreatingFetchingStatus'));
+
+    return () => {
+      dispatch(resetAdminFetchingStatus('eventCreatingFetchingStatus'));
+    };
   }, [dispatch]);
 
   return (

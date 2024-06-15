@@ -829,6 +829,7 @@ body,
   width: fit-content;
   height: 25px;
   display: inline-block;
+  z-index: 5;
 }
 
 .file-input-btn {

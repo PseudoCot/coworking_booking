@@ -42,9 +42,9 @@ export default function BookingScreen(): JSX.Element {
       setShowSuccesToast(true);
     } else if (bookFetchingStatus === FetchingStatuses.Rejected) {
       if (isTelegramConnected) {
-        setShowTgErrorToast(true);
-      } else {
         setShowErrorToast(true);
+      } else {
+        setShowTgErrorToast(true);
       }
     }
   }, [bookFetchingStatus, isTelegramConnected]);
@@ -61,7 +61,7 @@ export default function BookingScreen(): JSX.Element {
             <div className="booking__wrapper">
               <CoworkingCard {...coworkingData} />
               {/* {isAdmin || <BookingForm schedule={coworkingData.working_schedules?.[0]} />} */}
-              <BookingForm schedule={coworkingData.working_schedules?.[0]} />
+              {!!coworkingData.working_schedules?.length && <BookingForm schedule={coworkingData.working_schedules?.[0]} />}
             </div>
           </>
           : coworkingFetching && <Loader horizontalAlignCenter />}

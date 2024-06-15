@@ -58,8 +58,12 @@ export default function SeatsEditingForm({ coworkingId, seats,
     handleCancel();
   };
 
-  useEffect(() => () => {
+  useEffect(() => {
     dispatch(resetAdminFetchingStatus('seatsEditingFetchingStatus'));
+
+    return () => {
+      dispatch(resetAdminFetchingStatus('seatsEditingFetchingStatus'));
+    };
   }, [dispatch]);
 
   return (

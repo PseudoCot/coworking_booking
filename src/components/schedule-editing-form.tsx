@@ -92,8 +92,12 @@ export default function ScheduleEditingForm({ coworkingId, schedule, onSubmit: h
     handleCancel();
   };
 
-  useEffect(() => () => {
+  useEffect(() => {
     dispatch(resetAdminFetchingStatus('scheduleEditingFetchingStatus'));
+
+    return () => {
+      dispatch(resetAdminFetchingStatus('scheduleEditingFetchingStatus'));
+    };
   }, [dispatch]);
 
   return (
