@@ -2,7 +2,7 @@
 import { useState, FormEventHandler } from 'react';
 import { useAppDispatch } from '../hooks';
 import { postCoworkingScheduleAction } from '../store/api-actions';
-import { WeekdayOptions } from '../consts';
+import { FetchingStatuses, WeekdayOptions } from '../consts';
 import Select from './select';
 import TimestampSelectGroup from './timestamp-select-group';
 import getScheduleOrDefault from '../shared/get-schedule-or-default';
@@ -10,6 +10,8 @@ import { WeekdayNumber } from '../types/weekday';
 import { OptionToggles } from '../types/option-toggles';
 import { ScheduleDto } from '../types/api-shared/schedule-dto';
 import sortedArrayByElementField from '../shared/sorted-array-by-element-field';
+import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
+import Loader from './loader';
 
 type ScheduleEditingFormProps = {
   coworkingId: string;
@@ -22,6 +24,8 @@ type ScheduleEditingFormProps = {
 export default function ScheduleEditingForm({ coworkingId, schedule, onSubmit: handleSubmit,
   onCancel: handleCancel }: ScheduleEditingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const fetchingStatus = useAdminFetchingStatus('scheduleEditingFetchingStatus');
+
   const [newSchedule, setNewSchedule] = useState(schedule ? sortedArrayByElementField<ScheduleDto>(schedule, 'week_day') : []);
 
   const [selectedWeekday, setSelectedWeekday] = useState<number>(schedule?.[0]?.week_day ?? 0);
@@ -116,7 +120,9 @@ export default function ScheduleEditingForm({ coworkingId, schedule, onSubmit: h
           />
           <div className="schedule-form__btns admin-form-btns">
             <button className="schedule-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
-              Сохранить
+              {fetchingStatus === FetchingStatuses.Pending
+                ? <Loader alignCenter small />
+                : 'Сохранить'}
             </button>
             <button className="schedule-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
               Отменить

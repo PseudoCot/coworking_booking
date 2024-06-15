@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatuses as Status, NameSpaces, FetchingStatuses } from '../../consts';
 import { AuthStatus } from '../../types/auth-status';
-import { refreshSessionAction, loginAction, logoutAction, fetchUserAction, postPasswordChangeAction, postUserDataAction, postPasswordRecoveryAction } from '../api-actions';
+import { refreshSessionAction, loginAction, logoutAction, fetchUserAction, postPasswordChangeAction, postUserDataAction, postPasswordRecoveryAction, postAvatarAction } from '../api-actions';
 import { UserDto } from '../../types/user/user-dto';
 import { UserData } from '../../types/user/user-data';
 import { FetchingStatus } from '../../types/fetching-status';
@@ -130,6 +130,12 @@ export const userProcess = createSlice({
       })
       .addCase(postUserDataAction.rejected, (state) => {
         state.userDataChangeFetchingStatus = FetchingStatuses.Rejected;
+      })
+
+      .addCase(postAvatarAction.fulfilled, (state, action: PayloadAction<string>) => {
+        if (state.userData) {
+          state.userData.avatarFileName = action.payload;
+        }
       });
   }
 });

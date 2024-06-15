@@ -2,6 +2,9 @@ import { useState, FormEventHandler, FormEvent } from 'react';
 import { useAppDispatch } from '../hooks';
 import { postCoworkingCapabilityAction } from '../store/api-actions';
 import { CoworkingCapabilityDto } from '../types/api-shared/coworking-capability-dto';
+import { FetchingStatuses } from '../consts';
+import Loader from './loader';
+import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
 
 type CapabilitiesEditingFormProps = {
   coworkingId: string;
@@ -14,6 +17,7 @@ type CapabilitiesEditingFormProps = {
 export default function CapabilitiesEditingForm({ coworkingId, capabilities,
   onSubmit: handleSubmit, onCancel: handleCancel }: CapabilitiesEditingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const fetchingStatus = useAdminFetchingStatus('capabilitiesEditingFetchingStatus');
 
   const capabilitiesData: string[] = capabilities?.map((capabilityDto) => capabilityDto.capability) ?? [];
   capabilitiesData.push('');
@@ -75,7 +79,9 @@ export default function CapabilitiesEditingForm({ coworkingId, capabilities,
           </div>
           <div className="admin-form-btns">
             <button className="capabilities-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
-              Сохранить
+              {fetchingStatus === FetchingStatuses.Pending
+                ? <Loader alignCenter small />
+                : 'Сохранить'}
             </button>
             <button className="capabilities-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
               Отменить

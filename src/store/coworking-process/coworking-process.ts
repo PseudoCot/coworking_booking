@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpaces } from '../../consts';
-import { fetchCoworkingAction, postCoworkingAction, postCoworkingCapabilityAction, postCoworkingEventAction, postCoworkingScheduleAction, postCoworkingSeatsAction } from '../api-actions';
+import { fetchCoworkingAction, postCoworkingAction, postCoworkingAvatarAction, postCoworkingCapabilityAction, postCoworkingEventAction, postCoworkingImageAction, postCoworkingScheduleAction, postCoworkingSeatsAction } from '../api-actions';
 import { CoworkingDto } from '../../types/coworking/coworking-dto';
 import { CoworkingShortDto } from '../../types/coworking/coworking-short-dto';
 import { EventDto } from '../../types/api-shared/event-dto';
 import { CoworkingCapabilityDto } from '../../types/api-shared/coworking-capability-dto';
 import { SeatDto } from '../../types/api-shared/seat-dto';
 import { ScheduleDto } from '../../types/api-shared/schedule-dto';
+import { UploadedImageData } from '../../types/admin/uploaded-image-data';
 
 type CoworkingProcessState = {
   coworkingFetching: boolean;
@@ -43,8 +44,22 @@ export const coworkingProcess = createSlice({
       .addCase(postCoworkingAction.fulfilled, (state, action: PayloadAction<CoworkingShortDto>) => {
         state.coworkingDto = { ...action.payload } as CoworkingDto;
       })
+      .addCase(postCoworkingAvatarAction.fulfilled, (state, action: PayloadAction<UploadedImageData>) => {
+        if (state.coworkingDto?.id === action.payload.coworkingId) {
+          state.coworkingDto.avatar = action.payload.imageName;
+        }
+      })
+      .addCase(postCoworkingImageAction.fulfilled, (state, action: PayloadAction<UploadedImageData>) => {
+        if (state.coworkingDto?.id === action.payload.coworkingId) {
+          const images = state.coworkingDto.images ? [...state.coworkingDto.images] : [];
+          // eslint-disable-next-line camelcase
+          images.push({ image_filename: action.payload.imageName });
+          state.coworkingDto.images = images;
+        }
+      })
+
       .addCase(postCoworkingEventAction.fulfilled, (state, action: PayloadAction<EventDto>) => {
-        if (state.coworkingDto) {
+        if (state.coworkingDto?.events) {
           state.coworkingDto.events.push(action.payload);
         }
       })

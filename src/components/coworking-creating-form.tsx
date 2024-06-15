@@ -1,5 +1,5 @@
 import { useState, FormEventHandler, useEffect } from 'react';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { postCoworkingAction } from '../store/api-actions';
 import FormInputGroup from './form-input-group';
 import FileInput from './file-input';
@@ -7,7 +7,10 @@ import DragAndDropFileInput from './drag-and-drop-file-input';
 import validateStringsLength from '../shared/validate-strings-length';
 import useInputChangeCallback from '../hooks/use-change-callback';
 import FileController from './file-controller';
-import { IMAGE_INPUT_TOOLTIP_TEXT, ImageValidatorsData, MAX_IMAGES_COUNT } from '../consts';
+import { FetchingStatuses, IMAGE_INPUT_TOOLTIP_TEXT, ImageValidatorsData, MAX_IMAGES_COUNT } from '../consts';
+import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
+import { getImagesFetchingStatuses } from '../store/admin-process/selectors';
+import Loader from './loader';
 
 type CoworkingCreatingFormProps = {
   onSubmit: () => void;
@@ -17,6 +20,9 @@ type CoworkingCreatingFormProps = {
 export default function CoworkingCreatingForm({ onSubmit: handleSubmit, onCancel: handleCancel }
   : CoworkingCreatingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const coworkingCreatingStatus = useAdminFetchingStatus('coworkingCreatingFetchingStatus');
+  const avatarUploadingStatus = useAdminFetchingStatus('avatarUploadingFetchingStatus');
+  const imagesUploadingStatuses = useAppSelector(getImagesFetchingStatuses);
 
   const [avatar, setAvatar] = useState<File[]>();
   const [images, setImages] = useState<File[]>();
@@ -63,8 +69,9 @@ export default function CoworkingCreatingForm({ onSubmit: handleSubmit, onCancel
         <DragAndDropFileInput areaClasses="coworking-form__avatar-area" imagePreview tooltipText={IMAGE_INPUT_TOOLTIP_TEXT}
           validatorsData={ImageValidatorsData} files={avatar} setFiles={setAvatar}
         />
-        <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label' inputClasses='coworking-form__input'
-          labelText='Название коворкинга' name='title' type='text' adminFormStyles required
+        <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label'
+          inputClasses='coworking-form__input' labelText='Название коворкинга'
+          name='title' type='text' adminFormStyles required
           value={title} onChange={handleNameChange}
         />
         <div className="coworking-form__input-group admin-form-input-group">
@@ -83,22 +90,28 @@ export default function CoworkingCreatingForm({ onSubmit: handleSubmit, onCancel
         </div>
       </div>
       <div className="coworking-form__right">
-        <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label' inputClasses='coworking-form__textarea'
-          labelText='Описание' name='description' type='text' adminFormStyles textarea maxLenght={1500}
+        <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label'
+          inputClasses='coworking-form__textarea' labelText='Описание'
+          name='description' type='text' adminFormStyles textarea maxLenght={1500}
           value={description} onChange={handleDescriptionChange}
         />
-        <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label' inputClasses='coworking-form__input'
-          labelText='Институт' name='institute' type='text' autoComplete='institute' adminFormStyles required maxLenght={100}
+        <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label'
+          inputClasses='coworking-form__input' labelText='Институт'
+          name='institute' type='text' autoComplete='institute' adminFormStyles required maxLenght={100}
           value={institute} onChange={handleInstituteChange}
         />
-        <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label' inputClasses='coworking-form__input'
-          labelText='Адрес' name='address' type='text' adminFormStyles required maxLenght={100}
+        <FormInputGroup groupClasses='coworking-form__input-group' labelClasses='coworking-form__label'
+          inputClasses='coworking-form__input' labelText='Адрес'
+          name='address' type='text' adminFormStyles required maxLenght={100}
           value={address} onChange={handleAddressChange}
         />
       </div>
       <div className="coworking-form__bottom admin-form-btns">
         <button className="coworking-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
-          Сохранить
+          {coworkingCreatingStatus === FetchingStatuses.Pending || avatarUploadingStatus === FetchingStatuses.Pending
+            || Object.values(imagesUploadingStatuses).includes(FetchingStatuses.Pending)
+            ? <Loader alignCenter small />
+            : 'Сохранить'}
         </button>
         <button className="coworking-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
           Отменить

@@ -51,6 +51,7 @@ export const coworkingsProcess = createSlice({
         state.coworkingsFetching = false;
         state.coworkingsFetchingError = true;
       })
+
       .addCase(fetchCoworkingsByTimestampAction.pending, (state) => {
         state.coworkingsDto = [];
         state.coworkingsFetching = true;

@@ -5,6 +5,9 @@ import { postCoworkingEventAction } from '../store/api-actions';
 import FormInputGroup from './form-input-group';
 import { DateTime } from 'luxon';
 import useInputChangeCallback from '../hooks/use-change-callback';
+import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
+import Loader from './loader';
+import { FetchingStatuses } from '../consts';
 
 type EventCreatingFormProps = {
   coworkingId: string;
@@ -20,6 +23,7 @@ export default function EventCreatingForm({ coworkingId, onSubmit: handleSubmit,
   const nextMonthDate = today.plus({ month: 3 }).toISODate();
 
   const dispatch = useAppDispatch();
+  const fetchingStatus = useAdminFetchingStatus('eventCreatingFetchingStatus');
 
   const [date, setDate] = useState<string>();
   const [name, setName] = useState('');
@@ -79,7 +83,9 @@ export default function EventCreatingForm({ coworkingId, onSubmit: handleSubmit,
           />
           <div className="admin-form-btns">
             <button className="event-form__submit-btn admin-form-btn white-btn btn-reset" type='submit' disabled={!submitEnabled}>
-              Сохранить
+              {fetchingStatus === FetchingStatuses.Pending
+                ? <Loader alignCenter small />
+                : 'Сохранить'}
             </button>
             <button className="event-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
               Отменить

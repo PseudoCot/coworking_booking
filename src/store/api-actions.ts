@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { EmptyObject, createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { ApiMethods, ApiRoutes } from '../consts';
+import { ApiMethods, ApiRoutes, FetchingStatuses } from '../consts';
 import { redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { AppRoutes } from '../routes';
@@ -52,6 +52,8 @@ import { CreateSeatsData } from '../types/admin/create-seats-data';
 import { CreateSeatsRequestParams } from '../types/admin/create-seats-request-params';
 import { UploadAvatarData } from '../types/admin/upload-avatar-data';
 import { UploadImageData } from '../types/admin/upload-image-data';
+import { UploadedImageData } from '../types/admin/uploaded-image-data';
+import { setImageFetchingStatus } from './admin-process/admin-process';
 
 
 export const fetchUserAction = createAsyncThunk<UserDto, undefined, {
@@ -216,6 +218,26 @@ export const postPasswordChangeAction = createAsyncThunk<void, ChangePasswordDat
 );
 
 
+export const postAvatarAction = createAsyncThunk<string, File, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: ThunkExtraArgument;
+}>(
+  'image/postAvatar',
+  async (avatar, { extra: { api } }) => {
+    const formData = new FormData();
+    formData.append('image', avatar);
+    const { data } = await api.post<string>(ApiRoutes.UploadAvatar, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
+    return data;
+  },
+);
+
+
 export const fetchCoworkingsByTimestampAction = createAsyncThunk<CoworkingShortDto[], TimestampDto, {
   dispatch: AppDispatch;
   state: State;
@@ -277,24 +299,6 @@ export const fetchCoworkingAction = createAsyncThunk<CoworkingDto, string, {
     ));
 
     return data.result;
-  },
-);
-
-
-export const postAvatarAction = createAsyncThunk<void, File, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: ThunkExtraArgument;
-}>(
-  'image/postAvatar',
-  async (avatar, { extra: { api } }) => {
-    const formData = new FormData();
-    formData.append('image', avatar);
-    await api.post(ApiRoutes.UploadAvatar, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
   },
 );
 
@@ -407,7 +411,7 @@ export const postPasswordRecoveryAction = createAsyncThunk<void, PasswordRecover
 );
 
 
-export const postCoworkingAvatarAction = createAsyncThunk<void, UploadAvatarData, {
+export const postCoworkingAvatarAction = createAsyncThunk<UploadedImageData, UploadAvatarData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
@@ -416,28 +420,41 @@ export const postCoworkingAvatarAction = createAsyncThunk<void, UploadAvatarData
   async (avatarData, { extra: { api } }) => {
     const formData = new FormData();
     formData.append('image', avatarData.avatar);
-    await api.post(`${ApiRoutes.UploadCoworkingAvatar}?coworking_id=${avatarData.coworkingId}`, formData, {
+    const { data } = await api.post<string>(`${ApiRoutes.UploadCoworkingAvatar}?coworking_id=${avatarData.coworkingId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
+
+    return {
+      coworkingId: avatarData.coworkingId,
+      imageName: data
+    };
   },
 );
 
-export const postCoworkingImageAction = createAsyncThunk<void, UploadImageData, {
+export const postCoworkingImageAction = createAsyncThunk<UploadedImageData, UploadImageData, {
   dispatch: AppDispatch;
   state: State;
   extra: ThunkExtraArgument;
 }>(
   'image/postCoworkingImage',
-  async (imageData, { extra: { api } }) => {
+  async (imageData, { dispatch, extra: { api } }) => {
     const formData = new FormData();
     formData.append('image', imageData.image);
-    await api.post(`${ApiRoutes.UploadCoworkingImage}?coworking_id=${imageData.coworkingId}`, formData, {
+
+    dispatch(setImageFetchingStatus([imageData.image.name, FetchingStatuses.Pending]));
+
+    const { data } = await api.post<string>(`${ApiRoutes.UploadCoworkingImage}?coworking_id=${imageData.coworkingId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
+
+    return {
+      coworkingId: imageData.coworkingId,
+      imageName: data
+    };
   },
 );
 

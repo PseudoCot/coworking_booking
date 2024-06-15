@@ -3,8 +3,10 @@ import { useAppDispatch } from '../hooks';
 import { postCoworkingSeatsAction } from '../store/api-actions';
 import FormInputGroup from './form-input-group';
 import MeetingRoomsEditingInputs from './meeting-rooms-editing-inputs';
-import { PlaceTypes } from '../consts';
+import { FetchingStatuses, PlaceTypes } from '../consts';
 import { SeatDto } from '../types/api-shared/seat-dto';
+import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
+import Loader from './loader';
 
 type SeatsEditingFormProps = {
   coworkingId: string;
@@ -17,6 +19,7 @@ type SeatsEditingFormProps = {
 export default function SeatsEditingForm({ coworkingId, seats,
   onSubmit: handleSubmit, onCancel: handleCancel }: SeatsEditingFormProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const fetchingStatus = useAdminFetchingStatus('seatsEditingFetchingStatus');
 
   const initialReduceValue = { tableSeatsCount: 0, meetingRoomsData: [] as SeatDto[] };
   const { tableSeatsCount, meetingRoomsData } = seats?.reduce((res, elem) => {
@@ -72,7 +75,9 @@ export default function SeatsEditingForm({ coworkingId, seats,
 
           <div className="admin-form-btns">
             <button className="seats-form__submit-btn admin-form-btn white-btn btn-reset" type='submit'>
-              Сохранить
+              {fetchingStatus === FetchingStatuses.Pending
+                ? <Loader alignCenter small />
+                : 'Сохранить'}
             </button>
             <button className="seats-form__cancel-btn admin-form-btn light-btn btn-reset" onClick={handleCancelClick}>
               Отменить
