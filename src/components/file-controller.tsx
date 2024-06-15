@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import MiniMenu from './mini-menu';
 import getFileLocalURL from '../shared/get-file-local-url';
 
@@ -21,6 +21,7 @@ export default function FileController({ controllerClasses = '', orderNumber, fi
   const rootRef = useRef<HTMLDivElement>(null);
 
   const file = files[orderNumber];
+  const [imageUrl, setImageUrl] = useState<string>();
 
   const handleDownloadClick = () => {
     handleDownload?.();
@@ -34,11 +35,17 @@ export default function FileController({ controllerClasses = '', orderNumber, fi
     }
   };
 
+  useEffect(() => {
+    if (file) {
+      setImageUrl(getFileLocalURL(file));
+    }
+  }, [file]);
+
   return (
     <div className={`${controllerClasses} file-controller`} ref={rootRef}>
       {file.name}
       <MiniMenu menuBtnClasses='file-controller-menu-btn' menuClasses='file-controller-menu' rootRef={rootRef}>
-        <a className="file-controller-in-menu-btn btn-reset" href={getFileLocalURL(file)}
+        <a className="file-controller-in-menu-btn btn-reset" href={imageUrl}
           download={file.name} onClick={handleDownloadClick}
         >
           Скачать

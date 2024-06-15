@@ -1,4 +1,4 @@
-import { DragEvent, useState } from 'react';
+import { DragEvent, useEffect, useState } from 'react';
 import FileInput from './file-input';
 import PictureSVG from './svg/picture';
 import classNames from 'classnames';
@@ -21,6 +21,7 @@ type DragAndDropFileInputProps = {
 export default function DragAndDropFileInput({ areaClasses = '', imagePreview, tooltipText,
   validatorsData, files, setFiles }: DragAndDropFileInputProps): JSX.Element {
   const [dragActive, setDragActive] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
 
   const [error, errorText, validateFiles] = useValidator(validatorsData);
 
@@ -47,6 +48,12 @@ export default function DragAndDropFileInput({ areaClasses = '', imagePreview, t
     }
   };
 
+  useEffect(() => {
+    if (imagePreview && files?.[0]) {
+      setImageUrl(getFileLocalURL(files[0]));
+    }
+  }, [files, imagePreview]);
+
   return (
     <div className={classNames(`${areaClasses} dnd-file-input-wrapper`, {
       'dnd-file-input-wrapper--drag-active': dragActive,
@@ -54,8 +61,8 @@ export default function DragAndDropFileInput({ areaClasses = '', imagePreview, t
       'dnd-file-input-wrapper--preview': imagePreview && files?.[0],
     })} onDragEnter={handleDrag}
     >
-      {imagePreview && files?.[0]
-        ? <img className="dnd-file-input-preview" src={getFileLocalURL(files[0])} alt='Аватарка коворкинга' />
+      {imagePreview
+        ? <img className="dnd-file-input-preview" src={imageUrl} alt='Аватарка коворкинга' />
         : <PictureSVG />}
 
       {files?.[0]

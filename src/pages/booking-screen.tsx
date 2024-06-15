@@ -29,10 +29,10 @@ export default function BookingScreen(): JSX.Element {
   const handleErrorToastClose = useCallback(() => setShowErrorToast(false), []);
 
   useEffect(() => {
-    if (urlParams.id) {
+    if (urlParams.id && coworkingData?.id !== urlParams.id) {
       dispatch(fetchCoworkingAction(urlParams.id));
     }
-  }, [dispatch, urlParams.id]);
+  }, [coworkingData, dispatch, urlParams.id]);
 
   useEffect(() => {
     if (bookFetchingStatus === FetchingStatuses.Fulfilled) {

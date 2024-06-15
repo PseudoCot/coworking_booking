@@ -1,23 +1,18 @@
 import { generatePath, useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../routes';
-import { ScheduleDto } from '../types/api-shared/schedule-dto';
 import getImageURL from '../shared/get-image-url';
 import getRoundedTime from '../shared/get-rounded-time';
+import { CoworkingShortDto } from '../types/coworking/coworking-short-dto';
 
-type CoworkingMiniCardProps = {
-  id: string;
-  avatar?: string;
-  title: string;
-  workingSchedule?: ScheduleDto;
-};
+type CoworkingMiniCardProps = CoworkingShortDto;
 
-export default function CoworkingMiniCard({ id, avatar, title, workingSchedule }: CoworkingMiniCardProps): JSX.Element {
+export default function CoworkingMiniCard({ id, avatar, title, working_schedule: workingSchedule }: CoworkingMiniCardProps): JSX.Element {
   const navigate = useNavigate();
 
   const imageURL = getImageURL(avatar);
   const [openingTime, endingTime] = workingSchedule
     ? [getRoundedTime(workingSchedule.start_time), getRoundedTime(workingSchedule.end_time)]
-    : ['08:00', '20:00'];
+    : ['', ''];
 
   const handleCardClick = () => navigate(generatePath(AppRoutes.Booking.FullPath, { id: id }));
 
@@ -28,11 +23,9 @@ export default function CoworkingMiniCard({ id, avatar, title, workingSchedule }
       <div className="coworkings__item-content">
         <span className="coworkings__item-content-title">Режим работы</span>
         <span className="coworkings__item-content-info">
-          с&nbsp;{openingTime} до&nbsp;{endingTime}
-          {/* {true &&
-              <>
-                , <br />по&nbsp;заявкам
-              </>} */}
+          {openingTime && endingTime
+            ? `с ${openingTime} до ${endingTime}`
+            : 'Не указано'}
         </span>
       </div>
     </li>
