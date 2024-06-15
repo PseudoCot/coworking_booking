@@ -155,6 +155,16 @@ export const Weekdays = {
   6: 'Воскресенье',
 } as const;
 
+export const WeekdaysShort = {
+  0: 'ПН',
+  1: 'ВТ',
+  2: 'СР',
+  3: 'ЧТ',
+  4: 'ПТ',
+  5: 'СБ',
+  6: 'ВС',
+} as const;
+
 export const NameSpaces = {
   Coworkings: 'Coworkings',
   Coworking: 'Coworking',

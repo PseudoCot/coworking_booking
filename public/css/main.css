@@ -1136,23 +1136,30 @@ body,
   animation: loader 0.5s ease-out infinite alternate;
 }
 
-.loader-vertical-center {
+.loader--vertical-center {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.loader-horizontal-center {
+.loader--horizontal-center {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.loader-center {
+.loader--center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.loader--small {
+  width: 8px;
+  height: 8px;
+  background-color: var(--loader-dark-color);
+  box-shadow: 16px 0 var(--loader-dark-color), -16px 0 var(--loader-dark-color);
 }
 
 @keyframes loader {
@@ -2009,7 +2016,7 @@ body,
 
 .booking__info {
   position: relative;
-  padding: 30px 30px 0;
+  padding: 30px;
   margin-bottom: 21px;
   max-width: 925px;
   flex-basis: 100%;
@@ -2050,7 +2057,7 @@ body,
 }
 
 .booking__info-opening {
-  min-height: 38px;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -2148,6 +2155,79 @@ body,
   border-radius: 15px;
   width: 108px;
   height: 72px;
+}
+
+.booking__schedule {
+  position: absolute;
+  padding: 2px;
+  right: -25px;
+  top: 49%;
+  font-size: 0;
+  transform: translateY(-50%);
+}
+
+.booking__schedule-details {
+  position: absolute;
+  padding: 5px;
+  top: 135%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  display: none;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(7, auto);
+  gap: 0 13px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  border: 1px solid #304ffee6;
+  transform: translateX(-50%);
+  opacity: 0;
+  z-index: 0;
+}
+
+.booking__schedule:hover .booking__schedule-details {
+  width: 120px;
+  display: grid;
+  height: fit-content;
+  opacity: 1;
+  z-index: 10;
+}
+
+.booking__schedule-details::before {
+  position: absolute;
+  left: 50%;
+  top: -7px;
+  width: 12px;
+  height: 12px;
+  content: "";
+  border: 1px solid #304ffee6;
+  border-bottom: none;
+  border-right: none;
+  background-color: #ffffff;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.booking__schedule-details-day,
+.booking__schedule-details-time {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.booking__schedule-details-day {
+  grid-column: 1;
+  justify-self: center;
+  color: #283593e6;
+}
+
+.booking__schedule-details-time {
+  margin-bottom: 7px;
+  grid-column: 2;
+  color: #304ffee6;
+}
+
+.booking__schedule-details-time:last-child {
+  margin-bottom: 0;
 }
 
 .booking__info-edit-btn {

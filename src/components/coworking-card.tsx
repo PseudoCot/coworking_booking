@@ -1,4 +1,4 @@
-import { PlaceTypeOptions } from '../consts';
+import { PlaceTypeOptions, WeekdaysShort } from '../consts';
 import getRoundedTime from '../shared/get-rounded-time';
 import ImageCarousel from './image-carousel';
 import { CoworkingDto } from '../types/coworking/coworking-dto';
@@ -6,15 +6,17 @@ import { useAppSelector } from '../hooks';
 import { isUserAdmin } from '../store/user-process/selectors';
 import { AppRoutes } from '../routes';
 import { Link } from 'react-router-dom';
+import TipSVG from './svg/tip';
+import { getTimestampTime } from '../shared/get-timestamp-time';
 
 type CoworkingCardProps = CoworkingDto;
 
-export default function CoworkingCard({ avatar, title, description, address, seats, working_schedules: workingSchedule,
+export default function CoworkingCard({ avatar, title, description, address, seats, working_schedules: schedules,
   images, technical_capabilities: technicalCapabilities }: CoworkingCardProps): JSX.Element {
   const isAdmin = useAppSelector(isUserAdmin);
 
-  const [openingTime, endingTime] = workingSchedule?.length
-    ? [getRoundedTime(workingSchedule[0].start_time), getRoundedTime(workingSchedule[0].end_time)]
+  const [openingTime, endingTime] = schedules?.length
+    ? [getRoundedTime(schedules[0].start_time), getRoundedTime(schedules[0].end_time)]
     : ['', ''];
 
   const seatsTotalInfo = seats?.reduce((result, seatDto) => {
@@ -37,6 +39,22 @@ export default function CoworkingCard({ avatar, title, description, address, sea
               ? `с ${openingTime} до ${endingTime}`
               : 'Не указано'}
           </span>
+          {!!schedules?.length &&
+            <div className='booking__schedule'>
+              <TipSVG />
+              <div className='booking__schedule-details'>
+                {schedules?.map((data) => (
+                  <>
+                    <span className="booking__schedule-details-day">
+                      {WeekdaysShort[data.week_day]}
+                    </span>
+                    <span className="booking__schedule-details-time">
+                      {getTimestampTime(data.start_time, data.end_time)}
+                    </span>
+                  </>
+                ))}
+              </div>
+            </div>}
         </div>
       </div>
       <div className="booking__right-info">
