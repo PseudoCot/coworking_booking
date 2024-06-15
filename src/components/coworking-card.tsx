@@ -44,14 +44,14 @@ export default function CoworkingCard({ avatar, title, description, address, sea
               <TipSVG />
               <div className='booking__schedule-details'>
                 {schedules?.map((data) => (
-                  <>
+                  <div className='booking__schedule-details-daytime' key={data.week_day}>
                     <span className="booking__schedule-details-day">
                       {WeekdaysShort[data.week_day]}
                     </span>
                     <span className="booking__schedule-details-time">
                       {getTimestampTime(data.start_time, data.end_time)}
                     </span>
-                  </>
+                  </div>
                 ))}
               </div>
             </div>}

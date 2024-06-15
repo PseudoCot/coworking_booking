@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { useState, FormEventHandler } from 'react';
+import { useState, FormEventHandler, useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
 import { postCoworkingScheduleAction } from '../store/api-actions';
 import { FetchingStatuses, WeekdayOptions } from '../consts';
@@ -12,6 +12,7 @@ import { ScheduleDto } from '../types/api-shared/schedule-dto';
 import sortedArrayByElementField from '../shared/sorted-array-by-element-field';
 import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
 import Loader from './loader';
+import { resetAdminFetchingStatus } from '../store/admin-process/admin-process';
 
 type ScheduleEditingFormProps = {
   coworkingId: string;
@@ -90,6 +91,10 @@ export default function ScheduleEditingForm({ coworkingId, schedule, onSubmit: h
 
     handleCancel();
   };
+
+  useEffect(() => () => {
+    dispatch(resetAdminFetchingStatus('scheduleEditingFetchingStatus'));
+  }, [dispatch]);
 
   return (
     <form className="schedule-form admin-form" action="#" onSubmit={handleSubmitClick}>

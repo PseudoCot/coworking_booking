@@ -1,15 +1,21 @@
-import { Link, generatePath } from 'react-router-dom';
-import { IMAGE_INPUT_TOOLTIP_TEXT, ImageValidatorsData, MAX_IMAGES_COUNT, PlaceTypeOptions } from '../consts';
+import { Link, generatePath, useNavigate } from 'react-router-dom';
+import { FetchingStatuses, IMAGE_INPUT_TOOLTIP_TEXT, ImageValidatorsData, MAX_IMAGES_COUNT, PlaceTypeOptions } from '../consts';
 import getImageURL from '../shared/get-image-url';
 import getRoundedTime from '../shared/get-rounded-time';
 import { CoworkingDto } from '../types/coworking/coworking-dto';
 import PenInCircleSVG from './svg/pen-in-circle';
 import { AppRoutes } from '../routes';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DragAndDropFileInput from './drag-and-drop-file-input';
 import FileController from './file-controller';
 import FileInput from './file-input';
 import ImageCarousel from './image-carousel';
+import { postCoworkingAvatarAction, postCoworkingImageAction } from '../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
+import { getImagesFetchingStatuses } from '../store/admin-process/selectors';
+import { resetAdminFetchingStatus, resetImageFetchingStatuses } from '../store/admin-process/admin-process';
+import Loader from './loader';
 
 type CoworkingEditingFormProps = CoworkingDto & {
   onEditCapabilitiesClick: () => void;
@@ -23,6 +29,12 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
   onEditCapabilitiesClick: handleEditCapabilitiesClick, onCreateEventClick: handleCreateEventClick,
   onEditSeatsClick: handleEditSeatsClick, onEditScheduleClick: handleEditScheduleClick
 }: CoworkingEditingFormProps): JSX.Element {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const avatarUploadingStatus = useAdminFetchingStatus('avatarUploadingFetchingStatus');
+  const imagesUploadingStatuses = useAppSelector(getImagesFetchingStatuses);
+
   const [avatarFile, setAvatarFile] = useState<File[]>();
   const [imageFiles, setImageFiles] = useState<File[]>();
 
@@ -37,15 +49,32 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
     return result;
   }, {} as { [key: string]: number });
 
-  // const handleImageUpload = (isAvatar = false) => {
-  //   if (isAvatar && avatarFile) {
-  //     dispatch(postCoworkingAvatarAction({ coworkingId: id, avatar: avatarFile[0] }));
-  //   } else if (imageFiles) {
-  //     imageFiles.forEach((imageFile) => {
-  //       dispatch(postCoworkingImageAction({ coworkingId: id, image: imageFile }));
-  //     });
-  //   }
-  // };
+  const handleImageUpload = () => {
+    if (avatarFile?.length || imageFiles?.length) {
+      if (avatarFile?.length) {
+        dispatch(postCoworkingAvatarAction({ coworkingId: id, avatar: avatarFile[0] }));
+      }
+      if (imageFiles?.length) {
+        imageFiles.forEach((imageFile) => {
+          dispatch(postCoworkingImageAction({ coworkingId: id, image: imageFile }));
+        });
+      }
+      return;
+    }
+
+    navigate(generatePath(AppRoutes.Booking.FullPath, { id: id }));
+  };
+
+  useEffect(() => {
+    if (avatarUploadingStatus === FetchingStatuses.Fulfilled) {
+      navigate(generatePath(AppRoutes.Booking.FullPath, { id: id }));
+    }
+
+    return () => {
+      dispatch(resetAdminFetchingStatus('avatarUploadingFetchingStatus'));
+      dispatch(resetImageFetchingStatuses());
+    };
+  }, [avatarUploadingStatus, dispatch, id, navigate]);
 
   return (
     <div className="coworking-editing__wrapper">
@@ -87,19 +116,25 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
               <li className="coworking-editing__image-item" key={imageData.image_filename}>
                 <img className="coworking-editing__image" src={getImageURL(imageData.image_filename)} alt={imageData.image_filename} />
               </li>))}
-            {images && images.length < 6 &&
-              <span className='coworking-editing__image-item-template' />}
+            {Array.from({ length: Math.min((imageFiles?.length ?? 0) + 1, MAX_IMAGES_COUNT - (images?.length ?? 0)) })
+              .map((_, index) => {
+                const image = imageFiles?.[index];
+                return image
+                  ? <span key={image.name} className='coworking-editing__image-item-uploaded' />
+                  : <span key="new-image" className='coworking-editing__image-item-template' />;
+              })}
           </ul>
           <div className="coworking-editing__image-inputs">
-            {Array.from({ length: Math.min((imageFiles?.length ?? 0) + 1, MAX_IMAGES_COUNT) }).map((_, index) => {
-              const image = imageFiles?.[index];
-              return image
-                ? <FileController key={image.name} orderNumber={index} files={imageFiles} setFiles={setImageFiles} />
-                :
-                <FileInput key="new-image-input" tooltipText={IMAGE_INPUT_TOOLTIP_TEXT}
-                  validatorsData={ImageValidatorsData} orderNumber={index} files={imageFiles} setFiles={setImageFiles}
-                />;
-            })}
+            {Array.from({ length: Math.min((imageFiles?.length ?? 0) + 1, MAX_IMAGES_COUNT - (images?.length ?? 0)) })
+              .map((_, index) => {
+                const image = imageFiles?.[index];
+                return image
+                  ? <FileController key={image.name} orderNumber={index} files={imageFiles} setFiles={setImageFiles} />
+                  :
+                  <FileInput key="new-image-input" tooltipText={IMAGE_INPUT_TOOLTIP_TEXT}
+                    validatorsData={ImageValidatorsData} orderNumber={index} files={imageFiles} setFiles={setImageFiles}
+                  />;
+              })}
           </div>
         </div>
       </div>
@@ -159,10 +194,16 @@ export default function CoworkingEditingForm({ id, avatar, title, description, i
       </div>
 
       <div className="coworking-editing__bottom admin-form-btns">
-        <Link to={generatePath(AppRoutes.Coworkings.FullPath, { id: id })}
-          className="coworking-editing__submit-btn admin-form-btn white-btn"
+        <button className="coworking-editing__submit-btn admin-form-btn white-btn" onClick={handleImageUpload}>
+          {avatarUploadingStatus === FetchingStatuses.Pending
+            || Object.values(imagesUploadingStatuses).includes(FetchingStatuses.Pending)
+            ? <Loader alignCenter small />
+            : 'Сохранить'}
+        </button>
+        <Link to={generatePath(AppRoutes.Booking.FullPath, { id: id })}
+          className="coworking-editing__cancel-btn admin-form-btn light-btn"
         >
-          Сохранить
+          Отменить
         </Link>
       </div>
 

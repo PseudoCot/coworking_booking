@@ -33,6 +33,9 @@ export const adminProcess = createSlice({
     setImageFetchingStatus: (state, action: PayloadAction<[string, FetchingStatus]>) => {
       state.imagesUploadingFetchingStatuses[action.payload[0]] = action.payload[1];
     },
+    resetImageFetchingStatuses: (state) => {
+      state.imagesUploadingFetchingStatuses = {};
+    },
     resetAdminFetchingStatus: (state, action: PayloadAction<AdminFetchingField>) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore:
@@ -113,4 +116,4 @@ export const adminProcess = createSlice({
   },
 });
 
-export const { setImageFetchingStatus, resetAdminFetchingStatus } = adminProcess.actions;
+export const { setImageFetchingStatus, resetImageFetchingStatuses, resetAdminFetchingStatus } = adminProcess.actions;

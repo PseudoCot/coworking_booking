@@ -10,13 +10,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchCoworkingAction } from '../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { FetchingStatuses, TECHNICAL_SUPPORT_EMAIL, TELEGRAM_BOT_NAME } from '../consts';
-import { isUserAdmin } from '../store/user-process/selectors';
+import { isUserTelegramConnected } from '../store/user-process/selectors';
 import EventBanner from '../components/event-banner';
 
 export default function BookingScreen(): JSX.Element {
   const urlParams = useParams();
   const dispatch = useAppDispatch();
-  const isAdmin = useAppSelector(isUserAdmin);
+  const isTelegramConnected = useAppSelector(isUserTelegramConnected);
+  // const isAdmin = useAppSelector(isUserAdmin);
 
   const coworkingFetching = useAppSelector(isCoworkingFetching);
   const coworkingData = useAppSelector(getCoworkingDto);
@@ -24,8 +25,10 @@ export default function BookingScreen(): JSX.Element {
   const calendarEventLink = '#'; // useAppSelector(getBookedEventLink);
 
   const [showSuccesToast, setShowSuccesToast] = useState(false);
+  const [showTgErrorToast, setShowTgErrorToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const handleSuccesToastClose = useCallback(() => setShowSuccesToast(false), []);
+  const handleTgErrorToastClose = useCallback(() => setShowTgErrorToast(false), []);
   const handleErrorToastClose = useCallback(() => setShowErrorToast(false), []);
 
   useEffect(() => {
@@ -38,9 +41,13 @@ export default function BookingScreen(): JSX.Element {
     if (bookFetchingStatus === FetchingStatuses.Fulfilled) {
       setShowSuccesToast(true);
     } else if (bookFetchingStatus === FetchingStatuses.Rejected) {
-      setShowErrorToast(true);
+      if (isTelegramConnected) {
+        setShowTgErrorToast(true);
+      } else {
+        setShowErrorToast(true);
+      }
     }
-  }, [bookFetchingStatus]);
+  }, [bookFetchingStatus, isTelegramConnected]);
 
   return (
     <Layout>
@@ -53,7 +60,8 @@ export default function BookingScreen(): JSX.Element {
             <EventBanner events={coworkingData.events} />
             <div className="booking__wrapper">
               <CoworkingCard {...coworkingData} />
-              {isAdmin || <BookingForm schedule={coworkingData.working_schedules?.[0]} />}
+              {/* {isAdmin || <BookingForm schedule={coworkingData.working_schedules?.[0]} />} */}
+              <BookingForm schedule={coworkingData.working_schedules?.[0]} />
             </div>
           </>
           : coworkingFetching && <Loader horizontalAlignCenter />}
@@ -71,12 +79,19 @@ export default function BookingScreen(): JSX.Element {
           <a href={calendarEventLink} className="booking__toast-btn light-btn">Google Calendar</a>
         </Toast>
         <Toast toastClasses='booking__toast' toastTitleClasses='booking__toast-title' toastTextClasses='booking__toast-text'
-          show={showErrorToast} onCloseClick={handleErrorToastClose}
+          show={showTgErrorToast} onCloseClick={handleTgErrorToastClose}
           title='Ошибка оформления бронирования!'
           text={`Для оформления бронирования вам необходимо написать нашему telegram-боту - ${TELEGRAM_BOT_NAME}.
           Создайте бронирование в системе повторно после старта чата с ним.
           Если у вас уже есть активный чат с нашим ботом, то обратитесь в техническую поддержку
           по адресу - ${TECHNICAL_SUPPORT_EMAIL}.`}
+        />
+        <Toast toastClasses='booking__toast' toastTitleClasses='booking__toast-title' toastTextClasses='booking__toast-text'
+          show={showErrorToast} onCloseClick={handleErrorToastClose}
+          title='Ошибка оформления бронирования!'
+          text={`Указаны некорректные данные для бронирования коворкинга.
+            Если у вас не получается избежать ошибки, то обратитесь в техническую поддержку
+            по адресу - ${TECHNICAL_SUPPORT_EMAIL}.`}
         />
       </article>
     </Layout>

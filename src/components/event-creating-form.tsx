@@ -8,6 +8,7 @@ import useInputChangeCallback from '../hooks/use-change-callback';
 import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
 import Loader from './loader';
 import { FetchingStatuses } from '../consts';
+import { resetAdminFetchingStatus } from '../store/admin-process/admin-process';
 
 type EventCreatingFormProps = {
   coworkingId: string;
@@ -59,6 +60,10 @@ export default function EventCreatingForm({ coworkingId, onSubmit: handleSubmit,
   useEffect(() => {
     setSubmitEnabled(validateStringsLength([date, name]));
   }, [date, name]);
+
+  useEffect(() => () => {
+    dispatch(resetAdminFetchingStatus('eventCreatingFetchingStatus'));
+  }, [dispatch]);
 
   return (
     <form className="event-form admin-form" action="#" onSubmit={handleSubmitClick}>

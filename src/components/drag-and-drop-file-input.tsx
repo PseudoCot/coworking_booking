@@ -61,7 +61,7 @@ export default function DragAndDropFileInput({ areaClasses = '', imagePreview, t
       'dnd-file-input-wrapper--preview': imagePreview && files?.[0],
     })} onDragEnter={handleDrag}
     >
-      {imagePreview
+      {imagePreview && files?.[0]
         ? <img className="dnd-file-input-preview" src={imageUrl} alt='Аватарка коворкинга' />
         : <PictureSVG />}
 

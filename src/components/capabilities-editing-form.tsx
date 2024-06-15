@@ -1,10 +1,11 @@
-import { useState, FormEventHandler, FormEvent } from 'react';
+import { useState, FormEventHandler, FormEvent, useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
 import { postCoworkingCapabilityAction } from '../store/api-actions';
 import { CoworkingCapabilityDto } from '../types/api-shared/coworking-capability-dto';
 import { FetchingStatuses } from '../consts';
 import Loader from './loader';
 import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
+import { resetAdminFetchingStatus } from '../store/admin-process/admin-process';
 
 type CapabilitiesEditingFormProps = {
   coworkingId: string;
@@ -59,6 +60,10 @@ export default function CapabilitiesEditingForm({ coworkingId, capabilities,
 
     handleCancel();
   };
+
+  useEffect(() => () => {
+    dispatch(resetAdminFetchingStatus('capabilitiesEditingFetchingStatus'));
+  }, [dispatch]);
 
   return (
     <form className="capabilities-form admin-form" action="#" onSubmit={handleSubmitClick}>

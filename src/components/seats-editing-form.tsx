@@ -1,4 +1,4 @@
-import { useState, FormEventHandler, ChangeEvent, useCallback } from 'react';
+import { useState, FormEventHandler, ChangeEvent, useCallback, useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
 import { postCoworkingSeatsAction } from '../store/api-actions';
 import FormInputGroup from './form-input-group';
@@ -7,6 +7,7 @@ import { FetchingStatuses, PlaceTypes } from '../consts';
 import { SeatDto } from '../types/api-shared/seat-dto';
 import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
 import Loader from './loader';
+import { resetAdminFetchingStatus } from '../store/admin-process/admin-process';
 
 type SeatsEditingFormProps = {
   coworkingId: string;
@@ -56,6 +57,10 @@ export default function SeatsEditingForm({ coworkingId, seats,
 
     handleCancel();
   };
+
+  useEffect(() => () => {
+    dispatch(resetAdminFetchingStatus('seatsEditingFetchingStatus'));
+  }, [dispatch]);
 
   return (
     <form className="seats-form admin-form" action="#" onSubmit={handleSubmitClick}>

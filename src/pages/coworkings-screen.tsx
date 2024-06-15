@@ -30,7 +30,7 @@ export default function CoworkingsScreen(): JSX.Element {
         <CoworkingList />
 
         <ModalWindow show={creatingCoworking}>
-          <CoworkingCreatingForm onSubmit={handleAddCoworkingClick} onCancel={handleAddCoworkingClick} />
+          <CoworkingCreatingForm onCancel={handleAddCoworkingClick} />
         </ModalWindow>
       </article>
     </Layout>

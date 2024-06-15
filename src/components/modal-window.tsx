@@ -8,11 +8,9 @@ type ModalWindowProps = PropsWithChildren<{
 export default function ModalWindow({ show, children }: ModalWindowProps): JSX.Element {
   useEffect(() => {
     if (show) {
-      document.body.style.overflowY = 'hidden';
-      document.body.style.paddingRight = '15px';
+      document.body.className = 'stop-scroll';
     } else {
-      document.body.style.overflowY = 'auto';
-      document.body.style.paddingRight = '0';
+      document.body.className = '';
     }
   }, [show]);
 

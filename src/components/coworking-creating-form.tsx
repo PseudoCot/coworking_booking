@@ -11,15 +11,21 @@ import { FetchingStatuses, IMAGE_INPUT_TOOLTIP_TEXT, ImageValidatorsData, MAX_IM
 import { useAdminFetchingStatus } from '../hooks/use-admin-fetching-status';
 import { getImagesFetchingStatuses } from '../store/admin-process/selectors';
 import Loader from './loader';
+import { useNavigate } from 'react-router-dom';
+import { getCoworkingId } from '../store/coworking-process/selectors';
+import { resetAdminFetchingStatus } from '../store/admin-process/admin-process';
 
 type CoworkingCreatingFormProps = {
-  onSubmit: () => void;
+  onSubmit?: () => void;
   onCancel: () => void;
 };
 
 export default function CoworkingCreatingForm({ onSubmit: handleSubmit, onCancel: handleCancel }
   : CoworkingCreatingFormProps): JSX.Element {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const newCoworkingId = useAppSelector(getCoworkingId);
   const coworkingCreatingStatus = useAdminFetchingStatus('coworkingCreatingFetchingStatus');
   const avatarUploadingStatus = useAdminFetchingStatus('avatarUploadingFetchingStatus');
   const imagesUploadingStatuses = useAppSelector(getImagesFetchingStatuses);
@@ -50,7 +56,7 @@ export default function CoworkingCreatingForm({ onSubmit: handleSubmit, onCancel
       address
     }));
 
-    handleSubmit();
+    handleSubmit?.();
   };
 
   const handleCancelClick: FormEventHandler = (e) => {
@@ -62,6 +68,18 @@ export default function CoworkingCreatingForm({ onSubmit: handleSubmit, onCancel
   useEffect(() => {
     setSubmitEnabled(validateStringsLength([title, description, institute, address]));
   }, [title, description, institute, address]);
+
+  useEffect(() => {
+    if (coworkingCreatingStatus === FetchingStatuses.Fulfilled && avatarUploadingStatus === FetchingStatuses.Fulfilled
+      && newCoworkingId) {
+      navigate(newCoworkingId);
+    }
+
+    return () => {
+      dispatch(resetAdminFetchingStatus('coworkingCreatingFetchingStatus'));
+      dispatch(resetAdminFetchingStatus('avatarUploadingFetchingStatus'));
+    };
+  }, [avatarUploadingStatus, coworkingCreatingStatus, newCoworkingId, navigate, dispatch]);
 
   return (
     <form className="coworking-form" action="#" onSubmit={handleSubmitClick}>

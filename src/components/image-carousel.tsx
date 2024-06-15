@@ -21,7 +21,7 @@ export default function ImageCarousel({ wrapperClasses = '', leftButtonClasses =
   const rightBorder = images.length;
 
   const [onLeftBorder, setOnLeftBorder] = useState(true);
-  const [onRightBorder, setOnRightBorder] = useState(leftBorder < rightBorder);
+  const [onRightBorder, setOnRightBorder] = useState(leftBorder === rightBorder);
 
   const [, setCurrentImageNumber] = useState(leftBorder);
   const [currentImageURL, setCurrentImageURL] = useState(getImageURL(mainImage));
@@ -29,8 +29,9 @@ export default function ImageCarousel({ wrapperClasses = '', leftButtonClasses =
   const updateCurrentImage = (currentNumber: number) => {
     if (currentNumber <= leftBorder) {
       setCurrentImageURL(getImageURL(mainImage));
+    } else {
+      setCurrentImageURL(getImageURL(images[currentNumber - 1]));
     }
-    setCurrentImageURL(getImageURL(images[currentNumber - 1]));
   };
 
   const handlePreviousImageClick = () => {
@@ -41,6 +42,7 @@ export default function ImageCarousel({ wrapperClasses = '', leftButtonClasses =
 
       const newValue = prev - 1;
       setOnLeftBorder(newValue <= leftBorder);
+      setOnRightBorder(false);
       updateCurrentImage(newValue);
       return newValue;
     });
@@ -52,6 +54,7 @@ export default function ImageCarousel({ wrapperClasses = '', leftButtonClasses =
       }
 
       const newValue = prev + 1;
+      setOnLeftBorder(false);
       setOnRightBorder(newValue >= rightBorder);
       updateCurrentImage(newValue);
       return newValue;
@@ -68,9 +71,9 @@ export default function ImageCarousel({ wrapperClasses = '', leftButtonClasses =
         onClick={handleNextImageClick} disabled={onRightBorder}
       />
       <div className={`${bulletContainerClasses} image-carousel__bullets`}>
-        <span className={`${bulletClasses} image-carousel__bullet ${onLeftBorder ? '' : 'image-carousel__bullet--active'}`} />
-        <span className={`${bulletClasses} image-carousel__bullet image-carousel__bullet--active`} />
-        <span className={`${bulletClasses} image-carousel__bullet ${onRightBorder ? '' : 'image-carousel__bullet--active'}`} />
+        <span className={`${bulletClasses} image-carousel__bullet ${onLeftBorder ? 'image-carousel__bullet--active' : ''}`} />
+        <span className={`${bulletClasses} image-carousel__bullet ${onLeftBorder || onRightBorder ? '' : 'image-carousel__bullet--active'}`} />
+        <span className={`${bulletClasses} image-carousel__bullet ${onRightBorder ? 'image-carousel__bullet--active' : ''}`} />
       </div>
     </div>
   );
